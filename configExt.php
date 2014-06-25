@@ -5,14 +5,14 @@ if ($GLOBALS['debug']){
 ?>
 Ext.define('Global', {
 	singleton: true,
-	dirAplicacion: '/petzynga'
+	dirAplicacion: '/petzyngacms'
 });
 <?php	
 }else{
 ?>
 Ext.define('Global', {
 	singleton: true,
-	dirAplicacion: '/qa/qacms'
+	dirAplicacion: '/qa/petzingacms'
 });
 <?php	
 }
