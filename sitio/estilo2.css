@@ -1,0 +1,43 @@
+html, body {
+	margin: 0;
+	font: 100% "Inconsolata", Arial, Helvetica, sans-serif;
+	color: #000;
+	background: #abc;
+}
+#container {
+	margin: 20px auto;
+	background: #090;
+	width: 1000px;
+}
+h1 {
+	line-height: 75px;
+	margin: 0;
+	text-align: center;
+	background: #cc99aa
+}
+#left {
+	width: 180px;
+	padding: 20px;
+}
+#right {
+	padding: 20px;
+	overflow: auto;
+	background: #ccc;
+}
+footer {
+	color: #ccc;
+	background: #003300;
+}
+h2, h3, footer p {
+	line-height: 45px;
+	margin: 0;
+	text-align: center;
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Inconsolata'), url(http://themes.googleusercontent.com/static/fonts/inconsolata/v7/BjAYBlHtW3CJxDcjzrnZCIbN6UDyHWBl620a-IRfuBk.woff) format('woff');
+}
+		
