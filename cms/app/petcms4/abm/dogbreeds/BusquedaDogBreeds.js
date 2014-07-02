@@ -3,7 +3,8 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
       region: 'west',
       frame: true,
       items: [
-        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'dogBreedName', allowBlank: true, width: 280},
+        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'dogBreedName', allowBlank: true, width: 200},
+        {fieldLabel: 'Initial ', xtype: 'comboAbecedario', itemId: 'initial', allowBlank: true},
       ],
       buttons: [
           {text:'Buscar', itemId: 'botBuscar', ref: '../botBuscar',
@@ -41,6 +42,8 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('dogBreedName').getValue());
+        this.agregaClaveValor(resultado, 'inicial', this.getComponent('initial').getValue());
+        
         return resultado;
       },
       

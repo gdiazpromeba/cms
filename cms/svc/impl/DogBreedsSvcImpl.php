@@ -1,7 +1,7 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/oad/impl/DogBreedsOadImpl.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/svc/DogBreedsSvc.php';  
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/DogBreedsOadImpl.php';  
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogBreedsSvc.php';  
 
    class DogBreedsSvcImpl implements DogBreedsSvc { 
       private $oad=null; 
@@ -14,6 +14,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/svc/DogBreedsSvc.php';
          $bean=$this->oad->obtiene($id); 
          return $bean; 
       } 
+      
+
+      public function obtienePorNombre($nombre){
+      	$bean=$this->oad->obtienePorNombre($nombre);
+      	return $bean;
+      }      
 
 
       public function inserta($bean){ 
@@ -29,19 +35,21 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/svc/DogBreedsSvc.php';
       public function borra($id){ 
          return $this->oad->borra($id); 
       } 
-
+      
       public function inhabilita($id){
       	return $this->oad->inhabilita($id);
       }
+      
 
-      public function selecciona($parte, $desde, $cuantos){ 
-         $arr=$this->oad->selecciona($parte, $desde, $cuantos); 
+
+      public function selecciona($parte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos){ 
+         $arr=$this->oad->selecciona($parte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos); 
          return $arr; 
       } 
 
 
-      public function seleccionaCuenta($parte){ 
-         $cantidad=$this->oad->seleccionaCuenta($parte); 
+      public function seleccionaCuenta($parte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta){ 
+         $cantidad=$this->oad->seleccionaCuenta($parte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta); 
          return $cantidad; 
       } 
 

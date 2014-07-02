@@ -13,6 +13,7 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=$_REQUEST['nombreOParte'];
+		$initial=$_REQUEST['initial'];
 		
 		$svc = new DogBreedsSvcImpl();
 		$beans=$svc->selecciona($nombreOParte, $desde, $cuantos);
