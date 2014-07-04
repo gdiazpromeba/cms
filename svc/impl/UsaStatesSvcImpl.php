@@ -1,13 +1,13 @@
 <?php 
+require_once '../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/UsaStatesOadImpl.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/UsaStatesSvc.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/oad/impl/DogPurposesOadImpl.php'; 
-require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/svc/DogPurposesSvc.php';  
-
-   class DogPurposesSvcImpl implements DogPurposesSvc { 
+   class UsaStatesSvcImpl implements UsaStatesSvc { 
       private $oad=null; 
 
       function __construct(){ 
-         $this->oad=new DogPurposesOadImpl();   
+         $this->oad=new UsaStatesOadImpl();   
       } 
 
       public function obtiene($id){ 

@@ -1,14 +1,14 @@
-Ext.define('petcms4.iu.combos.ComboBancos', {
+Ext.define('petcms4.iu.combos.ComboUsaStates', {
   extend: 'Ext.form.field.ComboBox',
   editable: false,
-  alias: 'widget.comboBancos',
+  alias: 'widget.comboUsaStates',
   
   store: Ext.create('Ext.data.Store', {
 	    autoLoad: true,
-	    fields: ['bancoId','bancoNombre'],
+	    fields: ['id','nombre'],
 	    proxy: {
 	       type: 'ajax',
-	       url: '/produccion/svc/conector/bancos.php/selecciona',
+	       url: Global.dirAplicacion + '/svc/conector/usaStates.php/selecciona',
 	       reader: {
 	          type:'json',
 	          root: 'data'
@@ -16,6 +16,6 @@ Ext.define('petcms4.iu.combos.ComboBancos', {
 	    },
   }),
 
-  displayField: 'bancoNombre', 
-  valueField: 'bancoId',
+  displayField: 'name', 
+  valueField: 'id',
 });

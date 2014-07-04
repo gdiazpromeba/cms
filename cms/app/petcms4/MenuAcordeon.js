@@ -39,8 +39,20 @@ panelMenuAcordeon1.store.add({
          });
 //		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
          muestraEnPanel(panel);
-     }],
-	 columna2: []
+     }]
+});
+
+panelMenuAcordeon1.store.add({
+	 columnaUnica: ['dachs.jpg', 'Shelters USA', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.shelters.usa.PanelSheltersUsa', {
+		   frame: true,
+           id: 'panelSheltersUsaId'	
+        });
+//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
+        muestraEnPanel(panel);
+    }]
 });
 
 
@@ -61,7 +73,7 @@ Ext.define('app.petcms4.MenuAcordeon', {
             id: 'panelDogBreedsId'	
            });
            muestraEnPanel(panel);
-           panelMenuAcordeon1.disable();
+           //panelMenuAcordeon1.disable();
     	}
     }
 });

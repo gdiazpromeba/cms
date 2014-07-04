@@ -12,7 +12,7 @@ Ext.define('Global', {
 ?>
 Ext.define('Global', {
 	singleton: true,
-	dirAplicacion: '/qa/petzingacms'
+	dirAplicacion: '/qacms'
 });
 <?php	
 }

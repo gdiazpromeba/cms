@@ -1,21 +1,22 @@
 <?php
-  require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/beans/DogSheddingFrequency.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . '/petzynga/svc/impl/DogSheddingFrequenciesSvcImpl.php';
+  require_once '../../config.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/UsaState.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/UsaStatesSvcImpl.php';
   header("Content-Type: text/plain; charset=utf-8");
 
   $url=$_SERVER['PHP_SELF'];
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
-  $svc = new DogSheddingFrequenciesSvcImpl();
+  $svc = new UsaStatesSvcImpl();
 
   if ($ultimo=='selecciona'){
-	$beans=$svc->selecciona(0, 100);
-	$cuenta=$svc->seleccionaCuenta();
+	$beans=$svc->selTodos(0, 100);
+	$cuenta=$svc->selTodosCuenta();
 	$datos=array();
 	foreach ($beans as $bean){
 	  $arrBean=array();
 	  $arrBean['id']=$bean->getId();
-	  $arrBean['name']=$bean->getNombre();
+	  $arrBean['name']=$bean->getName();
 	  $datos[]=$arrBean;
 	}
 	$resultado=array();

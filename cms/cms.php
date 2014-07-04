@@ -22,7 +22,7 @@
     
     <script type="text/javascript" src="app/petcms4/combos/ComboRango1a5.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>
-     
+    <script type="text/javascript" src="app/petcms4/combos/ComboUsaStates.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSizes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogPurposes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingAmounts.js"></script>
