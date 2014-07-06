@@ -10,6 +10,9 @@
       private $phone; 
       private $description; 
       private $streetAddress; 
+      private $citiName;
+      private $countyName;
+      private $stateName;
 
       public function getId(){ 
          return $this->id;  
@@ -46,7 +49,19 @@
       public function getStreetAddress(){ 
          return $this->streetAddress;  
       }
-
+      
+      public function getCityName(){
+      	return $this->citiName;
+      }
+      
+      public function getCountyName(){
+      	return $this->countyName;
+      }
+      
+      public function getStateName(){
+      	return $this->stateName;
+      }
+      
       public function setId($valor){ 
          $this->id=$valor; 
       }
@@ -82,6 +97,19 @@
       public function setStreetAddress($valor){ 
          $this->streetAddress=$valor; 
       }
+      
+      public function setCityName($valor){
+      	$this->citiName = $valor;
+      }
+      
+      public function setCountyName($valor){
+      	$this->countyName = $valor;
+      }
+      
+      public function setStateName($valor){
+      	$this->stateName = $valor;
+      }
+      
 
    }
 ?>

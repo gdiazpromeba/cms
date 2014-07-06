@@ -5,7 +5,7 @@ Ext.define('petcms4.iu.combos.ComboUsaStates', {
   
   store: Ext.create('Ext.data.Store', {
 	    autoLoad: true,
-	    fields: ['id','nombre'],
+	    fields: ['id','name'],
 	    proxy: {
 	       type: 'ajax',
 	       url: Global.dirAplicacion + '/svc/conector/usaStates.php/selecciona',

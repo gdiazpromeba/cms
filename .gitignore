@@ -1,2 +1,4 @@
 cms/extjs/**
 resources/images/**
+/bin
+.project

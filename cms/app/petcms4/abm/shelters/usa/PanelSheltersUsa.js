@@ -5,40 +5,26 @@ Ext.define('app.petcms4.abm.shelters.usa.PanelSheltersUsa', {
   constructor: function(cnfg) {
       this.callParent(arguments);
       
-      this.panForm=Ext.create('app.petcms4.abm.dogbreeds.FormSheltersUsa', {
+      this.panForm=Ext.create('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
         id: 'formSheltersUsaId',	
         region: 'center'
       });     
       
-      this.panBusqueda=Ext.create('app.petcms4.abm.dogbreeds.BusquedaSheltersUsa', {
+      this.panBusqueda=Ext.create('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
         id: 'busquedaSheltersUsaId', 	
-        //height: 100,
+        region: 'west',
+        width: 250
       });   
       
-      var panLateral=Ext.create('Ext.panel.Panel', {
-    	region: 'west',
-    	width: 250,
-    	layout: {
-    	    type: 'vbox',
-    	    align : 'stretch',
-    	    pack  : 'start',
-    	},
-    	items: [
-    	    this.panBusqueda,   
-    	    {xtype : 'image', id : 'imageLogoShelter', width: 240, height: 180},
-    	    //{html:"<iframe width='250' src='http://www.youtube.com/embed/XGSy3_Czz8k'></iframe>", flex:2}
-    	    
-    	]
-      });
       
       this.panSuperior= new Ext.Container({
           layout: 'border',
           region: 'north',
           height: 450,
-          items: [this.panForm, panLateral]
+          items: [this.panForm, this.panBusqueda]
       });   
       
-      this.panGrilla = Ext.create('app.petcms4.abm.dogbreeds.GrillaSheltersUsa', {
+      this.panGrilla = Ext.create('app.petcms4.abm.shelters.usa.GrillaSheltersUsa', {
         id: 'grillaSheltersUsaId',	
         region: 'center',
 //        height : 150,

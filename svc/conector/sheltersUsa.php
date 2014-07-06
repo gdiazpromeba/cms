@@ -14,12 +14,12 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
-		$inicial=isset($_REQUEST['usaStateId'])?$_REQUEST['usaStateId']:null;
+		$estadoId=isset($_REQUEST['stateId'])?$_REQUEST['stateId']:null;
 		
 		
 		$svc = new SheltersUsaSvcImpl();
-		$beans=$svc->selecciona($nombreOParte, $estadoId, $desde, $cuantos);
-		$cuenta=$svc->seleccionaCuenta($nombreOParte, $estadoId);
+		$beans=$svc->selTodos($nombreOParte, $estadoId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId);
 		
 		$datos=array();
 		foreach ($beans as $bean){
@@ -33,6 +33,9 @@ if ($ultimo=='selecciona'){
 		  $arrBean['phone']=$bean->getPhone();
 		  $arrBean['description']=$bean->getDescription();
 		  $arrBean['streetAddress']=$bean->getStreetAddress();
+		  $arrBean['cityName']=$bean->getCityName();
+		  $arrBean['countyName']=$bean->getCountyName();
+		  $arrBean['stateName']=$bean->getStateName();
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -43,7 +46,7 @@ if ($ultimo=='selecciona'){
    } else if ($ultimo=='inserta'){
 	   	$bean=new ShelterUsa(); 
 		$svc = new SheltersUsaSvcImpl();
-		$bean->setNombre($_REQUEST['name']);
+		$bean->setName($_REQUEST['name']);
 		$bean->setZip($_REQUEST['zip']);
 		$bean->setUrl($_REQUEST['url']);
 		$bean->setLogoUrl($_REQUEST['logoUrl']);
@@ -58,7 +61,7 @@ if ($ultimo=='selecciona'){
   	  $bean=new ShelterUsa();
   	  $svc = new SheltersUsaSvcImpl();
   	  $bean->setId($_REQUEST['id']);
-  	  $bean->setNombre($_REQUEST['name']);
+  	  $bean->setName($_REQUEST['name']);
   	  $bean->setZip($_REQUEST['zip']);
   	  $bean->setUrl($_REQUEST['url']);
   	  $bean->setLogoUrl($_REQUEST['logoUrl']);
@@ -73,7 +76,11 @@ if ($ultimo=='selecciona'){
 	$svc = new SheltersUsaSvcImpl();
 	$exito=$svc->borra($_REQUEST['id']);
 	echo json_encode($exito) ;	
-
+	
+  } else if ($ultimo=='zipContainers'){
+		$svc = new SheltersUsaSvcImpl();
+		$exito=$svc->zipContainers($_REQUEST['zip']);
+		echo json_encode($exito) ;
 	
   }else if ($ultimo=='subeLogo'){
    	    header("Content-Type: text/html; charset=utf-8");

@@ -39,6 +39,13 @@
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/BusquedaDogBreeds.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/GrillaDogBreeds.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/PanelDogBreeds.js"></script>
+    
+    <!-- Shelters USA -->
+    <script type="text/javascript" src="app/petcms4/abm/shelters/usa/FormSheltersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/usa/BusquedaSheltersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/usa/GrillaSheltersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/usa/PanelSheltersUsa.js"></script>
+    
      
     <!-- inicio -->
     <script type="text/javascript" src="app/petcms4/PanelMenuAcordeon.js"></script>

@@ -1,10 +1,10 @@
-Ext.define('app.petcms4.abm.dogbreeds.BusquedaUsaStates', {
+Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
       extend: 'Ext.form.Panel',
       region: 'west',
       frame: true,
       items: [
-        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 200},
-        {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', allowBlank: true},
+        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
+        {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', width: 230 },
       ],
       buttons: [
           {text:'Buscar', itemId: 'botBuscar', ref: '../botBuscar',
@@ -41,7 +41,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaUsaStates', {
       
       getParamsBusqueda: function(){
         var resultado=new Array();
-        this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('dogBreedName').getValue());
+        this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
         this.agregaClaveValor(resultado, 'stateId', this.getComponent('comboUsaStates').getValue());
         
         return resultado;
@@ -58,6 +58,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaUsaStates', {
 
       reinicializar: function(){
             this.getForm().reset();
+            this.getComponent('comboUsaStates').setValue('');
       },
       
        /**

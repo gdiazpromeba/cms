@@ -80,7 +80,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Usa
          $sql.="FROM  \n"; 
          $sql.="  USA_STATES  \n"; 
          $sql.="ORDER BY  \n"; 
-         $sql.="  STATE_ID  \n"; 
+         $sql.="  STATE_NAME  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
