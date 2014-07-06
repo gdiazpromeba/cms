@@ -45,7 +45,7 @@ panelMenuAcordeon1.store.add({
 
 
 panelMenuAcordeon1.store.add({
-	 columnaUnica: ['icono_mapa_eeuu.png', 'Shelters USA', 
+	 columnaUnica: ['icono_mapa_usa_menu.png', 'Shelters USA', 
 	   function(){
 		 quitaDePanel();
 		 var panel=Ext.create('app.petcms4.abm.shelters.usa.PanelSheltersUsa', {

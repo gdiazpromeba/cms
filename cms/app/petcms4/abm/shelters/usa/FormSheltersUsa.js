@@ -16,7 +16,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
             {fieldLabel: 'State', xtype: 'textfield',  name: 'state', itemId: 'state',  id: 'state', readOnly: true, allowBlank: false, width: 200},
             {fieldLabel: 'County', xtype: 'textfield',  name: 'county', itemId: 'county',  id: 'county', readOnly: true, allowBlank: false, width: 250},
             {fieldLabel: 'City', xtype: 'textfield',  name: 'city', itemId: 'city',  id: 'city', readOnly: true, allowBlank: false, width: 250},
-            {fieldLabel: 'Zip Code', xtype: 'textfield',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 200,
+            {fieldLabel: 'Zip Code', xtype: 'textfield',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 160,
             	listeners:{
             		blur : function(  The, eOpts ){
             			var colIzq=this.up('#colIzq');
@@ -41,8 +41,8 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
             	
             },
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  id: 'url', allowBlank: false, width: 350},
-            {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  id: 'email', allowBlank: true, width: 250},
-            {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  id: 'phone', allowBlank: true, width: 250},
+            {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  id: 'email', allowBlank: true, width: 320},
+            {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  id: 'phone', allowBlank: true, width: 210},
             {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: true, width: 350},
             {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  id: 'streetAddress', 
 	          allowBlank: false, width: 350, height: 40},
@@ -64,7 +64,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     		               }//evento click
     		              }//listeners
     		         },//botón Aceptar       
-    		         {xtype : 'image', id : 'imageLogoShelter', width: 240, height: 180},    		         
+    		         {xtype : 'image', id : 'imageLogoShelter', width: 240, grow: true},    		         
     	         
     	  ]
       }
