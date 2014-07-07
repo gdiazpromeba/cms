@@ -6,8 +6,8 @@
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 
-      public function selTodos($nombre, $stateId, $desde, $cuantos); 
-      public function selTodosCuenta($nombre, $stateId); 
+      public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos); 
+      public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos);
       public function zipContainers($zipCode);
    } 
 

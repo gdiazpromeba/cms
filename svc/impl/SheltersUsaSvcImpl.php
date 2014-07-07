@@ -32,8 +32,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       } 
 
 
-      public function selTodos($nombreOParte, $estadoId, $desde, $cuantos){ 
-         $arr=$this->oad->selTodos($nombreOParte, $estadoId, $desde, $cuantos); 
+      public function selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos){
+         $arr=$this->oad->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
          return $arr; 
       }
 
@@ -43,10 +43,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       }
 
 
-      public function selTodosCuenta($nombreOParte, $estadoId){ 
-         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId); 
+      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos){ 
+         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
          return $cantidad; 
       } 
+      
+      public function selPorDistancia($zip, $distanciaMaxima){
+      	$latitude= 33.820104;
+      	$longitude= -84.366475;
+      	
+      }
 
    }
 ?>

@@ -15,11 +15,13 @@ if ($ultimo=='selecciona'){
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
 		$estadoId=isset($_REQUEST['stateId'])?$_REQUEST['stateId']:null;
-		
+		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:null;
+		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:null;
+		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
 		
 		$svc = new SheltersUsaSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $estadoId, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId);
+		$beans=$svc->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){

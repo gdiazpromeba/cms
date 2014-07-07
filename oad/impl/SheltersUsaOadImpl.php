@@ -4,7 +4,7 @@ require_once '../../config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/SheltersUsaOad.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterUsa.php';
- 
+require_once('FirePHPCore/fb.php4'); 
 
    class SheltersUsaOadImpl extends AOD implements SheltersUsaOad { 
 
@@ -129,7 +129,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	return $ret;
       }
       
-      public function selTodos($nombre, $stateId, $desde, $cuantos){ 
+      public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHU.ID,     \n"; 
@@ -157,9 +157,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($stateId))){
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
          }
+         if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
+         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) <=" . $distance . " \n";         	
+         }         
          $sql.="ORDER BY  \n"; 
          $sql.="  ID  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+         fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state); 
@@ -185,7 +189,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
 
-      public function selTodosCuenta($nombre, $stateId){ 
+      public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_USA SHU "; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -198,7 +202,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          }
          if (!(empty($stateId))){
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
-         }         
+         }    
+         if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
+         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) <=" . $distance . " \n";         	
+         }              
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $cuenta=null; 
