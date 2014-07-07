@@ -48,7 +48,7 @@ Ext.define('app.petcms4.abm.shelters.usa.GrillaSheltersUsa', {
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {
-	      store: dogBreedStore,
+	      store: sheltersUsaStore,
 	      displayInfo: true,
 	      displayMsg: '{0} - {1} of {2}',
 	      emptyMsg: "No topics to display"
