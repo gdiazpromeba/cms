@@ -19,6 +19,11 @@ if ($ultimo=='selecciona'){
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:null;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
 		
+		
+		//millas a kilómetros
+		if ($distance!=null){
+			$distance*=1.609344;
+		}
 		$svc = new SheltersUsaSvcImpl();
 		$beans=$svc->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
 		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
