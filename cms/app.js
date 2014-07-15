@@ -1,6 +1,17 @@
 Ext.application({
     name: 'Petzynga - CMS',
     launch: function() {
+    	
+        // Validación básica de ZipCodes
+        Ext.apply(Ext.form.field.VTypes, {
+            usaZipCode: function(val, field) {
+                if (/^\d{5}$/.test(val)) {
+                    return true;
+                }
+            },
+            usaZipCodeText: 'Zip Codes must have 5 numbers.'
+        });
+    	
         Ext.create('Ext.container.Viewport', {
             layout: 'border',
             items: [

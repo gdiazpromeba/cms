@@ -43,16 +43,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       }
 
 
-      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos){ 
-         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
+      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance){ 
+         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance); 
          return $cantidad; 
       } 
       
-      public function selPorDistancia($zip, $distanciaMaxima){
-      	$latitude= 33.820104;
-      	$longitude= -84.366475;
-      	
-      }
 
    }
 ?>

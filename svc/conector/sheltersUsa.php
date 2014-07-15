@@ -2,6 +2,10 @@
   require_once '../../config.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterUsa.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersUsaSvcImpl.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipUsa.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsUsaSvcImpl.php';
+  
+  
   header("Content-Type: text/plain; charset=utf-8");
 
   $url=$_SERVER['PHP_SELF'];
@@ -15,15 +19,19 @@ if ($ultimo=='selecciona'){
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
 		$estadoId=isset($_REQUEST['stateId'])?$_REQUEST['stateId']:null;
-		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:null;
-		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:null;
+		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
+		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
 		
-		
-		//millas a kilómetros
-		if ($distance!=null){
-			$distance*=1.609344;
+		//si el zipCode existe, transformarlo en latitud y longitud
+		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){
+		  $svcZips = new ZipsUsaSvcImpl();
+		  $zipBean = $svcZips->obtienePorCodigo($_REQUEST['zipCode']);
+		  $latitude= $zipBean->getLatitude();
+		  $longitude = $zipBean->getLongitude();
 		}
+		
+
 		$svc = new SheltersUsaSvcImpl();
 		$beans=$svc->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
 		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
@@ -43,6 +51,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean['cityName']=$bean->getCityName();
 		  $arrBean['countyName']=$bean->getCountyName();
 		  $arrBean['stateName']=$bean->getStateName();
+		  $arrBean['distanceMiles']=$bean->getDistancia() * 0.621371 ;  // pasa de km a millas
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -83,11 +92,6 @@ if ($ultimo=='selecciona'){
 	$svc = new SheltersUsaSvcImpl();
 	$exito=$svc->borra($_REQUEST['id']);
 	echo json_encode($exito) ;	
-	
-  } else if ($ultimo=='zipContainers'){
-		$svc = new SheltersUsaSvcImpl();
-		$exito=$svc->zipContainers($_REQUEST['zip']);
-		echo json_encode($exito) ;
 	
   }else if ($ultimo=='subeLogo'){
    	    header("Content-Type: text/html; charset=utf-8");

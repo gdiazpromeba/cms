@@ -13,6 +13,7 @@
       private $citiName;
       private $countyName;
       private $stateName;
+      private $distancia;
 
       public function getId(){ 
          return $this->id;  
@@ -62,6 +63,10 @@
       	return $this->stateName;
       }
       
+      public function getDistancia(){
+      	return $this->distancia;
+      }      
+      
       public function setId($valor){ 
          $this->id=$valor; 
       }
@@ -109,6 +114,10 @@
       public function setStateName($valor){
       	$this->stateName = $valor;
       }
+      
+      public function setDistancia($valor){
+      	$this->distancia = $valor;
+      }      
       
 
    }

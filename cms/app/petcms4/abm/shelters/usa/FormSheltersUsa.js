@@ -21,7 +21,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
             		blur : function(  The, eOpts ){
             			var colIzq=this.up('#colIzq');
             			Ext.Ajax.request ({
-            			    url: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/zipContainers?zip=' + this.getValue(),        			    
+            			    url: Global.dirAplicacion + '/svc/conector/usaZips.php/obtienePorCodigo?zip=' + this.getValue(),        			    
             			    success: function (res) {
             			    	var ret=Ext.JSON.decode(res.responseText);
             			    	if (ret.success=true){
@@ -128,8 +128,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   		   if (!colIzq.getComponent('zip').isValid()){
   			   valido=false;
   			   mensaje='Zip not valid';
-  		   }  		   
-         
+  		   }
   		   
   		   if (!valido && muestraVentana){
   	           Ext.MessageBox.show({

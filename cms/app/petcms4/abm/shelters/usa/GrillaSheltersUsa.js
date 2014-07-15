@@ -13,6 +13,7 @@ Ext.define('SheltersUsaModel',{
 				{name : 'cityName', type : 'string'},
 				{name : 'countyName', type : 'string'},
 				{name : 'stateName', type : 'string'},
+				{name : 'distanceMiles', type : 'float'}
 			]
 });
 
@@ -39,12 +40,12 @@ Ext.define('app.petcms4.abm.shelters.usa.GrillaSheltersUsa', {
 	  store : sheltersUsaStore,
 	  columns : [ 
 	    {header : 'id', dataIndex : 'id', hidden : true}, 
-	    {header : 'Name', dataIndex : 'name', width : 350, sortable : true},
-	    {header : 'URL', dataIndex : 'url', width : 150, sortable : true},
-	    {header : 'ZIP', dataIndex : 'zip', width : 150, sortable : true},
-	    {header : 'City', dataIndex : 'cityName', width : 150, sortable : true},
-	    {header : 'State', dataIndex : 'stateName', width : 150, sortable : true},
-	    {header : 'email', dataIndex : 'email', width : 150, sortable : true}
+	    {header : 'Name', dataIndex : 'name', width : 320, sortable : true},
+	    {header : 'URL', dataIndex : 'url', width : 200, sortable : true},
+	    {header : 'ZIP', dataIndex : 'zip', width : 100, sortable : true},
+	    {header : 'City', dataIndex : 'cityName', width : 110, sortable : true},
+	    {header : 'State', dataIndex : 'stateName', width : 110, sortable : true},
+	    {header : 'Distancia', dataIndex : 'distanceMiles', width : 110,  xtype: 'numbercolumn', format:'0', align: 'right'}
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {
