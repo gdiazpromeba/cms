@@ -1,10 +1,9 @@
 <?php 
 
-require_once '../../config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/SheltersUsaOad.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterUsa.php';
-require_once('FirePHPCore/fb.php4'); 
+//require_once('FirePHPCore/fb.php4'); 
 
    class SheltersUsaOadImpl extends AOD implements SheltersUsaOad { 
 
@@ -12,6 +11,7 @@ require_once('FirePHPCore/fb.php4');
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHU.ID,     \n"; 
+         $sql.="  SHU.NUMBER,     \n";
          $sql.="  SHU.NAME,     \n"; 
          $sql.="  SHU.ZIP_CODE,     \n"; 
          $sql.="  SHU.URL,     \n"; 
@@ -35,9 +35,10 @@ require_once('FirePHPCore/fb.php4');
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
          if ($stm->fetch()) { 
             $bean->setId($id);
+            $bean->setNumber($number);
             $bean->setName($name);
             $bean->setZip($zip);
             $bean->setUrl($url);
@@ -53,6 +54,54 @@ require_once('FirePHPCore/fb.php4');
          $this->cierra($conexion, $stm); 
          return $bean; 
       } 
+      
+      public function obtienePorNumero($number){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  SHU.ID,     \n";
+      	$sql.="  SHU.NUMBER,     \n";
+      	$sql.="  SHU.NAME,     \n";
+      	$sql.="  SHU.ZIP_CODE,     \n";
+      	$sql.="  SHU.URL,     \n";
+      	$sql.="  SHU.LOGO_URL,     \n";
+      	$sql.="  SHU.EMAIL,     \n";
+      	$sql.="  SHU.PHONE,     \n";
+      	$sql.="  SHU.DESCRIPTION,     \n";
+      	$sql.="  SHU.STREET_ADDRESS,    \n";
+      	$sql.="  CIU.CITY_NAME,    \n";
+      	$sql.="  COU.COUNTY_NAME,    \n";
+      	$sql.="  STU.STATE_NAME,    \n";
+      	$sql.="  0 AS DISTANCE_KM \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_USA  SHU \n";
+      	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
+      	$sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
+      	$sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
+      	$sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  SHU.NUMBER='" . $number . "' \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$bean=new ShelterUsa();
+      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance);
+      	if ($stm->fetch()) {
+      		$bean->setId($id);
+      		$bean->setNumber($number);
+      		$bean->setName($name);
+      		$bean->setZip($zip);
+      		$bean->setUrl($url);
+      		$bean->setLogoUrl($logoUrl);
+      		$bean->setEmail($email);
+      		$bean->setPhone($phone);
+      		$bean->setDescription($description);
+      		$bean->setStreetAddress($streetAddress);
+      		$bean->setCityName($city);
+      		$bean->setStateName($state);
+      		$bean->setDistancia(0);
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $bean;
+      }      
 
 
       public function inserta($bean){ 
@@ -103,38 +152,12 @@ require_once('FirePHPCore/fb.php4');
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
-
-      public function zipContainers($zipCode){
-      	$conexion=$this->conectarse();
-      	$sql="SELECT  \n";
-      	$sql.="  Z.CITY,     \n";
-      	$sql.="  Z.COUNTY,     \n";
-      	$sql.="  U.STATE_NAME     \n";
-      	$sql.="FROM  \n";
-      	$sql.="  ZIPS Z \n";
-      	$sql.="  INNER JOIN USA_STATES U ON Z.STATE=U.STATE_CODE\n";
-      	$sql.="WHERE  \n";
-      	$sql.="  ZIP_CODE='" . $zipCode . "' \n";
-      	$stm=$this->preparar($conexion, $sql);
-      	$stm->execute();
-      	$stm->bind_result($city, $county, $state);
-      	$ret=array();
-      	if ($stm->fetch()) {
-      		$ret['success']=true;
-      		$ret['city']=$city;
-      		$ret['county']=$county;
-      		$ret['state']=$state;
-      	}else{
-      		$ret['success']=false;
-      	}
-      	$this->cierra($conexion, $stm);
-      	return $ret;
-      }
       
       public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHU.ID,     \n"; 
+         $sql.="  SHU.NUMBER,     \n";
          $sql.="  SHU.NAME,     \n"; 
          $sql.="  SHU.ZIP_CODE,     \n"; 
          $sql.="  SHU.URL,     \n"; 
@@ -171,14 +194,15 @@ require_once('FirePHPCore/fb.php4');
          	$sql.="  SHU.NAME  \n";
          }         
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
-         fb($sql);
+         //fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
             $bean->setId($id);
+            $bean->setNumber($number);
             $bean->setName($name);
             $bean->setZip($zip);
             $bean->setUrl($url);

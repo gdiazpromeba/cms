@@ -2,6 +2,7 @@
 
    class ShelterUsa { 
       private $id; 
+      private $number;
       private $name; 
       private $zip; 
       private $url; 
@@ -18,6 +19,10 @@
       public function getId(){ 
          return $this->id;  
       }
+      
+      public function getNumber(){
+      	return $this->number;
+      }      
 
       public function getName(){ 
          return $this->name;  
@@ -69,6 +74,10 @@
       
       public function setId($valor){ 
          $this->id=$valor; 
+      }
+      
+      public function setNumber($valor){
+      	$this->number=$valor;
       }
 
       public function setName($valor){ 

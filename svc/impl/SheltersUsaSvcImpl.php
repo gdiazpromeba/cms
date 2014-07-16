@@ -1,6 +1,5 @@
 <?php 
 
-require_once '../../config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/SheltersUsaOadImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/SheltersUsaSvc.php';
 
@@ -15,7 +14,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
          $bean=$this->oad->obtiene($id); 
          return $bean; 
       } 
-
+      
+      public function obtienePorNumero($numero){
+      	$bean=$this->oad->obtienePorNumero($numero);
+      	return $bean;
+      }      
 
       public function inserta($bean){ 
          return $this->oad->inserta($bean); 

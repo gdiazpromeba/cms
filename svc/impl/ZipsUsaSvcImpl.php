@@ -1,5 +1,4 @@
 <?php 
-require_once '../../config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/ZipsUsaOadImpl.php';  
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/ZipsUsaSvc.php';  
 
