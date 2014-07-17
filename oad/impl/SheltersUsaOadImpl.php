@@ -23,7 +23,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
-         $sql.="  0 AS DISTANCE_KM \n";
+         $sql.="  0 AS DISTANCE_KM, \n";
+         $sql.="  ZIU.LATITUDE,     \n";
+         $sql.="  ZIU.LONGITUDE     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -35,7 +37,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -50,6 +52,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setCityName($city);
             $bean->setStateName($state);
             $bean->setDistancia(0);
+            $bean->setLatitud($latitud);
+            $bean->setLongitud($longitud);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -71,7 +75,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  CIU.CITY_NAME,    \n";
       	$sql.="  COU.COUNTY_NAME,    \n";
       	$sql.="  STU.STATE_NAME,    \n";
-      	$sql.="  0 AS DISTANCE_KM \n";
+      	$sql.="  0 AS DISTANCE_KM, \n";
+      	$sql.="  ZIU.LATITUDE,    \n";
+      	$sql.="  ZIU.LONGITUDE    \n";
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_USA  SHU \n";
       	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -83,7 +89,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new ShelterUsa();
-      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance);
+      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud);
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -98,6 +104,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setCityName($city);
       		$bean->setStateName($state);
       		$bean->setDistancia(0);
+      		$bean->setLatitud($latitud);
+      		$bean->setLongitud($longitud);
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -169,7 +177,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
-         $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) AS DISTANCE_KM \n";
+         $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) AS DISTANCE_KM, \n";
+         $sql.="  ZIU.LATITUDE,    \n";
+         $sql.="  ZIU.LONGITUDE    \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -197,7 +207,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          //fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
@@ -215,6 +225,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setCountyName($county);
             $bean->setStateName($state);
             $bean->setDistancia($distance);
+            $bean->setLatitud($latitud);
+            $bean->setLongitud($longitud);            
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 
