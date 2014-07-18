@@ -10,6 +10,7 @@ Ext.define('SheltersUsaModel',{
 				{name : 'phone', type : 'string'},
 				{name : 'description', type : 'string'},
 				{name : 'streetAddress', type : 'string'},
+				{name : 'poBox', type : 'int'},
 				{name : 'cityName', type : 'string'},
 				{name : 'countyName', type : 'string'},
 				{name : 'stateName', type : 'string'},

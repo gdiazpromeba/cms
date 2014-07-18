@@ -20,6 +20,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SHU.PHONE,     \n"; 
          $sql.="  SHU.DESCRIPTION,     \n"; 
          $sql.="  SHU.STREET_ADDRESS,    \n"; 
+         $sql.="  SHU.PO_BOX,    \n";
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
@@ -37,7 +38,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $distance, $latitud, $longitud); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -49,6 +50,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setPhone($phone);
             $bean->setDescription($description);
             $bean->setStreetAddress($streetAddress);
+            $bean->setPoBox($poBox);
             $bean->setCityName($city);
             $bean->setStateName($state);
             $bean->setDistancia(0);
@@ -72,6 +74,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  SHU.PHONE,     \n";
       	$sql.="  SHU.DESCRIPTION,     \n";
       	$sql.="  SHU.STREET_ADDRESS,    \n";
+      	$sql.="  SHU.PO_BOX,    \n";
       	$sql.="  CIU.CITY_NAME,    \n";
       	$sql.="  COU.COUNTY_NAME,    \n";
       	$sql.="  STU.STATE_NAME,    \n";
@@ -89,7 +92,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new ShelterUsa();
-      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud);
+      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $distance, $latitud, $longitud);
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -101,6 +104,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setPhone($phone);
       		$bean->setDescription($description);
       		$bean->setStreetAddress($streetAddress);
+      		$bean->setPoBox($poBox);
       		$bean->setCityName($city);
       		$bean->setStateName($state);
       		$bean->setDistancia(0);
@@ -123,12 +127,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  EMAIL,     \n"; 
          $sql.="  PHONE,     \n"; 
          $sql.="  DESCRIPTION,     \n"; 
-         $sql.="  STREET_ADDRESS)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  STREET_ADDRESS,     \n"; 
+         $sql.="  PO_BOX     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress()); 
+         $stm->bind_param("sssssssssd",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -153,10 +159,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  EMAIL=?,     \n"; 
          $sql.="  PHONE=?,     \n"; 
          $sql.="  DESCRIPTION=?,     \n"; 
-         $sql.="  STREET_ADDRESS=?     \n"; 
+         $sql.="  STREET_ADDRESS=?,     \n"; 
+         $sql.="  PO_BOX=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getId() ); 
+         $stm->bind_param("ssssssssds", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -174,6 +182,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SHU.PHONE,     \n"; 
          $sql.="  SHU.DESCRIPTION,     \n"; 
          $sql.="  SHU.STREET_ADDRESS,    \n"; 
+         $sql.="  SHU.PO_BOX,    \n";
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
@@ -207,7 +216,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          //fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $city, $county, $state, $distance, $latitud, $longitud); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
+         		  $city, $county, $state, $distance, $latitud, $longitud); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
@@ -221,6 +231,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setPhone($phone);
             $bean->setDescription($description);
             $bean->setStreetAddress($streetAddress);
+            $bean->setPoBox($poBox);
             $bean->setCityName($city);
             $bean->setCountyName($county);
             $bean->setStateName($state);

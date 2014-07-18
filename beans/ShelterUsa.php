@@ -11,6 +11,7 @@
       private $phone; 
       private $description; 
       private $streetAddress; 
+      private $poBox;
       private $citiName;
       private $countyName;
       private $stateName;
@@ -57,6 +58,11 @@
       public function getStreetAddress(){ 
          return $this->streetAddress;  
       }
+      
+      public function getPoBox(){
+      	return $this->poBox;
+      }
+      
       
       public function getCityName(){
       	return $this->citiName;
@@ -121,6 +127,11 @@
       public function setStreetAddress($valor){ 
          $this->streetAddress=$valor; 
       }
+      
+      public function setPoBox($valor){
+      	$this->poBox=$valor;
+      }
+      
       
       public function setCityName($valor){
       	$this->citiName = $valor;

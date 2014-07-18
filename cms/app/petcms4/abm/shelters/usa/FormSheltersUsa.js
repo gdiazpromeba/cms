@@ -43,9 +43,10 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  id: 'url', allowBlank: false, width: 350},
             {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  id: 'email', allowBlank: true, width: 320},
             {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  id: 'phone', allowBlank: true, width: 210},
-            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: true, width: 350},
+            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: false, width: 350, height: 100},
             {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  id: 'streetAddress', 
-	          allowBlank: false, width: 350, height: 40},
+	          allowBlank: true, width: 350, height: 40},
+	        {fieldLabel: 'P.O.Box', xtype: 'numberfield',  name: 'poBox', itemId: 'poBox',  id: 'poBox', allowBlank: true, width: 210},  
           ]
       },//colizq
       {xtype: 'fieldset', itemId: 'colDer', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
@@ -85,6 +86,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	  colIzq.getComponent('phone').setValue(record.get('phone'));
   	  colIzq.getComponent('description').setValue(record.get('description'));
   	  colIzq.getComponent('streetAddress').setValue(record.get('streetAddress'));
+  	  colIzq.getComponent('poBox').setValue(record.get('poBox'));
       //foto
   	  var colDer=this.getComponent('colDer');
   	  colDer.getComponent('logoUrl').setValue(record.get('logoUrl'));
@@ -109,6 +111,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     record.data['phone']=  colIzq.getComponent('phone').getValue();
     record.data['description']=  colIzq.getComponent('description').getValue();
     record.data['streetAddress']=  colIzq.getComponent('streetAddress').getValue();
+    record.data['poBox']=  colIzq.getComponent('poBox').getValue();
     var colDer=this.getComponent('colDer');
     record.data['logoUrl']=  colDer.getComponent('logoUrl').getValue();
   	record.commit();
@@ -129,6 +132,15 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   			   valido=false;
   			   mensaje='Zip not valid';
   		   }
+  		   
+  		   var addressEmpty=Ext.isEmpty(colIzq.getComponent('streetAddress').getValue());
+  		   var poBoxEmpty=Ext.isEmpty(colIzq.getComponent('poBox').getValue());
+  		   
+  		   if (addressEmpty && poBoxEmpty){
+  			   valido=false;
+  			   mensaje='Either the street address or the P.O.Box must be provided';
+  		   }
+  		   
   		   
   		   if (!valido && muestraVentana){
   	           Ext.MessageBox.show({

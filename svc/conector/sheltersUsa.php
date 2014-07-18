@@ -48,6 +48,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean['phone']=$bean->getPhone();
 		  $arrBean['description']=$bean->getDescription();
 		  $arrBean['streetAddress']=$bean->getStreetAddress();
+		  $arrBean['poBox']=$bean->getPoBox();
 		  $arrBean['cityName']=$bean->getCityName();
 		  $arrBean['countyName']=$bean->getCountyName();
 		  $arrBean['stateName']=$bean->getStateName();
@@ -70,7 +71,8 @@ if ($ultimo=='selecciona'){
 		$bean->setPhone($_REQUEST['phone']);
 	    $bean->setDescription($_REQUEST['description']);
 	    $bean->setStreetAddress($_REQUEST['streetAddress']);
-		$exito=$svc->inserta($bean);
+	    $bean->setPoBox($_REQUEST['poBox']);	    	
+	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
   } else if ($ultimo=='actualiza'){
@@ -84,7 +86,8 @@ if ($ultimo=='selecciona'){
   	  $bean->setEmail($_REQUEST['email']);
   	  $bean->setPhone($_REQUEST['phone']);
   	  $bean->setDescription($_REQUEST['description']);
-  	  $bean->setStreetAddress($_REQUEST['streetAddress']);
+	  $bean->setStreetAddress($_REQUEST['streetAddress']);
+	  $bean->setPoBox($_REQUEST['poBox']);	    	
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   
