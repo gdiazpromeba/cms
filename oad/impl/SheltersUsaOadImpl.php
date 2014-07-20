@@ -25,8 +25,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
-         $sql.="  ZIU.LATITUDE,     \n";
-         $sql.="  ZIU.LONGITUDE     \n";
+         $sql.="  SHU.LATITUDE,     \n";
+         $sql.="  SHU.LONGITUDE     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -54,8 +54,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setCityName($city);
             $bean->setStateName($state);
             $bean->setDistancia(0);
-            $bean->setLatitud($latitud);
-            $bean->setLongitud($longitud);
+            $bean->setLatitude($latitud);
+            $bean->setLongitude($longitud);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -79,8 +79,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  COU.COUNTY_NAME,    \n";
       	$sql.="  STU.STATE_NAME,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
-      	$sql.="  ZIU.LATITUDE,    \n";
-      	$sql.="  ZIU.LONGITUDE    \n";
+      	$sql.="  SHU.LATITUDE,    \n";
+      	$sql.="  SHU.LONGITUDE    \n";
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_USA  SHU \n";
       	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -108,8 +108,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setCityName($city);
       		$bean->setStateName($state);
       		$bean->setDistancia(0);
-      		$bean->setLatitud($latitud);
-      		$bean->setLongitud($longitud);
+      		$bean->setLatitude($latitud);
+      		$bean->setLongitude($longitud);
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -128,13 +128,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  PHONE,     \n"; 
          $sql.="  DESCRIPTION,     \n"; 
          $sql.="  STREET_ADDRESS,     \n"; 
-         $sql.="  PO_BOX     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  PO_BOX,     \n";
+         $sql.="  LATITUDE,     \n";
+         $sql.="  LONGITUDE     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssd",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox()); 
+         $stm->bind_param("sssssssssddd",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -160,11 +162,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  PHONE=?,     \n"; 
          $sql.="  DESCRIPTION=?,     \n"; 
          $sql.="  STREET_ADDRESS=?,     \n"; 
-         $sql.="  PO_BOX=?     \n";
+         $sql.="  PO_BOX=?,     \n";
+         $sql.="  LATITUDE=?,     \n";
+         $sql.="  LONGITUDE=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssds", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getId() ); 
+         $stm->bind_param("ssssssssddds", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -186,9 +190,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
-         $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) AS DISTANCE_KM, \n";
-         $sql.="  ZIU.LATITUDE,    \n";
-         $sql.="  ZIU.LONGITUDE    \n";
+         $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
+         $sql.="  SHU.LATITUDE,    \n";
+         $sql.="  SHU.LONGITUDE    \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -203,7 +207,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
          }
          if (!(empty($distance))){
-         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) <=" . $distance . " \n";         	
+         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
          }   
          if (!(empty($longitude))){ // la longitud y latitud no son cero, hay que ordenar por la distancia calculada
          	$sql.="ORDER BY  \n";
@@ -236,8 +240,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setCountyName($county);
             $bean->setStateName($state);
             $bean->setDistancia($distance);
-            $bean->setLatitud($latitud);
-            $bean->setLongitud($longitud);            
+            $bean->setLatitude($latitud);
+            $bean->setLongitude($longitud);            
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 
@@ -260,7 +264,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
          }    
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
-         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", ZIU.LATITUDE, ZIU.LONGITUDE) <=" . $distance . " \n";         	
+         	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
          }              
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  

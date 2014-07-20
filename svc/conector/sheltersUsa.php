@@ -5,6 +5,8 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipUsa.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsUsaSvcImpl.php';
   
+  require_once('FirePHPCore/fb.php4');
+  
   
   header("Content-Type: text/plain; charset=utf-8");
 
@@ -48,6 +50,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['phone']=$bean->getPhone();
 		  $arrBean['description']=$bean->getDescription();
 		  $arrBean['streetAddress']=$bean->getStreetAddress();
+		  $arrBean['latitude']=$bean->getLatitude();
+		  $arrBean['longitude']=$bean->getLongitude();
 		  $arrBean['poBox']=$bean->getPoBox();
 		  $arrBean['cityName']=$bean->getCityName();
 		  $arrBean['countyName']=$bean->getCountyName();
@@ -70,8 +74,12 @@ if ($ultimo=='selecciona'){
 		$bean->setEmail($_REQUEST['email']);
 		$bean->setPhone($_REQUEST['phone']);
 	    $bean->setDescription($_REQUEST['description']);
-	    $bean->setStreetAddress($_REQUEST['streetAddress']);
-	    $bean->setPoBox($_REQUEST['poBox']);	    	
+	    $streetAddress=$_REQUEST['streetAddress']; if (empty($streetAddress)) $streetAddress=null;
+	    $bean->setStreetAddress($streetAddress);
+	    $bean->setLatitude($_REQUEST['latitude']);
+	    $bean->setLongitude($_REQUEST['longitude']);
+	    $poBox=$_REQUEST['poBox']; if (empty($poBox)) $poBox=null;
+	    $bean->setPoBox($poBox);	    	
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -86,8 +94,12 @@ if ($ultimo=='selecciona'){
   	  $bean->setEmail($_REQUEST['email']);
   	  $bean->setPhone($_REQUEST['phone']);
   	  $bean->setDescription($_REQUEST['description']);
-	  $bean->setStreetAddress($_REQUEST['streetAddress']);
-	  $bean->setPoBox($_REQUEST['poBox']);	    	
+  	  $streetAddress=$_REQUEST['streetAddress']; if (empty($streetAddress)) $streetAddress=null;
+	  $bean->setStreetAddress($streetAddress);
+	  $bean->setLatitude($_REQUEST['latitude']);
+	  $bean->setLongitude($_REQUEST['longitude']);
+	  $poBox=$_REQUEST['poBox']; if (empty($poBox)) $poBox=null;
+	  $bean->setPoBox($poBox);	    	
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   

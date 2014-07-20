@@ -9,6 +9,11 @@ Ext.application({
                     return true;
                 }
             },
+            digits8: function(val, field) {
+                if (/^\d{1,8}$/.test(val)) {
+                    return true;
+                }
+            },            
             usaZipCodeText: 'Zip Codes must have 5 numbers.'
         });
     	

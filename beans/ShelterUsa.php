@@ -16,8 +16,8 @@
       private $countyName;
       private $stateName;
       private $distancia;
-      private $latitud;
-      private $longitud;
+      private $latitude;
+      private $longitude;
 
       public function getId(){ 
          return $this->id;  
@@ -80,12 +80,12 @@
       	return $this->distancia;
       }      
       
-      public function getLatitud(){
-      	return $this->latitud;
+      public function getLatitude(){
+      	return $this->latitude;
       }
       
-      public function getLongitud(){
-      	return $this->longitud;
+      public function getLongitude(){
+      	return $this->longitude;
       }
       
       public function setId($valor){ 
@@ -149,12 +149,12 @@
       	$this->distancia = $valor;
       }      
       
-      public function setLatitud($valor){
-      	$this->latitud = $valor;
+      public function setLatitude($valor){
+      	$this->latitude = $valor;
       }
       
-      public function setLongitud($valor){
-      	$this->longitud = $valor;
+      public function setLongitude($valor){
+      	$this->longitude = $valor;
       }
       
       
