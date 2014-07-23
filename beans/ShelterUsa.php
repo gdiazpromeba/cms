@@ -15,6 +15,7 @@
       private $citiName;
       private $countyName;
       private $stateName;
+      private $stateCode;
       private $distancia;
       private $latitude;
       private $longitude;
@@ -74,6 +75,10 @@
       
       public function getStateName(){
       	return $this->stateName;
+      }
+
+      public function getStateCode(){
+      	return $this->stateCode;
       }
       
       public function getDistancia(){
@@ -143,6 +148,10 @@
       
       public function setStateName($valor){
       	$this->stateName = $valor;
+      }
+      
+      public function setStateCode($valor){
+      	$this->stateCode = $valor;
       }
       
       public function setDistancia($valor){

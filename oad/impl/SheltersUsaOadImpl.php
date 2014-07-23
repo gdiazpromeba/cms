@@ -24,6 +24,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
+         $sql.="  STU.STATE_CODE,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,     \n";
          $sql.="  SHU.LONGITUDE     \n";
@@ -38,7 +39,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $distance, $latitud, $longitud); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, $latitud, $longitud); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -53,6 +54,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setPoBox($poBox);
             $bean->setCityName($city);
             $bean->setStateName($state);
+            $bean->setStateCode($stateCode);
             $bean->setDistancia(0);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);
@@ -78,6 +80,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  CIU.CITY_NAME,    \n";
       	$sql.="  COU.COUNTY_NAME,    \n";
       	$sql.="  STU.STATE_NAME,    \n";
+      	$sql.="  STU.STATE_CODE,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHU.LATITUDE,    \n";
       	$sql.="  SHU.LONGITUDE    \n";
@@ -92,7 +95,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new ShelterUsa();
-      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $distance, $latitud, $longitud);
+      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, $latitud, $longitud);
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -107,6 +110,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setPoBox($poBox);
       		$bean->setCityName($city);
       		$bean->setStateName($state);
+      		$bean->setStateCode($stateCode);
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
@@ -190,6 +194,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  CIU.CITY_NAME,    \n";
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
+         $sql.="  STU.STATE_CODE,    \n";
          $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,    \n";
          $sql.="  SHU.LONGITUDE    \n";
@@ -221,7 +226,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
-         		  $city, $county, $state, $distance, $latitud, $longitud); 
+         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
@@ -239,6 +244,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setCityName($city);
             $bean->setCountyName($county);
             $bean->setStateName($state);
+            $bean->setStateCode($stateCode);
             $bean->setDistancia($distance);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);            
