@@ -19,6 +19,8 @@
       private $distancia;
       private $latitude;
       private $longitude;
+      private $specialBreedId;
+      private $specialBreedName;
 
       public function getId(){ 
          return $this->id;  
@@ -93,6 +95,16 @@
       	return $this->longitude;
       }
       
+
+      public function getSpecialBreedId(){
+      	return $this->specialBreedId;
+      }
+      
+      public function getSpecialBreedName(){
+      	return $this->specialBreedName;
+      }
+      
+      
       public function setId($valor){ 
          $this->id=$valor; 
       }
@@ -164,6 +176,14 @@
       
       public function setLongitude($valor){
       	$this->longitude = $valor;
+      }
+      
+      public function setSpecialBreedId($valor){
+      	$this->specialBreedId = $valor;
+      }
+      
+      public function setSpecialBreedName($valor){
+      	$this->specialBreedName = $valor;
       }
       
       

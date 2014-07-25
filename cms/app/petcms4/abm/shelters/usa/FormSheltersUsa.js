@@ -51,6 +51,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
       },//colizq
       {xtype: 'fieldset', itemId: 'colDer', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
     	  items:[
+                    {fieldLabel: 'Special Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 320},
                     {xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUsa',  border: true, 
                     	items: [
                           {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  id: 'latitude', allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
@@ -127,6 +128,8 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	  colIzq.getComponent('poBox').setValue(record.get('poBox'));
       //foto
   	  var colDer=this.getComponent('colDer');
+  	  colDer.getComponent('specialBreedId').setValue(record.get('specialBreedId'));
+  	  colDer.getComponent('specialBreedId').setRawValue(record.get('specialBreedName'));
   	  colDer.getComponent('logoUrl').setValue(record.get('logoUrl'));
   	  colDer.getComponent('coordenadas').getComponent('latitude').setValue(record.get('latitude'));
   	  colDer.getComponent('coordenadas').getComponent('longitude').setValue(record.get('longitude'));
@@ -153,6 +156,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     record.data['streetAddress']=  colIzq.getComponent('streetAddress').getValue();
     record.data['poBox']=  colIzq.getComponent('poBox').getValue();
     var colDer=this.getComponent('colDer');
+    record.data['specialBreedId']= colDer.getComponent('specialBreedId').getRawValue();
     record.data['logoUrl']=  colDer.getComponent('logoUrl').getValue();
     record.data['longitude']= colDer.getComponent('coordenadas').getComponent('longitude').getValue();
     record.data['latitude']=  colDer.getComponent('coordenadas').getComponent('latitude').getValue();

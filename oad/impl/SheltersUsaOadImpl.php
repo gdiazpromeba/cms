@@ -27,19 +27,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STU.STATE_CODE,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,     \n";
-         $sql.="  SHU.LONGITUDE     \n";
+         $sql.="  SHU.LONGITUDE,     \n";
+         $sql.="  SHU.SPECIAL_BREED_ID,     \n";
+         $sql.="  DBR.DOG_BREED_NAME     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
          $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+         $sql.="  LEFT JOIN  DOG_BREEDS DBR ON SHU.SPECIAL_BREED_ID=DBR.DOG_BREED_ID \n";
          $sql.="WHERE  \n"; 
          $sql.="  SHU.ID='" . $id . "' \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, $latitud, $longitud); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, 
+         		$latitud, $longitud, $specialBreedId, $specialBreedName); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -58,6 +62,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setDistancia(0);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);
+            $bean->setSpecialBreedId($specialBreedId);
+            $bean->setSpecialBreedName($specialBreedName);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -83,19 +89,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  STU.STATE_CODE,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHU.LATITUDE,    \n";
-      	$sql.="  SHU.LONGITUDE    \n";
-      	$sql.="FROM  \n";
-      	$sql.="  SHELTERS_USA  SHU \n";
-      	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-      	$sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
-      	$sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
-      	$sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+      	$sql.="  SHU.LONGITUDE,    \n";
+      	$sql.="  SHU.SPECIAL_BREED_ID,    \n";
+        $sql.="  DBR.DOG_BREED_NAME     \n";
+        $sql.="FROM  \n"; 
+        $sql.="  SHELTERS_USA  SHU \n"; 
+        $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
+        $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
+        $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
+        $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+        $sql.="  LEFT JOIN  DOG_BREEDS DBR ON SHU.SPECIAL_BREED_ID=DBR.DOG_BREED_ID \n";
       	$sql.="WHERE  \n";
       	$sql.="  SHU.NUMBER='" . $number . "' \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new ShelterUsa();
-      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, $latitud, $longitud);
+      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, 
+      			$distance, $latitud, $longitud, $specialBreedId, $specialBreedName); 
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -114,6 +124,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
+      		$bean->setSpecialBreedId($specialBreedId);
+      		$bean->setSpecialBreedName($specialBreedName);
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -134,13 +146,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STREET_ADDRESS,     \n"; 
          $sql.="  PO_BOX,     \n";
          $sql.="  LATITUDE,     \n";
-         $sql.="  LONGITUDE     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  LONGITUDE,     \n";
+         $sql.="  SPECIAL_BREED_ID     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssddd",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude()); 
+         $stm->bind_param("sssssssssddds",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getSpecialBreedId()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -168,11 +181,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STREET_ADDRESS=?,     \n"; 
          $sql.="  PO_BOX=?,     \n";
          $sql.="  LATITUDE=?,     \n";
-         $sql.="  LONGITUDE=?     \n";
+         $sql.="  LONGITUDE=?,     \n";
+         $sql.="  SPECIAL_BREED_ID=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssddds", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getId() ); 
+         $stm->bind_param("ssssssssdddss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
+         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getSpecialBreedId(),
+         		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -197,13 +212,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STU.STATE_CODE,    \n";
          $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,    \n";
-         $sql.="  SHU.LONGITUDE    \n";
+         $sql.="  SHU.LONGITUDE,    \n";
+         $sql.="  SHU.SPECIAL_BREED_ID,    \n";
+         $sql.="  DBR.DOG_BREED_NAME     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
          $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+         $sql.="  LEFT JOIN  DOG_BREEDS DBR ON SHU.SPECIAL_BREED_ID=DBR.DOG_BREED_ID \n";
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
          	$sql.="  AND SHU.NAME LIKE '%" . $nombre . "%'  \n";
@@ -226,7 +244,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
-         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud); 
+         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud, $specialBreedId, $specialBreedName); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
@@ -247,7 +265,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setStateCode($stateCode);
             $bean->setDistancia($distance);
             $bean->setLatitude($latitud);
-            $bean->setLongitude($longitud);            
+            $bean->setLongitude($longitud);  
+            $bean->setSpecialBreedId($specialBreedId);           
+            $bean->setSpecialBreedName($specialBreedName);
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 
@@ -262,6 +282,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+         $sql.="  LEFT JOIN  DOG_BREEDS DBR ON SHU.SPECIAL_BREED_ID=DBR.DOG_BREED_ID \n";
          $sql.="WHERE  1=1  \n";
                    if (!(empty($nombre))){
          	$sql.="  AND SHU.NAME LIKE '%" . $nombre . "%'  \n";

@@ -5,7 +5,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipUsa.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsUsaSvcImpl.php';
   
-  require_once('FirePHPCore/fb.php4');
+  //require_once('FirePHPCore/fb.php4');
   
   
   header("Content-Type: text/plain; charset=utf-8");
@@ -57,6 +57,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['countyName']=$bean->getCountyName();
 		  $arrBean['stateName']=$bean->getStateName();
 		  $arrBean['distanceMiles']=$bean->getDistancia() * 0.621371 ;  // pasa de km a millas
+		  $arrBean['specialBreedId']=$bean->getSpecialBreedId();
+		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -79,7 +81,9 @@ if ($ultimo=='selecciona'){
 	    $bean->setLatitude($_REQUEST['latitude']);
 	    $bean->setLongitude($_REQUEST['longitude']);
 	    $poBox=$_REQUEST['poBox']; if (empty($poBox)) $poBox=null;
-	    $bean->setPoBox($poBox);	    	
+	    $bean->setPoBox($poBox);	
+	    $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
+	    $bean->setSpecialBreedId($specialBreedId);
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -99,7 +103,9 @@ if ($ultimo=='selecciona'){
 	  $bean->setLatitude($_REQUEST['latitude']);
 	  $bean->setLongitude($_REQUEST['longitude']);
 	  $poBox=$_REQUEST['poBox']; if (empty($poBox)) $poBox=null;
-	  $bean->setPoBox($poBox);	    	
+	  $bean->setPoBox($poBox);	  
+	  $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
+	  $bean->setSpecialBreedId($specialBreedId);
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   
