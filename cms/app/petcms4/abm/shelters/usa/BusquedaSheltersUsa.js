@@ -6,6 +6,7 @@ Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
         {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
         {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', width: 230 },
         {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'usaZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
+        {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
       ],
       buttons: [
           {text:'Buscar', itemId: 'botBuscar', ref: '../botBuscar',
@@ -45,6 +46,7 @@ Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
         this.agregaClaveValor(resultado, 'stateId', this.getComponent('comboUsaStates').getValue());
         this.agregaClaveValor(resultado, 'zipCode', this.getComponent('zipCode').getValue());
+        this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         
         return resultado;
       },
@@ -62,6 +64,7 @@ Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
             this.getForm().reset();
             this.getComponent('comboUsaStates').setValue('');
             this.getComponent('zipCode').setValue('');
+            this.getComponent('specialBreedId').setValue('');
       },
       
        /**

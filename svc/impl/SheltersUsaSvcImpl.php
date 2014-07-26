@@ -35,8 +35,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       } 
 
 
-      public function selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos){
-         $arr=$this->oad->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
+      public function selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
+         $arr=$this->oad->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
          return $arr; 
       }
 
@@ -46,8 +46,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       }
 
 
-      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance){ 
-         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance); 
+      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId){ 
+         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId); 
          return $cantidad; 
       } 
       

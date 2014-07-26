@@ -192,7 +192,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
       
-      public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $desde, $cuantos){ 
+      public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHU.ID,     \n"; 
@@ -232,10 +232,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
          }   
+         if (!(empty($specialBreedId))){
+         	$sql.="  AND SPECIAL_BREED_ID='" . $specialBreedId . "' \n";
+         }
          if (!(empty($longitude))){ // la longitud y latitud no son cero, hay que ordenar por la distancia calculada
          	$sql.="ORDER BY  \n";
          	$sql.="  DISTANCE_KM  \n";
-         }else if (!(empty($nombre))){ 
+         }else { 
          	$sql.="ORDER BY  \n";
          	$sql.="  SHU.NAME  \n";
          }         
@@ -275,7 +278,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
 
-      public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance){ 
+      public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_USA SHU "; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -292,7 +295,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          }    
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
-         }              
+         } 
+         if (!(empty($specialBreedId))){
+         	$sql.="  AND SPECIAL_BREED_ID='" . $specialBreedId . "' \n";
+         }                      
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $cuenta=null; 

@@ -17,19 +17,19 @@ Ext.define('petcms4.iu.combos.ComboDogBreeds', {
 	          root: 'data'
 	       }
 	    },
-	    baseParams: { nombreOParte: '', start: 0, limit: 20 }
+	    baseParams: { nombreOParte: '', start: 0, limit: 20 },
+	    listeners:{
+	    	load: function(store, records) {
+	          store.insert(0, [{
+	              dogBreedName: '',
+	              dogBreedId: ''
+	          }]);
+	    	}
+	    }
   }),
-  
-  //esto es para que permita meter valores vacíos (dado que el campo no es obligatorio), teniendo el forceSelection: true
-  //la firma del evento "change" debería ser onChange: function( cmp, newValue, oldValue, eOpts ), pero por algún motivo 
-  // el valor nuevo me vuelve en el primer parámetro
-  onChange: function(newValue)  {
-      var me = this;
-      if (  me.forceSelection && newValue === null )
-          me.reset();
-      me.callParent( arguments );
-  },  
+ 
 
   displayField: 'dogBreedName', 
   valueField: 'dogBreedId',
 });
+

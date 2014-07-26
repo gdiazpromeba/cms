@@ -24,6 +24,7 @@ if ($ultimo=='selecciona'){
 		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
+		$specialBreedId=isset($_REQUEST['specialBreedId'])?$_REQUEST['specialBreedId']:null;
 		
 		//si el zipCode existe, transformarlo en latitud y longitud
 		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){
@@ -35,8 +36,8 @@ if ($ultimo=='selecciona'){
 		
 
 		$svc = new SheltersUsaSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $desde, $cuantos); 
+		$beans=$svc->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){
