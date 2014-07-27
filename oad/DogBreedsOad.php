@@ -10,6 +10,11 @@
       public function inhabilita($id);
       public function selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde,  $upkeepHasta, $desde, $cuantos); 
       public function seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde,  $upkeepHasta); 
+      /**
+       * consulta ráipda que devuelve sólo el nombre e Id
+       * @param unknown $nombreOParte
+       */
+      public function selNombres($nombreOParte);
    } 
 
 ?>

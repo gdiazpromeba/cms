@@ -506,6 +506,36 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
          $this->cierra($conexion, $stm); 
          return $cuenta; 
       } 
+      
+      
+      public function selNombres($nombreOParte){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  DBR.DOG_BREED_ID,     \n";
+      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  DOG_BREEDS DBR \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  DBR.HABILITADA=1 \n";
+      	if (!empty($nombreOParte)){
+      		$sql.="  AND DBR.DOG_BREED_NAME LIKE '%" . $nombreOParte . "%' \n";
+      	}
+      	$sql.="ORDER BY  \n";
+      	$sql.="  DBR.DOG_BREED_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre);
+      	$filas=array();
+      	while ($stm->fetch()) {      	
+            $fila=array();
+            $fila['id']=$id;
+            $fila['value']=$nombre;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }
+      
 
    } 
 ?>

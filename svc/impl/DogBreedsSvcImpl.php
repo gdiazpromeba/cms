@@ -52,6 +52,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogBr
          $cantidad=$this->oad->seleccionaCuenta($parte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta); 
          return $cantidad; 
       } 
+      
+      public function selNombres($nombreOParte){
+      	$arr=$this->oad->selNombres($nombreOParte);
+      	return $arr;
+      }      
 
    }
 ?>

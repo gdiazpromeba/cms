@@ -179,6 +179,15 @@ if ($ultimo=='selecciona'){
           $exito['archivo']=$nombre;
         }
         echo json_encode($exito);	
+  
+  
+  } else if ($ultimo=='selNombres'){
+		$nombreOParte=isset($_REQUEST['term'])?$_REQUEST['term']:null;
+		$svc = new DogBreedsSvcImpl(); 
+		$arr = $svc->selNombres($nombreOParte);
+		echo json_encode($arr) ;
   }
+  
+
 
 ?>
