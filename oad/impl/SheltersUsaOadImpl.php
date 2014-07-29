@@ -283,7 +283,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  COU.COUNTY_NAME,    \n";
          $sql.="  STU.STATE_NAME,    \n";
          $sql.="  STU.STATE_CODE,    \n";
-         $sql.="  GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
+         $sql.="  DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,    \n";
          $sql.="  SHU.LONGITUDE,    \n";
          $sql.="  SHU.SPECIAL_BREED_ID,    \n";
