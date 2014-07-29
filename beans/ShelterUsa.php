@@ -6,6 +6,7 @@
       private $name; 
       private $zip; 
       private $url; 
+      private $urlDecoded;
       private $logoUrl; 
       private $email; 
       private $phone; 
@@ -41,6 +42,10 @@
       public function getUrl(){ 
          return $this->url;  
       }
+      
+      public function getUrlEncoded(){
+      	return $this->urlEncoded;
+      }      
 
       public function getLogoUrl(){ 
          return $this->logoUrl;  
@@ -125,6 +130,10 @@
          $this->url=$valor; 
       }
 
+      public function setUrlEncoded($valor){
+      	$this->urlEncoded=$valor;
+      }      
+      
       public function setLogoUrl($valor){ 
          $this->logoUrl=$valor; 
       }

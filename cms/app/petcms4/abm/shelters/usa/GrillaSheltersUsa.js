@@ -5,6 +5,7 @@ Ext.define('SheltersUsaModel',{
 				{name : 'name', type : 'string'},
 				{name : 'zip', type : 'string'},
 				{name : 'url', type : 'string'},
+				{name : 'urlEncoded', type : 'string'},
 				{name : 'logoUrl', type : 'string'},
 				{name : 'email', type : 'string'},
 				{name : 'phone', type : 'string'},

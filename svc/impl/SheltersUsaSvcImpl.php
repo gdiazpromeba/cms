@@ -18,7 +18,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       public function obtienePorNumero($numero){
       	$bean=$this->oad->obtienePorNumero($numero);
       	return $bean;
-      }      
+      }   
+
+      public function obtienePorUrlEncoded($urlEncoded){
+      	$bean=$this->oad->obtienePorUrlEncoded($urlEncoded);
+      	return $bean;
+      }
 
       public function inserta($bean){ 
          return $this->oad->inserta($bean); 

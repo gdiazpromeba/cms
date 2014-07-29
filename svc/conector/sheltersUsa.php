@@ -46,6 +46,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean['name']=$bean->getName();
 		  $arrBean['zip']=$bean->getZip();
 		  $arrBean['url']=$bean->getUrl();
+		  $arrBean['urlEncoded']=$bean->getUrlEncoded();
 		  $arrBean['logoUrl']=$bean->getLogoUrl();
 		  $arrBean['email']=$bean->getEmail();
 		  $arrBean['phone']=$bean->getPhone();
@@ -73,6 +74,7 @@ if ($ultimo=='selecciona'){
 		$bean->setName($_REQUEST['name']);
 		$bean->setZip($_REQUEST['zip']);
 		$bean->setUrl($_REQUEST['url']);
+		$bean->setUrlEncoded($_REQUEST['urlEncoded']);
 		$bean->setLogoUrl($_REQUEST['logoUrl']);
 		$bean->setEmail($_REQUEST['email']);
 		$bean->setPhone($_REQUEST['phone']);
@@ -95,6 +97,7 @@ if ($ultimo=='selecciona'){
   	  $bean->setName($_REQUEST['name']);
   	  $bean->setZip($_REQUEST['zip']);
   	  $bean->setUrl($_REQUEST['url']);
+  	  $bean->setUrlEncoded($_REQUEST['urlEncoded']);
   	  $bean->setLogoUrl($_REQUEST['logoUrl']);
   	  $bean->setEmail($_REQUEST['email']);
   	  $bean->setPhone($_REQUEST['phone']);

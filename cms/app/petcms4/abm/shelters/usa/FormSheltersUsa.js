@@ -13,6 +13,32 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
         items:[            
           
             {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  id: 'name', allowBlank: false, width: 350},
+            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding',  border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
+            	items: [
+                  {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  id: 'urlEncoded', allowBlank: false, columnWidth: 0.8},
+  	              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
+                  	listeners:{
+                		click : function(  The, eOpts ){
+                			var url=Ext.getCmp('name').getValue();
+                			url=url.replace(" ", "_");
+                			url=url.replace("&", "and");
+                			url=url.replace("\'", "");
+                			url=url.replace("'", "");
+                			url=url.replace("\"", "");
+                			url=url.replace(".", "");
+                			url=url.replace("%", "");
+                			url=url.replace(", ", "_");
+                			url=url.replace(",", "_");
+                			url=url.replace("´", "");
+                			url=url.replace("`", "");
+                			url=url.replace("/", "_");  
+                			var ueTxt=Ext.getCmp('urlEncoded');	
+                			ueTxt.setValue(url);
+                		}	
+                	}
+  		          }
+            	]
+            },
             {fieldLabel: 'State', xtype: 'textfield',  name: 'state', itemId: 'state',  id: 'state', readOnly: true, allowBlank: false, width: 200},
             {fieldLabel: 'County', xtype: 'textfield',  name: 'county', itemId: 'county',  id: 'county', readOnly: true, allowBlank: false, width: 250},
             {fieldLabel: 'City', xtype: 'textfield',  name: 'city', itemId: 'city',  id: 'city', readOnly: true, allowBlank: false, width: 250},
@@ -38,12 +64,11 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
             			});
             		}	
             	}
-            	
             },
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  id: 'url', allowBlank: false, width: 350},
             {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  id: 'email', allowBlank: true, width: 320},
             {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  id: 'phone', allowBlank: true, width: 210},
-            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: false, width: 350, height: 100},
+            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: false, width: 350, height: 70},
             {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  id: 'streetAddress', 
 	          allowBlank: true, width: 350, height: 40},
 	        {fieldLabel: 'P.O.Box', xtype: 'textfield',  vtype: 'digits8', name: 'poBox', itemId: 'poBox',  id: 'poBox', allowBlank: true, width: 210},  
@@ -121,6 +146,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	  colIzq.getComponent('county').setValue(record.get('countyName'));
   	  colIzq.getComponent('state').setValue(record.get('stateName'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
+  	  colIzq.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
   	  colIzq.getComponent('email').setValue(record.get('email'));
   	  colIzq.getComponent('phone').setValue(record.get('phone'));
   	  colIzq.getComponent('description').setValue(record.get('description'));
@@ -150,6 +176,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     record.data['name']=  colIzq.getComponent('name').getValue();
     record.data['zip']=  colIzq.getComponent('zip').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();
+    record.data['urlEncoded']=  colIzq.getComponent('encoding').getComponent('urlEncoded').getValue();
     record.data['email']=  colIzq.getComponent('email').getValue();
     record.data['phone']=  colIzq.getComponent('phone').getValue();
     record.data['description']=  colIzq.getComponent('description').getValue();
@@ -173,6 +200,11 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   			   valido=false;
   			   mensaje='Name not valid';
   		   }
+  		   
+  		   if (!colIzq.getComponent('encoding').getComponent('urlEncoded').isValid()){
+  			   valido=false;
+  			   mensaje='URL encoded not valid';
+  		   }  		   
   		   
   		   if (!colIzq.getComponent('zip').isValid()){
   			   valido=false;

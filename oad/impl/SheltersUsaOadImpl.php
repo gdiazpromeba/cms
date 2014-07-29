@@ -15,6 +15,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SHU.NAME,     \n"; 
          $sql.="  SHU.ZIP_CODE,     \n"; 
          $sql.="  SHU.URL,     \n"; 
+         $sql.="  SHU.URL_ENCODED,     \n";
          $sql.="  SHU.LOGO_URL,     \n"; 
          $sql.="  SHU.EMAIL,     \n"; 
          $sql.="  SHU.PHONE,     \n"; 
@@ -42,7 +43,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, 
+         $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, 
          		$latitud, $longitud, $specialBreedId, $specialBreedName); 
          if ($stm->fetch()) { 
             $bean->setId($id);
@@ -50,6 +51,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setName($name);
             $bean->setZip($zip);
             $bean->setUrl($url);
+            $bean->setUrlEncoded($urlEncoded);
             $bean->setLogoUrl($logoUrl);
             $bean->setEmail($email);
             $bean->setPhone($phone);
@@ -77,6 +79,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  SHU.NAME,     \n";
       	$sql.="  SHU.ZIP_CODE,     \n";
       	$sql.="  SHU.URL,     \n";
+      	$sql.="  SHU.URL_ENCODED,     \n";
       	$sql.="  SHU.LOGO_URL,     \n";
       	$sql.="  SHU.EMAIL,     \n";
       	$sql.="  SHU.PHONE,     \n";
@@ -104,7 +107,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new ShelterUsa();
-      	$stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, 
+      	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, 
       			$distance, $latitud, $longitud, $specialBreedId, $specialBreedName); 
       	if ($stm->fetch()) {
       		$bean->setId($id);
@@ -112,6 +115,71 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setName($name);
       		$bean->setZip($zip);
       		$bean->setUrl($url);
+      		$bean->setUrlEncoded($urlEncoded);
+      		$bean->setLogoUrl($logoUrl);
+      		$bean->setEmail($email);
+      		$bean->setPhone($phone);
+      		$bean->setDescription($description);
+      		$bean->setStreetAddress($streetAddress);
+      		$bean->setPoBox($poBox);
+      		$bean->setCityName($city);
+      		$bean->setStateName($state);
+      		$bean->setStateCode($stateCode);
+      		$bean->setDistancia(0);
+      		$bean->setLatitude($latitud);
+      		$bean->setLongitude($longitud);
+      		$bean->setSpecialBreedId($specialBreedId);
+      		$bean->setSpecialBreedName($specialBreedName);
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $bean;
+      }   
+
+      public function obtienePorUrlEncoded($urlEncoded){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  SHU.ID,     \n";
+      	$sql.="  SHU.NUMBER,     \n";
+      	$sql.="  SHU.NAME,     \n";
+      	$sql.="  SHU.ZIP_CODE,     \n";
+      	$sql.="  SHU.URL,     \n";
+      	$sql.="  SHU.URL_ENCODED,     \n";
+      	$sql.="  SHU.LOGO_URL,     \n";
+      	$sql.="  SHU.EMAIL,     \n";
+      	$sql.="  SHU.PHONE,     \n";
+      	$sql.="  SHU.DESCRIPTION,     \n";
+      	$sql.="  SHU.STREET_ADDRESS,    \n";
+      	$sql.="  SHU.PO_BOX,    \n";
+      	$sql.="  CIU.CITY_NAME,    \n";
+      	$sql.="  COU.COUNTY_NAME,    \n";
+      	$sql.="  STU.STATE_NAME,    \n";
+      	$sql.="  STU.STATE_CODE,    \n";
+      	$sql.="  0 AS DISTANCE_KM, \n";
+      	$sql.="  SHU.LATITUDE,    \n";
+      	$sql.="  SHU.LONGITUDE,    \n";
+      	$sql.="  SHU.SPECIAL_BREED_ID,    \n";
+      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_USA  SHU \n";
+      	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
+      	$sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
+      	$sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
+      	$sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
+      	$sql.="  LEFT JOIN  DOG_BREEDS DBR ON SHU.SPECIAL_BREED_ID=DBR.DOG_BREED_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  SHU.URL_ENCODED='" . $urlEncoded . "' \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$bean=new ShelterUsa();
+      	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode,
+      			$distance, $latitud, $longitud, $specialBreedId, $specialBreedName);
+      	if ($stm->fetch()) {
+      		$bean->setId($id);
+      		$bean->setNumber($number);
+      		$bean->setName($name);
+      		$bean->setZip($zip);
+      		$bean->setUrl($url);
+      		$bean->setUrlEncoded($urlEncoded);
       		$bean->setLogoUrl($logoUrl);
       		$bean->setEmail($email);
       		$bean->setPhone($phone);
@@ -139,6 +207,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  NAME,     \n"; 
          $sql.="  ZIP_CODE,     \n"; 
          $sql.="  URL,     \n"; 
+         $sql.="  URL_ENCODED,     \n";
          $sql.="  LOGO_URL,     \n"; 
          $sql.="  EMAIL,     \n"; 
          $sql.="  PHONE,     \n"; 
@@ -148,12 +217,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  LATITUDE,     \n";
          $sql.="  LONGITUDE,     \n";
          $sql.="  SPECIAL_BREED_ID     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssddds",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		  $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getSpecialBreedId()); 
+         $stm->bind_param("ssssssssssddds",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
+         		$bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), 
+         		$bean->getLongitude(), $bean->getSpecialBreedId()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -174,6 +244,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  NAME=?,     \n"; 
          $sql.="  ZIP_CODE=?,     \n"; 
          $sql.="  URL=?,     \n"; 
+         $sql.="  URL_ENCODED=?,     \n";
          $sql.="  LOGO_URL=?,     \n"; 
          $sql.="  EMAIL=?,     \n"; 
          $sql.="  PHONE=?,     \n"; 
@@ -185,8 +256,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SPECIAL_BREED_ID=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssdddss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), 
-         		$bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getSpecialBreedId(),
+         $stm->bind_param("sssssssssdddss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
+         		$bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), 
+         		$bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), $bean->getSpecialBreedId(),
          		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
@@ -200,6 +272,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SHU.NAME,     \n"; 
          $sql.="  SHU.ZIP_CODE,     \n"; 
          $sql.="  SHU.URL,     \n"; 
+         $sql.="  SHU.URL_ENCODED,     \n";
          $sql.="  SHU.LOGO_URL,     \n"; 
          $sql.="  SHU.EMAIL,     \n"; 
          $sql.="  SHU.PHONE,     \n"; 
@@ -246,7 +319,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          //fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
+         $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
          		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud, $specialBreedId, $specialBreedName); 
          $filas = array(); 
          while ($stm->fetch()) { 
@@ -256,6 +329,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setName($name);
             $bean->setZip($zip);
             $bean->setUrl($url);
+            $bean->setUrlEncoded($urlEncoded);
             $bean->setLogoUrl($logoUrl);
             $bean->setEmail($email);
             $bean->setPhone($phone);
