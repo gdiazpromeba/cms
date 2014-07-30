@@ -93,7 +93,7 @@ if ($ultimo=='selecciona'){
   } else if ($ultimo=='actualiza'){
   	  $bean=new ShelterUsa();
   	  $svc = new SheltersUsaSvcImpl();
-  	  $bean->setId($_REQUEST['id']);
+  	  $bean->setId($_REQUEST['shelterUsaId']);
   	  $bean->setName($_REQUEST['name']);
   	  $bean->setZip($_REQUEST['zip']);
   	  $bean->setUrl($_REQUEST['url']);
@@ -115,7 +115,7 @@ if ($ultimo=='selecciona'){
   
   } else if ($ultimo=='borra'){
 	$svc = new SheltersUsaSvcImpl();
-	$exito=$svc->borra($_REQUEST['id']);
+	$exito=$svc->borra($_REQUEST['shelterUsaId']);
 	echo json_encode($exito) ;	
 	
   }else if ($ultimo=='subeLogo'){

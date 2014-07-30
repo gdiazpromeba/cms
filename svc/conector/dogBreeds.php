@@ -186,6 +186,20 @@ if ($ultimo=='selecciona'){
 		$svc = new DogBreedsSvcImpl(); 
 		$arr = $svc->selNombres($nombreOParte);
 		echo json_encode($arr) ;
+  
+  } else if ($ultimo=='selNombresPorShelter'){
+		$shelterId=$_REQUEST['shelterId'];
+		$svc = new DogBreedsSvcImpl(); 
+		$arr = $svc->selNombresPorShelter($shelterId);
+		$res=array();
+		$res['data']=$arr;
+		$res['total']=count($data);
+		echo json_encode($res) ;
+  
+  } else if ($ultimo=='actualizaEnLotePorShelter'){
+		$res=array();
+		$res[]="hola";
+		echo json_encode($res) ;
   }
   
 

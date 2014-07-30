@@ -240,6 +240,30 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
+      
+      public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
+      	$conexion=$this->conectarse();
+      	$sql="INSERT INTO DOG_BREEDS_BY_SHELTER (   \n";
+      	$sql.="  DOG_BREED_ID,     \n";
+      	$sql.="  SHELTER_ID     \n";
+      	$sql.="VALUES (?, ?)    \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->bind_param("ss", $dogBreedId, $shelterId);
+      	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
+      }      
+      
+      public function desvinculaDogBreedAShelter($shelterId, $dogBreedId){
+      	$conexion=$this->conectarse();
+      	$sql="DELETE FROM DOG_BREEDS_BY_SHELTER    \n";
+      	$sql.="WHERE      \n";
+      	$sql.="  SHELTER_ID ='" . $shelterId  . "'     \n";
+      	$sql.="  AND DOG_BREED_ID ='" . $dogBreedId  . "'     \n";
+      	$sql.="VALUES (?, ?)    \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->bind_param("ss", $dogBreedId, $shelterId);
+      	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
+      }
+      
 
 
       public function borra($id){ 
@@ -535,6 +559,33 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
       	$this->cierra($conexion, $stm);
       	return $filas;
       }
+      
+      public function selNombresPorShelter($shelterId){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  DBR.DOG_BREED_ID,     \n";
+      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  DOG_BREEDS DBR \n";
+      	$sql.="  INNER JOIN DOG_BREEDS_BY_SHELTER DBS ON DBR.SHELTER_ID=DBS.SHELTER_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  DBR.HABILITADA=1 \n";
+        $sql.="  AND DBS.SHELTER_ID = '" . $shelterId . "' \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  DBR.DOG_BREED_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre);
+      	$filas=array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$nombre;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }      
       
 
    } 

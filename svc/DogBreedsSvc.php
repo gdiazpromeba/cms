@@ -17,6 +17,8 @@
        */
       public function selNombres($nombreOParte);
       
+      public function selNombresPorShelter($shelterId);
+      
    } 
 
 ?>

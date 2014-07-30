@@ -15,6 +15,14 @@
        * @param unknown $nombreOParte
        */
       public function selNombres($nombreOParte);
+      
+      /**
+       * consulta ráipda que devuelve sólo el nombre e Id, de razas en las que un refugio se especialice
+       * @param unknown $shelterId
+       */
+      public function selNombresPorShelter($shelterId);
+      
+      
    } 
 
 ?>
