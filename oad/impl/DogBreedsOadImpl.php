@@ -252,15 +252,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
       	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
       }      
       
-      public function desvinculaDogBreedAShelter($shelterId, $dogBreedId){
+      public function desvinculaDogBreedsDeShelter($shelterId){
       	$conexion=$this->conectarse();
       	$sql="DELETE FROM DOG_BREEDS_BY_SHELTER    \n";
       	$sql.="WHERE      \n";
       	$sql.="  SHELTER_ID ='" . $shelterId  . "'     \n";
-      	$sql.="  AND DOG_BREED_ID ='" . $dogBreedId  . "'     \n";
-      	$sql.="VALUES (?, ?)    \n";
       	$stm=$this->preparar($conexion, $sql);
-      	$stm->bind_param("ss", $dogBreedId, $shelterId);
+      	$stm->bind_param("s", $shelterId);
       	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
       }
       
@@ -567,7 +565,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
       	$sql.="  DBR.DOG_BREED_NAME     \n";
       	$sql.="FROM  \n";
       	$sql.="  DOG_BREEDS DBR \n";
-      	$sql.="  INNER JOIN DOG_BREEDS_BY_SHELTER DBS ON DBR.SHELTER_ID=DBS.SHELTER_ID \n";
+      	$sql.="  INNER JOIN DOG_BREEDS_BY_SHELTER DBS ON DBR.DOG_BREED_ID=DBS.DOG_BREED_ID \n";
       	$sql.="WHERE  \n";
       	$sql.="  DBR.HABILITADA=1 \n";
         $sql.="  AND DBS.SHELTER_ID = '" . $shelterId . "' \n";

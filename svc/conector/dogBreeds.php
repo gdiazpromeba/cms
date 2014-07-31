@@ -2,7 +2,9 @@
   require_once '../../config.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/DogBreed.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/DogBreedsSvcImpl.php';
-  header("Content-Type: text/plain; charset=utf-8");
+  require_once('FirePHPCore/fb.php4');
+  
+
 
   $url=$_SERVER['PHP_SELF'];
    
@@ -193,13 +195,26 @@ if ($ultimo=='selecciona'){
 		$arr = $svc->selNombresPorShelter($shelterId);
 		$res=array();
 		$res['data']=$arr;
-		$res['total']=count($data);
+		$res['total']=count($arr);
 		echo json_encode($res) ;
   
   } else if ($ultimo=='actualizaEnLotePorShelter'){
-		$res=array();
-		$res[]="hola";
-		echo json_encode($res) ;
+  	header("Content-Type: application/json; charset=utf-8");
+  	   
+
+  	$request_body = file_get_contents('php://input');
+  	$data = json_decode($request_body);
+  	fb($data);
+  	
+  	 
+  	
+  	
+//   	if (isset($_REQUEST['JSON'])) {
+//   		$decoded = json_decode(stripslashes($_REQUEST['JSON']), TRUE);
+//         echo print_r($decoded);  
+//   	}else{
+//   		echo print_r($_REQUEST);
+//   	}
   }
   
 

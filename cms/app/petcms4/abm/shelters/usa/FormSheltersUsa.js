@@ -127,9 +127,9 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                                 	        },                                	        
                                 	        api: {
                                 	          read: Global.dirAplicacion + '/svc/conector/dogBreeds.php/selNombresPorShelter',
-                                	          create: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
+                                	          //create: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
                                 	          update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
-                                	          destroy: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
+                                	          //destroy: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
                                 	        }
                                 	    },
                                 	    remoteSort: false,
