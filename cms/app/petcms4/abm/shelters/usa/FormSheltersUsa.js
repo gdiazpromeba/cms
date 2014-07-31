@@ -104,7 +104,8 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                                        fields : [ 
                                          {name : 'id', type : 'string'}, 
                                       	 {name : 'name', type : 'string'}
-                                       ]
+                                       ],
+                                       idProperty: 'id'
                                    }),
                                    store: Ext.create('Ext.data.JsonStore', {
                                 	    // store configs
@@ -122,14 +123,15 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                                 	        writer: {
                                 	            type: 'json',
                                 	            writeAllFields : false,  //just send changed fields
-                                	            allowSingle :false      //always wrap in an array
+                                	            allowSingle :false,      //always wrap in an array
+                                	            idProperty: 'id'
                                 	           // nameProperty: 'mapping'
                                 	        },                                	        
                                 	        api: {
                                 	          read: Global.dirAplicacion + '/svc/conector/dogBreeds.php/selNombresPorShelter',
-                                	          //create: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
-                                	          update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
-                                	          //destroy: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
+                                	          create: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/vinculaDogBreedAShelter',
+                                	          //update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
+                                	          destroy: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/desvinculaDogBreedDeShelter',
                                 	        }
                                 	    },
                                 	    remoteSort: false,
@@ -153,28 +155,20 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                             		  click: function(the, Opts){
                             		    var grid=Ext.getCmp('breedsAdded');
                             		    var store=grid.getStore();
-                            		    var idField=Ext.getCmp('shelterUsaId');
-                            		    store.getProxy().extraParams['shelterId']=idField.getValue();
-                            		    store.each(function(record){
-                            		        record.setDirty();
-                            		    });
+//                            		    var idField=Ext.getCmp('shelterUsaId');
+//                            		    store.getProxy().extraParams['shelterId']=idField.getValue();
+//                            		    var newRecords = store.getNewRecords();
+//                            		    var updatedRecords = store.getUpdatedRecords();
+//                            		    var removedRecords = store.getRemovedRecords();
+//                            		    
+//                            		    store.each(function(record){
+//                            		        record.setDirty();
+//                            		    });
                             		    store.sync();                            		    
                             		  }
                             	  }
                               }                              
-                      ],
-                  	  listeners: {
-                		expand: function ( f, eOpts ){
-                			//sólo carga si ya hay un id de shelter
-                			var idField=Ext.getCmp('shelterUsaId');
-                			if (!Ext.isEmpty(idField.getValue())){
-                			  var grid=this.down('#breedsAdded');
-                			  var store=grid.getStore();
-                			  store.getProxy().extraParams['shelterId']=idField.getValue();
-                			  store.load();
-                			}
-                		}
-                	  }                      
+                      ]                 
                     },
                     {xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUsa',  border: true, 
                     	items: [
@@ -233,11 +227,22 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     	  ]
       }
     ],
+    
+    /**
+     * carga las razas de perro en las que este refugio se especialice
+     */
+    cargaRazasAsociadas : function(shelterId){
+	  var grid=Ext.getCmp('breedsAdded');
+	  var store=grid.getStore();
+	  store.getProxy().extraParams['shelterId']=shelterId;
+	  store.load();
+    },
       
       
   	   
   	pueblaDatosEnForm : function(record){
-      this.getComponent('shelterUsaId').setValue(record.id);
+      this.getComponent('shelterUsaId').setValue(record.data['id']);
+      this.cargaRazasAsociadas(record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
   	  colIzq.getComponent('zip').setValue(record.get('zip'));
@@ -328,7 +333,23 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	           });
   		   }
   		   return valido;
-  }
+  },
+  
+  /**
+   * override para grabar también el store de las razas asociadas
+   */
+  pulsoConfirmar: function(me){
+      var grid=Ext.getCmp('breedsAdded');
+      var store=grid.getStore();
+      var idField=Ext.getCmp('shelterUsaId');
+      store.getProxy().extraParams['shelterId']=idField.getValue();
+      store.each(function(record){
+        record.setDirty();
+      });
+      store.sync(); 
+      
+      me.callParent(arguments);
+  }, 
   	   
   
 });

@@ -66,6 +66,7 @@ function abmIza(grillaCabecera, formCabecera, panelSearch) {
 		panelSearch.borraOcultos();
 		cargaParametrosAdicionales(storeCabecera, panelSearch);
 		storeCabecera.load();
+		grillaCabecera.getSelectionModel().deselectAll();
 	});
 
 	function cargaStore(grilla) {

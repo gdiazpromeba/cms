@@ -12,6 +12,10 @@
       public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance, $specialBreedId);
       public function zipContainers($zipCode); 
       
+
+      public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
+      public function vinculaDogBreedAShelter($shelterId, $dogBreedId);
+      
    } 
 
 ?>

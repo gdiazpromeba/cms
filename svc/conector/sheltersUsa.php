@@ -5,7 +5,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipUsa.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsUsaSvcImpl.php';
   
-  //require_once('FirePHPCore/fb.php4');
+  require_once('FirePHPCore/fb.php4');
   
   
   header("Content-Type: text/plain; charset=utf-8");
@@ -142,6 +142,40 @@ if ($ultimo=='selecciona'){
           $exito['archivo']=$nombre;
         }
         echo json_encode($exito);	
+  
+  } else if ($ultimo=='vinculaDogBreed'){
+  	header("Content-Type: application/json; charset=utf-8");
+  	   
+    // este código mágico extrae solamente la parte JSON de la respuesta
+  	$request_body = file_get_contents('php://input');
+  	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
+  	
+  	$breedId = $data['id'];
+ 	
+    //y ahora la parte http común
+    $shelterId=$_REQUEST['shelterId'];
+    $svc = new SheltersUsaSvcImpl();
+    
+    fb("vinculando shelterId=" . $shelterId . " breedId= " . $breedId);
+    
+    $svc->vinculaDogBreedAShelter($shelterId, $breedId);
+  	
+ } else if ($ultimo=='desvinculaDogBreed'){
+  	header("Content-Type: application/json; charset=utf-8");
+  	   
+    // este código mágico extrae solamente la parte JSON de la respuesta
+  	$request_body = file_get_contents('php://input');
+  	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
+  	
+    $breedId = $data['id'];
+ 	
+    //y ahora la parte http común
+    $shelterId=$_REQUEST['shelterId'];
+    $svc = new SheltersUsaSvcImpl();
+    
+    $svc->desvinculaDogBreedDeShelter($shelterId, $breedId);
+  	
   }
+    
 
 ?>

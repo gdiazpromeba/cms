@@ -63,12 +63,5 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogBr
       	return $arr;
       }
       
-      public function actualizaEnLoteVinculoConShelter($shelterId, $arrBredIds){
-      	$this->oad->desvinculaDogBreedsDeShelter($shelterId);
-      	foreach ($arrBredIds as $breedId){
-      		$this->oad->vinculaDogBreedAShelter($shelterId, $dogBreedId);
-      	}
-      }
-
    }
 ?>

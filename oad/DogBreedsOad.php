@@ -21,9 +21,7 @@
        * @param unknown $shelterId
        */
       public function selNombresPorShelter($shelterId);
-      
-      public function desvinculaDogBreedsDeShelter($shelterId);
-      public function vinculaDogBreedAShelter($shelterId, $dogBreedId);
+
       
       
    } 

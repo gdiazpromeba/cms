@@ -241,26 +241,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
       
-      public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
-      	$conexion=$this->conectarse();
-      	$sql="INSERT INTO DOG_BREEDS_BY_SHELTER (   \n";
-      	$sql.="  DOG_BREED_ID,     \n";
-      	$sql.="  SHELTER_ID     \n";
-      	$sql.="VALUES (?, ?)    \n";
-      	$stm=$this->preparar($conexion, $sql);
-      	$stm->bind_param("ss", $dogBreedId, $shelterId);
-      	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
-      }      
-      
-      public function desvinculaDogBreedsDeShelter($shelterId){
-      	$conexion=$this->conectarse();
-      	$sql="DELETE FROM DOG_BREEDS_BY_SHELTER    \n";
-      	$sql.="WHERE      \n";
-      	$sql.="  SHELTER_ID ='" . $shelterId  . "'     \n";
-      	$stm=$this->preparar($conexion, $sql);
-      	$stm->bind_param("s", $shelterId);
-      	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
-      }
+
       
 
 
