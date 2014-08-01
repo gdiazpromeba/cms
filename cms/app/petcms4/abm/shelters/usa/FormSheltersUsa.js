@@ -76,7 +76,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
       },//colizq
       {xtype: 'fieldset', itemId: 'colDer', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
     	  items:[
-                    { title: 'Related breeds', xtype: 'fieldset', itemId: 'specializations', id: 'specializations',  border: true, collapsible: true, 
+                    { title: 'Related breeds', xtype: 'fieldset', itemId: 'specializations', id: 'specializations',  border: true, collapsible: true, collapsed: true,
                       items: [
                               {xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', id: 'specialBreedId', width: 320},
                               {xtype: 'button', text: 'Add', itemId: 'botAddSpecial',
@@ -129,9 +129,9 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                                 	        },                                	        
                                 	        api: {
                                 	          read: Global.dirAplicacion + '/svc/conector/dogBreeds.php/selNombresPorShelter',
-                                	          create: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/vinculaDogBreedAShelter',
+                                	          create: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/vinculaDogBreed',
                                 	          //update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
-                                	          destroy: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/desvinculaDogBreedDeShelter',
+                                	          destroy: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/desvinculaDogBreed',
                                 	        }
                                 	    },
                                 	    remoteSort: false,
@@ -149,25 +149,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                             		    }
                             		  }
                             	  }
-                              },
-                              {xtype: 'button', text: 'Synch', itemId: 'botSynchSpecial',
-                            	  listeners: {
-                            		  click: function(the, Opts){
-                            		    var grid=Ext.getCmp('breedsAdded');
-                            		    var store=grid.getStore();
-//                            		    var idField=Ext.getCmp('shelterUsaId');
-//                            		    store.getProxy().extraParams['shelterId']=idField.getValue();
-//                            		    var newRecords = store.getNewRecords();
-//                            		    var updatedRecords = store.getUpdatedRecords();
-//                            		    var removedRecords = store.getRemovedRecords();
-//                            		    
-//                            		    store.each(function(record){
-//                            		        record.setDirty();
-//                            		    });
-                            		    store.sync();                            		    
-                            		  }
-                            	  }
-                              }                              
+                              }                          
                       ]                 
                     },
                     {xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUsa',  border: true, 
@@ -341,13 +323,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   pulsoConfirmar: function(me){
       var grid=Ext.getCmp('breedsAdded');
       var store=grid.getStore();
-      var idField=Ext.getCmp('shelterUsaId');
-      store.getProxy().extraParams['shelterId']=idField.getValue();
-      store.each(function(record){
-        record.setDirty();
-      });
       store.sync(); 
-      
       me.callParent(arguments);
   }, 
   	   

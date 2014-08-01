@@ -146,34 +146,34 @@ if ($ultimo=='selecciona'){
   } else if ($ultimo=='vinculaDogBreed'){
   	header("Content-Type: application/json; charset=utf-8");
   	   
+  	//la parte http común
+  	$shelterId=$_REQUEST['shelterId'];
+    
     // este código mágico extrae solamente la parte JSON de la respuesta
   	$request_body = file_get_contents('php://input');
   	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
   	
-  	$breedId = $data['id'];
- 	
-    //y ahora la parte http común
-    $shelterId=$_REQUEST['shelterId'];
-    $svc = new SheltersUsaSvcImpl();
-    
-    fb("vinculando shelterId=" . $shelterId . " breedId= " . $breedId);
-    
-    $svc->vinculaDogBreedAShelter($shelterId, $breedId);
+  	$svc = new SheltersUsaSvcImpl();
+  	foreach ($data as $item){
+      $breedId=$item['id'];
+      $svc->vinculaDogBreedAShelter($shelterId, $breedId);
+  	}
   	
  } else if ($ultimo=='desvinculaDogBreed'){
-  	header("Content-Type: application/json; charset=utf-8");
+   	header("Content-Type: application/json; charset=utf-8");
   	   
+  	//la parte http común
+  	$shelterId=$_REQUEST['shelterId'];
+    
     // este código mágico extrae solamente la parte JSON de la respuesta
   	$request_body = file_get_contents('php://input');
   	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
   	
-    $breedId = $data['id'];
- 	
-    //y ahora la parte http común
-    $shelterId=$_REQUEST['shelterId'];
-    $svc = new SheltersUsaSvcImpl();
-    
-    $svc->desvinculaDogBreedDeShelter($shelterId, $breedId);
+  	$svc = new SheltersUsaSvcImpl();
+  	foreach ($data as $item){
+      $breedId=$item['id'];
+      $svc->desvinculaDogBreedDeShelter($shelterId, $breedId);
+  	}
   	
   }
     
