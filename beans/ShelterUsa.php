@@ -6,7 +6,7 @@
       private $name; 
       private $zip; 
       private $url; 
-      private $urlDecoded;
+      private $urlEncoded;
       private $logoUrl; 
       private $email; 
       private $phone; 

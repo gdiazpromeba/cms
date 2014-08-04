@@ -564,6 +564,34 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Dog
       	}
       	$this->cierra($conexion, $stm);
       	return $filas;
+      }  
+
+      public function selSheltersPorRaza($dogBreedId){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  SHU.ID,     \n";
+      	$sql.="  SHU.NAME,     \n";
+      	$sql.="  SHU.URL_ENCODED     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_USA SHU \n";
+      	$sql.="  INNER JOIN DOG_BREEDS_BY_SHELTER DBS ON SHU.ID=DBS.SHELTER_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  DBS.DOG_BREED_ID = '" . $dogBreedId . "' \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  SHU.NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre, $urlEncoded);
+      	$filas=array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$nombre;
+      		$fila['urlEncoded']=$urlEncoded;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
       }      
       
 

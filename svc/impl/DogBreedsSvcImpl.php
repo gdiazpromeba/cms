@@ -63,5 +63,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogBr
       	return $arr;
       }
       
+
+      public function selSheltersPorRaza($dogBreedId){
+      	$arr=$this->oad->selSheltersPorRaza($dogBreedId);
+      	return $arr;
+      }
+      
    }
 ?>

@@ -17,12 +17,17 @@
       public function selNombres($nombreOParte);
       
       /**
-       * consulta ráipda que devuelve sólo el nombre e Id, de razas en las que un refugio se especialice
+       * consulta ráipda que devuelve array php, sólo el nombre e Id, de razas en las que un refugio se especialice
        * @param unknown $shelterId
        */
       public function selNombresPorShelter($shelterId);
 
-      
+      /**
+      * consulta rapida que devuelve array php, sólo con el nombre del refugio, el id, y la url para link, para una raza
+      * determinada
+      * @param dofBreedId
+      */
+      public function selSheltersPorRaza($dogBreedId);
       
    } 
 

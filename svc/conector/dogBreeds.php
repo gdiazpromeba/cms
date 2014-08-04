@@ -198,7 +198,16 @@ if ($ultimo=='selecciona'){
 		$res['total']=count($arr);
 		echo json_encode($res) ;
   
+  } else if ($ultimo=='selSheltersPorRaza'){
+		$dogBreedId=$_REQUEST['dogBreedId'];
+		$svc = new DogBreedsSvcImpl(); 
+		$arr = $svc->selSheltersPorRaza($dogBreedId);
+		$res=array();
+		$res['data']=$arr;
+		$res['total']=count($arr);
+		echo json_encode($res) ;
   }
+		
   
 
 
