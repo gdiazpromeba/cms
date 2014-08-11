@@ -24,6 +24,7 @@
     <script type="text/javascript" src="app/petcms4/combos/ComboRango1a5.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUsaStates.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboJapanPrefectures.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSizes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogPurposes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingAmounts.js"></script>
@@ -48,7 +49,13 @@
     <script type="text/javascript" src="app/petcms4/abm/shelters/usa/GrillaSheltersUsa.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/usa/PanelSheltersUsa.js"></script>
     
-     
+    <!-- Shelters JAPAN -->
+    <script type="text/javascript" src="app/petcms4/abm/shelters/japan/FormSheltersJapan.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/japan/BusquedaSheltersJapan.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/japan/GrillaSheltersJapan.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/japan/PanelSheltersJapan.js"></script>
+    
+    
     <!-- inicio -->
     <script type="text/javascript" src="app/petcms4/PanelMenuAcordeon.js"></script>
     <script type="text/javascript" src="app/petcms4/MenuAcordeon.js"></script>

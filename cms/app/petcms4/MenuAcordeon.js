@@ -58,6 +58,18 @@ panelMenuAcordeon1.store.add({
 });
 
 
+panelMenuAcordeon1.store.add({
+	 columnaUnica: ['icono_mapa_japan_menu.jpg', 'Shelters Japan', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.shelters.japan.PanelSheltersJapan', {
+		   frame: true,
+          id: 'panelSheltersJapanId'	
+       });
+//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
+       muestraEnPanel(panel);
+   }]
+});
 
 
 Ext.define('app.petcms4.MenuAcordeon', {

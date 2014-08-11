@@ -9,6 +9,11 @@ Ext.application({
                     return true;
                 }
             },
+            japanZipCode: function(val, field) {
+                if (/^\d{3}-\d{4}$/.test(val)) {
+                    return true;
+                }
+            },            
             digits8: function(val, field) {
                 if (/^\d{1,8}$/.test(val)) {
                     return true;
@@ -16,6 +21,8 @@ Ext.application({
             },            
             usaZipCodeText: 'Zip Codes must have 5 numbers.'
         });
+        
+
     	
         Ext.create('Ext.container.Viewport', {
             layout: 'border',
