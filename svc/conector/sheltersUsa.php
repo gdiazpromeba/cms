@@ -5,7 +5,7 @@
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipUsa.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsUsaSvcImpl.php';
   
-  require_once('FirePHPCore/fb.php4');
+  //require_once('FirePHPCore/fb.php4');
   
   
   header("Content-Type: text/plain; charset=utf-8");
