@@ -19,7 +19,8 @@ Ext.application({
                     return true;
                 }
             },            
-            usaZipCodeText: 'Zip Codes must have 5 numbers.'
+            usaZipCodeText: 'Zip Codes must have 5 numbers.',
+            japanZipCodeText: 'Zip Codes must have the following format: 999-9999',
         });
         
 

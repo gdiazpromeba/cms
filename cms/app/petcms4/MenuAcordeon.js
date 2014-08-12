@@ -16,12 +16,6 @@ function quitaDePanel(){
 function muestraEnPanel(componente){
   var panelCentral=Ext.getCmp('panelCentral');
   panelCentral.add(componente);
-//  panelCentral.doLayout();
-//  Ext.Msg.alert('Status title', 'layout');  
-//  panelCentral.setVisible(true);
-//  Ext.Msg.alert('Status title', 'visible');
-
-
   idUltimoPanel=componente.getId();
 }
 
