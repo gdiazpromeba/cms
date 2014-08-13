@@ -13,7 +13,7 @@ Ext.define('app.petcms4.abm.shelters.usa.PanelSheltersUsa', {
       this.panBusqueda=Ext.create('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
         id: 'busquedaSheltersUsaId', 	
         region: 'west',
-        width: 250
+        width: 350
       });   
       
       

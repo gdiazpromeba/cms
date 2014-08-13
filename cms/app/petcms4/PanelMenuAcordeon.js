@@ -17,7 +17,6 @@ Ext.define('app.petcms4.PanelMenuAcordeon', {
 //             [['dachs.jpg', 'Razas', ''],[]]
 //            ]
         }),
-        this.width = 429;      
         this.columns = [
           { flex: 1, align: 'center',  renderer: this.funcionMuestra}
         ];
