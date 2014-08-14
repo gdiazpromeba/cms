@@ -206,7 +206,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
     		                 win.show();
     		                 win.on("beforedestroy", function(){
     		                     Ext.getCmp('logoUrl').setValue(win.getNombreArchivoFoto());
-    		                     Ext.getCmp('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/' + win.getNombreArchivoFoto(); 
+    		                     Ext.getCmp('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/uk/' + win.getNombreArchivoFoto(); 
     		                     //formulario.doLayout();     
     		                 });
     		               }//evento click
@@ -257,7 +257,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
   	  coordenadas.getComponent('subLocality1').setValue(record.get('subLocality1'));
   	  
   	  //imagen, la carga si existe el archivo
-  	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/' +record.get('logoUrl');
+  	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/uk/' +record.get('logoUrl');
   	  try{
   		colDer.getComponent('imageLogoShelter').el.dom.src= urlImagen;
   	  }catch(exception){

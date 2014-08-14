@@ -120,7 +120,7 @@ if ($ultimo=='selecciona'){
 	
   }else if ($ultimo=='subeLogo'){
    	    header("Content-Type: text/html; charset=utf-8");
-        $uploads_dir = '../../resources/images/shelterLogos';
+        $uploads_dir = '../../resources/images/shelterLogos/usa';
         if (!is_uploaded_file($_FILES['fichaFotoFU']['tmp_name'])) {
           $exito=array();
           $exito['success']=false;
