@@ -96,6 +96,27 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/UkR
          $this->cierra($conexion, $stm); 
          return $filas; 
       } 
+      
+      public function obtRegionesMayores($regionName){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  COUNTRY_NAME,     \n";
+      	$sql.="  STATISTICAL_AREA     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  UK_REGIONS  \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  REGION_NAME='" . $regionName . "'  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($country, $statistical);
+      	$res = array();
+      	if ($stm->fetch()) {
+      		$res["country"]=$country;
+      		$res["statistical"]=$statistical;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $res;
+      }
 
 
       public function selTodosCuenta($statistical){ 

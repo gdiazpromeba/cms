@@ -118,85 +118,125 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                     {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUk',  border: true, collapsible: true, collapsed: true,
                     	items: [
                           {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'ukZipCode',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 180}, 
-                          {fieldLabel: 'Country', xtype: 'comboCountriesUk', name: 'adminArea1', itemId: 'adminArea1', width: 210,
+                          {fieldLabel: 'Country', xtype: 'comboCountriesUk', name: 'adminArea1', itemId: 'adminArea1', width: 230,
                           	listeners:{
                           		select : function(combo, value){
-                                	  var store=Ext.getCmp('comboUkRegionsForm').getStore();
+                                  var store=Ext.getCmp('comboUkStatisticalForm').getStore();
                               	  store.proxy.extraParams = { countryName: value[0].data.name};
                               	  store.load();
                           		}
                           	}
                           },
-                          {fieldLabel: 'Region ', xtype: 'comboUkRegions', itemId: 'comboUkRegionsForm', id: 'comboUkRegionsForm', width: 350,
+                          {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  name: 'statistical', id: 'comboUkStatisticalForm', width: 330,
+                          	listeners:{
+                          		select : function(combo, value){
+                                	  var store=Ext.getCmp('comboUkRegionsForm').getStore();
+                              	  store.proxy.extraParams = { statistical: value[0].data.name};
+                              	  store.load();
+                          		}
+                          	}
+                          },                          
+                          {fieldLabel: 'County (manual)', xtype: 'comboUkRegions', itemId: 'comboUkRegionsForm', id: 'comboUkRegionsForm', width: 350,
                           	listeners:{
                         		select : function(combo, value){
-                        			Ext.getCmp('adminArea2').setValue(value[0].data.name);
+                        			var aa2=Ext.getCmp('adminArea2');
+                        			if (Ext.isEmpty(aa2.getValue())){
+                        				Ext.getCmp('adminArea2').setValue(value[0].data.name);	
+                        			}
                         		}
                         	}
                           },                          
-                          {fieldLabel: 'Mnm County', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'County (geo)', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      id: 'locality',     readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  id: 'subLocality1', readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  id: 'latitude', allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true,  readOnly: true},
                           {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  id: 'longitude', allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true, readOnly: true},
-          	              {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
-                          	listeners:{
-                        		click : function(  The, eOpts ){
-                        			var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
-                        			var colIzq=Ext.getCmp('colIzqFormSheltersUk');
-                        			var address=null;
-                        			var zip= coordenadas.getComponent('zip').getValue();
-                        			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
-                        				request= { 
-                        				  address: colIzq.getComponent('streetAddress').getValue(),
-                        				  componentRestrictions :{
-                            			      country : 'Uk',
-                            			      postalCode: zip 
-                        				  }
-                        				};	
-                        			}else{
-                        				request= { 
-                        						componentRestrictions :{
-                                			      country : 'Uk',
-                                			      postalCode: zip 
-                            				  }
-                              			};	
-                        			}
-                        			
-                        		    
-                        			var geocoder = new google.maps.Geocoder();
-                        	        
-                        	        
-                        		    
-                        		    geocoder.geocode( request, function( results, status ) {
-                        		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
-                        		    	coordenadas.getComponent('adminArea1').reset();
-                        		    	coordenadas.getComponent('adminArea2').reset();
-                        		    	coordenadas.getComponent('locality').reset();
-                        		    	coordenadas.getComponent('subLocality1').reset();
-                        		        if ( status == google.maps.GeocoderStatus.OK ) {
-                    			    		var res0=results[0];
-                    			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
-                    			    		if (areas['administrative_area_level_1']!=null) coordenadas.getComponent('adminArea1').setValue(areas['administrative_area_level_1']);
-                    			    		if (areas['administrative_area_level_2']!=null) coordenadas.getComponent('adminArea2').setValue(areas['administrative_area_level_2']);
-                    			    		if (areas['locality']!=null) coordenadas.getComponent('locality').setValue(areas['locality']);
-                    			    		if (areas['sublocality_level_1']!=null) coordenadas.getComponent('subLocality1').setValue(areas['sublocality_level_1']);
-                    			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.lat());
-                    			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.lng());
-                        		        }else{
-                        		        	coordenadas.getComponent('adminArea1').markInvalid();
-                        		        	coordenadas.getComponent('adminArea2').markInvalid();
-                        		        	coordenadas.getComponent('locality').markInvalid();
-                        		        	coordenadas.getComponent('subLocality').markInvalid();
-                        		        	coordenadas.getComponent('latitude').markInvalid();
-                    			    		coordenadas.getComponent('longitude').markInvalid();	
-                        		        }
-                        		            
-                        		    });                        		    
-                        		}	
-                        	}
-          		          }
-                    	]
+                          {xtype: 'fieldset', itemId: 'botonesGeo', id: 'botonesGeo',  border: false,  
+                        	  layout: { type: 'hbox', padding:'5', align:'top'},
+                              items: [
+                                      {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
+                                      	  listeners:{
+                                    		click : function(  The, eOpts ){
+                                    			var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
+                                    			var colIzq=Ext.getCmp('colIzqFormSheltersUk');
+                                    			var address=null;
+                                    			var zip= coordenadas.getComponent('zip').getValue();
+                                    			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
+                                    				request= { 
+                                    				  address: colIzq.getComponent('streetAddress').getValue(),
+                                    				  componentRestrictions :{
+                                        			      country : 'Uk',
+                                        			      postalCode: zip 
+                                    				  }
+                                    				};	
+                                    			}else{
+                                    				request= { 
+                                    						componentRestrictions :{
+                                            			      country : 'Uk',
+                                            			      postalCode: zip 
+                                        				  }
+                                          			};	
+                                    			}
+                                    			
+                                    		    
+                                    			var geocoder = new google.maps.Geocoder();
+                                    	        
+                                    	        
+                                    		    
+                                    		    geocoder.geocode( request, function( results, status ) {
+                                    		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
+                                    		    	coordenadas.getComponent('adminArea1').reset();
+                                    		    	coordenadas.getComponent('adminArea2').reset();
+                                    		    	coordenadas.getComponent('locality').reset();
+                                    		    	coordenadas.getComponent('comboUkStatistical').reset();
+                                    		        if ( status == google.maps.GeocoderStatus.OK ) {
+                                			    		var res0=results[0];
+                                			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
+                                			    		if (areas['administrative_area_level_1']!=null) coordenadas.getComponent('adminArea1').setValue(areas['administrative_area_level_1']);
+                                			    		if (areas['administrative_area_level_2']!=null) coordenadas.getComponent('adminArea2').setValue(areas['administrative_area_level_2']);
+                                			    		if (areas['locality']!=null) coordenadas.getComponent('locality').setValue(areas['locality']);
+                                			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.lat());
+                                			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.lng());
+                                    		        }else{
+                                    		        	coordenadas.getComponent('adminArea1').markInvalid();
+                                    		        	coordenadas.getComponent('adminArea2').markInvalid();
+                                    		        	coordenadas.getComponent('locality').markInvalid();
+                                    		        	coordenadas.getComponent('comboUkStatistical').markInvalid();
+                                    		        	coordenadas.getComponent('latitude').markInvalid();
+                                			    		coordenadas.getComponent('longitude').markInvalid();	
+                                    		        }
+                                    		            
+                                    		    });                        		    
+                                    		}	
+                                    	}
+                      		          },
+                      	              {xtype: 'button', text: 'Suggest Upper Regions', itemId: 'botSuggestUpper', 
+                                        listeners:{
+                                      		click : function(  The, eOpts ){
+                                      			var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
+                                      			var countyName = coordenadas.getComponent('adminArea2').getValue();;
+                                      			Ext.Ajax.request({
+                                      			    url: Global.dirAplicacion + '/svc/conector/ukRegions.php/obtieneRegionesMayores',
+                                      			    method: 'POST',          
+                                      			    params: {
+                                      			        regionName: countyName
+                                      			    },
+                                      			    success: function(response){
+                                      			    	var res= Ext.JSON.decode(response.responseText)
+                                      			    	coordenadas.getComponent('comboUkStatistical').setValue(res.statistical);
+                                      			    	coordenadas.getComponent('adminArea1').setValue(res.country);
+                                      			    },                                    
+                                      			    failure: function(){
+                                      			    	alert("Error finding this region's containing areas");
+                                      			    }
+                                      			});
+                                      		}
+                                         }
+                                      }
+
+                              ]
+                          }
+                      ]
                     },
     	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', id: 'logoUrl', allowBlank: true, width: 250},
     	            {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
@@ -254,7 +294,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
   	  coordenadas.getComponent('adminArea1').setValue(record.get('adminArea1'));
   	  coordenadas.getComponent('adminArea2').setValue(record.get('adminArea2'));
   	  coordenadas.getComponent('locality').setValue(record.get('locality'));
-  	  coordenadas.getComponent('subLocality1').setValue(record.get('subLocality1'));
+  	  coordenadas.getComponent('comboUkStatistical').setValue(record.get('statistical'));
   	  
   	  //imagen, la carga si existe el archivo
   	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/uk/' +record.get('logoUrl');
@@ -288,7 +328,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
     record.data['adminArea1']=  coordenadas.getComponent('adminArea1').getValue();
     record.data['adminArea2']=  coordenadas.getComponent('adminArea2').getValue();
     record.data['locality']=  coordenadas.getComponent('locality').getValue();
-    record.data['subLocality1']=  coordenadas.getComponent('subLocality1').getValue();
+    record.data['statistical']=  coordenadas.getComponent('comboUkStatistical').getValue();
   	record.commit();
   },  	   
   

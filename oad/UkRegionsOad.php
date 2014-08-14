@@ -9,7 +9,8 @@
       public function selTodos($countryName, $desde, $cuantos); 
       public function selTodosCuenta($countryName); 
       public function selTodosStatistical($countryName, $desde, $cuantos);
-      public function selTodosStatisticalCuenta($countryName);      
+      public function selTodosStatisticalCuenta($countryName);    
+      public function obtRegionesMayores($regionName);  
    } 
 
 ?>

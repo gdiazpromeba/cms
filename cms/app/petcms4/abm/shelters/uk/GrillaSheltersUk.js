@@ -18,7 +18,7 @@ Ext.define('SheltersUkModel',{
 				{name : 'adminArea2', type : 'string'},
 				{name : 'collArea', type : 'string'},
 				{name : 'locality', type : 'string'},
-				{name : 'subLocality1', type : 'string'},
+				{name : 'statistical', type : 'string'},
 				{name : 'distanceMiles', type : 'float'},
 				{name : 'specialBreedId', type : 'string', useNull: true},
 				{name : 'specialBreedName', type : 'string', useNull: true},

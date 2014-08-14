@@ -13,18 +13,7 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
         		}
         	}
         },        
-        {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  id: 'comboUkStatistical', width: 330,
-        	listeners:{
-        		select : function(combo, value){
-              	  var store=Ext.getCmp('comboUkRegions').getStore();
-            	  store.proxy.extraParams = { statistical: value[0].data.name};
-            	  store.load();
-        		}
-        	}
-        },        
-
-        {fieldLabel: 'Mnm County', xtype: 'comboUkRegions', itemId: 'comboUkRegions', id: 'comboUkRegions', width: 330 },
-        {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'ukZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
+        {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  id: 'comboUkStatistical', width: 330},       
         {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
       ],
       buttons: [
@@ -63,8 +52,8 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
-        this.agregaClaveValor(resultado, 'countryName', this.getComponent('comboCountriesUk').getRawValue());
-        this.agregaClaveValor(resultado, 'zipCode', this.getComponent('zipCode').getValue());
+        this.agregaClaveValor(resultado, 'country', this.getComponent('comboCountriesUk').getValue());
+        this.agregaClaveValor(resultado, 'statistical', this.getComponent('comboUkStatistical').getValue());
         this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         
         return resultado;
@@ -81,8 +70,8 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
 
       reinicializar: function(){
             this.getForm().reset();
-            this.getComponent('comboUkRegions').setValue('');
-            this.getComponent('zipCode').setValue('');
+            this.getComponent('comboCountriesUk').setValue('');
+            this.getComponent('comboUkStatistical').setValue('');
             this.getComponent('specialBreedId').setValue('');
       },
       

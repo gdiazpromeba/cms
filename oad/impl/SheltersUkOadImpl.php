@@ -26,7 +26,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  SHJ.ADMINISTRATIVE_AREA_LEVEL_2,    \n";
          $sql.="  SHJ.COLLOQUIAL_AREA,    \n";
          $sql.="  SHJ.LOCALITY,    \n";
-         $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
+         $sql.="  SHJ.STATISTICAL_AREA,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
          $sql.="  SHJ.LATITUDE,     \n";
          $sql.="  SHJ.LONGITUDE     \n";
@@ -38,7 +38,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm->execute();  
          $bean=new ShelterUk();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
-         		$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
+         		$adminArea1, $adminArea2, $collArea,  $locality, $statistical, 
          		$distance, $latitud, $longitud); 
          if ($stm->fetch()) { 
             $bean->setId($id);
@@ -57,7 +57,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setAdminArea2($adminArea2);
             $bean->setCollArea($collArea);
             $bean->setLocality($locality);
-            $bean->setSubLocality1($subLocality1);
+            $bean->setStatisticalArea($statistical);
             $bean->setDistancia(0);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);
@@ -85,7 +85,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
         $sql.="  SHJ.ADMINISTRATIVE_AREA_LEVEL_2,    \n";
         $sql.="  SHJ.COLLOQUIAL_AREA,    \n";
         $sql.="  SHJ.LOCALITY,    \n";
-        $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
+        $sql.="  SHJ.STATISTICAL_AREA,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHJ.LATITUDE,    \n";
       	$sql.="  SHJ.LONGITUDE    \n";
@@ -97,7 +97,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm->execute();
       	$bean=new ShelterUk();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
-      			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
+      			$adminArea1, $adminArea2, $collArea,  $locality, $statistical, 
       			$distance, $latitud, $longitud); 
       	if ($stm->fetch()) {
       		$bean->setId($id);
@@ -116,7 +116,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setAdminArea2($adminArea2);
             $bean->setCollArea($collArea);
             $bean->setLocality($locality);
-            $bean->setSubLocality1($subLocality1);
+            $bean->setStatisticalArea($statistical);
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
@@ -144,7 +144,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
         $sql.="  SHJ.ADMINISTRATIVE_AREA_LEVEL_2,    \n";
         $sql.="  SHJ.COLLOQUIAL_AREA,    \n";
         $sql.="  SHJ.LOCALITY,    \n";
-        $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
+        $sql.="  SHJ.STATISTICAL_AREA,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHJ.LATITUDE,    \n";
       	$sql.="  SHJ.LONGITUDE    \n";
@@ -156,7 +156,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm->execute();
       	$bean=new ShelterUk();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
-      			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
+      			$adminArea1, $adminArea2, $collArea,  $locality, $statistical, 
       			$distance, $latitud, $longitud);
       	if ($stm->fetch()) {
       		$bean->setId($id);
@@ -175,7 +175,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setAdminArea2($adminArea2);
             $bean->setCollArea($collArea);
             $bean->setLocality($locality);
-            $bean->setSubLocality1($subLocality1);
+            $bean->setStatisticalArea($statistical);
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
@@ -205,14 +205,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  COLLOQUIAL_AREA,     \n";
          $sql.="  LOCALITY,     \n";
-         $sql.="  SUBLOCALITY_LEVEL_1     \n";
+         $sql.="  STATISTICAL_AREA     \n";
          $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
          $stm->bind_param("ssssssssssdddsssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
          		$bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(),
-         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getSubLocality1()
+         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getStatisticalArea()
          ); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
@@ -247,19 +247,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2=?,     \n";
          $sql.="  COLLOQUIAL_AREA=?,     \n";
          $sql.="  LOCALITY=?,     \n";
-         $sql.="  SUBLOCALITY_LEVEL_1=?     \n";         
+         $sql.="  STATISTICAL_AREA=?     \n";         
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->bind_param("sssssssssdddssssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
          		$bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), 
          		$bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), 
-         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getSubLocality1(),
+         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getStatisticalArea(),
          		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
       
-      public function selTodos($nombre, $country, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHJ.ID,     \n"; 
@@ -278,7 +278,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  COLLOQUIAL_AREA,     \n";
          $sql.="  LOCALITY,     \n";
-         $sql.="  SUBLOCALITY_LEVEL_1,     \n";
+         $sql.="  STATISTICAL_AREA,     \n";
          $sql.="  DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHJ.LATITUDE,    \n";
          $sql.="  SHJ.LONGITUDE    \n";
@@ -288,7 +288,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($country))){
+         if (!(empty($statistical))){
+         	$sql.="  AND STATISTICAL_AREA ='" .  $statistical . "'  \n";
+         }else if (!(empty($country))){
          	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $country . "'  \n";
          }
          if (!(empty($distance))){
@@ -308,7 +310,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
-         		  $adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
+         		  $adminArea1, $adminArea2, $collArea,  $locality, $statistical, 
          		  $distance, $latitud, $longitud); 
          $filas = array(); 
          while ($stm->fetch()) { 
@@ -329,7 +331,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setAdminArea2($adminArea2);
             $bean->setCollArea($collArea);
             $bean->setLocality($locality);
-            $bean->setSubLocality1($subLocality1);
+            $bean->setStatisticalArea($statistical);
             $bean->setDistancia($distance);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);  
@@ -340,16 +342,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
 
-      public function selTodosCuenta($nombre, $country, $latitude, $longitude, $distance, $specialBreedId){ 
+      public function selTodosCuenta($nombre, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_UK SHJ "; 
          $sql.="WHERE  1=1  \n";
                    if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($country))){
+         if (!(empty($statistical))){
+         	$sql.="  AND STATISTICAL_AREA ='" .  $statistical . "'  \n";
+         }else if (!(empty($country))){
          	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $country . "'  \n";
-         }    
+         }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
          } 

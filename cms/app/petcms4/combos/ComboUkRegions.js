@@ -5,7 +5,7 @@ Ext.define('petcms4.iu.combos.ComboUkRegions', {
   
   store: Ext.create('Ext.data.Store', {
 	    autoLoad: true,
-	    fields: ['id','name'],
+	    fields: ['name'],
 	    proxy: {
 	       type: 'ajax',
 	       url: Global.dirAplicacion + '/svc/conector/ukRegions.php/selecciona',
@@ -17,5 +17,5 @@ Ext.define('petcms4.iu.combos.ComboUkRegions', {
   }),
 
   displayField: 'name', 
-  valueField: 'id',
+  valueField: 'name',
 });

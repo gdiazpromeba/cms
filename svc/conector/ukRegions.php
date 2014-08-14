@@ -41,6 +41,10 @@
 	$resultado['data']=$datos;
     echo json_encode($resultado);
       
+  } else if ($ultimo=='obtieneRegionesMayores'){
+  	$regionName=$_REQUEST['regionName'];
+	$arr=$svc->obtRegionesMayores($regionName);
+    echo json_encode($arr);
   }
 
 ?>

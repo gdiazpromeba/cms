@@ -51,6 +51,15 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/UkReg
       public function selTodosStatisticalCuenta($countryName){
       	$cantidad=$this->oad->selTodosStatisticalCuenta($countryName);
       	return $cantidad;
+      } 
+
+      public function obtRegionesMayores($regionName){
+      	$arr=$this->oad->obtRegionesMayores($regionName);
+      	if (count($arr)==0){
+      		$arr["country"]="";
+      		$arr["statistical"]="";
+      	}
+      	return $arr;
       }      
 
    }

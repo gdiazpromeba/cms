@@ -17,7 +17,7 @@
       private $adminArea2;
       private $collArea;
       private $locality;
-      private $subLocality1;
+      private $statisticalArea;
       private $distancia;
       private $latitude;
       private $longitude;
@@ -89,8 +89,8 @@
       	return $this->locality;
       }
       
-      public function getSubLocality1(){
-      	return $this->subLocality1;
+      public function getStatisticalArea(){
+      	return $this->statisticalArea;
       }
       
 
@@ -181,8 +181,8 @@
       	$this->locality = $valor;
       }
       
-      public function setSubLocality1($valor){
-      	$this->subLocality1 = $valor;
+      public function setStatisticalArea($valor){
+      	$this->statisticalArea = $valor;
       }
       
       public function setDistancia($valor){

@@ -18,24 +18,16 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
-		$country=isset($_REQUEST['countryName'])?$_REQUEST['countryName']:null;
+		$country=isset($_REQUEST['country'])?$_REQUEST['country']:null;
+		$statistical=isset($_REQUEST['statistical'])?$_REQUEST['statistical']:null;
 		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
 		$specialBreedId=isset($_REQUEST['specialBreedId'])?$_REQUEST['specialBreedId']:null;
 		
-		//si el zipCode existe, transformarlo en latitud y longitud
-		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){
-		  $svcZips = new ZipsUkSvcImpl();
-		  $zipBean = $svcZips->obtienePorCodigo($_REQUEST['zipCode']);
-		  $latitude= $zipBean->getLatitude();
-		  $longitude = $zipBean->getLongitude();
-		}
-		
-
 		$svc = new SheltersUkSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $country, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $country, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
+		$beans=$svc->selTodos($nombreOParte, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){
@@ -57,7 +49,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean['adminArea2']=$bean->getAdminArea2();
 		  $arrBean['collArea']=$bean->getCollArea();
 		  $arrBean['locality']=$bean->getLocality();
-		  $arrBean['subLocality1']=$bean->getSubLocality1();
+		  $arrBean['statistical']=$bean->getStatisticalArea();
 		  $arrBean['distanceMiles']=$bean->getDistancia() * 0.621371 ;  // pasa de km a millas
 		  $arrBean['specialBreedId']=$bean->getSpecialBreedId();
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
@@ -91,8 +83,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setAdminArea2($adminArea2);
 	    $locality = $_REQUEST['locality']; if (empty($locality)) $locality = null;
 	    $bean->setLocality($locality);
-	    $subLocality1 = $_REQUEST['subLocality1']; if (empty($subLocality1)) $subLocality1 = null;
-	    $bean->setSubLocality1($subLocality1);
+	    $statistical = $_REQUEST['statistical']; 
+	    $bean->setStatisticalArea($statistical);
 	    $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	    $bean->setSpecialBreedId($specialBreedId);
 	    $exito=$svc->inserta($bean);
@@ -122,8 +114,8 @@ if ($ultimo=='selecciona'){
 	  $bean->setAdminArea2($adminArea2);
 	  $locality = $_REQUEST['locality']; if (empty($locality)) $locality = null;
 	  $bean->setLocality($locality);
-	  $subLocality1 = $_REQUEST['subLocality1']; if (empty($subLocality1)) $subLocality1 = null;
-	  $bean->setSubLocality1($subLocality1);
+	  $statistical = $_REQUEST['statistical']; 
+	  $bean->setStatisticalArea($statistical);
 	  $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	  $bean->setSpecialBreedId($specialBreedId);
 	  $exito=$svc->actualiza($bean);
