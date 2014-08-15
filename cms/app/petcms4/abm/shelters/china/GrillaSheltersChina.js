@@ -52,7 +52,7 @@ Ext.define('app.petcms4.abm.shelters.china.GrillaSheltersChina', {
 	    {header : 'URL', dataIndex : 'url', width : 200, sortable : true},
 	    {header : 'ZIP', dataIndex : 'zip', width : 100, sortable : true},
 	    {header : 'Locality', dataIndex : 'locality', width : 110, sortable : true},
-	    {header : 'Prefecture', dataIndex : 'adminArea1', width : 110, sortable : true},
+	    {header : 'Province', dataIndex : 'adminArea1', width : 110, sortable : true},
 	    {header : 'Distancia', dataIndex : 'distanceMiles', width : 110,  xtype: 'numbercolumn', format:'0', align: 'right'}
 	  ],
 	  // paging bar on the bottom

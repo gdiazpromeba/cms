@@ -44,7 +44,7 @@ Ext.define('app.petcms4.abm.shelters.china.BusquedaSheltersChina', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
-        this.agregaClaveValor(resultado, 'Province', this.getComponent('comboChinaProvinces').getRawValue());
+        this.agregaClaveValor(resultado, 'province', this.getComponent('comboChinaProvinces').getRawValue());
         this.agregaClaveValor(resultado, 'zipCode', this.getComponent('zipCode').getValue());
         this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         

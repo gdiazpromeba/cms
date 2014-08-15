@@ -156,6 +156,11 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                         		    
                         		    geocoder.geocode( request, function( results, status ) {
                         		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersJapan');
+                        		    	coordenadas.getComponent('adminArea1').reset();
+                        		    	coordenadas.getComponent('adminArea2').reset();
+                        		    	coordenadas.getComponent('collArea').reset();
+                        		    	coordenadas.getComponent('locality').reset();
+                        		    	coordenadas.getComponent('subLocality1').reset();
                         		        if ( status == google.maps.GeocoderStatus.OK ) {
                     			    		var res0=results[0];
                     			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);

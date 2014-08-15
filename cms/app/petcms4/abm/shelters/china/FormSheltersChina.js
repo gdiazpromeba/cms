@@ -118,11 +118,11 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
                     {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersChina',  border: true, collapsible: true, collapsed: true,
                     	items: [
                           {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'chinaZipCode',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 180},                    	        
-                          {fieldLabel: 'Prefecture', xtype: 'textfield',  name: 'adminArea1',   itemId: 'adminArea1',    id: 'adminArea1',   readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Adm.Area 2', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'District',  xtype: 'textfield',  name: 'collArea',     itemId: 'collArea',      id: 'collArea',     readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      id: 'locality',     readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  id: 'subLocality1', readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'Province', xtype: 'textfield',  name: 'adminArea1',   itemId: 'adminArea1',    id: 'adminArea1',   readOnly: false, allowBlank: true, width: 250},
+                          {fieldLabel: 'Adm.Area 2', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: false, allowBlank: true, width: 250},
+                          {fieldLabel: 'District',  xtype: 'textfield',  name: 'collArea',     itemId: 'collArea',      id: 'collArea',     readOnly: false, allowBlank: true, width: 250},
+                          {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      id: 'locality',     readOnly: false, allowBlank: true, width: 250},
+                          {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  id: 'subLocality1', readOnly: false, allowBlank: true, width: 250},
                           {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  id: 'latitude', allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
                           {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  id: 'longitude', allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
           	              {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
@@ -132,14 +132,22 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
                         			var colIzq=Ext.getCmp('colIzqFormSheltersChina');
                         			var address=null;
                         			var zip= coordenadas.getComponent('zip').getValue();
-                        			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
+                        			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue()) & !Ext.isEmpty(zip)){
                         				request= { 
                         				  address: colIzq.getComponent('streetAddress').getValue(),
                         				  componentRestrictions :{
                             			      country : 'China',
                             			      postalCode: zip 
                         				  }
-                        				};	
+                        				};
+                        			//para Macao y Hong Kong, que no utilizan el código postal, se usa sólo la Street Address
+                        			}else if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
+                            				request= { 
+                            				  address: colIzq.getComponent('streetAddress').getValue(),
+                            				  componentRestrictions :{
+                                			      country : 'China'
+                            				  }
+                            				};
                         			}else{
                         				request= { 
                         						componentRestrictions :{
@@ -156,6 +164,11 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
                         		    
                         		    geocoder.geocode( request, function( results, status ) {
                         		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersChina');
+                        		    	coordenadas.getComponent('adminArea1').reset();
+                        		    	coordenadas.getComponent('adminArea2').reset();
+                        		    	coordenadas.getComponent('collArea').reset();
+                        		    	coordenadas.getComponent('locality').reset();
+                        		    	coordenadas.getComponent('subLocality1').reset();                        		    	
                         		        if ( status == google.maps.GeocoderStatus.OK ) {
                     			    		var res0=results[0];
                     			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
@@ -166,6 +179,10 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
                     			    		if (areas['sublocality_level_1']!=null) coordenadas.getComponent('subLocality1').setValue(areas['sublocality_level_1']);
                     			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.lat());
                     			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.lng());
+                    			    		if (coordenadas.getComponent('adminArea1').getValue()=='Hong Kong Island'){
+                    			    		  coordenadas.getComponent('zip').setValue('999077');
+                    			    		  coordenadas.getComponent('subLocality').markInvalid();
+                    			    		}
                         		        }else{
                         		        	coordenadas.getComponent('adminArea1').markInvalid();
                         		        	coordenadas.getComponent('adminArea2').markInvalid();
