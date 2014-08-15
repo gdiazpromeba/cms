@@ -32,7 +32,6 @@ panelMenuAcordeon1.store.add({
 			frame: true,
             id: 'panelDogBreedsId'	
          });
-//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
          muestraEnPanel(panel);
      }]
 });
@@ -46,7 +45,6 @@ panelMenuAcordeon1.store.add({
 		   frame: true,
            id: 'panelSheltersUsaId'	
         });
-//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
         muestraEnPanel(panel);
     }]
 });
@@ -60,7 +58,6 @@ panelMenuAcordeon1.store.add({
 		   frame: true,
           id: 'panelSheltersJapanId'	
        });
-//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
        muestraEnPanel(panel);
    }]
 });
@@ -69,14 +66,26 @@ panelMenuAcordeon1.store.add({
 	 columnaUnica: ['icono_mapa_uk_menu.png', 'Shelters UK', 
 	   function(){
 		 quitaDePanel();
-		 var panel=Ext.create('app.petcms4.abm.shelters.japan.PanelSheltersUk', {
+		 var panel=Ext.create('app.petcms4.abm.shelters.uk.PanelSheltersUk', {
 		   frame: true,
          id: 'panelSheltersUkId'	
       });
-//		 var panel=Ext.create('Ext.panel.Panel', {id: 'hullo', title: 'Hola'});
       muestraEnPanel(panel);
   }]
 });
+
+panelMenuAcordeon1.store.add({
+	 columnaUnica: ['icono_mapa_china_menu.jpg', 'Shelters China', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.shelters.china.PanelSheltersChina', {
+		   frame: true,
+        id: 'panelSheltersChinaId'	
+     });
+     muestraEnPanel(panel);
+ }]
+});
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {

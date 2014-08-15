@@ -19,6 +19,11 @@ Ext.application({
 	    	    var regex = /^[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}$/i;
 	    	    return regex.test(val);
             },
+            chinaZipCode : function(val, field){
+                if (/^([0-9]){6}$/.test(val)) {
+                    return true;
+                }
+            },
             digits8: function(val, field) {
                 if (/^\d{1,8}$/.test(val)) {
                     return true;
@@ -27,6 +32,7 @@ Ext.application({
             usaZipCodeText: 'Zip Codes must have 5 numbers.',
             japanZipCodeText: 'Zip Codes must have the following format: 999-9999',
             ukZipCodeText: 'Invalid UK postal code',
+            chinaZipCodeText: 'Chinese zip codes must have the following format: 999999'
         });
         Ext.create('Ext.container.Viewport', {
             layout: 'border',

@@ -1,16 +1,16 @@
-Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
+Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
     extend: 'app.petcms4.abm.PanelFormCabeceraAbm',
     requires: ['Utilities'],
     frame: true,
-    prefijo: 'formSheltersJapan',
-    nombreElementoId: 'shelterJapanId',
-    urlAgregado:  Global.dirAplicacion + '/svc/conector/sheltersJapan.php/inserta',
-    urlModificacion: Global.dirAplicacion + '/svc/conector/sheltersJapan.php/actualiza',
-    urlBorrado: Global.dirAplicacion + '/svc/conector/sheltersJapan.php/borra',
+    prefijo: 'formSheltersChina',
+    nombreElementoId: 'shelterChinaId',
+    urlAgregado:  Global.dirAplicacion + '/svc/conector/sheltersChina.php/inserta',
+    urlModificacion: Global.dirAplicacion + '/svc/conector/sheltersChina.php/actualiza',
+    urlBorrado: Global.dirAplicacion + '/svc/conector/sheltersChina.php/borra',
     layout: 'column',
     items: [
-      {xtype: 'hidden', name: 'shelterJapanId', id: 'shelterJapanId', itemId: 'shelterJapanId'},            
-      {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormSheltersJapan', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
+      {xtype: 'hidden', name: 'shelterChinaId', id: 'shelterChinaId', itemId: 'shelterChinaId'},            
+      {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormSheltersChina', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
           
             {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  id: 'name', allowBlank: false, width: 350},
@@ -92,9 +92,9 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                                 	        },                                	        
                                 	        api: {
                                 	          read: Global.dirAplicacion + '/svc/conector/dogBreeds.php/selNombresPorShelter',
-                                	          create: Global.dirAplicacion + '/svc/conector/sheltersJapan.php/vinculaDogBreed',
+                                	          create: Global.dirAplicacion + '/svc/conector/sheltersChina.php/vinculaDogBreed',
                                 	          //update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
-                                	          destroy: Global.dirAplicacion + '/svc/conector/sheltersJapan.php/desvinculaDogBreed',
+                                	          destroy: Global.dirAplicacion + '/svc/conector/sheltersChina.php/desvinculaDogBreed',
                                 	        }
                                 	    },
                                 	    remoteSort: false,
@@ -115,10 +115,10 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                               }                          
                       ]                 
                     },
-                    {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersJapan',  border: true, collapsible: true, collapsed: true,
+                    {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersChina',  border: true, collapsible: true, collapsed: true,
                     	items: [
-                          {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'japanZipCode',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 180},                    	        
-                          {fieldLabel: 'Province', xtype: 'textfield',  name: 'adminArea1',   itemId: 'adminArea1',    id: 'adminArea1',   readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'chinaZipCode',  name: 'zip', itemId: 'zip',  id: 'zip', allowBlank: false, width: 180},                    	        
+                          {fieldLabel: 'Prefecture', xtype: 'textfield',  name: 'adminArea1',   itemId: 'adminArea1',    id: 'adminArea1',   readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Adm.Area 2', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'District',  xtype: 'textfield',  name: 'collArea',     itemId: 'collArea',      id: 'collArea',     readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      id: 'locality',     readOnly: true, allowBlank: true, width: 250},
@@ -128,22 +128,22 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
           	              {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
                           	listeners:{
                         		click : function(  The, eOpts ){
-                        			var coordenadas=Ext.getCmp('coordenadasFormSheltersJapan');
-                        			var colIzq=Ext.getCmp('colIzqFormSheltersJapan');
+                        			var coordenadas=Ext.getCmp('coordenadasFormSheltersChina');
+                        			var colIzq=Ext.getCmp('colIzqFormSheltersChina');
                         			var address=null;
                         			var zip= coordenadas.getComponent('zip').getValue();
                         			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
                         				request= { 
                         				  address: colIzq.getComponent('streetAddress').getValue(),
                         				  componentRestrictions :{
-                            			      country : 'Japan',
+                            			      country : 'China',
                             			      postalCode: zip 
                         				  }
                         				};	
                         			}else{
                         				request= { 
                         						componentRestrictions :{
-                                			      country : 'Japan',
+                                			      country : 'China',
                                 			      postalCode: zip 
                             				  }
                               			};	
@@ -155,7 +155,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                         	        
                         		    
                         		    geocoder.geocode( request, function( results, status ) {
-                        		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersJapan');
+                        		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersChina');
                         		        if ( status == google.maps.GeocoderStatus.OK ) {
                     			    		var res0=results[0];
                     			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
@@ -169,6 +169,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                         		        }else{
                         		        	coordenadas.getComponent('adminArea1').markInvalid();
                         		        	coordenadas.getComponent('adminArea2').markInvalid();
+                        		        	coordenadas.getComponent('colArea').markInvalid();
                         		        	coordenadas.getComponent('locality').markInvalid();
                         		        	coordenadas.getComponent('subLocality').markInvalid();
                         		        	coordenadas.getComponent('latitude').markInvalid();
@@ -185,11 +186,11 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
     	            {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
     		            listeners: {scope: this,  
     		               'click' :  function(){
-    		                 var win=muestraRemisionFotos('fichaFotoFU',  Global.dirAplicacion + '/svc/conector/sheltersJapan.php/subeLogo');
+    		                 var win=muestraRemisionFotos('fichaFotoFU',  Global.dirAplicacion + '/svc/conector/sheltersChina.php/subeLogo');
     		                 win.show();
     		                 win.on("beforedestroy", function(){
     		                     Ext.getCmp('logoUrl').setValue(win.getNombreArchivoFoto());
-    		                     Ext.getCmp('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/japan/' + win.getNombreArchivoFoto(); 
+    		                     Ext.getCmp('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/china/' + win.getNombreArchivoFoto(); 
     		                     //formulario.doLayout();     
     		                 });
     		               }//evento click
@@ -214,7 +215,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
       
   	   
   	pueblaDatosEnForm : function(record){
-      this.getComponent('shelterJapanId').setValue(record.data['id']);
+      this.getComponent('shelterChinaId').setValue(record.data['id']);
       this.cargaRazasAsociadas(record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
@@ -241,7 +242,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
   	  coordenadas.getComponent('subLocality1').setValue(record.get('subLocality1'));
   	  
   	  //imagen, la carga si existe el archivo
-  	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/japan/' +record.get('logoUrl');
+  	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/china/' +record.get('logoUrl');
   	  try{
   		colDer.getComponent('imageLogoShelter').el.dom.src= urlImagen;
   	  }catch(exception){
@@ -252,7 +253,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
     
   	   
   pueblaFormEnRegistro : function(record){
-	record.data['id']=  this.getComponent('shelterJapanId').getValue();	  
+	record.data['id']=  this.getComponent('shelterChinaId').getValue();	  
 	var colIzq=this.getComponent('colIzq');
     record.data['name']=  colIzq.getComponent('name').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();

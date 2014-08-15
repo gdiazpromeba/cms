@@ -27,6 +27,7 @@
     <script type="text/javascript" src="app/petcms4/combos/ComboJapanPrefectures.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUkRegions.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUkStatistical.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboChinaProvinces.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboCountriesUk.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSizes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogPurposes.js"></script>
@@ -63,6 +64,13 @@
     <script type="text/javascript" src="app/petcms4/abm/shelters/uk/BusquedaSheltersUk.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/uk/GrillaSheltersUk.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/uk/PanelSheltersUk.js"></script>
+
+    
+    <!-- Shelters China -->
+    <script type="text/javascript" src="app/petcms4/abm/shelters/china/FormSheltersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/china/BusquedaSheltersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/china/GrillaSheltersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/china/PanelSheltersChina.js"></script>
     
     
     <!-- inicio -->
