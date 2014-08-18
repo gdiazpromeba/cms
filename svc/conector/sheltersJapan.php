@@ -2,8 +2,8 @@
   require_once '../../config.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterJapan.php';
   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersJapanSvcImpl.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipJapan.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsJapanSvcImpl.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipGenerico.php';
+  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsGenericoSvcImpl.php';
   
   //require_once('FirePHPCore/fb.php4');
   
@@ -28,10 +28,10 @@ if ($ultimo=='selecciona'){
 		
 		//si el zipCode existe, transformarlo en latitud y longitud
 		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){
-		  $svcZips = new ZipsJapanSvcImpl();
-		  $zipBean = $svcZips->obtienePorCodigo($_REQUEST['zipCode']);
-		  $latitude= $zipBean->getLatitude();
-		  $longitude = $zipBean->getLongitude();
+			$svcZips = new ZipsGenericoSvcImpl();
+			$zipBean = $svcZips->obtienePorCodigo("JAPAN", $_REQUEST['zipCode']);
+			$latitude = $zipBean->getLatitude();
+			$longitude = $zipBean->getLongitude();
 		}
 		
 

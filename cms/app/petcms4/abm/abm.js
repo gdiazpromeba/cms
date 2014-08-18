@@ -50,7 +50,8 @@ function abmIza(grillaCabecera, formCabecera, panelSearch) {
 
 	function reaccionaAClickBuscar(){
 		cargaParametrosAdicionales(storeCabecera, panelSearch);
-		storeCabecera.load();
+		//storeCabecera.load();
+		storeCabecera.loadPage(1);
 	}
 
 	panelSearch.getBotonBuscar().on('click', function() {

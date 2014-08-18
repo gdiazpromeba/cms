@@ -1,6 +1,7 @@
 <?php 
 
-   interface SheltersJapanSvc { 
+   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/SheltersWebSelection.php';
+   interface SheltersJapanSvc extends SheltersWebSelection{ 
 
       public function obtiene($id); 
       public function obtienePorNumero($numero);

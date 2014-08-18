@@ -1,6 +1,7 @@
 <?php 
 
-   class ShelterUk { 
+   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/FormattedAddress.php';
+   class ShelterUk implements FormattedAddress{ 
       private $id; 
       private $number;
       private $name; 
@@ -203,6 +204,20 @@
       
       public function setSpecialBreedName($valor){
       	$this->specialBreedName = $valor;
+      }
+      
+      public function get1stLine(){
+      	$line="";
+      	if (!empty($this->poBox)){
+      		$line.="P.O.Box " . $this->poBox;
+      	}else{      	
+      	  $line.=$this->getStreetAddress();
+      	}
+      	return $line;
+      }
+      
+      public function get2ndLine(){
+      	return $this->locality . ", " . $this->adminArea2 . " " . $this->zip;
       }
       
       
