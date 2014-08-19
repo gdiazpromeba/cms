@@ -1,0 +1,17 @@
+<project name="MyProject" default="zipea" basedir=".">
+    <description>
+        simple example build file
+    </description>
+  <!-- set global properties for this build -->
+  <property name="base" location="."/>
+  <property name="trabajo" location="./work"/>
+  
+  <target name="init">
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+  </target>
+  
+  <target name="zipea" depends="init">
+    <zip destfile="${base}/pz.zip" basedir="${base}" excludes="cms/extjs/**, resources/images/**, config.php, configExt.php, build.xml, phpinfo.php, unzip.php, .settings/**, .buildpath, .project" />
+  </target>
+</project>

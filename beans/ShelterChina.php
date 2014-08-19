@@ -220,10 +220,27 @@
       }
       
       public function get2ndLine(){
-      	$line="";
-      	$line.=$this->adminArea1 . ", " . $this->zip;
+      	$line=$this->getAdminAreas();
+      	if (!empty($line)){
+      		$line.=" ";
+      	}
+      	$line.=$this->zip;
       	return $line;
-      }      
+      }  
+
+      public function getAdminAreas(){
+      	$line="";
+      	if (!empty($this->adminArea2)){
+          $line.=$this->adminArea2;
+      	}
+      	if ((!empty($this->adminArea1))){
+      	  if (!empty($line)){
+      	  	$line.=", ";
+      	  }
+      	  $line.=$this->adminArea1;
+      	}
+      	return $line;
+      }
       
       
       

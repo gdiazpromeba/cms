@@ -8,4 +8,8 @@
 interface FormattedAddress {
 	public function get1stLine();
 	public function get2ndLine();
+	/**
+	 * Esta sirve para listar en los resultado de búsqueda
+	*/
+	public function getAdminAreas();
 }

@@ -204,10 +204,30 @@
       	}
       	return $line;
       }
-      
+     
+
       public function get2ndLine(){
-      	return $this->citiName . ", " . $this->stateCode . " " . $this->zip;
+      	$line=$this->getAdminAreas();
+      	if (!empty($line)){
+      		$line.=" ";
+      	}
+      	$line.=$this->zip;
+      	return $line;
       }
+      
+      public function getAdminAreas(){
+      	$line="";
+      	if (!empty($this->citiName)){
+      		$line.=$this->citiName;
+      	}
+      	if ((!empty($this->stateCode))){
+      		if (!empty($line)){
+      			$line.=", ";
+      		}
+      		$line.=$this->stateCode;
+      	}
+      	return $line;
+      }      
       
       
       

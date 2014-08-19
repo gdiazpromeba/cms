@@ -217,8 +217,28 @@
       }
       
       public function get2ndLine(){
-      	return $this->locality . ", " . $this->adminArea2 . " " . $this->zip;
+      	$line=$this->getAdminAreas();
+      	if (!empty($line)){
+      		$line.=", ";
+      	}
+      	$line.=$this->zip;
+      	return $line;
       }
+      
+      public function getAdminAreas(){
+      	$line="";
+      	if (!empty($this->locality)){
+      		$line.=$this->locality;
+      	}
+      	if (!empty($this->adminArea2)){
+      		if (!empty($line)){
+      			$line.=", ";
+      		}
+      		$line.=$this->adminArea2;
+      	}
+      	return $line;
+      }      
+      
       
       
       
