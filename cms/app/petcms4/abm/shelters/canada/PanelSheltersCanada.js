@@ -1,17 +1,17 @@
-Ext.define('app.petcms4.abm.shelters.uk.PanelSheltersUk', {
+Ext.define('app.petcms4.abm.shelters.canada.PanelSheltersCanada', {
   extend: 'Ext.panel.Panel',
   layout: 'border',
   
   constructor: function(cnfg) {
       this.callParent(arguments);
       
-      this.panForm=Ext.create('app.petcms4.abm.shelters.japan.FormSheltersUk', {
-        id: 'formSheltersUkId',	
+      this.panForm=Ext.create('app.petcms4.abm.shelters.canada.FormSheltersCanada', {
+        id: 'formSheltersCanadaId',	
         region: 'center'
       });     
       
-      this.panBusqueda=Ext.create('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
-        id: 'busquedaSheltersUkId', 	
+      this.panBusqueda=Ext.create('app.petcms4.abm.shelters.canada.BusquedaSheltersCanada', {
+        id: 'busquedaSheltersCanadaId', 	
         region: 'west',
         width: 350
       });   
@@ -24,8 +24,8 @@ Ext.define('app.petcms4.abm.shelters.uk.PanelSheltersUk', {
           items: [this.panForm, this.panBusqueda]
       });   
       
-      this.panGrilla = Ext.create('app.petcms4.abm.shelters.japan.GrillaSheltersUk', {
-        id: 'grillaSheltersUkId',	
+      this.panGrilla = Ext.create('app.petcms4.abm.shelters.canada.GrillaSheltersCanada', {
+        id: 'grillaSheltersCanadaId',	
         region: 'center',
 //        height : 150,
       });  

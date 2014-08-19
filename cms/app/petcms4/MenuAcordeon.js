@@ -87,6 +87,19 @@ panelMenuAcordeon1.store.add({
 });
 
 
+panelMenuAcordeon1.store.add({
+	 columnaUnica: ['icono_mapa_canada_menu.jpg', 'Shelters Canada', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.shelters.canada.PanelSheltersCanada', {
+		   frame: true,
+       id: 'panelSheltersCanadaId'	
+    });
+    muestraEnPanel(panel);
+}]
+});
+
+
 
 Ext.define('app.petcms4.MenuAcordeon', {
 	extend: 'Ext.Panel',

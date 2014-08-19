@@ -24,6 +24,11 @@ Ext.application({
                     return true;
                 }
             },
+            canadaZipCode : function(val, field){
+                if (/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/.test(val)) {
+                    return true;
+                }
+            },
             digits8: function(val, field) {
                 if (/^\d{1,8}$/.test(val)) {
                     return true;
@@ -32,7 +37,8 @@ Ext.application({
             usaZipCodeText: 'Zip Codes must have 5 numbers.',
             japanZipCodeText: 'Zip Codes must have the following format: 999-9999',
             ukZipCodeText: 'Invalid UK postal code',
-            chinaZipCodeText: 'Chinese zip codes must have the following format: 999999'
+            chinaZipCodeText: 'Chinese zip codes must have the following format: 999999',
+            canadaZipCodeText: 'Invalid Canadian postal code',
         });
         Ext.create('Ext.container.Viewport', {
             layout: 'border',

@@ -25,6 +25,7 @@
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUsaStates.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboJapanPrefectures.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboCanadaProvinces.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUkRegions.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUkStatistical.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboChinaProvinces.js"></script>
@@ -71,6 +72,13 @@
     <script type="text/javascript" src="app/petcms4/abm/shelters/china/BusquedaSheltersChina.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/china/GrillaSheltersChina.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/china/PanelSheltersChina.js"></script>
+    
+    <!-- Shelters Canada -->
+    <script type="text/javascript" src="app/petcms4/abm/shelters/canada/FormSheltersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/canada/BusquedaSheltersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/canada/GrillaSheltersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/shelters/canada/PanelSheltersCanada.js"></script>
+    
     
     
     <!-- inicio -->
