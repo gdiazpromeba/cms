@@ -175,7 +175,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersJapan', {
                         		        	coordenadas.getComponent('adminArea1').markInvalid();
                         		        	coordenadas.getComponent('adminArea2').markInvalid();
                         		        	coordenadas.getComponent('locality').markInvalid();
-                        		        	coordenadas.getComponent('subLocality').markInvalid();
+                        		        	coordenadas.getComponent('subLocality1').markInvalid();
                         		        	coordenadas.getComponent('latitude').markInvalid();
                     			    		coordenadas.getComponent('longitude').markInvalid();	
                         		        }

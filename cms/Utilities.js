@@ -8,8 +8,6 @@ Ext.define('Utilities', {
 			url=url.replace("&", "and");
 			url=url.replace("\'", "");
 			url=url.replace("'", "");
-			url=url.replace("\"", "");
-			url=url.replace(".", "");
 			url=url.replace("%", "");
 			url=url.replace(", ", "_");
 			url=url.replace(",", "_");
@@ -17,6 +15,15 @@ Ext.define('Utilities', {
 			url=url.replace(new RegExp(' ', 'g'), "_");
 			url=url.replace(new RegExp('/', 'g'), "_");
 			url=url.replace(new RegExp('_+', 'g'), "_");
+            //paréntesis y backslashes (todo junto, porque deja backslashes después de la primera conversión)			
+			url=url.replace(/["'\(\)]/g, "");
+			url=url.replace(new RegExp('\\\\', 'g'), "_");
+			//guión
+			url=url.replace(new RegExp('\-', 'g'), "_");
+			//puntos
+			url=url.replace(new RegExp('\\.', 'g'), "_");
+			//doble guión bajo
+			url=url.replace(new RegExp('__', 'g'), "_");
 			return url;
 		},
 		/**

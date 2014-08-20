@@ -4,7 +4,7 @@ Ext.define('app.petcms4.abm.shelters.canada.BusquedaSheltersCanada', {
       frame: true,
       items: [
         {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
-        {fieldLabel: 'Province ', xtype: 'comboCanadaProvinces', itemId: 'comboCanadaProvinces', width: 230 },
+        {fieldLabel: 'Province ', xtype: 'comboCanadaProvinces', itemId: 'comboCanadaProvinces', width: 330 },
         {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'canadaZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
         {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
       ],

@@ -1,6 +1,6 @@
 <?php 
 
-   class JapanPrefecture { 
+   class CanadaProvince { 
       private $id; 
       private $name; 
       private $code;
