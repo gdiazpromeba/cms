@@ -46,7 +46,12 @@ class ZipsGenericoOadImpl extends AOD implements ZipsGenericoOad {
       	$nuevoId=$this->idUnico();
       	$bean->setId($nuevoId);
       	$stm=$this->preparar($conexion, $sql);
-      	$stm->bind_param("sssdd",$bean->getId(), $bean->getCode(), $bean->getLocationId(), $bean->getLatitude(), $bean->getLongitude());
+      	$id = $bean->getId();
+      	$code = $bean->getCode();
+      	$locationId = $bean->getLocationId();
+      	$latitude = $bean->getLatitude();
+      	$longitude = $bean->getLongitude();
+      	$stm->bind_param("sssdd", $id, $code, $locationId, $latitude, $longitude);
       	return $this->ejecutaYCierra($conexion, $stm, $nuevoId);
       }      
 

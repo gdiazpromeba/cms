@@ -29,6 +29,11 @@ Ext.application({
                     return true;
                 }
             },
+            indiaZipCode: function(val, field) {
+                if (/^\d{6}$/.test(val)) {
+                    return true;
+                }
+            },
             digits8: function(val, field) {
                 if (/^\d{1,8}$/.test(val)) {
                     return true;
@@ -39,6 +44,7 @@ Ext.application({
             ukZipCodeText: 'Invalid UK postal code',
             chinaZipCodeText: 'Chinese zip codes must have the following format: 999999',
             canadaZipCodeText: 'Invalid Canadian postal code',
+            indiaZipCodeText: 'India zip codes must have the following format: 999999',
         });
         Ext.create('Ext.container.Viewport', {
             layout: 'border',

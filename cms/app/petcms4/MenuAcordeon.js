@@ -105,6 +105,18 @@ panelShelters.store.add({
 }]
 });
 
+panelShelters.store.add({
+	 columnaUnica: ['icono_mapa_india_menu.jpg', 'Shelters India', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.shelters.india.PanelSheltersIndia', {
+		   frame: true,
+      id: 'panelSheltersIndiaId'	
+   });
+   muestraEnPanel(panel);
+}]
+});
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {
