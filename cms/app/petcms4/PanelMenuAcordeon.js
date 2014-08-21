@@ -4,6 +4,8 @@ Ext.define('app.petcms4.PanelMenuAcordeon', {
     layout: 'fit',
     border: true,
     hideHeaders: true,
+    collapsible: true,
+    frame: true,
     viewConfig: {
         stripeRows: true,
         forceFit: true,

@@ -20,7 +20,8 @@ function muestraEnPanel(componente){
 }
 
 var panelMenuAcordeon1=Ext.create('app.petcms4.PanelMenuAcordeon', {
-    id: 'panelMenuAcordeon1'
+    id: 'panelMenuAcordeon1',
+    title: 'Breeds'
 });
 
 
@@ -37,7 +38,12 @@ panelMenuAcordeon1.store.add({
 });
 
 
-panelMenuAcordeon1.store.add({
+var panelShelters=Ext.create('app.petcms4.PanelMenuAcordeon', {
+    id: 'panelShelters',
+    title: 'Shelters/country'
+});
+
+panelShelters.store.add({
 	 columnaUnica: ['icono_mapa_usa_menu.png', 'Shelters USA', 
 	   function(){
 		 quitaDePanel();
@@ -50,7 +56,7 @@ panelMenuAcordeon1.store.add({
 });
 
 
-panelMenuAcordeon1.store.add({
+panelShelters.store.add({
 	 columnaUnica: ['icono_mapa_japan_menu.jpg', 'Shelters Japan', 
 	   function(){
 		 quitaDePanel();
@@ -62,7 +68,7 @@ panelMenuAcordeon1.store.add({
    }]
 });
 
-panelMenuAcordeon1.store.add({
+panelShelters.store.add({
 	 columnaUnica: ['icono_mapa_uk_menu.png', 'Shelters UK', 
 	   function(){
 		 quitaDePanel();
@@ -74,7 +80,7 @@ panelMenuAcordeon1.store.add({
   }]
 });
 
-panelMenuAcordeon1.store.add({
+panelShelters.store.add({
 	 columnaUnica: ['icono_mapa_china_menu.jpg', 'Shelters China', 
 	   function(){
 		 quitaDePanel();
@@ -87,7 +93,7 @@ panelMenuAcordeon1.store.add({
 });
 
 
-panelMenuAcordeon1.store.add({
+panelShelters.store.add({
 	 columnaUnica: ['icono_mapa_canada_menu.jpg', 'Shelters Canada', 
 	   function(){
 		 quitaDePanel();
@@ -104,10 +110,12 @@ panelMenuAcordeon1.store.add({
 Ext.define('app.petcms4.MenuAcordeon', {
 	extend: 'Ext.Panel',
 	config:{
-	    layout: 'accordion',
-	    title: 'Hola'
+	    layout: 'accordion'
     },
-    items:[panelMenuAcordeon1],
+    items:[
+           panelMenuAcordeon1,
+           panelShelters
+    ],
     /*
     listeners:{
     	render: function(){
