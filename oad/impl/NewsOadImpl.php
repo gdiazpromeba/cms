@@ -1,0 +1,133 @@
+<?php 
+
+require_once '../../config.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/NewsOad.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/News.php';
+
+   class NewsOadImpl extends AOD implements NewsOad { 
+
+      public function obtiene($id){ 
+         $conexion=$this->conectarse(); 
+         $sql="SELECT  \n"; 
+         $sql.="  NEWS_ID,     \n"; 
+         $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  NEWS_TEXT,     \n"; 
+         $sql.="  NEWS_SOURCE,     \n"; 
+         $sql.="  NEWS_DATE    \n"; 
+         $sql.="FROM  \n"; 
+         $sql.="  NEWS  \n"; 
+         $sql.="WHERE  \n"; 
+         $sql.="  NEWS_ID='" . $id . "' \n"; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->execute();  
+         $bean=new News();  
+         $id=null;  
+         $newsTitle=null;  
+         $newsText=null;  
+         $newsSource=null;  
+         $newsDate=null;  
+         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate); 
+         if ($stm->fetch()) { 
+            $bean->setId($id);
+            $bean->setNewsTitle($newsTitle);
+            $bean->setNewsText($newsText);
+            $bean->setNewsSource($newsSource);
+            $bean->setNewsDateLarga($newsDate);
+         } 
+         $this->cierra($conexion, $stm); 
+         return $bean; 
+      } 
+
+
+      public function inserta($bean){ 
+         $conexion=$this->conectarse(); 
+         $sql="INSERT INTO NEWS (   \n"; 
+         $sql.="  NEWS_ID,     \n"; 
+         $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  NEWS_TEXT,     \n"; 
+         $sql.="  NEWS_SOURCE,     \n"; 
+         $sql.="  NEWS_DATE)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?)    \n"; 
+         $nuevoId=$this->idUnico(); 
+         $bean->setId($nuevoId); 
+         $stm=$this->preparar($conexion, $sql); 
+         $stm->bind_param("sssss",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDate()); 
+         return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
+      } 
+
+
+      public function borra($id){ 
+         $conexion=$this->conectarse(); 
+         $sql="DELETE FROM NEWS   \n"; 
+         $sql.="WHERE NEWS_ID=?   \n"; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->bind_param("s", $id);  
+         return $this->ejecutaYCierra($conexion, $stm); 
+      } 
+
+
+      public function actualiza($bean){ 
+         $conexion=$this->conectarse(); 
+         $sql="UPDATE NEWS SET   \n"; 
+         $sql.="  NEWS_TITLE=?,     \n"; 
+         $sql.="  NEWS_TEXT=?,     \n"; 
+         $sql.="  NEWS_SOURCE=?,     \n"; 
+         $sql.="  NEWS_DATE=?     \n"; 
+         $sql.="WHERE NEWS_ID=?   \n"; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->bind_param("sssss", $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getId() ); 
+         return $this->ejecutaYCierra($conexion, $stm); 
+      } 
+
+
+      public function selTodos($desde, $cuantos){ 
+         $conexion=$this->conectarse(); 
+         $sql="SELECT  \n"; 
+         $sql.="  NEWS_ID,     \n"; 
+         $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  NEWS_TEXT,     \n"; 
+         $sql.="  NEWS_SOURCE,     \n"; 
+         $sql.="  NEWS_DATE    \n"; 
+         $sql.="FROM  \n"; 
+         $sql.="  NEWS  \n"; 
+         $sql.="ORDER BY  \n"; 
+         $sql.="  NEWS_ID  \n"; 
+         $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->execute();  
+         $id=null;  
+         $newsTitle=null;  
+         $newsText=null;  
+         $newsSource=null;  
+         $newsDate=null;  
+         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate); 
+         $filas = array(); 
+         while ($stm->fetch()) { 
+            $bean=new News();  
+            $bean->setId($id);
+            $bean->setNewsTitle($newsTitle);
+            $bean->setNewsText($newsText);
+            $bean->setNewsSource($newsSource);
+            $bean->setNewsDateLarga($newsDate);
+            $filas[$id]=$bean; 
+         } 
+         $this->cierra($conexion, $stm); 
+         return $filas; 
+      } 
+
+
+      public function selTodosCuenta(){ 
+         $conexion=$this->conectarse(); 
+         $sql="SELECT COUNT(*) FROM NEWS "; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->execute();  
+         $cuenta=null; 
+         $stm->bind_result($cuenta); 
+         $stm->fetch();  
+         $this->cierra($conexion, $stm); 
+         return $cuenta; 
+      } 
+
+   } 
+?>

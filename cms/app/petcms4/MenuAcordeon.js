@@ -117,6 +117,23 @@ panelShelters.store.add({
 }]
 });
 
+var panelFrontPage=Ext.create('app.petcms4.PanelMenuAcordeon', {
+    id: 'panelFrontPage',
+    title: 'Front Page'
+});
+
+panelFrontPage.store.add({
+	 columnaUnica: ['news.jpg', 'News', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.news.PanelNews', {
+		   frame: true,
+           id: 'panelNewsId'	
+        });
+        muestraEnPanel(panel);
+    }]
+});
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {
@@ -126,7 +143,8 @@ Ext.define('app.petcms4.MenuAcordeon', {
     },
     items:[
            panelMenuAcordeon1,
-           panelShelters
+           panelShelters,
+           panelFrontPage
     ],
     /*
     listeners:{

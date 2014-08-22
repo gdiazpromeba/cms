@@ -21,6 +21,9 @@
     
     <link rel="stylesheet" type="text/css" href="resources/css/estiloCms.css">
     
+    <!--  utilities  -->
+    <script type="text/javascript" src="app/petcms4/util/Fecha.js"></script>
+    
     <script type="text/javascript" src="app/petcms4/combos/ComboRango1a5.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboUsaStates.js"></script>
@@ -86,6 +89,11 @@
     <script type="text/javascript" src="app/petcms4/abm/shelters/india/GrillaSheltersIndia.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/india/PanelSheltersIndia.js"></script>
     
+    <!-- News -->
+    <script type="text/javascript" src="app/petcms4/abm/news/FormNews.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/news/BusquedaNews.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/news/GrillaNews.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/news/Panelnews.js"></script>
     
     
     
