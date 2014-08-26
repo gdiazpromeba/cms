@@ -8,10 +8,20 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	urlBorrado: Global.dirAplicacion + '/svc/conector/news.php/inhabilita',
   	items: [
       {xtype: 'hidden', name: 'newsId', id: 'newsId', itemId: 'newsId'},
-      {fieldLabel: 'Title', xtype: 'textfield',  name: 'newsTitle', itemId: 'newsTitle',  id: 'newsTitle', allowBlank: false, width: 150},
-      {fieldLabel: 'Date', xtype: 'fecha', name: 'newsDate', itemId: 'newsDate', width: 100},
-      {fieldLabel: 'Text', xtype: 'textareafield',  name: 'newsText', itemId: 'newsText',  id: 'newsText', grow: false, width: 350, height: 270},
-      {fieldLabel: 'Soruce', xtype: 'textfield',  name: 'newsSource', itemId: 'newsSource',  id: 'newsSource', allowBlank: true, width: 320},
+      {fieldLabel: 'Title', xtype: 'textfield',  name: 'newsTitle', itemId: 'newsTitle',  id: 'newsTitle', allowBlank: false, width: 550},
+      {fieldLabel: 'Date', xtype: 'fecha', name: 'newsDate', itemId: 'newsDate', width: 200},
+      {fieldLabel: 'Text', xtype: 'htmleditor',  name: 'newsText', itemId: 'newsText',  id: 'newsText', grow: false, width: 750, height: 270, 
+    	                   enableColors: false,  enableAlignments: false, enableFont: false, enableFontSize: false, enableAlignments: false,
+    	                   enableFormat: false, enableLists: false},
+      {fieldLabel: 'Source', xtype: 'textfield',  name: 'newsSource', itemId: 'newsSource',  id: 'newsSource', allowBlank: true, width: 420},
+      {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
+          listeners: {scope: this,  
+            'click' :  function(){
+              var win=muestraRemisionFotos('fotoNews',  Global.dirAplicacion + '/svc/conector/news.php/subeFoto');
+              win.show();
+            }//evento click
+           }//listeners
+      },//botón Aceptar        
     ],      
   	   
   	pueblaDatosEnForm : function(record){

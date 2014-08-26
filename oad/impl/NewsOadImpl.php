@@ -52,7 +52,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssss",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDate()); 
+         $stm->bind_param("sssss",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 

@@ -5,7 +5,7 @@ Ext.define('NewsModel',{
 				{name : 'newsTitle', type : 'string'},
 				{name : 'newsText', type : 'string'},
 				{name : 'newsSource', type : 'string'},
-				{name : 'newsDate', type : 'date'}
+				{name : 'newsDate', type : 'date',  dateFormat: 'Y-m-d H:i:s'}
 			]
 });
 
@@ -15,7 +15,7 @@ var dogBreedStore = Ext.create('Ext.data.JsonStore', {
     model: 'NewsModel',
     proxy: {
         type: 'ajax',
-        url: Global.dirAplicacion + '/svc/conector/newsModel.php/selecciona',
+        url: Global.dirAplicacion + '/svc/conector/news.php/selecciona',
         reader: {
             type: 'json',
             root: 'data',
@@ -33,7 +33,7 @@ Ext.define('app.petcms4.abm.news.GrillaNews', {
 	  columns : [ 
 	    {header : 'id', dataIndex : 'newsId', hidden : true}, 
 	    {header : 'Title', dataIndex : 'newsTitle', width : 350, sortable : true},
-	    {header : 'Date', dataIndex : 'newsDate', width : 150, sortable : true},
+	    {header : 'Date', dataIndex : 'newsDate', width : 150, sortable : false, renderer: Ext.util.Format.dateRenderer('d/m/Y')},
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {

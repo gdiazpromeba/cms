@@ -1,5 +1,8 @@
 <?php 
 
+   require_once '../../config.php';
+   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/util/FechaUtils.php';
+
    class News { 
       private $id; 
       private $newsTitle; 
