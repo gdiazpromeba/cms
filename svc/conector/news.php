@@ -61,7 +61,7 @@ if ($ultimo=='selecciona'){
 
   } else if ($ultimo=='borra'){
 	$svc = new NewsSvcImpl();
-	$exito=$svc->borra($_REQUEST['newsId']);
+	$exito=$svc->borra($_REQUEST['id']);
 	echo json_encode($exito) ;	
 	
   }else if ($ultimo=='subeFoto'){

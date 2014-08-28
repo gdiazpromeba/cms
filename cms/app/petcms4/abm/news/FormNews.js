@@ -5,7 +5,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	nombreElementoId: 'newsId',
   	urlAgregado:  Global.dirAplicacion + '/svc/conector/news.php/inserta',
   	urlModificacion: Global.dirAplicacion + '/svc/conector/news.php/actualiza',
-  	urlBorrado: Global.dirAplicacion + '/svc/conector/news.php/inhabilita',
+  	urlBorrado: Global.dirAplicacion + '/svc/conector/news.php/borra',
   	items: [
       {xtype: 'hidden', name: 'newsId', id: 'newsId', itemId: 'newsId'},
       {fieldLabel: 'Title', xtype: 'textfield',  name: 'newsTitle', itemId: 'newsTitle',  id: 'newsTitle', allowBlank: false, width: 550},
