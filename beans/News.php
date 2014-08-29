@@ -9,6 +9,7 @@
       private $newsText; 
       private $newsSource; 
       private $newsDate; 
+      private $cutPosition;
 
       public function getId(){ 
          return $this->id;  
@@ -38,6 +39,9 @@
       	return FechaUtils::dateTimeaCadenaDMA($this->newsDate);
       }
       
+      public function getCutPosition(){
+      	return $this->cutPosition;
+      }
       
       public function setNewsDate($valor){
       	$this->newsDate=$valor;
@@ -74,6 +78,10 @@
       public function setNewsSource($valor){ 
          $this->newsSource=$valor; 
       }
+      
+      public function setCutPosition($valor){
+      	$this->cutPosition=$valor;
+      }      
 
    }
 ?>
