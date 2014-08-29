@@ -93,7 +93,7 @@
     <script type="text/javascript" src="app/petcms4/abm/news/FormNews.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/news/BusquedaNews.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/news/GrillaNews.js"></script>
-    <script type="text/javascript" src="app/petcms4/abm/news/Panelnews.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/news/PanelNews.js"></script>
     
     
     
