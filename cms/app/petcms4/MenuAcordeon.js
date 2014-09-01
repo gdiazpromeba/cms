@@ -134,6 +134,18 @@ panelFrontPage.store.add({
     }]
 });
 
+panelFrontPage.store.add({
+	 columnaUnica: ['videos.gif', 'Videos', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.abm.videos.PanelVideos', {
+		   frame: true,
+          id: 'panelVideosId'	
+       });
+       muestraEnPanel(panel);
+   }]
+});
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {

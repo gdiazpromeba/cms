@@ -23,6 +23,7 @@
     
     <!--  utilities  -->
     <script type="text/javascript" src="app/petcms4/util/Fecha.js"></script>
+    <script type="text/javascript" src="app/petcms4/util/MarcoVideo.js"></script>
     
     <script type="text/javascript" src="app/petcms4/combos/ComboRango1a5.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>
@@ -94,6 +95,12 @@
     <script type="text/javascript" src="app/petcms4/abm/news/BusquedaNews.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/news/GrillaNews.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/news/PanelNews.js"></script>
+    
+    <!-- Videos -->
+    <script type="text/javascript" src="app/petcms4/abm/videos/FormVideos.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/videos/BusquedaVideos.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/videos/GrillaVideos.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/videos/PanelVideos.js"></script>
     
     
     
