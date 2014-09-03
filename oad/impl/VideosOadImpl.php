@@ -76,7 +76,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Vid
       } 
 
 
-      public function selTodos($desde, $cuantos){ 
+      public function selTodos($title, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  VIDEO_ID,     \n"; 
@@ -85,6 +85,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Vid
          $sql.="  VIDEO_TAGS    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  VIDEOS  \n"; 
+         $sql.="WHERE  \n";
+         $sql.="  1=1  \n";
+         if (!empty($title)){
+         	$sql.="  AND VIDEO_TITLE LIKE '%" . $title . "%'  \n";
+         }
          $sql.="ORDER BY  \n"; 
          $sql.="  VIDEO_ID  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
@@ -109,9 +114,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Vid
       } 
 
 
-      public function selTodosCuenta(){ 
+      public function selTodosCuenta($title){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM VIDEOS "; 
+         $sql.="WHERE  \n";
+         $sql.="  1=1  \n";
+         if (!empty($title)){
+         	$sql.="  AND VIDEO_TITLE LIKE '%" . $title . "%'  \n";
+         }
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $cuenta=null; 

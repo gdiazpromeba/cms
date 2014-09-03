@@ -18,6 +18,8 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		
+		$title=$_REQUEST['videoTitle'];
+		
 
 		$svc = new VideosSvcImpl();
 		$beans=$svc->selTodos($desde, $cuantos);
