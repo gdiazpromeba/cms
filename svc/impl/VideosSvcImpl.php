@@ -33,14 +33,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Video
       } 
 
 
-      public function selTodos($desde, $cuantos){ 
-         $arr=$this->oad->selTodos($desde, $cuantos); 
+      public function selTodos($title, $desde, $cuantos){ 
+         $arr=$this->oad->selTodos($title, $desde, $cuantos); 
          return $arr; 
       } 
 
 
-      public function selTodosCuenta(){ 
-         $cantidad=$this->oad->selTodosCuenta(); 
+      public function selTodosCuenta($title){ 
+         $cantidad=$this->oad->selTodosCuenta($title); 
          return $cantidad; 
       } 
 

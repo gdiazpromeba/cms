@@ -1,25 +1,24 @@
-ComboPiezas = Ext.extend(Ext.form.ComboBox, {
-  
-    constructor : function(config) {
-      ComboPiezas.superclass.constructor.call(this, Ext.apply({
-        fieldLabel: 'Artículo',
-        allowBlank: true, 
-        width: 500, 
-        xtype: 'combo',
-        loadingText: recursosInter.buscando,
-        typeAhead: false, 
-        forceSelecion: true, 
-        store: getDsPiezas(), 
-        displayField: 'nombre', 
-        valueField: 'id',
-        minListWidth: 150, 
-        pageSize:15, 
-        hideTrigger: true, 
-        tpl: new Ext.XTemplate( '<tpl for="."><div class="search-item">', "<h4>{nombre}</h4>", '</div></tpl>'),
-        minChars: 1, 
-        itemSelector: 'div.search-item'
-    }, config));
-  } //constructor
-});
-
-Ext.reg('combopiezas', ComboPiezas);
+Ext.define('petcms4.combos.ComboVideos', {
+	  extend: 'Ext.form.field.ComboBox',
+	  editable: false,
+	  alias: 'widget.comboVideos',
+	  store: Ext.create('Ext.data.Store', {
+		    autoLoad: true,
+		    fields: ['id','title'],
+		    proxy: {
+		       type: 'ajax',
+		       url: Global.dirAplicacion + '/svc/conector/videos.php/selecciona',
+		       reader: {
+		          type:'json',
+		          root: 'data'
+		       }
+		    },
+	  }),
+	  displayField: 'title', 
+	  valueField: 'id',
+	  minchars: 2,
+	  hideTrigger: true,
+	  pageSize: 15, 
+	  typeAhead: false,
+	  forceSelection: true
+	});

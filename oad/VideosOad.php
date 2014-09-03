@@ -6,8 +6,8 @@
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 
-      public function selTodos($desde, $cuantos); 
-      public function selTodosCuenta(); 
+      public function selTodos($title, $desde, $cuantos); 
+      public function selTodosCuenta($title); 
    } 
 
 ?>

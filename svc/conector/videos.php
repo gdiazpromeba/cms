@@ -22,8 +22,8 @@ if ($ultimo=='selecciona'){
 		
 
 		$svc = new VideosSvcImpl();
-		$beans=$svc->selTodos($desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta(); 
+		$beans=$svc->selTodos($title, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($title); 
 		
 		$datos=array();
 		foreach ($beans as $bean){
