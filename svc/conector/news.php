@@ -18,15 +18,18 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		
+		$title=null;
+		if (isset($_REQUEST['newsTitle'])) $title=$_REQUEST['newsTitle'];
+		
 
 		$svc = new NewsSvcImpl();
-		$beans=$svc->selTodos($desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta(); 
+		$beans=$svc->selTodos($title, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($title); 
 		
 		$datos=array();
 		foreach ($beans as $bean){
 		  $arrBean=array();
-		  $arrBean['id']=$bean->getId();
+		  $arrBean['newsId']=$bean->getId();
 		  $arrBean['newsTitle']=$bean->getNewsTitle();
 		  $arrBean['newsText']=$bean->getNewsText();
 		  $arrBean['newsSource']=$bean->getNewsSource();

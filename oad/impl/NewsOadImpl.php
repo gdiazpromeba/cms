@@ -85,7 +85,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
       } 
 
 
-      public function selTodos($desde, $cuantos){ 
+      public function selTodos($title, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  NEWS_ID,     \n"; 
@@ -95,9 +95,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql.="  NEWS_DATE,    \n";
          $sql.="  CUT_POSITION    \n";
          $sql.="FROM  \n"; 
-         $sql.="  NEWS  \n"; 
+         $sql.="  NEWS  \n";
+         $sql.="WHERE  \n";
+         $sql.="  1=1  \n";
+         if (!empty($title)){
+         	$sql.="  AND UPPER(NEWS_TITLE) LIKE '%" . strtoupper($title) . "%'  \n";
+         }
          $sql.="ORDER BY  \n"; 
-         $sql.="  NEWS_ID  \n"; 
+         $sql.="  NEWS_TITLE  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
@@ -124,9 +129,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
       } 
 
 
-      public function selTodosCuenta(){ 
+      public function selTodosCuenta($title){ 
          $conexion=$this->conectarse(); 
-         $sql="SELECT COUNT(*) FROM NEWS "; 
+         $sql="SELECT COUNT(*) FROM NEWS ";
+         $sql.="WHERE  \n";
+         $sql.="  1=1  \n";
+         if (!empty($title)){
+         	$sql.="  AND UPPER(NEWS_TITLE) LIKE '%" . strtoupper($title) . "%'  \n";
+         }
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $cuenta=null; 

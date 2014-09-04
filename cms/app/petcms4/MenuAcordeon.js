@@ -140,19 +140,19 @@ panelFrontPage.store.add({
 		 quitaDePanel();
 		 var panel=Ext.create('app.petcms4.abm.videos.PanelVideos', {
 		   frame: true,
-          id: 'panelVideosId'	
+          id: 'panelNewsId'	
        });
        muestraEnPanel(panel);
    }]
 });
 
 panelFrontPage.store.add({
-	 columnaUnica: ['front-page.png', 'Home page', 
+	 columnaUnica: ['front-page.png', 'Home Page', 
 	   function(){
 		 quitaDePanel();
 		 var panel=Ext.create('app.petcms4.FormFrontPage', {
 		   frame: true,
-         id: 'panelFrontPageId'	
+         id: 'panelHomePageId'	
       });
       muestraEnPanel(panel);
   }]
@@ -170,17 +170,4 @@ Ext.define('app.petcms4.MenuAcordeon', {
            panelShelters,
            panelFrontPage
     ],
-    /*
-    listeners:{
-    	render: function(){
-   		  quitaDePanel();
-		   var panel=Ext.create('app.petcms4.abm.dogbreeds.PanelDogBreeds', {
-			frame: true,
-            id: 'panelDogBreedsId'	
-           });
-           muestraEnPanel(panel);
-           //panelMenuAcordeon1.disable();
-    	}
-    }
-    */
 });

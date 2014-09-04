@@ -47,10 +47,18 @@ Ext.application({
             indiaZipCodeText: 'India zip codes must have the following format: 999999',
         });
         Ext.create('Ext.container.Viewport', {
+            requires: [
+              'app.petcms4.MenuAcordeon'
+            ],
             layout: 'border',
             items: [
               Ext.create('app.petcms4.MenuAcordeon', {region: 'west', width: 150}),
-              {xtype: 'panel', region: 'center', layout: 'fit', itemId: 'panelCentral', id: 'panelCentral'}
+              {xtype: 'panel', region: 'center', layout: 'fit', itemId: 'panelCentral', id: 'panelCentral',
+            	  viewConfig: {
+            		    loadMask: false
+            		},
+            		maskOnDisable: false,
+              }
             ]
         });
     }
