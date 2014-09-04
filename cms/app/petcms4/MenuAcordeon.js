@@ -146,6 +146,18 @@ panelFrontPage.store.add({
    }]
 });
 
+panelFrontPage.store.add({
+	 columnaUnica: ['front-page.png', 'Home page', 
+	   function(){
+		 quitaDePanel();
+		 var panel=Ext.create('app.petcms4.FormFrontPage', {
+		   frame: true,
+         id: 'panelFrontPageId'	
+      });
+      muestraEnPanel(panel);
+  }]
+});
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {

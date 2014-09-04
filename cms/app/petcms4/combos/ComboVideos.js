@@ -1,10 +1,10 @@
 Ext.define('petcms4.combos.ComboVideos', {
 	  extend: 'Ext.form.field.ComboBox',
-	  editable: false,
+	  editable: true,
 	  alias: 'widget.comboVideos',
 	  store: Ext.create('Ext.data.Store', {
 		    autoLoad: true,
-		    fields: ['id','title'],
+		    fields: ['videoId','videoTitle'],
 		    proxy: {
 		       type: 'ajax',
 		       url: Global.dirAplicacion + '/svc/conector/videos.php/selecciona',
@@ -14,11 +14,13 @@ Ext.define('petcms4.combos.ComboVideos', {
 		       }
 		    },
 	  }),
-	  displayField: 'title', 
-	  valueField: 'id',
-	  minchars: 2,
+	  displayField: 'videoTitle', 
+	  valueField: 'videoId',
+	  minchars: 3,
 	  hideTrigger: true,
 	  pageSize: 15, 
-	  typeAhead: false,
-	  forceSelection: true
+	  //typeAhead: false,
+	  forceSelection: true,
+	  queryParam: 'videoTitle',
+	  queryMode: 'remote'
 	});

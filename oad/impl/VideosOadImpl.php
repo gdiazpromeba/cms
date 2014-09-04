@@ -88,10 +88,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Vid
          $sql.="WHERE  \n";
          $sql.="  1=1  \n";
          if (!empty($title)){
-         	$sql.="  AND VIDEO_TITLE LIKE '%" . $title . "%'  \n";
+         	$sql.="  AND UPPER(VIDEO_TITLE) LIKE '%" . strtoupper($title) . "%'  \n";
          }
          $sql.="ORDER BY  \n"; 
-         $sql.="  VIDEO_ID  \n"; 
+         $sql.="  VIDEO_TITLE  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
@@ -120,7 +120,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Vid
          $sql.="WHERE  \n";
          $sql.="  1=1  \n";
          if (!empty($title)){
-         	$sql.="  AND VIDEO_TITLE LIKE '%" . $title . "%'  \n";
+         	$sql.="  AND UPPER(VIDEO_TITLE) LIKE '%" . strtoupper($title) . "%'  \n";
          }
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  

@@ -18,7 +18,8 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		
-		$title=$_REQUEST['videoTitle'];
+		$title=null;
+		if (isset($_REQUEST['videoTitle'])) $title=$_REQUEST['videoTitle'];
 		
 
 		$svc = new VideosSvcImpl();
@@ -52,7 +53,7 @@ if ($ultimo=='selecciona'){
   	$bean=new Video(); 
 	$svc = new VideosSvcImpl();
     $bean->setId($_REQUEST['videoId']);
-	$bean->setVideoTitle($_REQUEST['videoT|itle']);
+	$bean->setVideoTitle($_REQUEST['videoTitle']);
 	$bean->setVideoUrl($_REQUEST['videoUrl']);
 	$bean->setVideoTags($_REQUEST['videoTags']);
   	$exito=$svc->actualiza($bean);
