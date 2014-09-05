@@ -47,10 +47,10 @@ Ext.define('app.petcms4.abm.shelters.canada.FormSheltersCanada', {
                               {xtype: 'button', text: 'Add', itemId: 'botAddSpecial',
                             	  listeners:{
                             		  click : function(  The, eOpts ){
-                            			  var cmbBreeds=Ext.getCmp('specialBreedId');
+                            			  var cmbBreeds = The.up('fieldset').getComponent('specialBreedId');
                             			  var id=cmbBreeds.getValue();
                             			  var name=cmbBreeds.getRawValue();
-                            			  var grid=Ext.getCmp('breedsAdded');
+                            			  var grid=The.up('fieldset').getComponent('breedsAdded');
                             			  var store=grid.getStore();
                             			  var registro = Ext.create(store.model.modelName);
                             			  registro.data['id']=id;
@@ -105,8 +105,8 @@ Ext.define('app.petcms4.abm.shelters.canada.FormSheltersCanada', {
                               },
                               {xtype: 'button', text: 'Delete', itemId: 'botDeleteSpecial',
                             	  listeners: {
-                            		  click: function(the, Opts){
-                            		    var grid=Ext.getCmp('breedsAdded');
+                            		  click: function(The, Opts){
+                            			var grid=The.up('fieldset').getComponent('breedsAdded');
                             		    var selection = grid.getSelectionModel().getSelection()[0];
                             		    if (selection) {
                             		      var store=grid.getStore();
