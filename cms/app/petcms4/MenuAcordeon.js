@@ -31,7 +31,7 @@ var storeShelters = Ext.create('Ext.data.ArrayStore', {
     ],
     data:[
         { image : 'icono_mapa_usa_menu.png',     caption : 'Shelters USA',     panelClass: 'app.petcms4.abm.shelters.usa.PanelSheltersUsa',        panelId: 'panelSheltersUsaId' },
-        { image : 'icono_mapa_japan_menu.jpg',   caption : 'Shelters Japan',   panelClass: 'app.petcms4.abm.shelters.japan.PanelSheltersJapan',      panelId: 'panelSheltersJapanId' },
+        { image : 'icono_mapa_japan_menu.jpg',   caption : 'Shelters Japan',   panelClass: 'app.petcms4.abm.shelters.japan.PanelSheltersJapan',    panelId: 'panelSheltersJapanId' },
         { image : 'icono_mapa_uk_menu.png',      caption : 'Shelters UK',      panelClass: 'app.petcms4.abm.shelters.uk.PanelSheltersUk',          panelId: 'panelSheltersUkId' },
         { image : 'icono_mapa_china_menu.jpg',   caption : 'Shelters China',   panelClass: 'app.petcms4.abm.shelters.china.PanelSheltersChina',    panelId: 'panelSheltersChinaId' },
         { image : 'icono_mapa_canada_menu.jpg',  caption : 'Shelters Canada',  panelClass: 'app.petcms4.abm.shelters.canada.PanelSheltersCanada',  panelId: 'panelSheltersCanadaId' },
@@ -56,7 +56,7 @@ var storeFp = Ext.create('Ext.data.ArrayStore', {
     data:[
         { image : 'videos.gif',        caption : 'Videos',        panelClass: 'app.petcms4.abm.videos.PanelVideos',   panelId: 'panelVideoId' },
         { image : 'news.jpg',          caption : 'News',          panelClass: 'app.petcms4.abm.news.PanelNews',       panelId: 'panelNewsId' },
-        { image : 'front-page.png',    caption : 'Front Page',    panelClass: 'app.petcms4.frontpage.FormFrontPage',  panelId: 'panelFrontPageId' },
+        { image : 'front-page.png',    caption : 'Front Page',    panelClass: 'app.petcms4.frontpage.FormFrontPage',  panelId: 'panelHomeId' },
     ],
 });
 
