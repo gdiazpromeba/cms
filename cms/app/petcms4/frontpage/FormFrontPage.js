@@ -1,4 +1,4 @@
-Ext.define('app.petcms4.FormFrontPage', {
+Ext.define('app.petcms4.frontpage.FormFrontPage', {
     extend: 'Ext.form.Panel',
 	defaultType: 'textfield',
     frame: true,

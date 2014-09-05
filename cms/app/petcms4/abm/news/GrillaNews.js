@@ -31,6 +31,9 @@ var dogBreedStore = Ext.create('Ext.data.JsonStore', {
 Ext.define('app.petcms4.abm.news.GrillaNews', {
 	  extend: 'Ext.grid.Panel',
 	  store : dogBreedStore,
+	  viewConfig: {
+	        loadMask: false
+	  },
 	  columns : [ 
 	    {header : 'id', dataIndex : 'newsId', hidden : true}, 
 	    {header : 'Title', dataIndex : 'newsTitle', width : 350, sortable : true},

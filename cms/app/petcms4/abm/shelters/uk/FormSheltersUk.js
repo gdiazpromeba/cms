@@ -13,8 +13,8 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormSheltersUk', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
           
-            {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  id: 'name', allowBlank: false, width: 350},
-            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', id: 'encoding',  border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
+            {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
+            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
             	items: [
                   {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  id: 'urlEncoded', allowBlank: false, columnWidth: 0.8},
   	              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
@@ -28,18 +28,18 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
   		          }
             	]
             },
-            {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  id: 'url', allowBlank: false, width: 350},
-            {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  id: 'email', allowBlank: true, width: 320},
-            {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  id: 'phone', allowBlank: true, width: 210},
-            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  id: 'description', grow: false, width: 350, height: 70},
+            {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  allowBlank: false, width: 350},
+            {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  allowBlank: true, width: 320},
+            {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  allowBlank: true, width: 210},
+            {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  grow: false, width: 350, height: 70},
             {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  id: 'streetAddress', 
 	          allowBlank: true, width: 350, height: 40},
-	        {fieldLabel: 'P.O.Box', xtype: 'textfield',  vtype: 'digits8', name: 'poBox', itemId: 'poBox',  id: 'poBox', allowBlank: true, width: 210},  
+	        {fieldLabel: 'P.O.Box', xtype: 'textfield',  vtype: 'digits8', name: 'poBox', itemId: 'poBox',  allowBlank: true, width: 210},  
           ]
       },//colizq
       {xtype: 'fieldset', itemId: 'colDer', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
     	  items:[
-                    { title: 'Related breeds', xtype: 'fieldset', itemId: 'specializations', id: 'specializations',  border: true, collapsible: true, collapsed: true,
+                    { title: 'Related breeds', xtype: 'fieldset', itemId: 'specializations', border: true, collapsible: true, collapsed: true,
                       items: [
                               {xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', id: 'specialBreedId', width: 320},
                               {xtype: 'button', text: 'Add', itemId: 'botAddSpecial',
@@ -48,7 +48,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                             			  var cmbBreeds=Ext.getCmp('specialBreedId');
                             			  var id=cmbBreeds.getValue();
                             			  var name=cmbBreeds.getRawValue();
-                            			  var grid=Ext.getCmp('breedsAdded');
+                            			  var grid=Ext.getCmp('breedsAddedUk');
                             			  var store=grid.getStore();
                             			  var registro = Ext.create(store.model.modelName);
                             			  registro.data['id']=id;
@@ -57,7 +57,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                             		  }
                             	  }
                               },
-                              {fieldLabel: 'Added so far', xtype: 'grid', name: 'breedsAdded', itemId: 'breedsAdded', id: 'breedsAdded',width: 320, height: 250,
+                              {fieldLabel: 'Added so far', xtype: 'grid', name: 'breedsAddedUk', itemId: 'breedsAddedUk', id: 'breedsAddedUk', width: 320, height: 250,
                             	  columns : [ 
                             	     	    {header : 'id', dataIndex : 'id', hidden : true}, 
                             	     	    {header : 'Breed name', dataIndex : 'name', width : 310, sortable : true}
@@ -104,7 +104,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                               {xtype: 'button', text: 'Delete', itemId: 'botDeleteSpecial',
                             	  listeners: {
                             		  click: function(the, Opts){
-                            		    var grid=Ext.getCmp('breedsAdded');
+                            		    var grid=Ext.getCmp('breedsAddedUk');
                             		    var selection = grid.getSelectionModel().getSelection()[0];
                             		    if (selection) {
                             		      var store=grid.getStore();
@@ -146,11 +146,11 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                         		}
                         	}
                           },                          
-                          {fieldLabel: 'County (geo)', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    id: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      id: 'locality',     readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  id: 'subLocality1', readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  id: 'latitude', allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true,  readOnly: true},
-                          {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  id: 'longitude', allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true, readOnly: true},
+                          {fieldLabel: 'County (geo)', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',   readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',       readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  readOnly: true, allowBlank: true, width: 250},
+                          {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true,  readOnly: true},
+                          {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  allowBlank: false, decimalPrecision: 8, width: 200, allowNegative:true, readOnly: true},
                           {xtype: 'fieldset', itemId: 'botonesGeo', id: 'botonesGeo',  border: false,  
                         	  layout: { type: 'hbox', padding:'5', align:'top'},
                               items: [
@@ -238,7 +238,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                           }
                       ]
                     },
-    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', id: 'logoUrl', allowBlank: true, width: 250},
+    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', allowBlank: true, width: 250},
     	            {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
     		            listeners: {scope: this,  
     		               'click' :  function(){
@@ -262,7 +262,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
      * carga las razas de perro en las que este refugio se especialice
      */
     cargaRazasAsociadas : function(shelterId){
-	  var grid=Ext.getCmp('breedsAdded');
+	  var grid=Ext.getCmp('breedsAddedUk');
 	  var store=grid.getStore();
 	  store.getProxy().extraParams['shelterId']=shelterId;
 	  store.load();
@@ -379,7 +379,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
    * override para grabar también el store de las razas asociadas
    */
   pulsoConfirmar: function(me){
-      var grid=Ext.getCmp('breedsAdded');
+      var grid=Ext.getCmp('breedsAddedUk');
       var store=grid.getStore();
       store.sync(); 
       me.callParent(arguments);

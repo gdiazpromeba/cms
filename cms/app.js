@@ -53,12 +53,7 @@ Ext.application({
             layout: 'border',
             items: [
               Ext.create('app.petcms4.MenuAcordeon', {region: 'west', width: 150}),
-              {xtype: 'panel', region: 'center', layout: 'fit', itemId: 'panelCentral', id: 'panelCentral',
-            	  viewConfig: {
-            		    loadMask: false
-            		},
-            		maskOnDisable: false,
-              }
+              {xtype: 'panel', region: 'center', layout: 'card', itemId: 'panelCentral', id: 'panelCentral'}
             ]
         });
     }

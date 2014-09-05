@@ -29,6 +29,9 @@ var videoStore = Ext.create('Ext.data.JsonStore', {
 Ext.define('app.petcms4.abm.videos.GrillaVideos', {
 	  extend: 'Ext.grid.Panel',
 	  store : videoStore,
+	  viewConfig: {
+	        loadMask: false
+	  },	  
 	  columns : [ 
 	    {header : 'id', dataIndex : 'videoId', hidden : true}, 
 	    {header : 'Title', dataIndex : 'videoTitle', width : 350, sortable : true},
@@ -36,6 +39,8 @@ Ext.define('app.petcms4.abm.videos.GrillaVideos', {
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {
+		  suspendLayout: true,
+		  maskOnDisable: false,
 	      store: videoStore,
 	      displayInfo: true,
 	      displayMsg: '{0} - {1} of {2}',

@@ -110,7 +110,7 @@
     
     
     <!-- inicio -->
-    <script type="text/javascript" src="app/petcms4/PanelMenuAcordeon.js"></script>
+    <script type="text/javascript" src="app/petcms4/PanelGrillaIconos.js"></script>
     <script type="text/javascript" src="app/petcms4/MenuAcordeon.js"></script>
 
     <script type="text/javascript" src="app.js"></script>
