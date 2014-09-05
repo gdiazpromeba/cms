@@ -3,10 +3,55 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
 	defaultType: 'textfield',
     frame: true,
     items:[
-      {fieldLabel: 'Video 1', xtype: 'comboVideos', name: 'comboVideos1', itemId: 'comboVideos1', width: 500},
-      {fieldLabel: 'Video 2', xtype: 'comboVideos', name: 'comboVideos2', itemId: 'comboVideos2', width: 500},
-      {fieldLabel: 'Video 3', xtype: 'comboVideos', name: 'comboVideos3', itemId: 'comboVideos3', width: 500},
-      {xtype: 'panel'},
+      {xtype: 'fieldset', title: 'Videos', itemId: 'videos', border: true, layout: 'column',
+    	  items:[
+             {xtype: 'fieldset', title: 'Video 1', itemId: 'video1', border: true, layout: 'vbox',
+            	 items:[
+                   {xtype: 'comboVideos', name: 'comboVideos1', itemId: 'comboVideos1', width: 370,
+                	   listeners : {
+                		   'change' : function (cmb, newValue, oldValue){
+                			   var newRecord = cmb.findRecordByValue(newValue);
+                			   if (newRecord.data!=undefined){
+                			     cmb.up('fieldset').getComponent('videoPreview1').setUrl(newRecord.data['videoUrl']);
+                			   }
+                		   }
+                	   }
+                   },
+                   {xtype: 'marcovideo',  itemId: 'videoPreview1'},
+            	 ]
+             },
+             {xtype: 'fieldset', title: 'Video 2', itemId: 'video2', border: true, layout: 'vbox',
+            	 items:[
+                    {xtype: 'comboVideos', name: 'comboVideos2', itemId: 'comboVideos2', width: 370,
+                 	   listeners : {
+                 		   'change' : function (cmb, newValue, oldValue){
+                 			   var newRecord = cmb.findRecordByValue(newValue);
+                 			   if (newRecord.data!=undefined){
+                 			     cmb.up('fieldset').getComponent('videoPreview2').setUrl(newRecord.data['videoUrl']);
+                 			   }
+                 		   }
+                 	   }
+                    },
+                    {xtype: 'marcovideo',  itemId: 'videoPreview2'},
+            	 ]
+             },
+             {xtype: 'fieldset', title: 'Video 3', itemId: 'video3', border: true, layout: 'vbox',
+            	 items:[
+                    {xtype: 'comboVideos', name: 'comboVideos3', itemId: 'comboVideos3', width: 370,
+                  	   listeners : {
+                  		   'change' : function (cmb, newValue, oldValue){
+                  			   var newRecord = cmb.findRecordByValue(newValue);
+                  			   if (newRecord.data!=undefined){
+                  			     cmb.up('fieldset').getComponent('videoPreview3').setUrl(newRecord.data['videoUrl']);
+                  			   }
+                  		   }
+                  	   }
+                     },
+                     {xtype: 'marcovideo',  itemId: 'videoPreview3'},
+            	 ]
+             },
+    	  ]
+      },
       {fieldLabel: 'Dog Breed 1', xtype: 'comboDogBreeds', name: 'comboDogBreeds1', itemId: 'comboDogBreeds1', width: 400},
       {fieldLabel: 'Dog Breed 2', xtype: 'comboDogBreeds', name: 'comboDogBreeds2', itemId: 'comboDogBreeds2', width: 400},
       {fieldLabel: 'Dog Breed 3', xtype: 'comboDogBreeds', name: 'comboDogBreeds3', itemId: 'comboDogBreeds3', width: 400},
@@ -36,9 +81,11 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
     },
     
     populateValues : function (me){
-    	var video1=me.getComponent('comboVideos1');
-    	var video2=me.getComponent('comboVideos2');
-    	var video3=me.getComponent('comboVideos3');
+    	var videos=me.getComponent('videos');
+    	
+    	var video1=videos.getComponent('video1').getComponent('comboVideos1');
+    	var video2=videos.getComponent('video2').getComponent('comboVideos2');
+    	var video3=videos.getComponent('video3').getComponent('comboVideos3');
     	
     	var news1=me.getComponent('comboNews1');
     	var news2=me.getComponent('comboNews2');
@@ -68,7 +115,7 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
 		    	cutPosition3.setValue(result.news3Cut);
 		    	cutPosition4.setValue(result.news4Cut);
 		    	
-		    	video1.setValue(result.video1Id); video3.setRawValue(result.video1Title);
+		    	video1.setValue(result.video1Id); video3.setRawValue(result.video1Title); 
 		    	video2.setValue(result.video2Id); video2.setRawValue(result.video2Title);
 		    	video3.setValue(result.video3Id); video3.setRawValue(result.video3Title);
 		    	
@@ -92,9 +139,11 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
     },
     
     saveValues : function (me){
-    	var video1=me.getComponent('comboVideos1');
-    	var video2=me.getComponent('comboVideos2');
-    	var video3=me.getComponent('comboVideos3');
+    	var videos=me.getComponent('videos');
+    	
+    	var video1=videos.getComponent('video1').getComponent('comboVideos1');
+    	var video2=videos.getComponent('video2').getComponent('comboVideos2');
+    	var video3=videos.getComponent('video3').getComponent('comboVideos3');
     	
     	var news1=me.getComponent('comboNews1');
     	var news2=me.getComponent('comboNews2');
