@@ -55,15 +55,46 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
       {fieldLabel: 'Dog Breed 1', xtype: 'comboDogBreeds', name: 'comboDogBreeds1', itemId: 'comboDogBreeds1', width: 400},
       {fieldLabel: 'Dog Breed 2', xtype: 'comboDogBreeds', name: 'comboDogBreeds2', itemId: 'comboDogBreeds2', width: 400},
       {fieldLabel: 'Dog Breed 3', xtype: 'comboDogBreeds', name: 'comboDogBreeds3', itemId: 'comboDogBreeds3', width: 400},
-      {xtype: 'panel'},
-      {fieldLabel: 'News 1', xtype: 'comboNews', name: 'comboNews1', itemId: 'comboNews1', width: 450},
-      {fieldLabel: 'Cut position 1', xtype: 'numberfield',  name: 'cutPosition1', itemId: 'cutPosition1', allowBlank: false, width: 200, allowDecimals: false},
-      {fieldLabel: 'News 2', xtype: 'comboNews', name: 'comboNews2', itemId: 'comboNews2', width: 450},
-      {fieldLabel: 'Cut position 2', xtype: 'numberfield',  name: 'cutPosition2', itemId: 'cutPosition2', allowBlank: false, width: 200, allowDecimals: false},
-      {fieldLabel: 'News 3', xtype: 'comboNews', name: 'comboNews3', itemId: 'comboNews3', width: 450},
-      {fieldLabel: 'Cut position 3', xtype: 'numberfield',  name: 'cutPosition3', itemId: 'cutPosition3', allowBlank: false, width: 200, allowDecimals: false},
-      {fieldLabel: 'News 4', xtype: 'comboNews', name: 'comboNews4', itemId: 'comboNews4', width: 450},
-      {fieldLabel: 'Cut position 4', xtype: 'numberfield',  name: 'cutPosition4', itemId: 'cutPosition4', allowBlank: false, width: 200, allowDecimals: false},
+      {xtype: 'fieldset', title: 'News', itemId: 'news', border: true, layout: 'column',
+    	  items:[
+            {xtype: 'fieldset', itemId: 'news1', border: true, layout: 'vbox', columnWidth: 0.25,
+            	items: [
+                        {xtype: 'label', text: 'Text'},
+            	        {xtype: 'comboNews', name: 'comboNews1', itemId: 'comboNews1', width: 270},
+            	        {xtype: 'label', text: 'Cut position'},
+            	        {xtype: 'numberfield',  name: 'cutPosition1', itemId: 'cutPosition1', allowBlank: false, width: 100, allowDecimals: false},
+            	        {xtype: 'textarea', itemId: 'newsText1', width: 270, height: 180, editable: false},
+            	]
+            },
+            {xtype: 'fieldset', itemId: 'news2', border: true, layout: 'vbox', columnWidth: 0.25,
+            	items: [
+                        {xtype: 'label', text: 'Title'},
+            	        {xtype: 'comboNews', name: 'comboNews2', itemId: 'comboNews2', width: 270},
+            	        {xtype: 'label', text: 'Cut position'},
+            	        {xtype: 'numberfield',  name: 'cutPosition2', itemId: 'cutPosition2', allowBlank: false, width: 100, allowDecimals: false},
+            	        {xtype: 'textarea', itemId: 'newsText2', width: 270, height: 180, editable: false},
+            	]
+            },
+            {xtype: 'fieldset', itemId: 'news3', border: true, layout: 'vbox', columnWidth: 0.25,
+            	items: [
+                        {xtype: 'label', text: 'Title'},
+            	        {xtype: 'comboNews', name: 'comboNews3', itemId: 'comboNews3', width: 270},
+            	        {xtype: 'label', text: 'Cut position'},
+            	        {xtype: 'numberfield',  name: 'cutPosition3', itemId: 'cutPosition3', allowBlank: false, width: 100, allowDecimals: false},
+            	        {xtype: 'textarea', itemId: 'newsText3', width: 270, height: 180, editable: false},
+            	]
+            },
+            {xtype: 'fieldset', itemId: 'news4', border: true, layout: 'vbox', columnWidth: 0.25,
+            	items: [
+                        {xtype: 'label', text: 'Title'},
+            	        {xtype: 'comboNews', name: 'comboNews4', itemId: 'comboNews4', width: 270},
+            	        {xtype: 'label', text: 'Cut position'},
+            	        {xtype: 'numberfield',  name: 'cutPosition4', itemId: 'cutPosition4', allowBlank: false, width: 100, allowDecimals: false},
+            	        {xtype: 'textarea', itemId: 'newsText4', width: 270, height: 180, editable: false},
+            	]
+            },
+    	  ]
+      },
     ],  
     buttons: [
        {id: 'saveBtn', itemId: 'saveBtn', text: 'Save', 
@@ -87,15 +118,21 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
     	var video2=videos.getComponent('video2').getComponent('comboVideos2');
     	var video3=videos.getComponent('video3').getComponent('comboVideos3');
     	
-    	var news1=me.getComponent('comboNews1');
-    	var news2=me.getComponent('comboNews2');
-    	var news3=me.getComponent('comboNews3');
-    	var news4=me.getComponent('comboNews4');
+    	var news=me.getComponent('news');
+    	var news1=news.getComponent('news1').getComponent('comboNews1');
+    	var news2=news.getComponent('news2').getComponent('comboNews2');
+    	var news3=news.getComponent('news3').getComponent('comboNews3');
+    	var news4=news.getComponent('news4').getComponent('comboNews4');
     	
-    	var cutPosition1=me.getComponent('cutPosition1');
-    	var cutPosition2=me.getComponent('cutPosition2');
-    	var cutPosition3=me.getComponent('cutPosition3');
-    	var cutPosition4=me.getComponent('cutPosition4');
+    	var cutPosition1=news.getComponent('news1').getComponent('cutPosition1');
+    	var cutPosition2=news.getComponent('news2').getComponent('cutPosition2');
+    	var cutPosition3=news.getComponent('news3').getComponent('cutPosition3');
+    	var cutPosition4=news.getComponent('news4').getComponent('cutPosition4');
+    	
+    	var newsText1 = news.getComponent('news1').getComponent('newsText1');
+    	var newsText2 = news.getComponent('news2').getComponent('newsText2');
+    	var newsText3 = news.getComponent('news3').getComponent('newsText3');
+    	var newsText4 = news.getComponent('news4').getComponent('newsText4');    	
     	
     	var dogBreed1=me.getComponent('comboDogBreeds1');
     	var dogBreed2=me.getComponent('comboDogBreeds2');
@@ -114,6 +151,10 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
 		    	cutPosition2.setValue(result.news2Cut);
 		    	cutPosition3.setValue(result.news3Cut);
 		    	cutPosition4.setValue(result.news4Cut);
+		    	newsText1.setValue(result.news1Text);
+		    	newsText2.setValue(result.news2Text);
+		    	newsText3.setValue(result.news3Text);
+		    	newsText4.setValue(result.news4Text);
 		    	
 		    	video1.setValue(result.video1Id); video3.setRawValue(result.video1Title); 
 		    	video2.setValue(result.video2Id); video2.setRawValue(result.video2Title);
@@ -145,15 +186,21 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
     	var video2=videos.getComponent('video2').getComponent('comboVideos2');
     	var video3=videos.getComponent('video3').getComponent('comboVideos3');
     	
-    	var news1=me.getComponent('comboNews1');
-    	var news2=me.getComponent('comboNews2');
-    	var news3=me.getComponent('comboNews3');
-    	var news4=me.getComponent('comboNews4');
+    	var news=me.getComponent('news');
+    	var news1=news.getComponent('news1').getComponent('comboNews1');
+    	var news2=news.getComponent('news2').getComponent('comboNews2');
+    	var news3=news.getComponent('news3').getComponent('comboNews3');
+    	var news4=news.getComponent('news4').getComponent('comboNews4');
     	
-    	var cutPosition1=me.getComponent('cutPosition1');
-    	var cutPosition2=me.getComponent('cutPosition2');
-    	var cutPosition3=me.getComponent('cutPosition3');
-    	var cutPosition4=me.getComponent('cutPosition4');
+    	var cutPosition1=news.getComponent('news1').getComponent('cutPosition1');
+    	var cutPosition2=news.getComponent('news2').getComponent('cutPosition2');
+    	var cutPosition3=news.getComponent('news3').getComponent('cutPosition3');
+    	var cutPosition4=news.getComponent('news4').getComponent('cutPosition4');
+    	
+    	var newsText1 = news.getComponent('news1').getComponent('newsText1');
+    	var newsText2 = news.getComponent('news2').getComponent('newsText2');
+    	var newsText3 = news.getComponent('news3').getComponent('newsText3');
+    	var newsText4 = news.getComponent('news4').getComponent('newsText4');
     	
     	var dogBreed1=me.getComponent('comboDogBreeds1');
     	var dogBreed2=me.getComponent('comboDogBreeds2');

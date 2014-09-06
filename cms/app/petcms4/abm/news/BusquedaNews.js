@@ -3,7 +3,7 @@ Ext.define('app.petcms4.abm.news.BusquedaNews', {
       region: 'west',
       frame: true,
       items: [
-        {fieldLabel: 'Titie', xtype: 'textfield', itemId: 'newsTitle', allowBlank: true, width: 200},
+        {fieldLabel: 'Titie', xtype: 'textfield', itemId: 'newsTitle', allowBlank: true, width: 370},
         {fieldLabel: 'Content', xtype: 'textfield', itemId: 'newsContent', allowBlank: true},
       ],
       buttons: [

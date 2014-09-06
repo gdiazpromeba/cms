@@ -13,6 +13,10 @@
       private $news2Title; 
       private $news3Title; 
       private $news4Title; 
+      private $news1Text;
+      private $news2Text;
+      private $news3Text;
+      private $news4Text;
       private $video1Id; 
       private $video2Id; 
       private $video3Id; 
@@ -74,6 +78,22 @@
          return $this->news4Title;  
       }
 
+      public function getNews1Text(){
+      	return $this->news1Text;
+      }
+      
+      public function getNews2Text(){
+      	return $this->news2Text;
+      }
+      
+      public function getNews3Text(){
+      	return $this->news3Text;
+      }
+      
+      public function getNews4Text(){
+      	return $this->news4Text;
+      }
+            
       public function getVideo1Id(){ 
          return $this->video1Id;  
       }
@@ -154,22 +174,39 @@
          $this->news4Cut=$valor; 
       }
 
-      public function setNews1Title($valor){ 
-         $this->news1Title=$valor; 
+      public function setNews1Text($valor){ 
+         $this->news1Text=$valor; 
       }
 
-      public function setNews2Title($valor){ 
-         $this->news2Title=$valor; 
+      public function setNews2Text($valor){ 
+         $this->news2Text=$valor; 
       }
 
-      public function setNews3Title($valor){ 
-         $this->news3Title=$valor; 
+      public function setNews3Text($valor){ 
+         $this->news3Text=$valor; 
       }
 
-      public function setNews4Title($valor){ 
-         $this->news4Title=$valor; 
+      public function setNews4Text($valor){ 
+         $this->news4Text=$valor; 
       }
 
+      public function setNews1Title($valor){
+      	$this->news1Title=$valor;
+      }
+      
+      public function setNews2Title($valor){
+      	$this->news2Title=$valor;
+      }
+      
+      public function setNews3Title($valor){
+      	$this->news3Title=$valor;
+      }
+      
+      public function setNews4Title($valor){
+      	$this->news4Title=$valor;
+      }
+      
+      
       public function setVideo1Id($valor){ 
          $this->video1Id=$valor; 
       }

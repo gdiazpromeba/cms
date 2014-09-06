@@ -21,18 +21,19 @@ if ($ultimo=='obtiene'){
 		$arrBean=array();
 		$arrBean['news1Id']=$bean->getNews1Id();
 		$arrBean['news1Title']=$bean->getNews1Title();
+		$arrBean['news1Text']=$bean->getNews1Text();
 		$arrBean['news1Cut']=$bean->getNews1Cut();
 		$arrBean['news2Id']=$bean->getNews2Id();
 		$arrBean['news2Title']=$bean->getNews2Title();
-		$arrBean['news2Cut']=$bean->getNews2Cut();
-		$arrBean['news2Id']=$bean->getNews2Id();
-		$arrBean['news2Title']=$bean->getNews2Title();
+		$arrBean['news2Text']=$bean->getNews2Text();
 		$arrBean['news2Cut']=$bean->getNews2Cut();
 		$arrBean['news3Id']=$bean->getNews3Id();
 		$arrBean['news3Title']=$bean->getNews3Title();
+		$arrBean['news3Text']=$bean->getNews3Text();
 		$arrBean['news3Cut']=$bean->getNews3Cut();
 		$arrBean['news4Id']=$bean->getNews4Id();
 		$arrBean['news4Title']=$bean->getNews4Title();
+		$arrBean['news4Text']=$bean->getNews4Text();
 		$arrBean['news4Cut']=$bean->getNews4Cut();
 		
 		$arrBean['video1Id']=$bean->getVideo1Id();

@@ -3,7 +3,7 @@ Ext.define('app.petcms4.abm.videos.BusquedaVideos', {
       region: 'west',
       frame: true,
       items: [
-        {fieldLabel: 'Title', xtype: 'textfield', itemId: 'videoTitle', allowBlank: true, width: 200},
+        {fieldLabel: 'Title', xtype: 'textfield', itemId: 'videoTitle', allowBlank: true, width: 400},
         {fieldLabel: 'Tag', xtype: 'textfield', itemId: 'videoTags', allowBlank: true},
       ],
       buttons: [

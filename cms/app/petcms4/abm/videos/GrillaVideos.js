@@ -35,7 +35,7 @@ Ext.define('app.petcms4.abm.videos.GrillaVideos', {
 	  columns : [ 
 	    {header : 'id', dataIndex : 'videoId', hidden : true}, 
 	    {header : 'Title', dataIndex : 'videoTitle', width : 350, sortable : true},
-	    {header : 'Tags', dataIndex : 'videoTags', width : 150, sortable : false},
+	    {header : 'Tags', dataIndex : 'videoTags', width : 550, sortable : false},
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {

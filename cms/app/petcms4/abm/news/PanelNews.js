@@ -17,7 +17,7 @@ Ext.define('app.petcms4.abm.news.PanelNews', {
       
       var panLateral=Ext.create('Ext.panel.Panel', {
     	region: 'west',
-    	width: 250,
+    	width: 400,
     	layout: {
     	    type: 'vbox',
     	    align : 'stretch',

@@ -21,6 +21,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  N2.NEWS_TITLE AS NEWS_2_TITLE,     \n"; 
          $sql.="  N3.NEWS_TITLE AS NEWS_3_TITLE,     \n"; 
          $sql.="  N4.NEWS_TITLE AS NEWS_4_TITLE,     \n"; 
+         $sql.="  N1.NEWS_TEXT AS NEWS_1_TEXT,     \n";
+         $sql.="  N2.NEWS_TEXT AS NEWS_2_TEXT,     \n";
+         $sql.="  N3.NEWS_TEXT AS NEWS_3_TEXT,     \n";
+         $sql.="  N4.NEWS_TEXT AS NEWS_4_TEXT,     \n";         
          $sql.="  FP.VIDEO_1_ID,     \n"; 
          $sql.="  FP.VIDEO_2_ID,     \n"; 
          $sql.="  FP.VIDEO_3_ID,     \n"; 
@@ -61,7 +65,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $news1Title=null;  
          $news2Title=null;  
          $news3Title=null;  
-         $news4Title=null;  
+         $news4Title=null;
+         $news1Text=null;
+         $news2Text=null;
+         $news3Text=null;
+         $news4Text=null;
          $video1Id=null;  
          $video2Id=null;  
          $video3Id=null;  
@@ -74,7 +82,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $dogBreed1Name=null;  
          $dogBreed2Name=null;  
          $dogBreed3Name=null;  
-         $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, $news1Title, $news2Title, $news3Title, $news4Title, $video1Id, $video2Id, $video3Id, $video1Title, $video2Title, $video3Title, $dogBreed1Id, $dogBreed2Id, $dogBreed3Id, $dogBreed1Name, $dogBreed2Name, $dogBreed3Name); 
+         $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, 
+         		$news1Title, $news2Title, $news3Title, $news4Title, 
+         		$news1Text, $news2Text, $news3Text, $news4Text,
+         		$video1Id, $video2Id, $video3Id, $video1Title, $video2Title, $video3Title, 
+         		$dogBreed1Id, $dogBreed2Id, $dogBreed3Id, $dogBreed1Name, $dogBreed2Name, $dogBreed3Name); 
          if ($stm->fetch()) { 
             $bean->setNews1Id($news1Id);
             $bean->setNews2Id($news2Id);
@@ -88,6 +100,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
             $bean->setNews2Title($news2Title);
             $bean->setNews3Title($news3Title);
             $bean->setNews4Title($news4Title);
+            $bean->setNews1Text($news1Text);
+            $bean->setNews2Text($news2Text);
+            $bean->setNews3Text($news3Text);
+            $bean->setNews4Text($news4Text);
             $bean->setVideo1Id($video1Id);
             $bean->setVideo2Id($video2Id);
             $bean->setVideo3Id($video3Id);
