@@ -60,7 +60,17 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
             {xtype: 'fieldset', itemId: 'news1', border: true, layout: 'vbox', columnWidth: 0.25,
             	items: [
                         {xtype: 'label', text: 'Text'},
-            	        {xtype: 'comboNews', name: 'comboNews1', itemId: 'comboNews1', width: 270},
+            	        {xtype: 'comboNews', name: 'comboNews1', itemId: 'comboNews1', width: 270,
+                       	   listeners : {
+                      		   'change' : function (cmb, newValue, oldValue){
+                      			   var newRecord = cmb.findRecordByValue(newValue);
+                      			   if (newRecord.data!=undefined){
+                      			     cmb.up('fieldset').getComponent('newsText1').setValue(newRecord.data['newsText']);
+                      			     cmb.up('fieldset').getComponent('cutPosition1').setValue(newRecord.data['cutPosition']);
+                      			   }
+                      		   }
+                      	   }
+                        },
             	        {xtype: 'label', text: 'Cut position'},
             	        {xtype: 'numberfield',  name: 'cutPosition1', itemId: 'cutPosition1', allowBlank: false, width: 100, allowDecimals: false},
             	        {xtype: 'textarea', itemId: 'newsText1', width: 270, height: 180, editable: false},
@@ -69,7 +79,17 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
             {xtype: 'fieldset', itemId: 'news2', border: true, layout: 'vbox', columnWidth: 0.25,
             	items: [
                         {xtype: 'label', text: 'Title'},
-            	        {xtype: 'comboNews', name: 'comboNews2', itemId: 'comboNews2', width: 270},
+            	        {xtype: 'comboNews', name: 'comboNews2', itemId: 'comboNews2', width: 270,
+                    	   listeners : {
+                      		   'change' : function (cmb, newValue, oldValue){
+                      			   var newRecord = cmb.findRecordByValue(newValue);
+                      			   if (newRecord.data!=undefined){
+                      			     cmb.up('fieldset').getComponent('newsText2').setValue(newRecord.data['newsText']);
+                      			     cmb.up('fieldset').getComponent('cutPosition2').setValue(newRecord.data['cutPosition']);
+                      			   }
+                      		   }
+                      	   }
+                        },
             	        {xtype: 'label', text: 'Cut position'},
             	        {xtype: 'numberfield',  name: 'cutPosition2', itemId: 'cutPosition2', allowBlank: false, width: 100, allowDecimals: false},
             	        {xtype: 'textarea', itemId: 'newsText2', width: 270, height: 180, editable: false},
@@ -78,7 +98,17 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
             {xtype: 'fieldset', itemId: 'news3', border: true, layout: 'vbox', columnWidth: 0.25,
             	items: [
                         {xtype: 'label', text: 'Title'},
-            	        {xtype: 'comboNews', name: 'comboNews3', itemId: 'comboNews3', width: 270},
+            	        {xtype: 'comboNews', name: 'comboNews3', itemId: 'comboNews3', width: 270,
+                    	   listeners : {
+                      		   'change' : function (cmb, newValue, oldValue){
+                      			   var newRecord = cmb.findRecordByValue(newValue);
+                      			   if (newRecord.data!=undefined){
+                      			     cmb.up('fieldset').getComponent('newsText3').setValue(newRecord.data['newsText']);
+                      			     cmb.up('fieldset').getComponent('cutPositio3').setValue(newRecord.data['cutPosition']);
+                      			   }
+                      		   }
+                      	   }
+                        },
             	        {xtype: 'label', text: 'Cut position'},
             	        {xtype: 'numberfield',  name: 'cutPosition3', itemId: 'cutPosition3', allowBlank: false, width: 100, allowDecimals: false},
             	        {xtype: 'textarea', itemId: 'newsText3', width: 270, height: 180, editable: false},
@@ -87,8 +117,17 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
             {xtype: 'fieldset', itemId: 'news4', border: true, layout: 'vbox', columnWidth: 0.25,
             	items: [
                         {xtype: 'label', text: 'Title'},
-            	        {xtype: 'comboNews', name: 'comboNews4', itemId: 'comboNews4', width: 270},
-            	        {xtype: 'label', text: 'Cut position'},
+            	        {xtype: 'comboNews', name: 'comboNews4', itemId: 'comboNews4', width: 270,
+                    	   listeners : {
+                      		   'change' : function (cmb, newValue, oldValue){
+                      			   var newRecord = cmb.findRecordByValue(newValue);
+                      			   if (newRecord.data!=undefined){
+                      			     cmb.up('fieldset').getComponent('newsText4').setValue(newRecord.data['newsText']);
+                      			     cmb.up('fieldset').getComponent('cutPosition4').setValue(newRecord.data['cutPosition']);
+                      			   }
+                      		   }
+                      	   }
+                        },            	        {xtype: 'label', text: 'Cut position'},
             	        {xtype: 'numberfield',  name: 'cutPosition4', itemId: 'cutPosition4', allowBlank: false, width: 100, allowDecimals: false},
             	        {xtype: 'textarea', itemId: 'newsText4', width: 270, height: 180, editable: false},
             	]
