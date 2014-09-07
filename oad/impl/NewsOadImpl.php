@@ -14,8 +14,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql.="  NEWS_TITLE,     \n"; 
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
-         $sql.="  NEWS_DATE,    \n"; 
-         $sql.="  CUT_POSITION    \n";
+         $sql.="  NEWS_DATE    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  NEWS  \n"; 
          $sql.="WHERE  \n"; 
@@ -35,7 +34,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
             $bean->setNewsText($newsText);
             $bean->setNewsSource($newsSource);
             $bean->setNewsDateLarga($newsDate);
-            $bean->setCutPosition($cutPosition);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -49,13 +47,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql.="  NEWS_TITLE,     \n"; 
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
-         $sql.="  NEWS_DATE,    \n";
-         $sql.="  CUT_POSITION    \n";
-         $sql.=")VALUES (?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  NEWS_DATE    \n";
+         $sql.=")VALUES (?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssd",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition()); 
+         $stm->bind_param("sssss",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -76,11 +73,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql.="  NEWS_TITLE=?,     \n"; 
          $sql.="  NEWS_TEXT=?,     \n"; 
          $sql.="  NEWS_SOURCE=?,     \n"; 
-         $sql.="  NEWS_DATE=?,     \n";
-         $sql.="  CUT_POSITION=?     \n";
+         $sql.="  NEWS_DATE=?     \n";
          $sql.="WHERE NEWS_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssds", $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition(), $bean->getId()); 
+         $stm->bind_param("sssss", $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getId()); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -92,8 +88,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql.="  NEWS_TITLE,     \n"; 
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
-         $sql.="  NEWS_DATE,    \n";
-         $sql.="  CUT_POSITION    \n";
+         $sql.="  NEWS_DATE   \n";
          $sql.="FROM  \n"; 
          $sql.="  NEWS  \n";
          $sql.="WHERE  \n";
@@ -111,8 +106,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $newsText=null;  
          $newsSource=null;  
          $newsDate=null;  
-         $cutPosition=null;
-         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate, $cutPosition); 
+         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new News();  
@@ -121,7 +115,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
             $bean->setNewsText($newsText);
             $bean->setNewsSource($newsSource);
             $bean->setNewsDateLarga($newsDate);
-            $bean->setCutPosition($cutPosition);
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 

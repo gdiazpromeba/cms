@@ -6,7 +6,6 @@ Ext.define('NewsModel',{
 				{name : 'newsText', type : 'string'},
 				{name : 'newsSource', type : 'string'},
 				{name : 'newsDate', type : 'date',  dateFormat: 'Y-m-d H:i:s'},
-				{name : 'cutPosition', type : 'int'},
 			]
 });
 

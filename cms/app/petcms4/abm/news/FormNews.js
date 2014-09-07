@@ -14,7 +14,6 @@ Ext.define('app.petcms4.abm.news.FormNews', {
     	                   enableColors: false,  enableAlignments: false, enableFont: false, enableFontSize: false, enableAlignments: false,
     	                   enableFormat: false, enableLists: false},
       {fieldLabel: 'Source', xtype: 'textfield',  name: 'newsSource', itemId: 'newsSource',  id: 'newsSource', allowBlank: true, width: 420},
-      {fieldLabel: 'Cut position', xtype: 'numberfield',  name: 'cutPosition', itemId: 'cutPosition',  id: 'cutPosition', allowBlank: false, width: 200, allowDecimals: false},
       {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
           listeners: {scope: this,  
             'click' :  function(){
@@ -31,7 +30,6 @@ Ext.define('app.petcms4.abm.news.FormNews', {
       this.getComponent('newsDate').setValue(record.get('newsDate'));
       this.getComponent('newsSource').setValue(record.get('newsSource'));
       this.getComponent('newsText').setValue(record.get('newsText'));
-      this.getComponent('cutPosition').setValue(record.get('cutPosition'));
   	},
   	   
   	pueblaFormEnRegistro : function(record){
@@ -40,7 +38,6 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	  record.data['newsSource']=  this.getComponent('newsSource').getValue();
   	  record.data['newsDate']=  this.getComponent('newsDate').getValue();
   	  record.data['newsText']=  this.getComponent('newsText').getValue();
-  	  record.data['cutPosition']=  this.getComponent('cutPosition').getValue();
   	},  	   
   	   
   	   validaHijo : function(muestraVentana){
