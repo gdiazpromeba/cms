@@ -104,7 +104,7 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
                       			   var newRecord = cmb.findRecordByValue(newValue);
                       			   if (newRecord.data!=undefined){
                       			     cmb.up('fieldset').getComponent('newsText3').setValue(newRecord.data['newsText']);
-                      			     cmb.up('fieldset').getComponent('cutPositio3').setValue(newRecord.data['cutPosition']);
+                      			     cmb.up('fieldset').getComponent('cutPosition3').setValue(newRecord.data['cutPosition']);
                       			   }
                       		   }
                       	   }

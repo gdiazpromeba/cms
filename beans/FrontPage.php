@@ -13,6 +13,10 @@
       private $news2Title; 
       private $news3Title; 
       private $news4Title; 
+      private $news1Source;
+      private $news2Source;
+      private $news3Source;
+      private $news4Source;
       private $news1Text;
       private $news2Text;
       private $news3Text;
@@ -77,6 +81,23 @@
       public function getNews4Title(){ 
          return $this->news4Title;  
       }
+      
+      public function getNews1Source(){
+      	return $this->news1Source;
+      }
+      
+      public function getNews2Source(){
+      	return $this->news2Source;
+      }
+      
+      public function getNews3Source(){
+      	return $this->news3Source;
+      }
+      
+      public function getNews4Source(){
+      	return $this->news4Source;
+      }
+      
 
       public function getNews1Text(){
       	return $this->news1Text;
@@ -204,6 +225,22 @@
       
       public function setNews4Title($valor){
       	$this->news4Title=$valor;
+      }
+      
+      public function setNews1Source($valor){
+      	$this->news1Source=$valor;
+      }
+      
+      public function setNews2Source($valor){
+      	$this->news2Source=$valor;
+      }
+      
+      public function setNews3Source($valor){
+      	$this->news3Source=$valor;
+      }
+      
+      public function setNews4Source($valor){
+      	$this->news4Source=$valor;
       }
       
       

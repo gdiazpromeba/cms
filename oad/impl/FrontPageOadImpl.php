@@ -21,6 +21,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  N2.NEWS_TITLE AS NEWS_2_TITLE,     \n"; 
          $sql.="  N3.NEWS_TITLE AS NEWS_3_TITLE,     \n"; 
          $sql.="  N4.NEWS_TITLE AS NEWS_4_TITLE,     \n"; 
+         $sql.="  N1.NEWS_SOURCE AS NEWS_1_SOURCE,     \n";
+         $sql.="  N2.NEWS_SOURCE AS NEWS_2_SOURCE,     \n";
+         $sql.="  N3.NEWS_SOURCE AS NEWS_3_SOURCE,     \n";
+         $sql.="  N4.NEWS_SOURCE AS NEWS_4_SOURCE,     \n";
          $sql.="  N1.NEWS_TEXT AS NEWS_1_TEXT,     \n";
          $sql.="  N2.NEWS_TEXT AS NEWS_2_TEXT,     \n";
          $sql.="  N3.NEWS_TEXT AS NEWS_3_TEXT,     \n";
@@ -39,16 +43,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  D3.DOG_BREED_NAME AS DOG_BREED_3_NAME    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  FRONT_PAGE FP  \n"; 
-         $sql.="  INNER JOIN NEWS N1 ON FP.NEWS_1_ID = N1.NEWS_ID  \n";
+         $sql.="  LEFT JOIN NEWS N1 ON FP.NEWS_1_ID = N1.NEWS_ID  \n";
          $sql.="  LEFT JOIN NEWS N2 ON FP.NEWS_2_ID = N2.NEWS_ID  \n";
          $sql.="  LEFT JOIN NEWS N3 ON FP.NEWS_3_ID = N3.NEWS_ID  \n";
          $sql.="  LEFT JOIN NEWS N4 ON FP.NEWS_4_ID = N4.NEWS_ID  \n";
-         $sql.="  INNER JOIN VIDEOS V1 ON FP.VIDEO_1_ID = V1.VIDEO_ID  \n";
-         $sql.="  INNER JOIN VIDEOS V2 ON FP.VIDEO_2_ID = V2.VIDEO_ID  \n";         
-         $sql.="  INNER JOIN VIDEOS V3 ON FP.VIDEO_3_ID = V3.VIDEO_ID  \n";         
-         $sql.="  INNER JOIN DOG_BREEDS D1 ON FP.DOG_BREED_1_ID = D1.DOG_BREED_ID  \n";
-         $sql.="  INNER JOIN DOG_BREEDS D2 ON FP.DOG_BREED_2_ID = D2.DOG_BREED_ID  \n";
-         $sql.="  INNER JOIN DOG_BREEDS D3 ON FP.DOG_BREED_3_ID = D3.DOG_BREED_ID  \n";
+         $sql.="  LEFT JOIN VIDEOS V1 ON FP.VIDEO_1_ID = V1.VIDEO_ID  \n";
+         $sql.="  LEFT JOIN VIDEOS V2 ON FP.VIDEO_2_ID = V2.VIDEO_ID  \n";         
+         $sql.="  LEFT JOIN VIDEOS V3 ON FP.VIDEO_3_ID = V3.VIDEO_ID  \n";         
+         $sql.="  LEFT JOIN DOG_BREEDS D1 ON FP.DOG_BREED_1_ID = D1.DOG_BREED_ID  \n";
+         $sql.="  LEFT JOIN DOG_BREEDS D2 ON FP.DOG_BREED_2_ID = D2.DOG_BREED_ID  \n";
+         $sql.="  LEFT JOIN DOG_BREEDS D3 ON FP.DOG_BREED_3_ID = D3.DOG_BREED_ID  \n";
           
          
          $stm=$this->preparar($conexion, $sql);  
@@ -58,24 +62,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $news2Id=null;  
          $news3Id=null;  
          $news4Id=null;  
-         $news1Cut=null;  
-         $news2Cut=null;  
-         $news3Cut=null;  
-         $news4Cut=null;  
-         $news1Title=null;  
-         $news2Title=null;  
-         $news3Title=null;  
-         $news4Title=null;
-         $news1Text=null;
-         $news2Text=null;
-         $news3Text=null;
-         $news4Text=null;
-         $video1Id=null;  
-         $video2Id=null;  
-         $video3Id=null;  
-         $video1Title=null;  
-         $video2Title=null;  
-         $video3Title=null;  
+         $news1Cut=null; $news2Cut=null; $news3Cut=null; $news4Cut=null;  
+         $news1Title=null; $news2Title=null; $news3Title=null; $news4Title=null;
+         $news1Source=null; $news1Source=null; $news1Source=null; $news1Source=null;
+         $news1Text=null; $news2Text=null; $news3Text=null; $news4Text=null;
+         $video1Id=null;  $video2Id=null;  $video3Id=null;  
+         $video1Title=null; $video2Title=null; $video3Title=null;   
          $dogBreed1Id=null;  
          $dogBreed2Id=null;  
          $dogBreed3Id=null;  
@@ -84,6 +76,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $dogBreed3Name=null;  
          $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, 
          		$news1Title, $news2Title, $news3Title, $news4Title, 
+         		$news1Source, $news2Source, $news3Source, $news4Source,
          		$news1Text, $news2Text, $news3Text, $news4Text,
          		$video1Id, $video2Id, $video3Id, $video1Title, $video2Title, $video3Title, 
          		$dogBreed1Id, $dogBreed2Id, $dogBreed3Id, $dogBreed1Name, $dogBreed2Name, $dogBreed3Name); 
@@ -96,10 +89,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
             $bean->setNews2Cut($news2Cut);
             $bean->setNews3Cut($news3Cut);
             $bean->setNews4Cut($news4Cut);
+            
             $bean->setNews1Title($news1Title);
             $bean->setNews2Title($news2Title);
             $bean->setNews3Title($news3Title);
             $bean->setNews4Title($news4Title);
+
+            $bean->setNews1Source($news1Source);
+            $bean->setNews2Source($news2Source);
+            $bean->setNews3Source($news3Source);
+            $bean->setNews4Source($news4Source);
+            
+            
             $bean->setNews1Text($news1Text);
             $bean->setNews2Text($news2Text);
             $bean->setNews3Text($news3Text);
