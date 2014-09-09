@@ -32,6 +32,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  FP.VIDEO_1_ID,     \n"; 
          $sql.="  FP.VIDEO_2_ID,     \n"; 
          $sql.="  FP.VIDEO_3_ID,     \n"; 
+         $sql.="  V1.VIDEO_URL AS VIDEO_1_URL,     \n";
+         $sql.="  V2.VIDEO_URL AS VIDEO_2_URL,     \n";
+         $sql.="  V3.VIDEO_URL AS VIDEO_3_URL,     \n";
          $sql.="  V1.VIDEO_TITLE AS VIDEO_1_TITLE,     \n"; 
          $sql.="  V2.VIDEO_TITLE AS VIDEO_2_TITLE,     \n"; 
          $sql.="  V3.VIDEO_TITLE AS VIDEO_3_TITLE,     \n"; 
@@ -40,7 +43,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  FP.DOG_BREED_3_ID,     \n"; 
          $sql.="  D1.DOG_BREED_NAME AS DOG_BREED_1_NAME,     \n"; 
          $sql.="  D2.DOG_BREED_NAME AS DOG_BREED_2_NAME,     \n"; 
-         $sql.="  D3.DOG_BREED_NAME AS DOG_BREED_3_NAME    \n"; 
+         $sql.="  D3.DOG_BREED_NAME AS DOG_BREED_3_NAME,    \n"; 
+         $sql.="  D1.PICTURE_URL AS DOG_BREED_1_PICTURE,    \n";
+         $sql.="  D2.PICTURE_URL AS DOG_BREED_2_PICTURE,    \n";
+         $sql.="  D3.PICTURE_URL AS DOG_BREED_3_PICTURE     \n";
          $sql.="FROM  \n"; 
          $sql.="  FRONT_PAGE FP  \n"; 
          $sql.="  LEFT JOIN NEWS N1 ON FP.NEWS_1_ID = N1.NEWS_ID  \n";
@@ -67,19 +73,22 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $news1Source=null; $news1Source=null; $news1Source=null; $news1Source=null;
          $news1Text=null; $news2Text=null; $news3Text=null; $news4Text=null;
          $video1Id=null;  $video2Id=null;  $video3Id=null;  
+         $video1Url=null;  $video2Url=null;  $video3Url=null;
          $video1Title=null; $video2Title=null; $video3Title=null;   
-         $dogBreed1Id=null;  
-         $dogBreed2Id=null;  
-         $dogBreed3Id=null;  
-         $dogBreed1Name=null;  
-         $dogBreed2Name=null;  
-         $dogBreed3Name=null;  
+         $dogBreed1Id=null;  $dogBreed2Id=null;  $dogBreed3Id=null;  
+         $dogBreed1Name=null;  $dogBreed2Name=null;  $dogBreed3Name=null;
+         $dogBreed1Picture=null;  $dogBreed2Picture=null;  $dogBreed3Picture=null;
          $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, 
          		$news1Title, $news2Title, $news3Title, $news4Title, 
          		$news1Source, $news2Source, $news3Source, $news4Source,
          		$news1Text, $news2Text, $news3Text, $news4Text,
-         		$video1Id, $video2Id, $video3Id, $video1Title, $video2Title, $video3Title, 
-         		$dogBreed1Id, $dogBreed2Id, $dogBreed3Id, $dogBreed1Name, $dogBreed2Name, $dogBreed3Name); 
+         		$video1Id, $video2Id, $video3Id, 
+         		$video1Url, $video2Url, $video3Url,
+         		$video1Title, $video2Title, $video3Title, 
+         		$dogBreed1Id, $dogBreed2Id, $dogBreed3Id, 
+         		$dogBreed1Name, $dogBreed2Name, $dogBreed3Name,
+         		$dogBreed1Picture, $dogBreed2Picture, $dogBreed3Picture
+         ); 
          if ($stm->fetch()) { 
             $bean->setNews1Id($news1Id);
             $bean->setNews2Id($news2Id);
@@ -108,6 +117,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
             $bean->setVideo1Id($video1Id);
             $bean->setVideo2Id($video2Id);
             $bean->setVideo3Id($video3Id);
+            $bean->setVideo1Url($video1Url);
+            $bean->setVideo2Url($video2Url);
+            $bean->setVideo3Url($video3Url);
+            
+            
             $bean->setVideo1Title($video1Title);
             $bean->setVideo2Title($video2Title);
             $bean->setVideo3Title($video3Title);
@@ -117,6 +131,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
             $bean->setDogBreed1Name($dogBreed1Name);
             $bean->setDogBreed2Name($dogBreed2Name);
             $bean->setDogBreed3Name($dogBreed3Name);
+            $bean->setDogBreed1Picture($dogBreed1Picture);
+            $bean->setDogBreed2Picture($dogBreed2Picture);
+            $bean->setDogBreed3Picture($dogBreed3Picture);
+            
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 

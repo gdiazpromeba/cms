@@ -52,10 +52,13 @@ if ($ultimo=='obtiene'){
 
 		$arrBean['dogBreed1Id']=$bean->getDogBreed1Id();
 		$arrBean['dogBreed1Name']=$bean->getDogBreed1Name();
+		$arrBean['dogBreed1Picture']=$bean->getDogBreed1Picture();
 		$arrBean['dogBreed2Id']=$bean->getDogBreed2Id();
 		$arrBean['dogBreed2Name']=$bean->getDogBreed2Name();
+		$arrBean['dogBreed2Picture']=$bean->getDogBreed2Picture();
 		$arrBean['dogBreed3Id']=$bean->getDogBreed3Id();
 		$arrBean['dogBreed3Name']=$bean->getDogBreed3Name();
+		$arrBean['dogBreed3Picture']=$bean->getDogBreed3Picture();
 		
 		echo json_encode($arrBean) ;
 

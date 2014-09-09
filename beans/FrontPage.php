@@ -24,6 +24,9 @@
       private $video1Id; 
       private $video2Id; 
       private $video3Id; 
+      private $video1Url;
+      private $video2Url;
+      private $video3Url;
       private $video1Title; 
       private $video2Title; 
       private $video3Title; 
@@ -33,6 +36,10 @@
       private $dogBreed1Name; 
       private $dogBreed2Name; 
       private $dogBreed3Name; 
+      private $dogBreed1Picture;
+      private $dogBreed2Picture;
+      private $dogBreed3Picture;
+      
 
       public function getNews1Id(){ 
          return $this->news1Id;  
@@ -126,6 +133,18 @@
       public function getVideo3Id(){ 
          return $this->video3Id;  
       }
+      
+      public function getVideo1Url(){
+      	return $this->video1Url;
+      }
+      
+      public function getVideo2Url(){
+      	return $this->video2Url;
+      }
+      
+      public function getVideo3Url(){
+      	return $this->video3Url;
+      }      
 
       public function getVideo1Title(){ 
          return $this->video1Title;  
@@ -162,6 +181,18 @@
       public function getDogBreed3Name(){ 
          return $this->dogBreed3Name;  
       }
+      
+      public function getDogBreed1Picture(){
+      	return $this->dogBreed1Picture;
+      }
+      
+      public function getDogBreed2Picture(){
+      	return $this->dogBreed2Picture;
+      }
+      
+      public function getDogBreed3Picture(){
+      	return $this->dogBreed3Picture;
+      }      
 
       public function setNews1Id($valor){ 
          $this->news1Id=$valor; 
@@ -255,6 +286,18 @@
       public function setVideo3Id($valor){ 
          $this->video3Id=$valor; 
       }
+      
+      public function setVideo1Url($valor){
+      	$this->video1Url=$valor;
+      }
+      
+      public function setVideo2Url($valor){
+      	$this->video2Url=$valor;
+      }
+      
+      public function setVideo3Url($valor){
+      	$this->video3Url=$valor;
+      }
 
       public function setVideo1Title($valor){ 
          $this->video1Title=$valor; 
@@ -291,6 +334,18 @@
       public function setDogBreed3Name($valor){ 
          $this->dogBreed3Name=$valor; 
       }
+      
+      public function setDogBreed1Picture($valor){
+      	$this->dogBreed1Picture=$valor;
+      }
+      
+      public function setDogBreed2Picture($valor){
+      	$this->dogBreed2Picture=$valor;
+      }
+      
+      public function setDogBreed3Picture($valor){
+      	$this->dogBreed3Picture=$valor;
+      }      
 
    }
 ?>
