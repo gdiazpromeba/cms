@@ -277,7 +277,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
-         	$sql.="  AND SHU.NAME LIKE '%" . $nombre . "%'  \n";
+         	$sql.="  AND UPPER(SHU.NAME) LIKE '%" . strtoupper($nombre) . "%'  \n";
          }
          if (!(empty($stateId))){
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
@@ -338,7 +338,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
          $sql.="WHERE  1=1  \n";
                    if (!(empty($nombre))){
-         	$sql.="  AND SHU.NAME LIKE '%" . $nombre . "%'  \n";
+         	$sql.="  AND UPPER(SHU.NAME) LIKE '%" . strtoupper($nombre) . "%'  \n";
          }
          if (!(empty($stateId))){
          	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";

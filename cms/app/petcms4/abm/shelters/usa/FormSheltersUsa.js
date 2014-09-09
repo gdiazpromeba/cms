@@ -29,9 +29,9 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   		          }
             	]
             },
-            {fieldLabel: 'State', xtype: 'textfield',  name: 'state', itemId: 'state',  readOnly: true, allowBlank: false, width: 200},
-            {fieldLabel: 'County', xtype: 'textfield',  name: 'county', itemId: 'county',  readOnly: true, allowBlank: false, width: 250},
-            {fieldLabel: 'City', xtype: 'textfield',  name: 'city', itemId: 'city',  readOnly: true, allowBlank: false, width: 250},
+            {fieldLabel: 'State', xtype: 'textfield',  name: 'state', itemId: 'state',  readOnly: true, allowBlank: false, width: 300},
+            {fieldLabel: 'County', xtype: 'textfield',  name: 'county', itemId: 'county',  readOnly: true, allowBlank: false, width: 300},
+            {fieldLabel: 'City', xtype: 'textfield',  name: 'city', itemId: 'city',  readOnly: true, allowBlank: false, width: 300},
             {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'usaZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 160,
             	listeners:{
             		blur : function(  The, eOpts ){
@@ -158,7 +158,13 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                         			
                         		    var geocoder = new google.maps.Geocoder();
                         	        
-                        	        request= { 'address': address };
+                        	        request= { 
+                        	        		'address': address,
+                        	        		componentRestrictions: {
+ 	                                          country: 'USA'
+                        	        		}
+                        	        		
+                        	        };
                         	        
                         		    
                         		    geocoder.geocode( request, function( results, status ) {
@@ -167,11 +173,6 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                         		        	var coordenadas=Ext.getCmp('coordenadasFormSheltersUsa');
                     			    		var res0=results[0];
                     			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
-                    			    		var message="";
-                    			    		for (var key in areas) {
-                    			    		    message += key + " = " + areas[key] + "\n";
-                    			    		}
-                    			    		alert(message);                    			    		
                     			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.k);
                     			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.B);
                         		        }else{
@@ -179,13 +180,13 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                     			    		coordenadas.getComponent('longitude').markInvalid();	
                         		        }
                         		            
-                        		    });                        		    
+                        		    }, {language: 'en'});                        		    
                         		}	
                         	}
           		          }
                     	]
                     },
-    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', allowBlank: true, width: 250},
+    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', allowBlank: true, width: 350},
     	            {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
     		            listeners: {scope: this,  
     		               'click' :  function(but){
@@ -195,7 +196,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     		                	 var frm = but.up('form');
     		                	 var colDer = frm.getComponent('colDer');
     		                     colDer.getComponent('logoUrl').setValue(win.getNombreArchivoFoto());
-    		                     colDer.getComponent('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/india/' + win.getNombreArchivoFoto(); 
+    		                     colDer.getComponent('imageLogoShelter').el.dom.src= Global.dirAplicacion + '/resources/images/shelterLogos/usa/' + win.getNombreArchivoFoto(); 
     		                 });
     		               }//evento click
     		              }//listeners

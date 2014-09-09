@@ -3,8 +3,8 @@ Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
       region: 'west',
       frame: true,
       items: [
-        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
-        {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', width: 230 },
+        {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 300},
+        {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', width: 300 },
         {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'usaZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
         {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
       ],
