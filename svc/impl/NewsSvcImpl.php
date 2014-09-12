@@ -14,6 +14,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/NewsS
          $bean=$this->oad->obtiene($id); 
          return $bean; 
       } 
+      
+      public function obtienePorUrlEncoded($urlEncoded){
+      	$bean=$this->oad->obtienePorUrlEncoded($urlEncoded);
+      	return $bean;
+      }      
 
 
       public function inserta($bean){ 

@@ -43,11 +43,35 @@ if ($ultimo=='selecciona'){
 		$resultado['data']=$datos;
 		echo json_encode($resultado) ;
 
-   } else if ($ultimo=='inserta'){
+   }else if ($ultimo=='obtienePorUrlEncoded'){
+		//parametros de paginación
+		$desde=$_REQUEST['start'];
+		$cuantos=$_REQUEST['limit'];
+		
+		$urlEncoded=null;
+		if (isset($_REQUEST['urlEncoded'])) $title=$_REQUEST['urlEncoded'];
+		
+
+		$svc = new NewsSvcImpl();
+		$bean=$svc->obtienePorUrlEncoded($urlEncoded);
+		
+	    $arrBean=array();
+	    $arrBean['newsId']=$bean->getId();
+	    $arrBean['newsTitle']=$bean->getNewsTitle();
+	    $arrBean['urlEncoded']=$bean->getUrlEncoded();
+	    $arrBean['newsText']=$bean->getNewsText();
+	    $arrBean['newsSource']=$bean->getNewsSource();
+	    $arrBean['newsDate']=$bean->getNewsDateLarga();
+	    $arrBean['cutPosition']=$bean->getCutPosition();
+
+		echo json_encode($arrBean) ;
+
+   }
+    else if ($ultimo=='inserta'){
 	 $bean=new News(); 
 	 $svc = new NewsSvcImpl();
 	 $bean->setNewsTitle($_REQUEST['newsTitle']);
-	 $bean->setUrlEncoded($_REQUEST['newsTitle']);
+	 $bean->setUrlEncoded($_REQUEST['urlEncoded']);
 	 $bean->setNewsText($_REQUEST['newsText']);
 	 $bean->setNewsSource($_REQUEST['newsSource']);
 	 $bean->setNewsDateCorta($_REQUEST['newsDate']);
@@ -61,7 +85,7 @@ if ($ultimo=='selecciona'){
 	$svc = new NewsSvcImpl();
     $bean->setId($_REQUEST['newsId']);
 	$bean->setNewsTitle($_REQUEST['newsTitle']);
-	$bean->setUrlEncoded($_REQUEST['newsTitle']);
+	$bean->setUrlEncoded($_REQUEST['urlEncoded']);
 	$bean->setNewsText($_REQUEST['newsText']);
 	$bean->setNewsSource($_REQUEST['newsSource']);
 	$bean->setNewsDateCorta($_REQUEST['newsDate']);

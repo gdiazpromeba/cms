@@ -3,6 +3,7 @@
    interface NewsSvc { 
 
       public function obtiene($id); 
+      public function obtienePorUrlEncoded($urlEncoded);
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 

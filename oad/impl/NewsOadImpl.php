@@ -43,6 +43,44 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $this->cierra($conexion, $stm); 
          return $bean; 
       } 
+      
+      public function obtienePorUrlEncoded($urlEncoded){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  NEWS_ID,     \n";
+      	$sql.="  NEWS_TITLE,     \n";
+      	$sql.="  URL_ENCODED,     \n";
+      	$sql.="  NEWS_TEXT,     \n";
+      	$sql.="  NEWS_SOURCE,     \n";
+      	$sql.="  NEWS_DATE,    \n";
+      	$sql.="  CUT_POSITION    \n";
+      	$sql.="FROM  \n";
+      	$sql.="  NEWS  \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  URL_ENCODED='" . $urlEncoded . "' \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$bean=new News();
+      	$id=null;
+      	$newsTitle=null;
+      	$urlEncoded=null;
+      	$newsText=null;
+      	$newsSource=null;
+      	$newsDate=null;
+      	$cutPosition=null;
+      	$stm->bind_result($id, $newsTitle, $urlEncoded, $newsText, $newsSource, $newsDate, $cutPosition);
+      	if ($stm->fetch()) {
+      		$bean->setId($id);
+      		$bean->setNewsTitle($newsTitle);
+      		$bean->setUrlEncoded($urlEncoded);
+      		$bean->setNewsText($newsText);
+      		$bean->setNewsSource($newsSource);
+      		$bean->setNewsDateLarga($newsDate);
+      		$bean->setCutPosition($cutPosition);
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $bean;
+      }      
 
 
       public function inserta($bean){ 
