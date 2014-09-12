@@ -1,6 +1,5 @@
 <?php 
 
-   require_once '../../config.php';
    require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/util/FechaUtils.php';
 
    class News { 
@@ -9,6 +8,7 @@
       private $newsText; 
       private $newsSource; 
       private $newsDate; 
+      private $cutPosition;
 
       public function getId(){ 
          return $this->id;  
@@ -37,6 +37,10 @@
       public function getNewsDateCorta(){
       	return FechaUtils::dateTimeaCadenaDMA($this->newsDate);
       }
+      
+      public function getCutPosition(){
+      	return $this->cutPosition;
+      }      
       
       public function setNewsDate($valor){
       	$this->newsDate=$valor;
@@ -73,6 +77,11 @@
       public function setNewsSource($valor){ 
          $this->newsSource=$valor; 
       }
+      
+      public function setCutPosition($valor){
+      	$this->cutPosition=$valor;
+      }
+      
   
    }
 ?>

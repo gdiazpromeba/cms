@@ -11,6 +11,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
       {fieldLabel: 'Title', xtype: 'textfield',  name: 'newsTitle', itemId: 'newsTitle',  id: 'newsTitle', allowBlank: false, width: 550},
       {fieldLabel: 'Date', xtype: 'fecha', name: 'newsDate', itemId: 'newsDate', width: 200},
       {fieldLabel: 'Text', xtype: 'textarea',  name: 'newsText', itemId: 'newsText',  id: 'newsText', grow: false, width: 750, height: 270}, 
+      {fieldLabel: 'Cut position', xtype: 'numberfield',  name: 'cutPosition', itemId: 'cutPosition', allowBlank: false, width: 200, allowDecimals: false},
       {fieldLabel: 'Source', xtype: 'textfield',  name: 'newsSource', itemId: 'newsSource',  id: 'newsSource', allowBlank: true, width: 420},
       {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
           listeners: {scope: this,  
@@ -28,6 +29,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
       this.getComponent('newsDate').setValue(record.get('newsDate'));
       this.getComponent('newsSource').setValue(record.get('newsSource'));
       this.getComponent('newsText').setValue(record.get('newsText'));
+      this.getComponent('cutPosition').setValue(record.get('cutPosition'));
   	},
   	   
   	pueblaFormEnRegistro : function(record){
@@ -36,6 +38,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	  record.data['newsSource']=  this.getComponent('newsSource').getValue();
   	  record.data['newsDate']=  this.getComponent('newsDate').getValue();
   	  record.data['newsText']=  this.getComponent('newsText').getValue();
+  	  record.data['cutPosition']=  this.getComponent('cutPosition').getValue();
   	},  	   
   	   
   	   validaHijo : function(muestraVentana){

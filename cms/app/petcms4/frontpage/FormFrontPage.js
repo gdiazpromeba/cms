@@ -129,7 +129,6 @@ Ext.define('app.petcms4.frontpage.FormFrontPage', {
                       	   }
                         },            	        
                         {xtype: 'label', text: 'Cut position'},
-            	        {xtype: 'numberfield',  name: 'cutPosition4', itemId: 'cutPosition4', allowBlank: false, width: 100, allowDecimals: false},
             	        {xtype: 'textarea', itemId: 'newsText4', width: 270, height: 180, editable: false},
             	]
             },
