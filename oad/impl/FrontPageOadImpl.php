@@ -21,6 +21,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $sql.="  N2.NEWS_TITLE AS NEWS_2_TITLE,     \n"; 
          $sql.="  N3.NEWS_TITLE AS NEWS_3_TITLE,     \n"; 
          $sql.="  N4.NEWS_TITLE AS NEWS_4_TITLE,     \n"; 
+         $sql.="  N1.URL_ENCODED AS NEWS_1_URL_ENCODED,     \n";
+         $sql.="  N2.URL_ENCODED AS NEWS_2_URL_ENCODED,     \n";
+         $sql.="  N3.URL_ENCODED AS NEWS_3_URL_ENCODED,     \n";
+         $sql.="  N4.URL_ENCODED AS NEWS_4_URL_ENCODED,     \n";
          $sql.="  N1.NEWS_SOURCE AS NEWS_1_SOURCE,     \n";
          $sql.="  N2.NEWS_SOURCE AS NEWS_2_SOURCE,     \n";
          $sql.="  N3.NEWS_SOURCE AS NEWS_3_SOURCE,     \n";
@@ -70,6 +74,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $news4Id=null;  
          $news1Cut=null; $news2Cut=null; $news3Cut=null; $news4Cut=null;  
          $news1Title=null; $news2Title=null; $news3Title=null; $news4Title=null;
+         $news1UrlEncoded=null; $news2UrlEncoded=null; $news3UrlEncoded=null; $news4UrlEncoded=null;
          $news1Source=null; $news1Source=null; $news1Source=null; $news1Source=null;
          $news1Text=null; $news2Text=null; $news3Text=null; $news4Text=null;
          $video1Id=null;  $video2Id=null;  $video3Id=null;  
@@ -79,7 +84,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
          $dogBreed1Name=null;  $dogBreed2Name=null;  $dogBreed3Name=null;
          $dogBreed1Picture=null;  $dogBreed2Picture=null;  $dogBreed3Picture=null;
          $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, 
-         		$news1Title, $news2Title, $news3Title, $news4Title, 
+         		$news1Title, $news2Title, $news3Title, $news4Title,
+         		$news1UrlEncoded, $news2UrlEncoded, $news3UrlEncoded, $news4UrlEncoded,
          		$news1Source, $news2Source, $news3Source, $news4Source,
          		$news1Text, $news2Text, $news3Text, $news4Text,
          		$video1Id, $video2Id, $video3Id, 
@@ -103,6 +109,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Fro
             $bean->setNews2Title($news2Title);
             $bean->setNews3Title($news3Title);
             $bean->setNews4Title($news4Title);
+            
+            $bean->setNews1UrlEncoded($news1UrlEncoded);
+            $bean->setNews2UrlEncoded($news2UrlEncoded);
+            $bean->setNews3UrlEncoded($news3UrlEncoded);
+            $bean->setNews4UrlEncoded($news4UrlEncoded);
 
             $bean->setNews1Source($news1Source);
             $bean->setNews2Source($news2Source);

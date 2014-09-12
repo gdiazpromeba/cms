@@ -13,6 +13,10 @@
       private $news2Title; 
       private $news3Title; 
       private $news4Title; 
+      private $news1UrlEncoded;
+      private $news2UrlEncoded;
+      private $news3UrlEncoded;
+      private $news4UrlEncoded;
       private $news1Source;
       private $news2Source;
       private $news3Source;
@@ -88,6 +92,23 @@
       public function getNews4Title(){ 
          return $this->news4Title;  
       }
+      
+      public function getNews1UrlEncoded(){
+      	return $this->news1UrlEncoded;
+      }
+      
+      public function getNews2UrlEncoded(){
+      	return $this->news2UrlEncoded;
+      }
+      
+      public function getNews3UrlEncoded(){
+      	return $this->news3UrlEncoded;
+      }
+      
+      public function getNews4UrlEncoded(){
+      	return $this->news4UrlEncoded;
+      }
+      
       
       public function getNews1Source(){
       	return $this->news1Source;
@@ -257,6 +278,23 @@
       public function setNews4Title($valor){
       	$this->news4Title=$valor;
       }
+
+      public function setNews1UrlEncoded($valor){
+      	$this->news1UrlEncoded=$valor;
+      }
+      
+      public function setNews2UrlEncoded($valor){
+      	$this->news2UrlEncoded=$valor;
+      }
+      
+      public function setNews3UrlEncoded($valor){
+      	$this->news3UrlEncoded=$valor;
+      }
+      
+      public function setNews4UrlEncoded($valor){
+      	$this->news4UrlEncoded=$valor;
+      }
+      
       
       public function setNews1Source($valor){
       	$this->news1Source=$valor;
