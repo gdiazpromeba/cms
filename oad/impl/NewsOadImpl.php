@@ -11,6 +11,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql="SELECT  \n"; 
          $sql.="  NEWS_ID,     \n"; 
          $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  URL_ENCODED,     \n";
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
          $sql.="  NEWS_DATE,    \n"; 
@@ -24,14 +25,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $bean=new News();  
          $id=null;  
          $newsTitle=null;  
+         $urlEncoded=null;
          $newsText=null;  
          $newsSource=null;  
          $newsDate=null;
          $cutPosition=null;
-         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate, $cutPosition); 
+         $stm->bind_result($id, $newsTitle, $urlEncoded, $newsText, $newsSource, $newsDate, $cutPosition); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNewsTitle($newsTitle);
+            $bean->setUrlEncoded($urlEncoded);
             $bean->setNewsText($newsText);
             $bean->setNewsSource($newsSource);
             $bean->setNewsDateLarga($newsDate);
@@ -47,15 +50,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $sql="INSERT INTO NEWS (   \n"; 
          $sql.="  NEWS_ID,     \n"; 
          $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  URL_ENCODED,     \n";
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
          $sql.="  NEWS_DATE,     \n";
          $sql.="  CUT_POSITION     \n";
-         $sql.=")VALUES (?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.=")VALUES (?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssd",$bean->getId(), $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition()); 
+         $stm->bind_param("ssssssd",$bean->getId(), $bean->getNewsTitle(), $bean->getUrlEncoded(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -74,13 +78,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $conexion=$this->conectarse(); 
          $sql="UPDATE NEWS SET   \n"; 
          $sql.="  NEWS_TITLE=?,     \n"; 
+         $sql.="  URL_ENCODED=?,     \n";
          $sql.="  NEWS_TEXT=?,     \n"; 
          $sql.="  NEWS_SOURCE=?,     \n"; 
          $sql.="  NEWS_DATE=?,     \n";
          $sql.="  CUT_POSITION=?     \n";
          $sql.="WHERE NEWS_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssds", $bean->getNewsTitle(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition(), $bean->getId()); 
+         $stm->bind_param("sssssds", $bean->getNewsTitle(), $bean->getUrlEncoded(), $bean->getNewsText(), $bean->getNewsSource(), $bean->getNewsDateLarga(), $bean->getCutPosition(), $bean->getId()); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -89,7 +94,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  NEWS_ID,     \n"; 
-         $sql.="  NEWS_TITLE,     \n"; 
+         $sql.="  NEWS_TITLE,     \n";
+         $sql.="  URL_ENCODED,     \n";
          $sql.="  NEWS_TEXT,     \n"; 
          $sql.="  NEWS_SOURCE,     \n"; 
          $sql.="  NEWS_DATE,   \n";
@@ -107,17 +113,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/New
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $id=null;  
-         $newsTitle=null;  
+         $newsTitle=null;
+         $urlEncoded=null;
          $newsText=null;  
          $newsSource=null;  
          $newsDate=null;  
          $cutPosition=null;
-         $stm->bind_result($id, $newsTitle, $newsText, $newsSource, $newsDate, $cutPosition); 
+         $stm->bind_result($id, $newsTitle, $urlEncoded, $newsText, $newsSource, $newsDate, $cutPosition); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new News();  
             $bean->setId($id);
             $bean->setNewsTitle($newsTitle);
+            $bean->setUrlEncoded($urlEncoded);
             $bean->setNewsText($newsText);
             $bean->setNewsSource($newsSource);
             $bean->setNewsDateLarga($newsDate);

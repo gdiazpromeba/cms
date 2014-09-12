@@ -31,6 +31,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean=array();
 		  $arrBean['newsId']=$bean->getId();
 		  $arrBean['newsTitle']=$bean->getNewsTitle();
+		  $arrBean['urlEncoded']=$bean->getUrlEncoded();
 		  $arrBean['newsText']=$bean->getNewsText();
 		  $arrBean['newsSource']=$bean->getNewsSource();
 		  $arrBean['newsDate']=$bean->getNewsDateLarga();
@@ -46,10 +47,12 @@ if ($ultimo=='selecciona'){
 	 $bean=new News(); 
 	 $svc = new NewsSvcImpl();
 	 $bean->setNewsTitle($_REQUEST['newsTitle']);
+	 $bean->setUrlEncoded($_REQUEST['newsTitle']);
 	 $bean->setNewsText($_REQUEST['newsText']);
 	 $bean->setNewsSource($_REQUEST['newsSource']);
 	 $bean->setNewsDateCorta($_REQUEST['newsDate']);
 	 $bean->setCutPosition($_REQUEST['cutPosition']);
+	 
 	 $exito=$svc->inserta($bean);
 	 echo json_encode($exito) ;
  
@@ -58,6 +61,7 @@ if ($ultimo=='selecciona'){
 	$svc = new NewsSvcImpl();
     $bean->setId($_REQUEST['newsId']);
 	$bean->setNewsTitle($_REQUEST['newsTitle']);
+	$bean->setUrlEncoded($_REQUEST['newsTitle']);
 	$bean->setNewsText($_REQUEST['newsText']);
 	$bean->setNewsSource($_REQUEST['newsSource']);
 	$bean->setNewsDateCorta($_REQUEST['newsDate']);

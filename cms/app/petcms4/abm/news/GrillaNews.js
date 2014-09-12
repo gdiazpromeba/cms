@@ -3,6 +3,7 @@ Ext.define('NewsModel',{
 	fields : [ 
 			    {name : 'newsId', type : 'string'}, 
 				{name : 'newsTitle', type : 'string'},
+				{name : 'urlEncoded', type : 'string'},
 				{name : 'newsText', type : 'string'},
 				{name : 'newsSource', type : 'string'},
 				{name : 'newsDate', type : 'date',  dateFormat: 'Y-m-d H:i:s'},

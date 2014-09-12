@@ -6,6 +6,7 @@
       private $id; 
       private $newsTitle; 
       private $newsText; 
+      private $urlEncoded;
       private $newsSource; 
       private $newsDate; 
       private $cutPosition;
@@ -17,6 +18,12 @@
       public function getNewsTitle(){ 
          return $this->newsTitle;  
       }
+      
+
+      public function getUrlEncoded(){
+      	return $this->urlEncoded;
+      }
+            
 
       public function getNewsText(){ 
          return $this->newsText;  
@@ -69,6 +76,10 @@
       public function setNewsTitle($valor){ 
          $this->newsTitle=$valor; 
       }
+      
+      public function setUrlEncoded($valor){
+      	$this->urlEncoded=$valor;
+      }      
 
       public function setNewsText($valor){ 
          $this->newsText=$valor; 
