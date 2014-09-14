@@ -66,17 +66,29 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       	return $arr;
       }
       
-      public function selTodosWeb($shelterName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
-      	$arr=$this->oad->selTodos($shelterName, null, null, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+      public function selTodosWeb($shelterName, $statisticalArea, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
+      	$arr=$this->oad->selTodos($shelterName, null, $statisticalArea,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
       	return $arr;
       }
       
-      public function selTodosWebCuenta($shelterName, $latitude, $longitude, $distance, $specialBreedId){
-      	$cantidad=$this->oad->selTodosCuenta($shelterName, null, null, $latitude, $longitude, $distance, $specialBreedId);
+      public function selTodosWebCuenta($shelterName, $statisticalArea, $latitude, $longitude, $distance, $specialBreedId){
+      	$cantidad=$this->oad->selTodosCuenta($shelterName, null, $statisticalArea,  $latitude, $longitude, $distance, $specialBreedId);
       	return $cantidad;
       }
       
       
+      public function selFirstAreas(){
+      	$arr=$this->oad->selAreasEstadisticasDeShelters();
+      	$res=array();
+      	$res[]=array('value'=>"", 'label'=>"");
+      	foreach ($arr as $valor){
+      		$fila=array();
+      		$fila['value']=$valor;
+      		$fila['label']=$valor;
+      		$res[]=$fila;
+      	}
+      	return $res;      	
+      }      
       
 
    }

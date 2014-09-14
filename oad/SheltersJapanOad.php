@@ -11,6 +11,7 @@
       public function selTodos($nombre, $prefectureId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
       public function selTodosCuenta($nombre, $prefectureId, $latitude, $longitude, $distance, $specialBreedId);
 
+      public function selPrefecturasDeShelters();
    } 
 
 ?>

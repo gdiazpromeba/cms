@@ -369,6 +369,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          return $cuenta; 
       } 
       
+      public function selAreasEstadisticasDeShelters(){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT DISTINCT \n";
+      	$sql.="  STATISTICAL_AREA  \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_UK  SHJ \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  STATISTICAL_AREA  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($prefecture);
+      	$filas = array();
+      	while ($stm->fetch()) {
+      		$filas[]=$prefecture;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }      
+      
       public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
       	$conexion=$this->conectarse();
       	$sql="INSERT INTO DOG_BREEDS_BY_SHELTER (   \n";

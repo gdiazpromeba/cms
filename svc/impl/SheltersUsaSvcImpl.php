@@ -2,12 +2,16 @@
 
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/SheltersUsaOadImpl.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/SheltersUsaSvc.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/UsaStatesOadImpl.php';
+
 
    class SheltersUsaSvcImpl implements SheltersUsaSvc { 
       private $oad=null; 
+      private $usaStatesOad = null;
 
       function __construct(){ 
          $this->oad=new SheltersUsaOadImpl();   
+         $this->usaStatesOad = new UsaStatesOadImpl();
       } 
 
       public function obtiene($id){ 
@@ -57,13 +61,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       } 
       
       
-      public function selTodosWeb($shelterName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
-      	$arr=$this->oad->selTodos($shelterName, null, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+      public function selTodosWeb($shelterName, $location,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
+      	$arr=$this->oad->selTodos($shelterName, $location, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
       	return $arr;
       }
       
-      public function selTodosWebCuenta($shelterName, $latitude, $longitude, $distance, $specialBreedId){
-      	$cantidad=$this->oad->selTodosCuenta($shelterName, null, $latitude, $longitude, $distance, $specialBreedId);
+      public function selTodosWebCuenta($shelterName, $location, $latitude, $longitude, $distance, $specialBreedId){
+      	$cantidad=$this->oad->selTodosCuenta($shelterName, $location,  $latitude, $longitude, $distance, $specialBreedId);
       	return $cantidad;
       }
       
@@ -76,6 +80,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/Shelt
       public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId){
       	$arr=$this->oad->desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
       	return $arr;
+      }
+      
+      public function selFirstAreas(){
+      	$arr=$this->usaStatesOad->selTodos(0, 10000);
+      	$res=array();
+      	$res[]=array('value'=>"", 'label'=>"");
+      	foreach ($arr as $bean){
+      		$fila=array();
+      		$fila['value']=$bean->getId();
+      		$fila['label']=$bean->getName();
+      		$res[]=$fila;
+      	}
+      	return $res;
       }
       
       

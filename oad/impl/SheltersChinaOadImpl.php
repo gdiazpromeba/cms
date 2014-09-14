@@ -338,6 +338,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $this->cierra($conexion, $stm); 
          return $filas; 
       } 
+      
+      public function selProvinciasDeShelters(){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT DISTINCT \n";
+      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1 \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_CHINA  SHJ \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($prefecture);
+      	$filas = array();
+      	while ($stm->fetch()) {
+      		$filas[]=$prefecture;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }      
 
 
       public function selTodosCuenta($nombre, $province, $latitude, $longitude, $distance, $specialBreedId){ 
