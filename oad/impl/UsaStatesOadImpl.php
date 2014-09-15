@@ -98,6 +98,36 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Usa
          $this->cierra($conexion, $stm); 
          return $filas; 
       } 
+      
+      public function selCondados($stateId){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  COUNTY_ID,     \n";
+      	$sql.="  COUNTY_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  USA_COUNTIES  \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  COUNTY_ID  \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  COUNTY_NAME  \n";
+      	$sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$id=null;
+      	$name=null;
+      	$code=null;
+      	$stm->bind_result($id, $name);
+      	$filas = array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$name;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }
+      
 
 
       public function selTodosCuenta(){ 

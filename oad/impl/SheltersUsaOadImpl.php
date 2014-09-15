@@ -28,7 +28,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STU.STATE_CODE,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,     \n";
-         $sql.="  SHU.LONGITUDE     \n";
+         $sql.="  SHU.LONGITUDE,     \n";
+         $sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
+         $sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
+         $sql.="  SHU.LOCALITY,     \n";
+         $sql.="  SHU.STATISTICAL_AREA     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -40,8 +44,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new ShelterUsa();  
-         $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, $distance, 
-         		$latitud, $longitud); 
+         $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
+         		$city, $county, $state, $stateCode, $distance, 
+         		$latitud, $longitud,
+                $adminArea1, $adminArea2, $locality, $statisticalArea); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -61,6 +67,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setDistancia(0);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);
+            $bean->setAdminArea1($adminArea1);
+            $bean->setAdminArea2($adminArea2);
+            $bean->setLocality($locality);
+            $bean->setStatisticalArea($statisticalArea);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -87,7 +97,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  STU.STATE_CODE,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHU.LATITUDE,    \n";
-      	$sql.="  SHU.LONGITUDE    \n";
+      	$sql.="  SHU.LONGITUDE,    \n";
+      	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
+      	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
+      	$sql.="  SHU.LOCALITY,     \n";
+      	$sql.="  SHU.STATISTICAL_AREA     \n";
         $sql.="FROM  \n"; 
         $sql.="  SHELTERS_USA  SHU \n"; 
         $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -100,7 +114,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm->execute();
       	$bean=new ShelterUsa();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, 
-      			$distance, $latitud, $longitud); 
+      			$distance, $latitud, $longitud,
+                $adminArea1, $adminArea2, $locality, $statisticalArea); 
+      	
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -120,6 +136,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
+      		$bean->setAdminArea1($adminArea1);
+      		$bean->setAdminArea2($adminArea2);
+      		$bean->setLocality($locality);
+      		$bean->setStatisticalArea($statisticalArea);
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -146,7 +166,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  STU.STATE_CODE,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHU.LATITUDE,    \n";
-      	$sql.="  SHU.LONGITUDE    \n";
+      	$sql.="  SHU.LONGITUDE,    \n";
+      	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
+      	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
+      	$sql.="  SHU.LOCALITY,     \n";
+      	$sql.="  SHU.STATISTICAL_AREA     \n";
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_USA  SHU \n";
       	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -159,7 +183,9 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$stm->execute();
       	$bean=new ShelterUsa();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode,
-      			$distance, $latitud, $longitud);
+      			$distance, $latitud, $longitud,
+                $adminArea1, $adminArea2, $locality, $statisticalArea); 
+      	
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -179,6 +205,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
+      		$bean->setAdminArea1($adminArea1);
+      		$bean->setAdminArea2($adminArea2);
+      		$bean->setLocality($locality);
+      		$bean->setStatisticalArea($statisticalArea);
+      		
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -200,14 +231,18 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STREET_ADDRESS,     \n"; 
          $sql.="  PO_BOX,     \n";
          $sql.="  LATITUDE,     \n";
-         $sql.="  LONGITUDE     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  LONGITUDE,     \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_1,     \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
+         $sql.="  LOCALITY,     \n";
+         $sql.="  STATISTICAL_AREA     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("ssssssssssddd",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
+         $stm->bind_param("ssssssssssdddssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
          		$bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), 
-         		$bean->getLongitude()); 
+         		$bean->getLongitude(), $bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getLocality(), $bean->getStatisticalArea()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -236,18 +271,23 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STREET_ADDRESS=?,     \n"; 
          $sql.="  PO_BOX=?,     \n";
          $sql.="  LATITUDE=?,     \n";
-         $sql.="  LONGITUDE=?    \n";
+         $sql.="  LONGITUDE=?,    \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_1=?,     \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_2=?,     \n";
+         $sql.="  LOCALITY=?,     \n";
+         $sql.="  STATISTICAL_AREA=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssssddds", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
+         $stm->bind_param("sssssssssdddsssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
          		$bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), 
          		$bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), 
+         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getLocality(), $bean->getStatisticalArea(),
          		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
       
-      public function selTodos($nombre, $stateId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $stateName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHU.ID,     \n"; 
@@ -268,7 +308,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="  STU.STATE_CODE,    \n";
          $sql.="  DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHU.LATITUDE,    \n";
-         $sql.="  SHU.LONGITUDE    \n";
+         $sql.="  SHU.LONGITUDE,    \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_1,     \n";
+         $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
+         $sql.="  LOCALITY,     \n";
+         $sql.="  STATISTICAL_AREA     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -279,8 +323,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($nombre))){
          	$sql.="  AND UPPER(SHU.NAME) LIKE '%" . strtoupper($nombre) . "%'  \n";
          }
-         if (!(empty($stateId))){
-         	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
+         if (!(empty($stateName))){
+         	$sql.="  AND STU.STATE_NAME ='" . $stateName . "'  \n";
+         }
+         if (!(empty($countyName))){
+         	$sql.="  AND COU.COUNTY_NAME ='" . $countyName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
@@ -299,7 +346,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
-         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud); 
+         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud, $adminArea1, $adminArea2, $locality, $statisticalArea
+         ); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterUsa();  
@@ -322,6 +370,10 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
             $bean->setDistancia($distance);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);  
+            $bean->setAdminArea1($adminArea1);
+            $bean->setAdminArea2($adminArea2);
+            $bean->setLocality($locality);
+            $bean->setStatisticalArea($statisticalArea);
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 
@@ -329,7 +381,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
 
-      public function selTodosCuenta($nombre, $stateId, $latitude, $longitude, $distance, $specialBreedId){ 
+      public function selTodosCuenta($nombre, $stateName, $countyName, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_USA SHU "; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -340,11 +392,14 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
                    if (!(empty($nombre))){
          	$sql.="  AND UPPER(SHU.NAME) LIKE '%" . strtoupper($nombre) . "%'  \n";
          }
-         if (!(empty($stateId))){
-         	$sql.="  AND STU.STATE_ID ='" . $stateId . "'  \n";
-         }    
+         if (!(empty($stateName))){
+         	$sql.="  AND STU.STATE_NAME ='" . $stateName . "'  \n";
+         }
+         if (!(empty($countyName))){
+         	$sql.="  AND COU.COUNTY_NAME ='" . $countyName . "'  \n";
+         }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
-         	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
+         	$sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHU.LATITUDE, SHU.LONGITUDE) <=" . $distance . " \n";         	
          } 
          if (!(empty($specialBreedId))){
          	$sql.="  AND SHU.ID IN (SELECT DBS.SHELTER_ID FROM DOG_BREEDS_BY_SHELTER DBS WHERE DBS.DOG_BREED_ID='" . $specialBreedId . "' ) \n";
@@ -357,6 +412,28 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $this->cierra($conexion, $stm); 
          return $cuenta; 
       } 
+      
+      public function selEstadosDeShelters(){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT DISTINCT \n";
+      	$sql.="  STATE_ID,  \n";
+      	$sql.="  STATE_NAME  \n";
+      	$sql.="FROM  \n";
+      	$sql.="  USA_STATES   \n";
+      	$sql.="WHERE   \n";
+      	$sql.=" STATE_NAME IN (SELECT ADMINISTRATIVE_AREA_LEVEL_1 FROM SHELTERS_USA)   \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  STATE_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $name);
+      	$filas = array();
+      	while ($stm->fetch()) {
+      		$filas[]=array('id'=> $id, 'name' => $name);
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }      
       
       public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
       	$conexion=$this->conectarse();

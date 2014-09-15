@@ -260,7 +260,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
       
-      public function selTodos($nombre, $state, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $stateName, $districtName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHJ.ID,     \n"; 
@@ -289,8 +289,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($state))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $state . "'  \n";
+         if (!(empty($stateName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $stateName . "'  \n";
+         }
+         if (!(empty($districtName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $districtName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
@@ -341,16 +344,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
 
-      public function selTodosCuenta($nombre, $state, $latitude, $longitude, $distance, $specialBreedId){ 
+      public function selTodosCuenta($nombre, $stateName, $districtName, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_INDIA SHJ "; 
          $sql.="WHERE  1=1  \n";
-                   if (!(empty($nombre))){
+         if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($state))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $state . "'  \n";
-         }    
+         if (!(empty($stateName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $stateName . "'  \n";
+         }
+         if (!(empty($districtName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $districtName . "'  \n";
+         }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
          } 

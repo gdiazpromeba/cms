@@ -259,7 +259,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       } 
 
       
-      public function selTodos($nombre, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $countryName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHJ.ID,     \n"; 
@@ -288,10 +288,11 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($statistical))){
-         	$sql.="  AND STATISTICAL_AREA ='" .  $statistical . "'  \n";
-         }else if (!(empty($country))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $country . "'  \n";
+         if (!(empty($countryName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $countryName . "'  \n";
+         }
+         if (!(empty($countyName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $countyName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
@@ -377,6 +378,25 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="  SHELTERS_UK  SHJ \n";
       	$sql.="ORDER BY  \n";
       	$sql.="  STATISTICAL_AREA  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($prefecture);
+      	$filas = array();
+      	while ($stm->fetch()) {
+      		$filas[]=$prefecture;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }    
+
+      public function selCountriesDeShelters(){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT DISTINCT \n";
+      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1  \n";
+      	$sql.="FROM  \n";
+      	$sql.="  SHELTERS_UK  SHJ \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$stm->bind_result($prefecture);

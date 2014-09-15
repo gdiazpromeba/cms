@@ -145,6 +145,10 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                     	items: [
                           {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
                           {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
+                          {xtype: 'hidden', name: 'adminArea1', itemId: 'adminArea1'},
+                          {xtype: 'hidden', name: 'adminArea2', itemId: 'adminArea2'},
+                          {xtype: 'hidden', name: 'locality', itemId: 'locality'},
+                          {xtype: 'hidden', name: 'statisticalArea', itemId: 'statisticalArea'},
           	              {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
                           	listeners:{
                         		click : function(  The, eOpts ){
@@ -233,13 +237,18 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	  colIzq.getComponent('description').setValue(record.get('description'));
   	  colIzq.getComponent('streetAddress').setValue(record.get('streetAddress'));
   	  colIzq.getComponent('poBox').setValue(record.get('poBox'));
+  	  
       //foto
   	  var colDer=this.getComponent('colDer');
+      var coordenadas=colDer.getComponent('coordenadas');
   	  //colDer.getComponent('specialBreedId').setValue(record.get('specialBreedId'));
   	  //colDer.getComponent('specialBreedId').setRawValue(record.get('specialBreedName'));
   	  colDer.getComponent('logoUrl').setValue(record.get('logoUrl'));
   	  colDer.getComponent('coordenadas').getComponent('latitude').setValue(record.get('latitude'));
   	  colDer.getComponent('coordenadas').getComponent('longitude').setValue(record.get('longitude'));
+  	  coordenadas.getComponent('adminArea1').setValue(colIzq.getComponent('state').getValue());
+  	  coordenadas.getComponent('adminArea2').setValue(colIzq.getComponent('county').getValue());
+  	  coordenadas.getComponent('locality').setValue(colIzq.getComponent('city').getValue());  	  
   	  //imagen, la carga si existe el archivo
   	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/usa/' +record.get('logoUrl');
   	  try{
@@ -268,6 +277,9 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     record.data['logoUrl']=  colDer.getComponent('logoUrl').getValue();
     record.data['longitude']= colDer.getComponent('coordenadas').getComponent('longitude').getValue();
     record.data['latitude']=  colDer.getComponent('coordenadas').getComponent('latitude').getValue();
+    record.data['adminArea1']=  colIzq.getComponent('state').getValue();
+    record.data['adminArea2']=  colIzq.getComponent('county').getValue();
+    record.data['locality']=  colIzq.getComponent('city').getValue();;
   	record.commit();
   },  	   
   

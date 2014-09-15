@@ -22,6 +22,48 @@
       private $longitude;
       private $specialBreedId;
       private $specialBreedName;
+      private $adminArea1;
+      private $adminArea2;
+      private $locality;
+      private $statisticalArea;
+      
+      public function getAdminArea1(){
+      	return $this->adminArea1;
+      }
+      
+      public function getAdminArea2(){
+      	return $this->adminArea2;
+      }
+      
+      public function getLocality(){
+      	return $this->locality;
+      }
+      
+      public function getStatisticalArea(){
+      	return $this->statisticalArea;
+      }
+      
+      public function setAdminArea1($valor){
+      	$this->adminArea1=$valor;
+      }
+      
+      public function setAdminArea2($valor){
+      	$this->adminArea2=$valor;
+      }
+      
+      public function setLocality($valor){
+      	$this->locality=$valor;
+      }
+      
+      public function setStatisticalArea($valor){
+      	$this->statisticalArea = $valor;
+      }
+      
+      
+      
+      
+      
+      
 
       public function getId(){ 
          return $this->id;  

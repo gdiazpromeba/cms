@@ -9,8 +9,8 @@
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 
-      public function selTodos($nombre, $state, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
-      public function selTodosCuenta($nombre, $state, $latitude, $longitude, $distance, $specialBreedId);
+      public function selTodos($nombre, $stateName, $districtName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+      public function selTodosCuenta($nombre, $stateName, $districtName, $latitude, $longitude, $distance, $specialBreedId);
       public function zipContainers($zipCode); 
       
 

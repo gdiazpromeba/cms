@@ -61,6 +61,10 @@ if ($ultimo=='selecciona'){
 		  $arrBean['distanceMiles']=$bean->getDistancia() * 0.621371 ;  // pasa de km a millas
 		  $arrBean['specialBreedId']=$bean->getSpecialBreedId();
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
+		  $arrBean['adminArea1']=$bean->getAdminArea1();
+		  $arrBean['adminArea2']=$bean->getAdminArea2();
+		  $arrBean['locality']=$bean->getLocality();
+		  $arrBean['statisticalArea']=$bean->getStatisticalArea();
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -87,6 +91,10 @@ if ($ultimo=='selecciona'){
 	    $bean->setPoBox($poBox);	
 	    $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	    $bean->setSpecialBreedId($specialBreedId);
+	    $bean->setAdminArea1($_REQUEST['adminArea1']);
+	    $bean->setAdminArea2($_REQUEST['adminArea2']);
+	    $bean->setLocality($_REQUEST['locality']);
+	    $bean->setStatisticalArea($_REQUEST['statisticalArea']);
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -110,6 +118,10 @@ if ($ultimo=='selecciona'){
 	  $bean->setPoBox($poBox);	  
 	  $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	  $bean->setSpecialBreedId($specialBreedId);
+	  $bean->setAdminArea1($_REQUEST['adminArea1']);
+	  $bean->setAdminArea2($_REQUEST['adminArea2']);
+	  $bean->setLocality($_REQUEST['locality']);
+	  $bean->setStatisticalArea($_REQUEST['statisticalArea']);
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   

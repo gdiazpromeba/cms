@@ -44,8 +44,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/
       } 
 
 
-      public function selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
-         $arr=$this->oad->selTodos($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+      public function selTodos($nombreOParte, $estadoName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
+         $arr=$this->oad->selTodos($nombreOParte, $estadoName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
          return $arr; 
       }
 
@@ -55,19 +55,19 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/
       }
 
 
-      public function selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId){ 
-         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoId, $latitude, $longitude, $distance, $specialBreedId); 
+      public function selTodosCuenta($nombreOParte, $estadoName, $countyName, $latitude, $longitude, $distance, $specialBreedId){ 
+         $cantidad=$this->oad->selTodosCuenta($nombreOParte, $estadoName, $countyName, $latitude, $longitude, $distance, $specialBreedId); 
          return $cantidad; 
       } 
       
       
-      public function selTodosWeb($shelterName, $location,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
-      	$arr=$this->oad->selTodos($shelterName, $location, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+      public function selTodosWeb($shelterName, $firstArea, $secondArea,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
+      	$arr=$this->oad->selTodos($shelterName, $firstArea, $secondArea, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
       	return $arr;
       }
       
-      public function selTodosWebCuenta($shelterName, $location, $latitude, $longitude, $distance, $specialBreedId){
-      	$cantidad=$this->oad->selTodosCuenta($shelterName, $location,  $latitude, $longitude, $distance, $specialBreedId);
+      public function selTodosWebCuenta($shelterName, $firstArea, $secondArea, $latitude, $longitude, $distance, $specialBreedId){
+      	$cantidad=$this->oad->selTodosCuenta($shelterName, $firstArea, $secondArea,  $latitude, $longitude, $distance, $specialBreedId);
       	return $cantidad;
       }
       
@@ -83,13 +83,13 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/
       }
       
       public function selFirstAreas(){
-      	$arr=$this->usaStatesOad->selTodos(0, 10000);
+      	$arr=$this->oad->selEstadosDeShelters();
       	$res=array();
-      	$res[]=array('value'=>"", 'label'=>"");
-      	foreach ($arr as $bean){
+      	$res[]=array('value'=>"", 'label'=>"Select state ...");
+      	foreach ($arr as $dupla){
       		$fila=array();
-      		$fila['value']=$bean->getId();
-      		$fila['label']=$bean->getName();
+      		$fila['value']=$dupla['name'];
+      		$fila['label']=$dupla['name'];
       		$res[]=$fila;
       	}
       	return $res;

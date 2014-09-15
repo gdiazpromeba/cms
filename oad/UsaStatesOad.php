@@ -8,6 +8,9 @@
       public function borra($id); 
       public function selTodos($desde, $cuantos); 
       public function selTodosCuenta(); 
+      
+      public function selCondados($stateId);
+      
    } 
 
 ?>

@@ -8,8 +8,8 @@
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 
-      public function selTodos($nombre, $provinceId, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
-      public function selTodosCuenta($nombre, $provinceId, $latitude, $longitude, $distance, $specialBreedId);
+      public function selTodos($nombre, $provinceName, $subdivisionName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
+      public function selTodosCuenta($nombre, $provinceName, $subdivisionName, $latitude, $longitude, $distance, $specialBreedId);
 
    } 
 

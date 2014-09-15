@@ -20,6 +20,10 @@ Ext.define('SheltersUsaModel',{
 				{name : 'distanceMiles', type : 'float'},
 				{name : 'specialBreedId', type : 'string', useNull: true},
 				{name : 'specialBreedName', type : 'string', useNull: true},
+				{name : 'adminArea1', type : 'string'},
+				{name : 'adminArea2', type : 'string'},
+				{name : 'locality', type : 'string'},
+				{name : 'statisticalArea', type : 'string'}
 			]
 });
 
