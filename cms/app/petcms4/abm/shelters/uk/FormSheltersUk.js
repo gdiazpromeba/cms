@@ -162,23 +162,23 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                                     			var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
                                     			var colIzq=Ext.getCmp('colIzqFormSheltersUk');
                                     			var address=null;
-                                    			var zip= coordenadas.getComponent('zip').getValue();
                                     			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
-                                    				request= { 
-                                    				  address: colIzq.getComponent('streetAddress').getValue(),
-                                    				  componentRestrictions :{
-                                        			      country : 'Uk',
-                                        			      postalCode: zip 
-                                    				  }
-                                    				};	
-                                    			}else{
-                                    				request= { 
-                                    						componentRestrictions :{
-                                            			      country : 'Uk',
-                                            			      postalCode: zip 
-                                        				  }
-                                          			};	
-                                    			}
+                                      			  address= colIzq.getComponent('streetAddress').getValue() + ', ' + coordenadas.getComponent('zip').getValue() + ', United Kingdom';	
+                                      			}else{
+                                      			  address= coordenadas.getComponent('zip').getValue() + ', United Kingdom';
+                                      			}
+                                      			
+                                      		    var geocoder = new google.maps.Geocoder();
+                                      	        
+                                      	        request= { 
+                                      	        		'address': address,
+                                      	        		 region: 'UK',
+                                      	        		 language: 'en',
+                                      	        		 componentRestrictions: {
+               	                                           country: 'uk'
+                                      	        		 }
+                                      	        		
+                                      	        };
                                     			
                                     		    
                                     			var geocoder = new google.maps.Geocoder();
@@ -208,7 +208,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                                 			    		coordenadas.getComponent('longitude').markInvalid();	
                                     		        }
                                     		            
-                                    		    });                        		    
+                                    		    }, { language: 'en_US' });                        		    
                                     		}	
                                     	}
                       		          },

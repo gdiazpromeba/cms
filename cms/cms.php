@@ -17,7 +17,7 @@
       require_once '../configExt.php';
     ?>
 
-    <script src="http://maps.googleapis.com/maps/api/js?sensor=true"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?language=en"></script>
     
     <link rel="stylesheet" type="text/css" href="resources/css/estiloCms.css">
     
