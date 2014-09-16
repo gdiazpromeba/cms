@@ -36,7 +36,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.LOCATION_ID  \n";
+         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
          $sql.="WHERE  \n"; 
@@ -105,7 +105,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
         $sql.="FROM  \n"; 
         $sql.="  SHELTERS_USA  SHU \n"; 
         $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-        $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.LOCATION_ID  \n";
+        $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
         $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
         $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
       	$sql.="WHERE  \n";
@@ -174,7 +174,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_USA  SHU \n";
       	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-      	$sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.LOCATION_ID  \n";
+      	$sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
       	$sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
       	$sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
       	$sql.="WHERE  \n";
@@ -316,7 +316,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.LOCATION_ID  \n";
+         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
          $sql.="WHERE  1=1  \n";
@@ -385,7 +385,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/She
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM SHELTERS_USA SHU "; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
-         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.LOCATION_ID  \n";
+         $sql.="  INNER JOIN USA_CITIES CIU ON CIU.CITY_ID=ZIU.CITY_ID  \n";
          $sql.="  INNER JOIN USA_COUNTIES COU ON COU.COUNTY_ID=CIU.COUNTY_ID  \n";
          $sql.="  INNER JOIN USA_STATES STU ON COU.STATE_ID=STU.STATE_ID \n";
          $sql.="WHERE  1=1  \n";

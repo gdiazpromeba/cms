@@ -10,8 +10,8 @@
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
   
-  $db_connection = new mysqli("localhost", "almarlam_gonzalo" , "manuela" , "petzynga");
-  $db_connection->set_charset("utf8");
+  $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
+  $db_connection->set_charset("utf8");  
 
   if ($ultimo=='selSegundasAreas'){
   	$pais=$_REQUEST['country'];

@@ -55,7 +55,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/
       		//si no se encontró ningún resultado válido en la goecodificación,
       		//devuelvo el centro geográfico del país, de la tabla de países
       		$svcPaises=new CountriesSvcImpl();
-      		$country=$scvPaises->obtienePorPrefijoTabla($pais);
+      		$country=$svcPaises->obtienePorPrefijoTabla($pais);
       		$bean->setLatitude($country->getLatitude());
       		$bean->setLongitude($country->getLongitude());
       		return $bean;
