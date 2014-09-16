@@ -20,6 +20,7 @@ if ($ultimo=='selecciona'){
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
 		$province=isset($_REQUEST['province'])?$_REQUEST['province']:null;
+		$locality=isset($_REQUEST['locality'])?$_REQUEST['locality']:null;
 		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
@@ -34,8 +35,8 @@ if ($ultimo=='selecciona'){
 		}
 
 		$svc = new SheltersChinaSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $province, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $province, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
+		$beans=$svc->selTodos($nombreOParte, $province, $locality,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $province, $locality, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){

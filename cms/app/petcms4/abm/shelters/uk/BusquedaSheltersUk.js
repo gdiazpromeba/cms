@@ -7,14 +7,14 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
         {fieldLabel: 'Country', xtype: 'comboCountriesUk', itemId: 'comboCountriesUk', width: 230,
         	listeners:{
         		select : function(combo, value){
-              	  var store=Ext.getCmp('comboUkStatistical').getStore();
+              	  var store=combo.up('form').getComponent('comboUkRegions').getStore();
             	  store.proxy.extraParams = { countryName: value[0].data.name};
             	  store.load();
         		}
         	}
         },        
-        {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  id: 'comboUkStatistical', width: 330},       
-        {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
+        {fieldLabel: 'County', xtype: 'comboUkRegions', name: 'comboUkRegions', itemId: 'comboUkRegions',  width: 330},       
+        {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 330},
       ],
       buttons: [
           {text:'Buscar', itemId: 'botBuscar', ref: '../botBuscar',
@@ -52,8 +52,8 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
-        this.agregaClaveValor(resultado, 'country', this.getComponent('comboCountriesUk').getValue());
-        this.agregaClaveValor(resultado, 'statistical', this.getComponent('comboUkStatistical').getValue());
+        this.agregaClaveValor(resultado, 'countryName', this.getComponent('comboCountriesUk').getValue());
+        this.agregaClaveValor(resultado, 'regionName', this.getComponent('comboUkRegions').getValue());
         this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         
         return resultado;
@@ -71,7 +71,7 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersUk', {
       reinicializar: function(){
             this.getForm().reset();
             this.getComponent('comboCountriesUk').setValue('');
-            this.getComponent('comboUkStatistical').setValue('');
+            this.getComponent('comboUkRegions').setValue('');
             this.getComponent('specialBreedId').setValue('');
       },
       

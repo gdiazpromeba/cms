@@ -21,6 +21,7 @@ if ($ultimo=='selecciona'){
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
 		$prefecture=isset($_REQUEST['prefecture'])?$_REQUEST['prefecture']:null;
+		$district=isset($_REQUEST['district'])?$_REQUEST['district']:null;
 		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
@@ -36,8 +37,8 @@ if ($ultimo=='selecciona'){
 		
 
 		$svc = new SheltersJapanSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $prefecture, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $prefecture, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
+		$beans=$svc->selTodos($nombreOParte, $prefecture, $district, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $prefecture, $district, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){

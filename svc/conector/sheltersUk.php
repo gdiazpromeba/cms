@@ -20,7 +20,8 @@ if ($ultimo=='selecciona'){
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
 		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
-		$country=isset($_REQUEST['country'])?$_REQUEST['country']:null;
+		$countryName=isset($_REQUEST['countryName'])?$_REQUEST['countryName']:null;
+		$regionName=isset($_REQUEST['regionName'])?$_REQUEST['regionName']:null;
 		$statistical=isset($_REQUEST['statistical'])?$_REQUEST['statistical']:null;
 		$latitude=isset($_REQUEST['latitude'])?$_REQUEST['latitude']:0;
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
@@ -36,8 +37,8 @@ if ($ultimo=='selecciona'){
 		}	
 		
 		$svc = new SheltersUkSvcImpl();
-		$beans=$svc->selTodos($nombreOParte, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
-		$cuenta=$svc->selTodosCuenta($nombreOParte, $country, $statistical, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
+		$beans=$svc->selTodos($nombreOParte, $countryName, $regionName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
+		$cuenta=$svc->selTodosCuenta($nombreOParte, $countryName, $regionName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos); 
 		
 		$datos=array();
 		foreach ($beans as $bean){

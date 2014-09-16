@@ -69,16 +69,16 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/UkR
       } 
 
 
-      public function selTodos($statistical, $desde, $cuantos){ 
+      public function selTodos($countryName, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  REGION_ID,     \n"; 
          $sql.="  REGION_NAME     \n"; 
          $sql.="FROM  \n"; 
          $sql.="  UK_REGIONS  \n"; 
-         if (!empty($statistical)){
+         if (!empty($countryName)){
          	$sql.="WHERE  \n";
-         	$sql.="  STATISTICAL_AREA='" . $statistical . "'  \n";
+         	$sql.="  COUNTRY_NAME='" . $countryName . "'  \n";
          }
          $sql.="ORDER BY  \n"; 
          $sql.="  REGION_NAME  \n"; 
@@ -119,12 +119,12 @@ require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/UkR
       }
 
 
-      public function selTodosCuenta($statistical){ 
+      public function selTodosCuenta($countryName){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM UK_REGIONS "; 
          if (!empty($statistical)){
          	$sql.="WHERE  \n";
-         	$sql.="  STATISTICAL_AREA='" . $statistical . "'  \n";
+         	$sql.="  COUNTRY_NAME='" . $countryName . "'  \n";
          }
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  

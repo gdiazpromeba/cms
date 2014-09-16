@@ -4,7 +4,7 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersJapan', {
       frame: true,
       items: [
         {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
-        {fieldLabel: 'Prefecture ', xtype: 'comboJapanPrefectures', itemId: 'comboJapanPrefectures', width: 230 },
+        {fieldLabel: 'Prefecture ', xtype: 'comboJapanPrefectures', itemId: 'comboJapanPrefectures', width: 320 },
         {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'japanZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
         {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 230},
       ],
@@ -63,6 +63,7 @@ Ext.define('app.petcms4.abm.shelters.japan.BusquedaSheltersJapan', {
       reinicializar: function(){
             this.getForm().reset();
             this.getComponent('comboJapanPrefectures').setValue('');
+            this.getComponent('comboJapanPrefectures').setRawValue('');
             this.getComponent('zipCode').setValue('');
             this.getComponent('specialBreedId').setValue('');
       },

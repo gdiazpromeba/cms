@@ -10,9 +10,9 @@
   $svc = new UkRegionsSvcImpl();
 
   if ($ultimo=='selecciona'){
-  	$statistical = isset($_REQUEST['statistical'])?$_REQUEST['statistical']:null;
-	$beans=$svc->selTodos($statistical, 0, 100);
-	$cuenta=$svc->selTodosCuenta($statistical);
+  	$countryName = isset($_REQUEST['countryName'])?$_REQUEST['countryName']:null;
+	$beans=$svc->selTodos($countryName, 0, 100);
+	$cuenta=$svc->selTodosCuenta($countryName);
 	$datos=array();
 	foreach ($beans as $bean){
 	  $arrBean=array();
