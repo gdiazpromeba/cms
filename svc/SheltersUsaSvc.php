@@ -15,7 +15,6 @@
       
      
       
-      public function selFirstAreas();
       public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
       public function vinculaDogBreedAShelter($shelterId, $dogBreedId);
       
