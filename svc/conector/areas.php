@@ -28,6 +28,7 @@
   			$sql.= "  SHELTERS_USA  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;
   		case "japan":
   			$subdivision="locality";
@@ -37,6 +38,7 @@
   			$sql.= "  SHELTERS_JAPAN  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;
   	   case "canada":
   	   	    $subdivision="subdivision";
@@ -46,6 +48,7 @@
   			$sql.= "  SHELTERS_CANADA  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;
   	   case "china":
   	   	    $subdivision="locality";
@@ -55,6 +58,7 @@
   			$sql.= "  SHELTERS_CHINA  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;  					
   	   case "india":
   	   	    $subdivision="district";
@@ -64,6 +68,7 @@
   			$sql.= "  SHELTERS_INDIA  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;
   	   case "uk":
   	   	    $subdivision="county";
@@ -73,6 +78,7 @@
   			$sql.= "  SHELTERS_UK  \n";
   			$sql.= "WHERE  \n";
   			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
   			break;
   	}
   	
