@@ -1,9 +1,9 @@
 <?php 
 
  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] .  '/beans/Country.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] .  '/oad/AOD.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] .  '/oad/CountriesOad.php';
+require_once $GLOBALS['pathCms'] .  '/beans/Country.php';
+require_once $GLOBALS['pathCms'] .  '/oad/AOD.php';
+require_once $GLOBALS['pathCms'] .  '/oad/CountriesOad.php';
 
    class CountriesOadImpl extends AOD implements CountriesOad { 
 

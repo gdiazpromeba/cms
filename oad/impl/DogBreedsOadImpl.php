@@ -1,8 +1,8 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] .  '/oad/AOD.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/DogBreedsOad.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/DogBreed.php';  
+require_once $GLOBALS['pathCms'] .  '/oad/AOD.php';  
+require_once $GLOBALS['pathCms'] . '/oad/DogBreedsOad.php';  
+require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';  
 // require_once('FirePHPCore/fb.php4');
 
    class DogBreedsOadImpl extends AOD implements DogBreedsOad { 

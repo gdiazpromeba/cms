@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/CanadaProvincesOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/CanadaProvincesSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/CanadaProvincesOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/CanadaProvincesSvc.php';
 
    class CanadaProvincesSvcImpl implements CanadaProvincesSvc { 
       private $oad=null; 

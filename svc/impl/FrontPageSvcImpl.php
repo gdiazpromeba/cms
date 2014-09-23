@@ -1,8 +1,8 @@
 <?php 
 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/FrontPageOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/FrontPageSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/FrontPageOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/FrontPageSvc.php';
 
    class FrontPageSvcImpl implements FrontPageSvc { 
       private $oad=null; 

@@ -1,6 +1,6 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/ZipsJapanOadImpl.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/ZipsJapanSvc.php';  
+require_once $GLOBALS['pathCms'] . '/oad/impl/ZipsJapanOadImpl.php';  
+require_once $GLOBALS['pathCms'] . '/svc/ZipsJapanSvc.php';  
 
    class ZipsJapanSvcImpl implements ZipsJapanSvc { 
       private $oad=null; 

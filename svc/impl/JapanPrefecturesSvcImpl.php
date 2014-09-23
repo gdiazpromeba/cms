@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/JapanPrefecturesOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/JapanPrefecturesSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/JapanPrefecturesOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/JapanPrefecturesSvc.php';
 
    class JapanPrefecturesSvcImpl implements JapanPrefecturesSvc { 
       private $oad=null; 

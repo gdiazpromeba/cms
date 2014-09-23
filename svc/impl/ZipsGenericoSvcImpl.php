@@ -1,7 +1,7 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/ZipsGenericoOadImpl.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/ZipsGenericoSvc.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/CountriesSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/ZipsGenericoOadImpl.php';  
+require_once $GLOBALS['pathCms'] . '/svc/ZipsGenericoSvc.php';  
+require_once $GLOBALS['pathCms'] . '/svc/impl/CountriesSvcImpl.php';
 //require_once('FirePHPCore/fb.php4');
 
    class ZipsGenericoSvcImpl implements ZipsGenericoSvc { 

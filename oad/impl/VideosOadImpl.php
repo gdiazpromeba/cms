@@ -1,9 +1,9 @@
 <?php 
 
 require_once '../../config.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/VideosOad.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/Video.php';
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
+require_once $GLOBALS['pathCms'] . '/oad/VideosOad.php';
+require_once $GLOBALS['pathCms'] . '/beans/Video.php';
 
    class VideosOadImpl extends AOD implements VideosOad { 
 

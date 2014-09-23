@@ -1,7 +1,7 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/SheltersCanadaOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/SheltersCanadaSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/SheltersCanadaOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/SheltersCanadaSvc.php';
 
    class SheltersCanadaSvcImpl implements SheltersCanadaSvc { 
       private $oad=null; 

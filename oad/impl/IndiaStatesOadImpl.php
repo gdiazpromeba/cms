@@ -1,9 +1,9 @@
 <?php 
 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/IndiaStatesOad.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/IndiaState.php';
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
+require_once $GLOBALS['pathCms'] . '/oad/IndiaStatesOad.php';
+require_once $GLOBALS['pathCms'] . '/beans/IndiaState.php';
 
    class IndiaStatesOadImpl extends AOD implements IndiaStatesOad { 
 

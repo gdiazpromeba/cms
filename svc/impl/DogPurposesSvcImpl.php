@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/DogPurposesOadImpl.php'; 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogPurposesSvc.php';  
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogPurposesOadImpl.php'; 
+require_once $GLOBALS['pathCms'] . '/svc/DogPurposesSvc.php';  
 
    class DogPurposesSvcImpl implements DogPurposesSvc { 
       private $oad=null; 

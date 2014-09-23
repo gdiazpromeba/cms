@@ -1,9 +1,9 @@
 <?php 
 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/JapanPrefecturesOad.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/JapanPrefecture.php';
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
+require_once $GLOBALS['pathCms'] . '/oad/JapanPrefecturesOad.php';
+require_once $GLOBALS['pathCms'] . '/beans/JapanPrefecture.php';
 
    class JapanPrefecturesOadImpl extends AOD implements JapanPrefecturesOad { 
 

@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/UkRegionsOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/UkRegionsSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/UkRegionsOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/UkRegionsSvc.php';
 
    class UkRegionsSvcImpl implements UkRegionsSvc { 
       private $oad=null; 

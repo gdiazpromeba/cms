@@ -1,7 +1,7 @@
 <?php
   require_once '../../config.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/DogBreed.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/DogBreedsSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/DogBreedsSvcImpl.php';
 //   require_once('FirePHPCore/fb.php4');
   
 

@@ -1,8 +1,8 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/SheltersJapanOad.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterJapan.php';
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
+require_once $GLOBALS['pathCms'] . '/oad/SheltersJapanOad.php';
+require_once $GLOBALS['pathCms'] . '/beans/ShelterJapan.php';
 //require_once('FirePHPCore/fb.php4'); 
 
    class SheltersJapanOadImpl extends AOD implements SheltersJapanOad { 

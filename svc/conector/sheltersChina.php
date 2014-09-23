@@ -1,9 +1,9 @@
 <?php
   require_once '../../config.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ShelterChina.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersChinaSvcImpl.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipGenerico.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ZipsGenericoSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersChinaSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/beans/ZipGenerico.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/ZipsGenericoSvcImpl.php';
     //require_once('FirePHPCore/fb.php4');
   
   

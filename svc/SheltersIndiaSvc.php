@@ -1,6 +1,6 @@
 <?php 
 
-   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/SheltersWebSelection.php';
+   require_once $GLOBALS['pathCms'] . '/svc/SheltersWebSelection.php';
    interface SheltersIndiaSvc extends SheltersWebSelection{ 
 
       public function obtiene($id); 

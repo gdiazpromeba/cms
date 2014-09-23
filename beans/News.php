@@ -1,6 +1,6 @@
 <?php 
 
-   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/util/FechaUtils.php';
+   require_once $GLOBALS['pathCms'] . '/util/FechaUtils.php';
 
    class News { 
       private $id; 

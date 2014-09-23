@@ -1,7 +1,7 @@
 <?php
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/VideosOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/VideosSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/VideosOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/VideosSvc.php';
 
 
 

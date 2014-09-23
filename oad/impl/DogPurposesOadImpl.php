@@ -1,8 +1,8 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/DogPurposesOad.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/DogPurpose.php';
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';  
+require_once $GLOBALS['pathCms'] . '/oad/DogPurposesOad.php';  
+require_once $GLOBALS['pathCms'] . '/beans/DogPurpose.php';
   
 
   class DogPurposesOadImpl extends AOD implements DogPurposesOad { 

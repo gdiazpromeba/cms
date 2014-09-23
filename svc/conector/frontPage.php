@@ -1,7 +1,7 @@
 <?php
   require_once '../../config.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/FrontPage.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/FrontPageSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/FrontPageSvcImpl.php';
   
   //require_once('FirePHPCore/fb.php4');
   

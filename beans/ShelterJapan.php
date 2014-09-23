@@ -1,6 +1,6 @@
 <?php 
 
-   require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/FormattedAddress.php';
+   require_once $GLOBALS['pathCms'] . '/beans/FormattedAddress.php';
    class ShelterJapan implements FormattedAddress{ 
       private $id; 
       private $number;

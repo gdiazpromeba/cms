@@ -1,7 +1,7 @@
 <?php
   require_once '../../config.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ChinaProvince.php';
-  require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/ChinaProvincesSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/beans/ChinaProvince.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/ChinaProvincesSvcImpl.php';
   header("Content-Type: text/plain; charset=utf-8");
 
   $url=$_SERVER['PHP_SELF'];

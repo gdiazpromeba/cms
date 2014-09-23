@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/DogSheddingFrequenciesOadImpl.php'; 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/DogSheddingFrequenciesSvc.php';  
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogSheddingFrequenciesOadImpl.php'; 
+require_once $GLOBALS['pathCms'] . '/svc/DogSheddingFrequenciesSvc.php';  
 
    class DogSheddingFrequenciesSvcImpl implements DogSheddingFrequenciesSvc { 
       private $oad=null; 

@@ -1,7 +1,7 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/impl/NewsOadImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/NewsSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/NewsOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/NewsSvc.php';
 
    class NewsSvcImpl implements NewsSvc { 
       private $oad=null; 

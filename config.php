@@ -7,13 +7,16 @@
 //      global $clave; $clave ='manuela';
 //      global $baseDeDatos; $baseDeDatos ='petzynga_cmsqa';
 //      $GLOBALS['dirAplicacion'] ='/qacms';
+//      $GLOBALS['pathWeb'] = '/home1/petzynga/public_html';
 
   //local
  $GLOBALS['debug'] = true;
- global $raiz; $raiz = 'C:/xampp/htdocs/petzyngacms';
  global $usuario; $usuario ='almarlam_gonzalo';
  global $clave; $clave ='manuela';
  global $baseDeDatos; $baseDeDatos ='petzynga';
  $GLOBALS['dirAplicacion'] ='/petzyngacms';
+ $GLOBALS['pathWeb'] = 'C:/xampp/htdocs/petzyngaweb';
+ $GLOBALS['pathCms'] = 'C:/xampp/htdocs/petzyngacms';
+ 
     
 ?>

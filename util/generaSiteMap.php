@@ -2,19 +2,19 @@
 
 require_once '../config.php';
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/DogBreed.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/DogBreedsSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersUsaSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersJapanSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersCanadaSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersUkSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersIndiaSvcImpl.php';
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/svc/impl/SheltersChinaSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/DogBreedsSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUsaSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersJapanSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersCanadaSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUkSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersIndiaSvcImpl.php';
+require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersChinaSvcImpl.php';
 
 
 
 function escribeArchivo($nombreArchivo, $contenido){
-	$fh = fopen("$nombreArchivo", 'w') or die("can't open file");
+	$fh = fopen($GLOBALS['pathWeb'] .   "/$nombreArchivo", 'w') or die("can't open file");
 	fwrite($fh, utf8_encode($contenido));
 	fclose($fh);
 }
@@ -33,7 +33,7 @@ $res =  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>   \n";
 $res .= "  <?xml-stylesheet type=\"text/xsl\" href=\"gss.xsl\"?>   \n";
 $res .= "  <urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.google.com/schemas/sitemap/0.84 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd\">   \n";
 
-$rootUrl = "http://petzynga.com/qaweb/";
+$rootUrl = "http://petzynga.com/";
 $lastMod = date("Y-m-d");;
 
 $url= $rootUrl;
@@ -70,7 +70,7 @@ $res .= construyeUnidad($url, $lastMod, "weekly", 0.5);
 //  usa
 $res .= "<!-- USA shelters listing   -->   \n";
 $svc = new SheltersUsaSvcImpl();
-$beans=$svc->selTodos(null, null, 0, 0, null, null, 0, 100000);
+$beans=$svc->selTodos(null, null, null, 0, 0, null, null, 0, 100000);
 foreach ($beans as $bean){
 	$url= $rootUrl . "shelters/info/usa/" . $bean->getUrlEncoded();
 	$res .= construyeUnidad($url, $lastMod, "monthly", 0.5);
@@ -78,7 +78,7 @@ foreach ($beans as $bean){
 //  japan
 $res .= "<!-- Japan shelters listing   -->   \n";
 $svc = new SheltersJapanSvcImpl();
-$beans=$svc->selTodos(null, null, 0, 0, null, null, 0, 100000);
+$beans=$svc->selTodos(null, null, null, 0, 0, null, null, 0, 100000);
 foreach ($beans as $bean){
 	$url= $rootUrl . "shelters/info/japan/" . $bean->getUrlEncoded();
 	$res .= construyeUnidad($url, $lastMod, "monthly", 0.5);
@@ -86,7 +86,7 @@ foreach ($beans as $bean){
 //  canada
 $res .= "<!-- Canada shelters listing   -->   \n";
 $svc = new SheltersCanadaSvcImpl();
-$beans=$svc->selTodos(null, null, 0, 0, null, null, 0, 100000);
+$beans=$svc->selTodos(null, null, null, 0, 0, null, null, 0, 100000);
 foreach ($beans as $bean){
 	$url= $rootUrl . "shelters/info/canada/" . $bean->getUrlEncoded();
 	$res .= construyeUnidad($url, $lastMod, "monthly", 0.5);
@@ -102,7 +102,7 @@ foreach ($beans as $bean){
 //  india
 $res .= "<!-- india shelters listing   -->   \n";
 $svc = new SheltersIndiaSvcImpl();
-$beans=$svc->selTodos(null, null, 0, 0, null, null, 0, 100000);
+$beans=$svc->selTodos(null, null, null, 0, 0, null, null, 0, 100000);
 foreach ($beans as $bean){
 	$url= $rootUrl . "shelters/info/india/" . $bean->getUrlEncoded();
 	$res .= construyeUnidad($url, $lastMod, "monthly", 0.5);
@@ -110,7 +110,7 @@ foreach ($beans as $bean){
 //  China
 $res .= "<!-- China shelters listing   -->   \n";
 $svc = new SheltersChinaSvcImpl();
-$beans=$svc->selTodos(null, null, 0, 0, null, null, 0, 100000);
+$beans=$svc->selTodos(null, null, null, 0, 0, null, null, 0, 100000);
 foreach ($beans as $bean){
 	$url= $rootUrl . "shelters/info/china/" . $bean->getUrlEncoded();
 	$res .= construyeUnidad($url, $lastMod, "monthly", 0.5);

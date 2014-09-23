@@ -1,8 +1,8 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/ZipsGenericoOad.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipGenerico.php';  
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';  
+require_once $GLOBALS['pathCms'] . '/oad/ZipsGenericoOad.php';  
+require_once $GLOBALS['pathCms'] . '/beans/ZipGenerico.php';  
 
 class ZipsGenericoOadImpl extends AOD implements ZipsGenericoOad { 
 

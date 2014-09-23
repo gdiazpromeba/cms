@@ -1,8 +1,8 @@
 <?php 
 
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/AOD.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/oad/ZipsJapanOad.php';  
-require_once $_SERVER['DOCUMENT_ROOT'] . $GLOBALS['dirAplicacion'] . '/beans/ZipJapan.php';  
+require_once $GLOBALS['pathCms'] . '/oad/AOD.php';  
+require_once $GLOBALS['pathCms'] . '/oad/ZipsJapanOad.php';  
+require_once $GLOBALS['pathCms'] . '/beans/ZipJapan.php';  
 
    class ZipsJapanOadImpl extends AOD implements ZipsJapanOad { 
 
