@@ -20,6 +20,13 @@
     <script src="http://maps.googleapis.com/maps/api/js?language=en"></script>
     
     <link rel="stylesheet" type="text/css" href="resources/css/estiloCms.css">
+    <?php 
+      if ($GLOBALS['debug']){
+        echo "<link rel='stylesheet' type='text/css' href='resources/css/qa.css'>";
+      }
+    ?>
+    
+    
     
     <!--  utilities  -->
     <script type="text/javascript" src="app/petcms4/util/Fecha.js"></script>
