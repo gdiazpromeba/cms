@@ -44,7 +44,7 @@ Ext.define('app.petcms4.abm.shelters.usa.BusquedaSheltersUsa', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
-        this.agregaClaveValor(resultado, 'stateId', this.getComponent('comboUsaStates').getValue());
+        this.agregaClaveValor(resultado, 'stateName', this.getComponent('comboUsaStates').getRawValue());
         this.agregaClaveValor(resultado, 'zipCode', this.getComponent('zipCode').getValue());
         this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         return resultado;

@@ -126,6 +126,11 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                                   var store=Ext.getCmp('comboUkStatisticalForm').getStore();
                               	  store.proxy.extraParams = { countryName: value[0].data.name};
                               	  store.load();
+                              	  
+                                  var store2=Ext.getCmp('comboUkRegionsForm').getStore();
+                              	  store2.proxy.extraParams = { countryName: value[0].data.name};
+                              	  store2.load();
+                              	  
                           		}
                           	}
                           },
