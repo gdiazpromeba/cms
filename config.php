@@ -12,7 +12,7 @@
 
   //local
  $GLOBALS['debug'] = true;
- $GLOBALS['env'] = 'local';
+ $GLOBALS['env'] = 'qa';
  global $usuario; $usuario ='almarlam_gonzalo';
  global $clave; $clave ='manuela';
  global $baseDeDatos; $baseDeDatos ='petzynga';
