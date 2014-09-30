@@ -21,7 +21,7 @@
     
     <link rel="stylesheet" type="text/css" href="resources/css/estiloCms.css">
     <?php 
-      if ($GLOBALS['debug']){
+      if ($GLOBALS['env']=="qa"){
         echo "<link rel='stylesheet' type='text/css' href='resources/css/qa.css'>";
       }
     ?>

@@ -2,6 +2,7 @@
 
 //   //servidor qa
 //      $GLOBALS['debug'] = false;
+//      $GLOBALS['env'] = 'qa';
 //      global $raiz; $raiz = '/home1/petzynga/public_html/qacms';
 //      global $usuario; $usuario ='petzynga_gonzalo';
 //      global $clave; $clave ='manuela';
@@ -11,6 +12,7 @@
 
   //local
  $GLOBALS['debug'] = true;
+ $GLOBALS['env'] = 'local';
  global $usuario; $usuario ='almarlam_gonzalo';
  global $clave; $clave ='manuela';
  global $baseDeDatos; $baseDeDatos ='petzynga';
