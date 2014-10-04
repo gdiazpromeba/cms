@@ -44,6 +44,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean['dogSheddingFrequencyId']=$bean->getSheddingFrequencyId();
 		  $arrBean['dogSheddingFrequencyName']=$bean->getSheddingFrequencyName();
 		  $arrBean['mainFeatures']=$bean->getMainFeatures();
+		  $arrBean['headerText']=$bean->getHeaderText();
 		  $arrBean['colors']=$bean->getColors();
 		  $arrBean['sizeMin']=$bean->getSizeMin();
 		  $arrBean['sizeMax']=$bean->getSizeMax();
@@ -84,6 +85,7 @@ if ($ultimo=='selecciona'){
 		$bean->setSheddingAmountId($_REQUEST['dogSheddingAmount']);
 		$bean->setSheddingFrequencyId($_REQUEST['dogSheddingFrequency']);
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
+		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
 	    $bean->setSizeMin($_REQUEST['sizeMin']);
 	    $bean->setSizeMax($_REQUEST['sizeMax']);
@@ -119,6 +121,7 @@ if ($ultimo=='selecciona'){
 		$bean->setSheddingAmountId($_REQUEST['dogSheddingAmount']);
 		$bean->setSheddingFrequencyId($_REQUEST['dogSheddingFrequency']);
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
+		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
 	    $bean->setSizeMin($_REQUEST['sizeMin']);
 	    $bean->setSizeMax($_REQUEST['sizeMax']);

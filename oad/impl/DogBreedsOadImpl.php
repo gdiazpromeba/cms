@@ -21,6 +21,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DBR.DOG_SHEDDING_FREQUENCY_ID,     \n"; 
          $sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n"; 
          $sql.="  DBR.MAIN_FEATURES,     \n"; 
+         $sql.="  DBR.HEADER_TEXT,     \n"; 
          $sql.="  DBR.COLORS,     \n"; 
          $sql.="  DBR.SIZE_MIN,     \n"; 
          $sql.="  DBR.SIZE_MAX,     \n"; 
@@ -56,7 +57,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new DogBreed();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, $mainFeatures, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
+         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
          		  $servingMin, $servingMax,
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
          		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
@@ -72,6 +74,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
             $bean->setSheddingFrequencyId($sheddingFrequencyId);
             $bean->setSheddingFrequencyName($sheddingFrequencyName);
             $bean->setMainFeatures($mainFeatures);
+            $bean->setHeaderText($headerText);
             $bean->setColors($colors);
             $bean->setSizeMin($sizeMin);
             $bean->setSizeMax($sizeMax);
@@ -115,6 +118,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$sql.="  DBR.DOG_SHEDDING_FREQUENCY_ID,     \n";
       	$sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n";
       	$sql.="  DBR.MAIN_FEATURES,     \n";
+      	$sql.="  DBR.HEADER_TEXT,     \n";
       	$sql.="  DBR.COLORS,     \n";
       	$sql.="  DBR.SIZE_MIN,     \n";
       	$sql.="  DBR.SIZE_MAX,     \n";
@@ -150,7 +154,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new DogBreed();
-      	$stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, $mainFeatures, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
+      	$stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+      			$mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
       			$servingMin, $servingMax,
       			$friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText,
       			$pictureUrl, $videoUrl, $appartments, $kids, $habilitada);
@@ -166,6 +171,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       		$bean->setSheddingFrequencyId($sheddingFrequencyId);
       		$bean->setSheddingFrequencyName($sheddingFrequencyName);
       		$bean->setMainFeatures($mainFeatures);
+      		$bean->setHeadertext($headerText);
       		$bean->setColors($colors);
       		$bean->setSizeMin($sizeMin);
       		$bean->setSizeMax($sizeMax);
@@ -206,6 +212,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DOG_SHEDDING_AMOUNT_ID,     \n"; 
          $sql.="  DOG_SHEDDING_FREQUENCY_ID,     \n"; 
          $sql.="  MAIN_FEATURES,     \n"; 
+         $sql.="  HEADER_TEXT,     \n"; 
          $sql.="  COLORS,     \n"; 
          $sql.="  SIZE_MIN,     \n"; 
          $sql.="  SIZE_MAX,     \n"; 
@@ -230,11 +237,12 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  APPARTMENTS,     \n";
          $sql.="  KIDS,     \n";
          $sql.="  HABILITADA)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("ssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), $bean->getMainFeatures(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
+         $stm->bind_param("sssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids()); 
@@ -274,6 +282,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DOG_SHEDDING_AMOUNT_ID=?,     \n"; 
          $sql.="  DOG_SHEDDING_FREQUENCY_ID=?,     \n"; 
          $sql.="  MAIN_FEATURES=?,     \n"; 
+         $sql.="  HEADER_TEXT=?,     \n"; 
          $sql.="  COLORS=?,     \n"; 
          $sql.="  SIZE_MIN=?,     \n"; 
          $sql.="  SIZE_MAX=?,     \n"; 
@@ -300,7 +309,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE DOG_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), $bean->getMainFeatures(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
+         $stm->bind_param("ssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), $bean->getHabilitada(), $bean->getId() ); 
@@ -322,6 +332,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DBR.DOG_SHEDDING_FREQUENCY_ID,     \n"; 
          $sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n"; 
          $sql.="  DBR.MAIN_FEATURES,     \n"; 
+         $sql.="  DBR.HEADER_TEXT,     \n"; 
          $sql.="  DBR.COLORS,     \n"; 
          $sql.="  DBR.SIZE_MIN,     \n"; 
          $sql.="  DBR.SIZE_MAX,     \n"; 
@@ -400,7 +411,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, $mainFeatures, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
+         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
          		  $servingMin, $servingMax, 
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
          		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
@@ -418,6 +430,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
             $bean->setSheddingFrequencyId($sheddingFrequencyId);
             $bean->setSheddingFrequencyName($sheddingFrequencyName);
             $bean->setMainFeatures($mainFeatures);
+            $bean->setHeaderText($headerText);
             $bean->setColors($colors);
             $bean->setSizeMin($sizeMin);
             $bean->setSizeMax($sizeMax);

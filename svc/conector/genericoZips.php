@@ -12,7 +12,7 @@
 		$svc = new ZipsGenericoSvcImpl();
 		$bean=$svc->obtienePorCodigo($_REQUEST['pais'], $_REQUEST['zip']);
 		$ret=array();
-		if ((empty($bean)){
+		if (empty($bean)){ 
 		  $ret["success"]=false;
 		}else{
 		  $lat=$bean->getLatitude();

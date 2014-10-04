@@ -8,47 +8,46 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   	urlBorrado: Global.dirAplicacion + '/svc/conector/dogBreeds.php/inhabilita',
     layout: {
         type: 'table',
-        columns: 2,
-        tableAttrs: {
-            style: {
-                width: '100%',
-                height: '100%'
-            }
-        }
+        columns: 3,
     },
   	items: [
-        {xtype: 'fieldset', itemId: 'colIzq', border: false, layout: 'form', style: 'padding:0px', bodyStyle: 'padding:0px', width: 400,
+        {xtype: 'fieldset', title: 'Header Text', itemId: 'colDesc', border: false, layout: 'form', width: 200,
+        	items: [
+              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true, width: 50, height: 200}
+        	]
+        },
+        {xtype: 'fieldset', itemId: 'colIzq', border: false, layout: 'form', style: 'padding:0px', bodyStyle: 'padding:0px', width: 300,
           items:[
             {xtype: 'hidden', name: 'dogBreedId', id: 'dogBreedId', itemId: 'dogBreedId'},
-            {fieldLabel: 'Breed Name', xtype: 'textfield',  name: 'dogBreedName', itemId: 'dogBreedName',  id: 'dogBreedName', allowBlank: false, width: 150},
-            {fieldLabel: 'Size', xtype: 'comboDogSizes', name: 'dogSize', itemId: 'dogSize', width: 100},
-            {fieldLabel: 'Hist.Purpose', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'dogPurpose', width: 100},
-            {fieldLabel: 'Shed.Amount', xtype: 'comboDogSheddingAmounts', name: 'dogSheddingAmount', itemId: 'dogSheddingAmount',  width: 100},
-            {fieldLabel: 'Shed.Freq.', xtype: 'comboDogSheddingFrequencies', name: 'dogSheddingFrequency', itemId: 'dogSheddingFrequency', width: 100},
-            {fieldLabel: 'Main Features', xtype: 'textfield',  name: 'mainFeatures', itemId: 'mainFeatures',  allowBlank: false, width: 150},
-            {fieldLabel: 'Colors', xtype: 'textfield',  name: 'colors', itemId: 'colors',  allowBlank: false, width: 100},
+            {fieldLabel: 'Breed Name', xtype: 'textfield',  name: 'dogBreedName', itemId: 'dogBreedName',  id: 'dogBreedName', allowBlank: false, width: 50},
+            {fieldLabel: 'Size', xtype: 'comboDogSizes', name: 'dogSize', itemId: 'dogSize', width: 50},
+            {fieldLabel: 'Hist.Purpose', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'dogPurpose', width: 50},
+            {fieldLabel: 'Shed.Amount', xtype: 'comboDogSheddingAmounts', name: 'dogSheddingAmount', itemId: 'dogSheddingAmount',  width: 50},
+            {fieldLabel: 'Shed.Freq.', xtype: 'comboDogSheddingFrequencies', name: 'dogSheddingFrequency', itemId: 'dogSheddingFrequency', width: 50},
+            {fieldLabel: 'Main Features', xtype: 'textfield',  name: 'mainFeatures', itemId: 'mainFeatures',  allowBlank: false, width: 50},
+            {fieldLabel: 'Colors', xtype: 'textfield',  name: 'colors', itemId: 'colors',  allowBlank: false, width: 150},
             {fieldLabel: 'For appartments', xtype: 'checkbox', name: 'appartments', itemId: 'appartments'},
             {fieldLabel: 'Safe for kids', xtype: 'checkbox', name: 'kids', itemId: 'kids'},
            ]
         },//del colIzq    
-        {xtype: 'fieldset', itemId: 'colDer', border: false, layout: 'form',  width: 400, //style: 'padding:0px;', bodyStyle: 'padding:0px;', width: 300,
+        {xtype: 'fieldset', itemId: 'colDer', border: false, layout: 'form',  width: 250, //style: 'padding:0px;', bodyStyle: 'padding:0px;', width: 300,
             items:[
-              {title: 'Size', xtype: 'fieldset', itemId: 'size', border: true, layout: 'column',
+              {title: 'Size', xtype: 'fieldset', itemId: 'size', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'},
                 items: [
-                  {fieldLabel: 'Min', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMin', itemId: 'sizeMin', allowBlank: false, columnWidth:0.5},
-                  {fieldLabel: 'Max', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMax', itemId: 'sizeMax', allowBlank: false, columnWidth:0.5}
+                  {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMin', itemId: 'sizeMin', allowBlank: false, width: 90},
+                  {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMax', itemId: 'sizeMax', allowBlank: false, width: 90}
                 ]
               },
-              {title: 'Weight', xtype: 'fieldset', itemId: 'weight', border: true, layout: 'column', 
+              {title: 'Weight', xtype: 'fieldset', itemId: 'weight', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'}, 
          	     items: [
-                   {fieldLabel: 'Min', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'weightMin', itemId: 'weightMin',   allowBlank: false, columnWidth:0.5},
-                   {fieldLabel: 'Max', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'weightMax', itemId: 'weightMax',   allowBlank: false, columnWidth:0.5},
+                   {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'weightMin', itemId: 'weightMin',   allowBlank: false,  width: 90},
+                   {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'weightMax', itemId: 'weightMax',   allowBlank: false,  width: 90},
                  ]
                },                   
-               {title: 'Serving sizes', xtype: 'fieldset', itemId: 'serving', border: true, layout: 'column', 
+               {title: 'Serving sizes', xtype: 'fieldset', itemId: 'serving', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'}, 
            	     items: [
-                     {fieldLabel: 'Min', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMin', itemId: 'servingMin',  allowBlank: false, columnWidth:0.5},
-                     {fieldLabel: 'Max', labelAlign:'right', xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMax', itemId: 'servingMax',  allowBlank: false, columnWidth:0.5},
+                     {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMin', itemId: 'servingMin',  allowBlank: false, width: 90},
+                     {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMax', itemId: 'servingMax',  allowBlank: false, width: 90},
                    ]
                  },                
                {fieldLabel: 'Video', xtype: 'textfield',  name: 'videoUrl', itemId: 'videoUrl',  allowBlank: false, width: 250},
@@ -68,7 +67,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
                },//botón Aceptar                  
             ]
         },//del colDer
-        {xtype: 'tabpanel',  itemId: 'ranksPanel', height: 195, activeTab: 0, colspan: 2, //width: 800, //height: 240, 
+        {xtype: 'tabpanel',  itemId: 'ranksPanel', height: 195, activeTab: 0, colspan: 3, //width: 800, //height: 240, 
           items:[
             {xtype: 'panel', itemId: 'friendly', layout: 'form', title: 'Friendly', frame: true, labelWidth: 10,
         	    items:[
@@ -113,6 +112,8 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
       
   	   
   	  pueblaDatosEnForm : function(record){
+   		 var colDesc=this.getComponent('colDesc');
+  		 colDesc.getComponent('headerText').setValue(record.get('headerText'));
   		 var colIzq=this.getComponent('colIzq');
   		 colIzq.getComponent('dogBreedId').setValue(record.id);
   		 colIzq.getComponent('dogBreedName').setValue(record.get('dogBreedName'));
@@ -154,6 +155,8 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   	   },
   	   
   	   pueblaFormEnRegistro : function(record){
+         var colDesc=this.getComponent('colDesc');
+         record.data['headerText']=colDesc.getComponent('headerText');
   		 var colIzq=this.getComponent('colIzq');
   		 record.data['dogBreedId']=  colIzq.getComponent('dogBreedId').getValue();
   		 record.data['dogBreedName']= colIzq.getComponent('dogBreedName').getRawValue();
@@ -166,6 +169,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   		 record.data['dogSheddingFrequencyName']= colIzq.getComponent('dogSheddingFrequency').getRawValue();
   		 record.data['dogSheddingFrequencyId']= colIzq.getComponent('dogSheddingFrequency').getValue();
   		 record.data['mainFeatures']=  colIzq.getComponent('mainFeatures').getValue();
+  		 record.data['headerText']=  colIzq.getComponent('headerText').getValue();
   		 record.data['colors']=  colIzq.getComponent('colors').getValue();
   		 record.data['appartments']=  colIzq.getComponent('appartments').getValue();
   		 record.data['kids']=  colIzq.getComponent('kids').getValue();

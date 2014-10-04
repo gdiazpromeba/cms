@@ -16,6 +16,7 @@ Ext.define('DogBreedModel',{
 				{name : 'weightMin', type : 'int'},
 				{name : 'weightMax', type : 'int'},
 				{name : 'mainFeatures', type : 'string'},
+				{name : 'headerText', type : 'string'},
 				{name : 'colors', type : 'string'},
 				{name : 'servingMin', type : 'float'},
 				{name : 'servingMax', type : 'float'},

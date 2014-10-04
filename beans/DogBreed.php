@@ -12,6 +12,7 @@
       private $dogSheddingFrequencyId; 
       private $dogSheddingFrequencyName; 
       private $mainFeatures; 
+      private $headerText; 
       private $colors; 
       private $sizeMin; 
       private $sizeMax; 
@@ -80,6 +81,11 @@
       public function getMainFeatures(){ 
          return $this->mainFeatures;  
       }
+      
+      public function getHeaderText(){ 
+         return $this->headerText;  
+      }
+      
 
       public function getColors(){ 
          return $this->colors;  
@@ -223,6 +229,11 @@
       public function setMainFeatures($valor){ 
          $this->mainFeatures=$valor; 
       }
+      
+      public function setHeaderText($valor){ 
+         $this->headerText=$valor;  
+      }
+      
 
       public function setColors($valor){ 
          $this->colors=$valor; 
