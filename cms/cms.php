@@ -114,6 +114,12 @@
     <!-- Front Page -->
     <script type="text/javascript" src="app/petcms4/frontpage/FormFrontPage.js"></script>
     
+    <!-- Resources -->
+    <script type="text/javascript" src="app/petcms4/abm/resources/FormResources.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/resources/BusquedaResources.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/resources/GrillaResources.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/resources/PanelResources.js"></script>    
+    
     
     
     <!-- inicio -->

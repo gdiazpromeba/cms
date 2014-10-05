@@ -68,6 +68,26 @@ var panelFrontPage=Ext.create('app.petcms4.PanelGrillaIconos', {
 });
 
 
+var storeRecursos = Ext.create('Ext.data.ArrayStore', {
+    autoSync: true,
+    fields: [
+             {name: 'image'},
+             {name: 'caption'},
+             {name: 'panelClass'},
+             {name: 'panelId'}
+    ],
+    data:[
+        { image : 'videos.gif',        caption : 'Text resources',        panelClass: 'app.petcms4.abm.resources.PanelResources',   panelId: 'panelTextResourcesId' },
+    ],
+});
+
+var panelRecursosEstaticos=Ext.create('app.petcms4.PanelGrillaIconos', {
+    id: 'panelRecursosEstaticosId',
+    title: 'Resources',
+    store: storeRecursos
+});
+
+
 
 
 Ext.define('app.petcms4.MenuAcordeon', {
@@ -78,6 +98,7 @@ Ext.define('app.petcms4.MenuAcordeon', {
     items:[
            panelBreeds,
            panelShelters,
-           panelFrontPage
+           panelFrontPage,
+           panelRecursosEstaticos
     ],
 });

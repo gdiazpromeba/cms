@@ -1,4 +1,5 @@
 @CHARSET "ISO-8859-1";
 .x-panel-body{
-    background-color : #F293D1 !important;
+    /* background-color : #F293D1 !important; */
+    background-color : #D6C2FF !important; 
 }

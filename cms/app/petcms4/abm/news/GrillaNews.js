@@ -11,7 +11,7 @@ Ext.define('NewsModel',{
 			]
 });
 
-var dogBreedStore = Ext.create('Ext.data.JsonStore', {
+var newsStore = Ext.create('Ext.data.JsonStore', {
     // store configs
     autoDestroy: true,
     model: 'NewsModel',
@@ -31,7 +31,7 @@ var dogBreedStore = Ext.create('Ext.data.JsonStore', {
 
 Ext.define('app.petcms4.abm.news.GrillaNews', {
 	  extend: 'Ext.grid.Panel',
-	  store : dogBreedStore,
+	  store : newsStore,
 	  viewConfig: {
 	        loadMask: false
 	  },
@@ -42,7 +42,7 @@ Ext.define('app.petcms4.abm.news.GrillaNews', {
 	  ],
 	  // paging bar on the bottom
 	  bbar: Ext.create('Ext.PagingToolbar', {
-	      store: dogBreedStore,
+	      store: newsStore,
 	      displayInfo: true,
 	      displayMsg: '{0} - {1} of {2}',
 	      emptyMsg: "No topics to display"
