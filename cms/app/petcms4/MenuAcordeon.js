@@ -77,7 +77,7 @@ var storeRecursos = Ext.create('Ext.data.ArrayStore', {
              {name: 'panelId'}
     ],
     data:[
-        { image : 'videos.gif',        caption : 'Text resources',        panelClass: 'app.petcms4.abm.resources.PanelResources',   panelId: 'panelTextResourcesId' },
+        { image : 'recursos_textuales.jpg',        caption : 'Text resources',        panelClass: 'app.petcms4.abm.resources.PanelResources',   panelId: 'panelTextResourcesId' },
     ],
 });
 
