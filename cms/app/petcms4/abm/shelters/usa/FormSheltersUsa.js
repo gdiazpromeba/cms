@@ -287,11 +287,26 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   validaHijo : function(muestraVentana){
   		   var mensaje=null;
   		   var valido=true;
-  		   
   		   var colIzq=this.getComponent('colIzq');
+
   		   if (!colIzq.getComponent('name').isValid()){
   			   valido=false;
   			   mensaje='Name not valid';
+  		   }
+  		   
+  		   if (!colIzq.getComponent('state').isValid()){
+  			   valido=false;
+  			   mensaje='State not valid';
+  		   }
+
+  		   if (!colIzq.getComponent('county').isValid()){
+  			   valido=false;
+  			   mensaje='County not valid';
+  		   }
+  		   
+  		   if (!colIzq.getComponent('city').isValid()){
+  			   valido=false;
+  			   mensaje='City not valid';
   		   }
   		   
   		   if (!colIzq.getComponent('encoding').getComponent('urlEncoded').isValid()){
