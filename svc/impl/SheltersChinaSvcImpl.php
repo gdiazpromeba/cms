@@ -82,14 +82,14 @@ require_once $GLOBALS['pathCms'] . '/svc/SheltersChinaSvc.php';
       	$arr=$this->oad->selProvinciasDeShelters();
       	$res=array();
       	$res[]=array('value'=>"", 'label'=>"Select Province ...");
-      	foreach ($arr as $valor){
+        foreach ($arr as $dupla){
       		$fila=array();
-      		$fila['value']=$valor;
-      		$fila['label']=$valor;
+      		$fila['value']=$dupla['name'];
+      		$fila['label']=$dupla['name'] . "       (" . $dupla['amount'] . ")";
       		$res[]=$fila;
       	}
       	return $res;
-      }      
+      }        
       
 
    }

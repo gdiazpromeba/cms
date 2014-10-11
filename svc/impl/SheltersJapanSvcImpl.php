@@ -79,16 +79,16 @@ require_once $GLOBALS['pathCms'] . '/svc/SheltersJapanSvc.php';
 
       public function selFirstAreas(){
       	$arr=$this->oad->selPrefecturasDeShelters();
-      	$res=array();
+        $res=array();
       	$res[]=array('value'=>"", 'label'=>"Select Prefecture ...");
-      	foreach ($arr as $valor){
+        foreach ($arr as $dupla){
       		$fila=array();
-      		$fila['value']=$valor;
-      		$fila['label']=$valor;
+      		$fila['value']=$dupla['name'];
+      		$fila['label']=$dupla['name'] . "       (" . $dupla['amount'] . ")";
       		$res[]=$fila;
       	}
       	return $res;
-      }      
+      }       
       
       
       

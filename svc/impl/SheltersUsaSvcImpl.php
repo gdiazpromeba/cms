@@ -89,7 +89,7 @@ require_once $GLOBALS['pathCms'] . '/oad/impl/UsaStatesOadImpl.php';
       	foreach ($arr as $dupla){
       		$fila=array();
       		$fila['value']=$dupla['name'];
-      		$fila['label']=$dupla['name'];
+      		$fila['label']=$dupla['name'] . "       (" . $dupla['amount'] . ")";
       		$res[]=$fila;
       	}
       	return $res;

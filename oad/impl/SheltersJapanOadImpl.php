@@ -344,23 +344,24 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterJapan.php';
       } 
       
       public function selPrefecturasDeShelters(){
-      	$conexion=$this->conectarse();
-      	$sql="SELECT DISTINCT \n";
-      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1    \n";
+            	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1,  \n";
+      	$sql.="  COUNT(*)  \n";
       	$sql.="FROM  \n";
-      	$sql.="  SHELTERS_JAPAN  SHJ \n";   
-        $sql.="ORDER BY  \n";
-      	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1  \n";
+      	$sql.="  SHELTERS_JAPAN   \n";
+      	$sql.="GROUP BY  1 \n";
+      	$sql.="ORDER BY  1 \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($prefecture);
+      	$stm->bind_result($name, $amount);
       	$filas = array();
       	while ($stm->fetch()) {
-      		$filas[]=$prefecture;
+      		$filas[]=array('name' => $name, 'amount' => $amount);
       	}
       	$this->cierra($conexion, $stm);
       	return $filas;
-      }
+      } 
 
 
       public function selTodosCuenta($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId){ 

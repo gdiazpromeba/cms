@@ -12,6 +12,6 @@
   </target>
   
   <target name="zipea" depends="init">
-    <zip destfile="${base}/pz.zip" basedir="${base}" excludes="cms/extjs/**, resources/images/**, config.php, configExt.php, build.xml, phpinfo.php, unzip.php, .settings/**, bin/**, .buildpath, .project" />
+    <zip destfile="${base}/pz.zip" basedir="${base}" excludes="cms/extjs/**, resources/images/**, config.php, configExt.php, build.xml, phpinfo.php, unzip.php, .settings/**, bin/**, .buildpath, .project, cache.storage.localhost/**" />
   </target>
 </project>
