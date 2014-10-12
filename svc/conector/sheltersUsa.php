@@ -128,7 +128,7 @@ if ($ultimo=='selecciona'){
   
   } else if ($ultimo=='borra'){
 	$svc = new SheltersUsaSvcImpl();
-	$exito=$svc->borra($_REQUEST['shelterUsaId']);
+	$exito=$svc->borra($_REQUEST['id']);
 	echo json_encode($exito) ;	
 	
   }else if ($ultimo=='subeLogo'){
