@@ -578,6 +578,33 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$this->cierra($conexion, $stm);
       	return $filas;
       }  
+      
+      public function selNombresPorBreeder($breederId){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  DBR.DOG_BREED_ID,     \n";
+      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  DOG_BREEDS DBR \n";
+      	$sql.="  INNER JOIN DOG_BREEDS_BY_BREEDER DBS ON DBR.DOG_BREED_ID=DBS.DOG_BREED_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  DBR.HABILITADA=1 \n";
+        $sql.="  AND DBS.BREEDER_ID = '" . $breederId . "' \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  DBR.DOG_BREED_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre);
+      	$filas=array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$nombre;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }        
 
       public function selSheltersPorRaza($dogBreedId){
       	$conexion=$this->conectarse();

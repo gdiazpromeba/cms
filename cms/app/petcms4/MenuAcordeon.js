@@ -45,6 +45,30 @@ var panelShelters=Ext.create('app.petcms4.PanelGrillaIconos', {
     store: storeShelters
 });
 
+
+var storeBreeders = Ext.create('Ext.data.ArrayStore', {
+    autoSync: true,
+    fields: [
+             {name: 'image'},
+             {name: 'caption'},
+             {name: 'panelClass'},
+             {name: 'panelId'}
+    ],
+    data:[
+        //{ image : 'usa_map_menu_outline.jpeg',  caption : 'Breeders USA',  panelClass: 'app.petcms4.abm.breeders.usa.PanelBreedersUsa',   panelId: 'panelBreedersUsaId' },
+        { image : 'usa_map_menu_outline.jpeg',  caption : 'Breeders USA',  panelClass: 'app.petcms4.abm.breeders.usa.PanelBreedersUsa',   panelId: 'panelBreedersUsaId' },
+    ],
+});
+
+var panelBreeders=Ext.create('app.petcms4.PanelGrillaIconos', {
+    id: 'panelBreedersId',
+    title: 'Breeders',
+    store: storeBreeders
+});
+
+
+
+
 var storeFp = Ext.create('Ext.data.ArrayStore', {
     autoSync: true,
     fields: [
@@ -98,6 +122,7 @@ Ext.define('app.petcms4.MenuAcordeon', {
     items:[
            panelBreeds,
            panelShelters,
+           panelBreeders,
            panelFrontPage,
            panelRecursosEstaticos
     ],

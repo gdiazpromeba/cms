@@ -200,6 +200,15 @@ if ($ultimo=='selecciona'){
 		$res['data']=$arr;
 		$res['total']=count($arr);
 		echo json_encode($res) ;
+		
+  } else if ($ultimo=='selNombresPorBreeder'){
+		$breederId=$_REQUEST['breederId'];
+		$svc = new DogBreedsSvcImpl(); 
+		$arr = $svc->selNombresPorBreeder($breederId);
+		$res=array();
+		$res['data']=$arr;
+		$res['total']=count($arr);
+		echo json_encode($res) ;		
   
   } else if ($ultimo=='selSheltersPorRaza'){
 		$dogBreedId=$_REQUEST['dogBreedId'];

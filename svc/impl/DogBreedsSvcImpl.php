@@ -63,6 +63,11 @@ require_once $GLOBALS['pathCms'] . '/svc/DogBreedsSvc.php';
       	return $arr;
       }
       
+      public function selNombresPorBreeder($breederId){
+      	$arr=$this->oad->selNombresPorBreeder($breederId);
+      	return $arr;
+      }      
+      
 
       public function selSheltersPorRaza($dogBreedId){
       	$arr=$this->oad->selSheltersPorRaza($dogBreedId);

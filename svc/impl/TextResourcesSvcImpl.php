@@ -46,5 +46,9 @@ require_once $GLOBALS['pathCms'] . '/svc/TextResourcesSvc.php';
       public function obtienePorKey($key){
       	return $this->oad->obtienePorKey($key);
       }
+      
+      public function selTeasers($key){
+      	return $this->oad->selTeasers($key);
+      }
    }
 ?>

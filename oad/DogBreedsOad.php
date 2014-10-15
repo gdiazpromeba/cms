@@ -21,6 +21,13 @@
        * @param unknown $shelterId
        */
       public function selNombresPorShelter($shelterId);
+      
+      /**
+       * consulta ráipda que devuelve array php, sólo el nombre e Id, de razas en las que un criador se especialice
+       * @param unknown $breederId
+       */
+      public function selNombresPorBreeder($breederId);
+      
 
       /**
       * consulta rapida que devuelve array php, sólo con el nombre del refugio, el id, y la url para link, para una raza

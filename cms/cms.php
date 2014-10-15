@@ -99,6 +99,12 @@
     <script type="text/javascript" src="app/petcms4/abm/shelters/india/GrillaSheltersIndia.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/india/PanelSheltersIndia.js"></script>
     
+    <!-- Breeders USA -->
+    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/FormBreedersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/BusquedaBreedersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/GrillaBreedersUsa.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/PanelBreedersUsa.js"></script>    
+    
     <!-- News -->
     <script type="text/javascript" src="app/petcms4/abm/news/FormNews.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/news/BusquedaNews.js"></script>

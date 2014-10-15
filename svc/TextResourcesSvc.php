@@ -9,6 +9,7 @@
       public function borra($id); 
       public function selTodos($textOrPart, $keyOrPart, $desde, $cuantos); 
       public function selTodosCuenta($textOrPart, $keyOrPart); 
+      public function selTeasers($key);
    } 
 
 ?>

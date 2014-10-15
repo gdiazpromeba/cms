@@ -56,6 +56,35 @@ require_once $GLOBALS['pathCms'] . '/beans/TextResource.php';
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
+      }    
+
+      public function selTeasers($key){ 
+         $conexion=$this->conectarse(); 
+         $sql="SELECT  \n"; 
+         $sql.="  TEXT_RES_ID,     \n"; 
+         $sql.="  TEXT_RES_KEY,     \n"; 
+         $sql.="  TEXT_RESOURCE    \n"; 
+         $sql.="FROM  \n"; 
+         $sql.="  TEXT_RESOURCES  \n"; 
+         $sql.="WHERE  \n"; 
+         $sql.="  TEXT_RES_KEY LIKE '" . $key . "_%' \n"; 
+         $sql.="ORDER BY TEXT_RES_KEY  \n"; 
+         $stm=$this->preparar($conexion, $sql);  
+         $stm->execute();  
+         $id=null;  
+         $key=null;  
+         $text=null;  
+         $stm->bind_result($id, $key, $text); 
+         $res=array();
+         while ($stm->fetch()) { 
+         	$bean=new TextResource();  
+            $bean->setId($id);
+            $bean->setKey($key);
+            $bean->setText($text);
+            $res[]=$bean;
+         } 
+         $this->cierra($conexion, $stm); 
+         return $res; 
       }       
 
 
