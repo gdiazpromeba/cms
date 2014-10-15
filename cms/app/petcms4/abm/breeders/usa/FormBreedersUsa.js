@@ -8,6 +8,13 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
     urlModificacion: Global.dirAplicacion + '/svc/conector/breedersUsa.php/actualiza',
     urlBorrado: Global.dirAplicacion + '/svc/conector/breedersUsa.php/borra',
     layout: 'column',
+    listeners:{
+    	exitoAgregado: function (nuevoId){
+    		alert('el nuevo id generado es ' + nuevoId);
+    		this.sincronizacionStores(this, nuevoId);
+    		
+    	}
+    },
     items: [
       {xtype: 'hidden', name: 'breederUsaId', itemId: 'breederUsaId'},            
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormBreedersUsa', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
@@ -331,12 +338,25 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
   /**
    * override para grabar también el store de las razas asociadas
    */
-  pulsoConfirmar: function(me){
+  sincronizacionStores : function(me, breederId){
 	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
       var store=grid.getStore();
+	  store.getProxy().extraParams['breederId']=breederId;
+	  alert('llamando a sync con id' + breederId);
       store.sync(); 
+  }, 
+  
+  /**
+   * override borrar la lista de razas asociadas (que hubieran podido agregadas durante la entrada anterior)
+   * cada vez que se oprime "agregar"
+   */
+  pulsoAgregar: function(me){
+	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
+      var store=grid.getStore();
+      store.loadData([], false); //esto borra el caché local y no manda nada al server
       me.callParent(arguments);
   }, 
+  
   	   
   
 });
