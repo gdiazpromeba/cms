@@ -10,9 +10,12 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
     layout: 'column',
     listeners:{
     	exitoAgregado: function (nuevoId){
-    		alert('el nuevo id generado es ' + nuevoId);
     		this.sincronizacionStores(this, nuevoId);
     		
+    	},
+    	exitoModificacion: function (me){
+    		var nuevoId = me.down('#' + me.nombreElementoId).getValue();
+    		me.sincronizacionStores(me, nuevoId);
     	}
     },
     items: [
@@ -180,6 +183,17 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
                     			    		if (areas['sublocality_level_1']!=null) coordenadas.getComponent('subLocality1').setValue(areas['sublocality_level_1']);
                     			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.lat());
                     			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.lng());
+                    			    		//if the zip didn't provide specific county, make a univocal search by latitude and longitude
+                    			    		if (Ext.isEmpty(coordenadas.getComponent('adminArea2').getValue())){
+                        			    		var geocoder2 = new google.maps.Geocoder();
+                        			    		var latlng2 = new google.maps.LatLng(res0.geometry.location.lat(), res0.geometry.location.lng());
+                        			    		geocoder2.geocode({latLng: latlng2}, function (results, status){
+                        			    		  var areas2=Utilities.procesaGeoComponentes(results[0].address_components); 	
+                        			    		  if (areas2['administrative_area_level_2']!=null){
+                        			    			  coordenadas.getComponent('adminArea2').setValue(areas2['administrative_area_level_2'])
+                        			    		  }
+                        			    		});
+                    			    		}
                         		        }else{
                         		        	coordenadas.getComponent('adminArea1').markInvalid();
                         		        	coordenadas.getComponent('adminArea2').markInvalid();
@@ -336,13 +350,13 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
   },
   
   /**
-   * override para grabar también el store de las razas asociadas
+   * Actualiza el store de razas asociadas.
+   * Se lo llama luego de un ingreso o una actualización del registro principal exitosas
    */
   sincronizacionStores : function(me, breederId){
 	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
       var store=grid.getStore();
 	  store.getProxy().extraParams['breederId']=breederId;
-	  alert('llamando a sync con id' + breederId);
       store.sync(); 
   }, 
   

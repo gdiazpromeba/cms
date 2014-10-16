@@ -1,6 +1,5 @@
 Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     extend: 'app.petcms4.abm.PanelFormCabeceraAbm',
-    requires: ['Utilities'],
     frame: true,
     prefijo: 'formSheltersUsa',
     nombreElementoId: 'shelterUsaId',
@@ -8,23 +7,13 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     urlModificacion: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/actualiza',
     urlBorrado: Global.dirAplicacion + '/svc/conector/sheltersUsa.php/borra',
     layout: 'column',
-    listeners:{
-    	exitoAgregado: function (nuevoId){
-    		this.sincronizacionStores(this, nuevoId);
-    		
-    	},
-    	exitoModificacion: function (me){
-    		var nuevoId = me.down('#' + me.nombreElementoId).getValue();
-    		me.sincronizacionStores(me, nuevoId);
-    	}
-    },
     items: [
-      {xtype: 'hidden', name: 'shelterUsaId', itemId: 'shelterUsaId'},            
+      {xtype: 'hidden', name: 'shelterUsaId', id: 'shelterUsaId', itemId: 'shelterUsaId'},            
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormSheltersUsa', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
           
             {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
-            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
+            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding',  border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
             	items: [
                   {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
   	              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
@@ -40,12 +29,37 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   		          }
             	]
             },
+            {fieldLabel: 'State', xtype: 'textfield',  name: 'state', itemId: 'state',  readOnly: true, allowBlank: false, width: 300},
+            {fieldLabel: 'County', xtype: 'textfield',  name: 'county', itemId: 'county',  readOnly: true, allowBlank: false, width: 300},
+            {fieldLabel: 'City', xtype: 'textfield',  name: 'city', itemId: 'city',  readOnly: true, allowBlank: false, width: 300},
+            {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'usaZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 160,
+            	listeners:{
+            		blur : function(  The, eOpts ){
+            			var colIzq=this.up('#colIzq');
+            			Ext.Ajax.request ({
+            			    url: Global.dirAplicacion + '/svc/conector/usaZips.php/obtienePorCodigo?zip=' + this.getValue(),        			    
+            			    success: function (res) {
+            			    	var ret=Ext.JSON.decode(res.responseText);
+            			    	if (ret.success=true){
+            			    		colIzq.getComponent('state').setValue(ret.state);
+            			    		colIzq.getComponent('city').setValue(ret.city);
+            			    		colIzq.getComponent('county').setValue(ret.county);
+            			    	}else{
+            			    		colIzq.getComponent('zip').markInvalid();
+            			    	}
+            			    } ,
+            			    failure: function () {
+            			        alert('ajax call error');
+            			    }
+            			});
+            		}	
+            	}
+            },
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  allowBlank: false, width: 350},
             {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  allowBlank: true, width: 320},
             {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  allowBlank: true, width: 210},
             {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  grow: false, width: 350, height: 70},
-            {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  
-	          allowBlank: true, width: 350, height: 40},
+            {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  allowBlank: true, width: 350, height: 40},
 	        {fieldLabel: 'P.O.Box', xtype: 'textfield',  vtype: 'digits8', name: 'poBox', itemId: 'poBox',  allowBlank: true, width: 210},  
           ]
       },//colizq
@@ -127,89 +141,56 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                               }                          
                       ]                 
                     },
-                    {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUsa',  border: true, collapsible: true, collapsed: true,
+                    {xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormSheltersUsa',  border: true, 
                     	items: [
-                          {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'usaZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 180},                    	        
-                          {fieldLabel: 'State', xtype: 'textfield',  name: 'adminArea1',   itemId: 'adminArea1',    readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'County', xtype: 'textfield',  name: 'adminArea2',   itemId: 'adminArea2',    readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'District',  xtype: 'textfield',  name: 'collArea',     itemId: 'collArea',      readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Locality',   xtype: 'textfield',  name: 'locality',     itemId: 'locality',      readOnly: true, allowBlank: true, width: 250},
-                          {fieldLabel: 'Neighbor.',   xtype: 'textfield',  name: 'subLocality1', itemId: 'subLocality1',  readOnly: true, allowBlank: true, width: 250},
                           {fieldLabel: 'Latitude', xtype: 'numberfield',  name: 'latitude', itemId: 'latitude',  allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
                           {fieldLabel: 'Longitude', xtype: 'numberfield',  name: 'longitude', itemId: 'longitude',  allowBlank: false, decimalPrecision: 8, width: 200, readOnly: true},
+                          {xtype: 'hidden', name: 'adminArea1', itemId: 'adminArea1'},
+                          {xtype: 'hidden', name: 'adminArea2', itemId: 'adminArea2'},
+                          {xtype: 'hidden', name: 'locality', itemId: 'locality'},
+                          {xtype: 'hidden', name: 'statisticalArea', itemId: 'statisticalArea'},
           	              {xtype: 'button', text: 'GeoLocation', itemId: 'botGeoLocation', 
                           	listeners:{
                         		click : function(  The, eOpts ){
-                        			var coordenadas=Ext.getCmp('coordenadasFormSheltersUsa');
                         			var colIzq=Ext.getCmp('colIzqFormSheltersUsa');
                         			var address=null;
-                        			var zip= coordenadas.getComponent('zip').getValue();
                         			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
-                        				request= { 
-                        				  address: colIzq.getComponent('streetAddress').getValue(),
-                        				  componentRestrictions :{
-                            			      country : 'Usa',
-                            			      postalCode: zip 
-                        				  }
-                        				};	
+                        			  address= colIzq.getComponent('streetAddress').getValue() + ', ' + colIzq.getComponent('zip').getValue() + ', USA';	
                         			}else{
-                        				request= { 
-                        						componentRestrictions :{
-                                			      country : 'Usa',
-                                			      postalCode: zip 
-                            				  }
-                              			};	
+                        			  address= colIzq.getComponent('zip').getValue() + ', USA';
                         			}
                         			
-                        		    
-                        			var geocoder = new google.maps.Geocoder();
+                        		    var geocoder = new google.maps.Geocoder();
                         	        
+                        	        request= { 
+                        	        		'address': address,
+                        	        		componentRestrictions: {
+ 	                                          country: 'USA'
+                        	        		}
+                        	        		
+                        	        };
                         	        
                         		    
                         		    geocoder.geocode( request, function( results, status ) {
-                        		    	var coordenadas=Ext.getCmp('coordenadasFormSheltersUsa');
-                        		    	coordenadas.getComponent('adminArea1').reset();
-                        		    	coordenadas.getComponent('adminArea2').reset();
-                        		    	coordenadas.getComponent('collArea').reset();
-                        		    	coordenadas.getComponent('locality').reset();
-                        		    	coordenadas.getComponent('subLocality1').reset();
+                        	            
                         		        if ( status == google.maps.GeocoderStatus.OK ) {
+                        		        	var coordenadas=Ext.getCmp('coordenadasFormSheltersUsa');
                     			    		var res0=results[0];
                     			    		var areas=Utilities.procesaGeoComponentes(res0.address_components);
-                    			    		if (areas['administrative_area_level_1']!=null) coordenadas.getComponent('adminArea1').setValue(areas['administrative_area_level_1']);
-                    			    		if (areas['administrative_area_level_2']!=null) coordenadas.getComponent('adminArea2').setValue(areas['administrative_area_level_2']);
-                    			    		if (areas['colloquial_area']!=null) coordenadas.getComponent('collArea').setValue(areas['colloquial_area']);
-                    			    		if (areas['locality']!=null) coordenadas.getComponent('locality').setValue(areas['locality']);
-                    			    		if (areas['sublocality_level_1']!=null) coordenadas.getComponent('subLocality1').setValue(areas['sublocality_level_1']);
-                    			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.lat());
-                    			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.lng());
-                    			    		//if the zip didn't provide specific county, make a univocal search by latitude and longitude
-                    			    		if (Ext.isEmpty(coordenadas.getComponent('adminArea2').getValue())){
-                        			    		var geocoder2 = new google.maps.Geocoder();
-                        			    		var latlng2 = new google.maps.LatLng(res0.geometry.location.lat(), res0.geometry.location.lng());
-                        			    		geocoder2.geocode({latLng: latlng2}, function (results, status){
-                        			    		  var areas2=Utilities.procesaGeoComponentes(results[0].address_components); 	
-                        			    		  if (areas2['administrative_area_level_2']!=null){
-                        			    			  coordenadas.getComponent('adminArea2').setValue(areas2['administrative_area_level_2'])
-                        			    		  }
-                        			    		});
-                    			    		}
+                    			    		coordenadas.getComponent('latitude').setValue(res0.geometry.location.k);
+                    			    		coordenadas.getComponent('longitude').setValue(res0.geometry.location.B);
                         		        }else{
-                        		        	coordenadas.getComponent('adminArea1').markInvalid();
-                        		        	coordenadas.getComponent('adminArea2').markInvalid();
-                        		        	coordenadas.getComponent('locality').markInvalid();
-                        		        	coordenadas.getComponent('subLocality1').markInvalid();
-                        		        	coordenadas.getComponent('latitude').markInvalid();
+                    			    		coordenadas.getComponent('latitude').markInvalid();
                     			    		coordenadas.getComponent('longitude').markInvalid();	
                         		        }
                         		            
-                        		    });                        		    
+                        		    }, {language: 'en'});                        		    
                         		}	
                         	}
           		          }
                     	]
                     },
-    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', allowBlank: true, width: 250},
+    	            {fieldLabel: 'Picture', xtype: 'textfield',  name: 'logoUrl', itemId: 'logoUrl', allowBlank: true, width: 350},
     	            {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
     		            listeners: {scope: this,  
     		               'click' :  function(but){
@@ -233,20 +214,22 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     /**
      * carga las razas de perro en las que este refugio se especialice
      */
-    cargaRazasAsociadas : function(me, shelterId){
-      var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
+    cargaRazasAsociadas : function(frm, shelterId){
+      var grid=frm.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
 	  var store=grid.getStore();
 	  store.getProxy().extraParams['shelterId']=shelterId;
 	  store.load();
     },
-      
-      
-  	   
+    
   	pueblaDatosEnForm : function(record){
       this.getComponent('shelterUsaId').setValue(record.data['id']);
       this.cargaRazasAsociadas(this, record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
+  	  colIzq.getComponent('zip').setValue(record.get('zip'));
+  	  colIzq.getComponent('city').setValue(record.get('cityName'));
+  	  colIzq.getComponent('county').setValue(record.get('countyName'));
+  	  colIzq.getComponent('state').setValue(record.get('stateName'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
   	  colIzq.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
   	  colIzq.getComponent('email').setValue(record.get('email'));
@@ -254,21 +237,18 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   	  colIzq.getComponent('description').setValue(record.get('description'));
   	  colIzq.getComponent('streetAddress').setValue(record.get('streetAddress'));
   	  colIzq.getComponent('poBox').setValue(record.get('poBox'));
+  	  
       //foto
   	  var colDer=this.getComponent('colDer');
+      var coordenadas=colDer.getComponent('coordenadas');
   	  //colDer.getComponent('specialBreedId').setValue(record.get('specialBreedId'));
   	  //colDer.getComponent('specialBreedId').setRawValue(record.get('specialBreedName'));
   	  colDer.getComponent('logoUrl').setValue(record.get('logoUrl'));
-  	  var coordenadas=colDer.getComponent('coordenadas');
-  	  coordenadas.getComponent('zip').setValue(record.get('zip'));
-  	  coordenadas.getComponent('latitude').setValue(record.get('latitude'));
-  	  coordenadas.getComponent('longitude').setValue(record.get('longitude'));
-  	  coordenadas.getComponent('adminArea1').setValue(record.get('adminArea1'));
-  	  coordenadas.getComponent('adminArea2').setValue(record.get('adminArea2'));
-  	  coordenadas.getComponent('collArea').setValue(record.get('collArea'));
-  	  coordenadas.getComponent('locality').setValue(record.get('locality'));
-  	  coordenadas.getComponent('subLocality1').setValue(record.get('subLocality1'));
-  	  
+  	  colDer.getComponent('coordenadas').getComponent('latitude').setValue(record.get('latitude'));
+  	  colDer.getComponent('coordenadas').getComponent('longitude').setValue(record.get('longitude'));
+  	  coordenadas.getComponent('adminArea1').setValue(colIzq.getComponent('state').getValue());
+  	  coordenadas.getComponent('adminArea2').setValue(colIzq.getComponent('county').getValue());
+  	  coordenadas.getComponent('locality').setValue(colIzq.getComponent('city').getValue());  	  
   	  //imagen, la carga si existe el archivo
   	  var urlImagen =Global.dirAplicacion + '/resources/images/shelterLogos/usa/' +record.get('logoUrl');
   	  try{
@@ -284,6 +264,7 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
 	record.data['id']=  this.getComponent('shelterUsaId').getValue();	  
 	var colIzq=this.getComponent('colIzq');
     record.data['name']=  colIzq.getComponent('name').getValue();
+    record.data['zip']=  colIzq.getComponent('zip').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();
     record.data['urlEncoded']=  colIzq.getComponent('encoding').getComponent('urlEncoded').getValue();
     record.data['email']=  colIzq.getComponent('email').getValue();
@@ -294,15 +275,11 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
     var colDer=this.getComponent('colDer');
     //record.data['specialBreedId']= colDer.getComponent('specialBreedId').getRawValue();
     record.data['logoUrl']=  colDer.getComponent('logoUrl').getValue();
-    var coordenadas=colDer.getComponent('coordenadas');
-    record.data['longitude']= coordenadas.getComponent('longitude').getValue();
-    record.data['latitude']=  coordenadas.getComponent('latitude').getValue();
-    record.data['zip']=  coordenadas.getComponent('zip').getValue();
-    record.data['adminArea1']=  coordenadas.getComponent('adminArea1').getValue();
-    record.data['adminArea2']=  coordenadas.getComponent('adminArea2').getValue();
-    record.data['collArea']=  coordenadas.getComponent('collArea').getValue();
-    record.data['locality']=  coordenadas.getComponent('locality').getValue();
-    record.data['subLocality1']=  coordenadas.getComponent('subLocality1').getValue();
+    record.data['longitude']= colDer.getComponent('coordenadas').getComponent('longitude').getValue();
+    record.data['latitude']=  colDer.getComponent('coordenadas').getComponent('latitude').getValue();
+    record.data['adminArea1']=  colIzq.getComponent('state').getValue();
+    record.data['adminArea2']=  colIzq.getComponent('county').getValue();
+    record.data['locality']=  colIzq.getComponent('city').getValue();;
   	record.commit();
   },  	   
   
@@ -310,21 +287,34 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   validaHijo : function(muestraVentana){
   		   var mensaje=null;
   		   var valido=true;
-  		   
   		   var colIzq=this.getComponent('colIzq');
+
   		   if (!colIzq.getComponent('name').isValid()){
   			   valido=false;
   			   mensaje='Name not valid';
   		   }
   		   
+  		   if (!colIzq.getComponent('state').isValid()){
+  			   valido=false;
+  			   mensaje='State not valid';
+  		   }
+
+  		   if (!colIzq.getComponent('county').isValid()){
+  			   valido=false;
+  			   mensaje='County not valid';
+  		   }
+  		   
+  		   if (!colIzq.getComponent('city').isValid()){
+  			   valido=false;
+  			   mensaje='City not valid';
+  		   }
+  		   
   		   if (!colIzq.getComponent('encoding').getComponent('urlEncoded').isValid()){
   			   valido=false;
   			   mensaje='URL encoded not valid';
-  		   }  		 
+  		   }  		   
   		   
-  		   var colDer=this.getComponent('colDer');
-  		   var coordenadas=colDer.getComponent('coordenadas');
-  		   if (!coordenadas.getComponent('zip').isValid()){
+  		   if (!colIzq.getComponent('zip').isValid()){
   			   valido=false;
   			   mensaje='Zip not valid';
   		   }
@@ -350,27 +340,14 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
   },
   
   /**
-   * Actualiza el store de razas asociadas.
-   * Se lo llama luego de un ingreso o una actualización del registro principal exitosas
+   * override para grabar también el store de las razas asociadas
    */
-  sincronizacionStores : function(me, shelterId){
+  pulsoConfirmar: function(me){
 	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
       var store=grid.getStore();
-	  store.getProxy().extraParams['shelterId']=shelterId;
       store.sync(); 
-  }, 
-  
-  /**
-   * override borrar la lista de razas asociadas (que hubieran podido agregadas durante la entrada anterior)
-   * cada vez que se oprime "agregar"
-   */
-  pulsoAgregar: function(me){
-	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
-      var store=grid.getStore();
-      store.loadData([], false); //esto borra el caché local y no manda nada al server
       me.callParent(arguments);
   }, 
-  
   	   
   
 });

@@ -95,7 +95,7 @@ if ($ultimo=='selecciona'){
 	    $bean->setAdminArea1($_REQUEST['adminArea1']);
 	    $bean->setAdminArea2($_REQUEST['adminArea2']);
 	    $bean->setLocality($_REQUEST['locality']);
-	    $bean->setStatisticalArea($_REQUEST['statisticalArea']);
+	    $bean->setStatisticalArea(null);
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -122,7 +122,7 @@ if ($ultimo=='selecciona'){
 	  $bean->setAdminArea1($_REQUEST['adminArea1']);
 	  $bean->setAdminArea2($_REQUEST['adminArea2']);
 	  $bean->setLocality($_REQUEST['locality']);
-	  $bean->setStatisticalArea($_REQUEST['statisticalArea']);
+	  $bean->setStatisticalArea(null);
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   

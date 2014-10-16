@@ -262,6 +262,7 @@ Ext.define('app.petcms4.abm.PanelFormCabeceraAbm', {
    
   exitoModificacion: function(me){
    	me.fireEvent('datos del formulario cabecera cambiaron');
+   	me.fireEvent('exitoModificacion', me);
    	me.habilitaCampos(me, false);
    	me.agregando=false;
    	me.modificando=false;
