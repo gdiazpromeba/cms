@@ -78,7 +78,7 @@ require_once $GLOBALS['pathCms'] . '/svc/BreedersUsaSvc.php';
       
 
       public function selFirstAreas(){
-      	$arr=$this->oad->selEstadosDeShelters();
+      	$arr=$this->oad->selEstadosDeBreeders();
         $res=array();
       	$res[]=array('value'=>"", 'label'=>"Select State ...");
         foreach ($arr as $dupla){

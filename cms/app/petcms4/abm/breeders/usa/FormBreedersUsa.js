@@ -23,7 +23,7 @@ Ext.define('app.petcms4.abm.breeders.usa.FormBreedersUsa', {
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormBreedersUsa', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
           
-            {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
+            {fieldLabel: 'Breeder Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
             {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
             	items: [
                   {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
