@@ -24,6 +24,8 @@ Ext.define('Utilities', {
 			url=url.replace(new RegExp('\\.', 'g'), "_");
 			//doble guión bajo
 			url=url.replace(new RegExp('__', 'g'), "_");
+			//doble guión bajo
+			url=url.replace(new RegExp('ü', 'g'), "u");
 			return url;
 		},
 		/**
