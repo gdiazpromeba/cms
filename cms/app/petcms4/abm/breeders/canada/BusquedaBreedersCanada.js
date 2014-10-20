@@ -1,11 +1,11 @@
-Ext.define('app.petcms4.abm.breeders.usa.BusquedaBreedersUsa', {
+Ext.define('app.petcms4.abm.breeders.canada.BusquedaBreedersCanada', {
       extend: 'Ext.form.Panel',
       region: 'west',
       frame: true,
       items: [
         {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'name', allowBlank: true, width: 230},
-        {fieldLabel: 'State ', xtype: 'comboUsaStates', itemId: 'comboUsaStates', width: 320 },
-        {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'usaZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
+        {fieldLabel: 'Province ', xtype: 'comboCanadaProvinces', itemId: 'comboCanadaProvinces', width: 320 },
+        {fieldLabel: 'Zip Code ', xtype: 'textfield', vtype: 'canadaZipCode',  itemId: 'zipCode', minLenght: 5, maxLenght: 5,  width: 200 },
         {fieldLabel: 'Breed', xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', width: 320},
       ],
       buttons: [
@@ -44,7 +44,7 @@ Ext.define('app.petcms4.abm.breeders.usa.BusquedaBreedersUsa', {
       getParamsBusqueda: function(){
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('name').getValue());
-        this.agregaClaveValor(resultado, 'state', this.getComponent('comboUsaStates').getRawValue());
+        this.agregaClaveValor(resultado, 'province', this.getComponent('comboCanadaProvinces').getRawValue());
         this.agregaClaveValor(resultado, 'zipCode', this.getComponent('zipCode').getValue());
         this.agregaClaveValor(resultado, 'specialBreedId', this.getComponent('specialBreedId').getValue());
         
@@ -62,8 +62,8 @@ Ext.define('app.petcms4.abm.breeders.usa.BusquedaBreedersUsa', {
 
       reinicializar: function(){
             this.getForm().reset();
-            this.getComponent('comboUsaStates').setValue('');
-            this.getComponent('comboUsaStates').setRawValue('');
+            this.getComponent('comboCanadaProvinces').setValue('');
+            this.getComponent('comboCanadaProvinces').setRawValue('');
             this.getComponent('zipCode').setValue('');
             this.getComponent('specialBreedId').setValue('');
       },

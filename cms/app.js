@@ -25,7 +25,7 @@ Ext.application({
                 }
             },
             canadaZipCode : function(val, field){
-                if (/^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/.test(val)) {
+                if (/^[A-Za-z][0-9][A-Za-z][ -]?[0-9][A-Za-z][0-9]$/.test(val)) {
                     return true;
                 }
             },
