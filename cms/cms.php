@@ -103,7 +103,19 @@
     <script type="text/javascript" src="app/petcms4/abm/breeders/usa/FormBreedersUsa.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/breeders/usa/BusquedaBreedersUsa.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/breeders/usa/GrillaBreedersUsa.js"></script>
-    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/PanelBreedersUsa.js"></script>    
+    <script type="text/javascript" src="app/petcms4/abm/breeders/usa/PanelBreedersUsa.js"></script>   
+    
+    <!-- Breeders Canada -->
+    <script type="text/javascript" src="app/petcms4/abm/breeders/canada/FormBreedersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/canada/BusquedaBreedersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/canada/GrillaBreedersCanada.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/canada/PanelBreedersCanada.js"></script>       
+    
+    <!-- Breeders UK -->
+    <script type="text/javascript" src="app/petcms4/abm/breeders/uk/FormBreedersUk.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/uk/BusquedaBreedersUk.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/uk/GrillaBreedersUk.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/uk/PanelBreedersUk.js"></script>     
     
     <!-- News -->
     <script type="text/javascript" src="app/petcms4/abm/news/FormNews.js"></script>

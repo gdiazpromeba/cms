@@ -69,16 +69,16 @@ require_once $GLOBALS['pathCms'] . '/beans/UkRegion.php';
       } 
 
 
-      public function selTodos($countryName, $desde, $cuantos){ 
+      public function selTodos($statistical, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  REGION_ID,     \n"; 
          $sql.="  REGION_NAME     \n"; 
          $sql.="FROM  \n"; 
          $sql.="  UK_REGIONS  \n"; 
-         if (!empty($countryName)){
+         if (!empty($statistical)){
          	$sql.="WHERE  \n";
-         	$sql.="  COUNTRY_NAME='" . $countryName . "'  \n";
+         	$sql.="  STATISTICAL_AREA='" . $statistical . "'  \n";
          }
          $sql.="ORDER BY  \n"; 
          $sql.="  REGION_NAME  \n"; 
@@ -119,12 +119,12 @@ require_once $GLOBALS['pathCms'] . '/beans/UkRegion.php';
       }
 
 
-      public function selTodosCuenta($countryName){ 
+      public function selTodosCuenta($statistical){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM UK_REGIONS "; 
          if (!empty($statistical)){
          	$sql.="WHERE  \n";
-         	$sql.="  COUNTRY_NAME='" . $countryName . "'  \n";
+         	$sql.="  STATISTICAL_AREA='" . $statistical . "'  \n";
          }
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
