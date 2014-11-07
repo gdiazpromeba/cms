@@ -126,18 +126,19 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                                   var store=Ext.getCmp('comboUkStatisticalForm').getStore();
                               	  store.proxy.extraParams = { countryName: value[0].data.name};
                               	  store.load();
-                              	  
-                                  var store2=Ext.getCmp('comboUkRegionsForm').getStore();
-                              	  store2.proxy.extraParams = { countryName: value[0].data.name};
-                              	  store2.load();
-                              	  
-                          		}
+                          		},
+//                          		load : {
+//                          			
+//                                  var store2=Ext.getCmp('comboUkRegionsForm').getStore();
+//                                  store2.proxy.extraParams = { statistical: store.getAt(0).data.name};
+//                                  store2.load();
+//                          		}
                           	}
                           },
                           {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  name: 'statistical', id: 'comboUkStatisticalForm', width: 330,
                           	listeners:{
                           		select : function(combo, value){
-                                	  var store=Ext.getCmp('comboUkRegionsForm').getStore();
+                                  var store=Ext.getCmp('comboUkRegionsForm').getStore();
                               	  store.proxy.extraParams = { statistical: value[0].data.name};
                               	  store.load();
                           		}
@@ -146,7 +147,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                           {fieldLabel: 'County (manual)', xtype: 'comboUkRegions', itemId: 'comboUkRegionsForm', id: 'comboUkRegionsForm', width: 350,
                           	listeners:{
                         		select : function(combo, value){
-                        			var aa2=Ext.getCmp('adminArea2');
+                        			var aa2=combo.up('fieldset').down('#adminArea2');
                         			if (Ext.isEmpty(aa2.getValue())){
                         				Ext.getCmp('adminArea2').setValue(value[0].data.name);	
                         			}
