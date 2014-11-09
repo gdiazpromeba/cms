@@ -260,7 +260,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUk.php';
       } 
 
       
-      public function selTodos($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $countryName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHJ.ID,     \n"; 
@@ -289,11 +289,11 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUk.php';
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($prefectureName))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
+         if (!(empty($countryName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $countryName . "'  \n";
          }
-         if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         if (!(empty($countyName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $countyName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
@@ -309,6 +309,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUk.php';
          	$sql.="  SHJ.NAME  \n";
          }         
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+         //fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
@@ -364,18 +365,18 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUk.php';
       } 
 
 
-      public function selTodosCuenta($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId){ 
+      public function selTodosCuenta($nombre, $countryName, $countyName, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM BREEDERS_UK SHJ "; 
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($prefectureName))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
+         if (!(empty($countryName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $countryName . "'  \n";
          }
-         if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         if (!(empty($countyName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $countyName . "'  \n";
          }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	

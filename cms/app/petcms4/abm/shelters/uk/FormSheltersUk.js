@@ -34,7 +34,7 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
             {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  allowBlank: true, width: 320},
             {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  allowBlank: true, width: 210},
             {fieldLabel: 'Description', xtype: 'textareafield',  name: 'description', itemId: 'description',  grow: false, width: 350, height: 70},
-            {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  id: 'streetAddress', 
+            {fieldLabel: 'Street Address', xtype: 'textareafield',  name: 'streetAddress', itemId: 'streetAddress',  
 	          allowBlank: true, width: 350, height: 40},
 	        {fieldLabel: 'P.O.Box', xtype: 'textfield',  vtype: 'digits8', name: 'poBox', itemId: 'poBox',  allowBlank: true, width: 210},  
           ]
@@ -122,33 +122,30 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                           {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'ukZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 180}, 
                           {fieldLabel: 'Country', xtype: 'comboCountriesUk', name: 'adminArea1', itemId: 'adminArea1', width: 230,
                           	listeners:{
-                          		select : function(combo, value){
+                          		chage : function(index, oldValue, newValue){
+                          		  setInterval(500);
                                   var store=Ext.getCmp('comboUkStatisticalForm').getStore();
-                              	  store.proxy.extraParams = { countryName: value[0].data.name};
+                              	  store.proxy.extraParams = { countryName: newValue};
                               	  store.load();
-                              	  
-                                  var store2=Ext.getCmp('comboUkRegionsForm').getStore();
-                              	  store2.proxy.extraParams = { countryName: value[0].data.name};
-                              	  store2.load();
-                              	  
                           		}
                           	}
                           },
                           {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  name: 'statistical', id: 'comboUkStatisticalForm', width: 330,
                           	listeners:{
-                          		select : function(combo, value){
-                                	  var store=Ext.getCmp('comboUkRegionsForm').getStore();
-                              	  store.proxy.extraParams = { statistical: value[0].data.name};
+                          		chage : function(index, oldValue, newValue){
+                          		  setInterval(500);	
+                                  var store=Ext.getCmp('comboUkRegionsForm').getStore();
+                              	  store.proxy.extraParams = { statistical: newValue};
                               	  store.load();
                           		}
                           	}
                           },                          
                           {fieldLabel: 'County (manual)', xtype: 'comboUkRegions', itemId: 'comboUkRegionsForm', id: 'comboUkRegionsForm', width: 350,
                           	listeners:{
-                        		select : function(combo, value){
+                          		chage : function(index, oldValue, newValue){
                         			var aa2=Ext.getCmp('adminArea2');
                         			if (Ext.isEmpty(aa2.getValue())){
-                        				Ext.getCmp('adminArea2').setValue(value[0].data.name);	
+                        				Ext.getCmp('adminArea2').setValue(newValue);	
                         			}
                         		}
                         	}
@@ -165,12 +162,14 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                                       	  listeners:{
                                     		click : function(  The, eOpts ){
                                     			var coordenadas=Ext.getCmp('coordenadasFormSheltersUk');
+                                    			var postalCodeField=coordenadas.getComponent('zip');
+                                    			postalCodeField.setValue(postalCodeField.getValue().toUpperCase());                                    			
                                     			var colIzq=Ext.getCmp('colIzqFormSheltersUk');
                                     			var address=null;
                                     			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
                                       			  address= colIzq.getComponent('streetAddress').getValue() + ', ' + coordenadas.getComponent('zip').getValue() + ', United Kingdom';	
                                       			}else{
-                                      			  address= coordenadas.getComponent('zip').getValue() + ', United Kingdom';
+                                      			  address= postalCodeField.getValue() + ', United Kingdom';
                                       			}
                                       			
                                       		    var geocoder = new google.maps.Geocoder();
@@ -229,9 +228,13 @@ Ext.define('app.petcms4.abm.shelters.japan.FormSheltersUk', {
                                       			        regionName: countyName
                                       			    },
                                       			    success: function(response){
-                                      			    	var res= Ext.JSON.decode(response.responseText)
-                                      			    	coordenadas.getComponent('comboUkStatistical').setValue(res.statistical);
+                                      			    	var res= Ext.JSON.decode(response.responseText);
                                       			    	coordenadas.getComponent('adminArea1').setValue(res.country);
+                                      			    	setTimeout(
+                                      			    		  function(){	
+                                      			    			  coordenadas.getComponent('comboUkStatistical').setValue(res.statistical);
+                                      			    		  }, 2000
+                                      			        );                                      			    	
                                       			    },                                    
                                       			    failure: function(){
                                       			    	alert("Error finding this region's containing areas");
