@@ -122,9 +122,10 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                           {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'ukZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 180}, 
                           {fieldLabel: 'Country', xtype: 'comboCountriesUk', name: 'adminArea1', itemId: 'adminArea1', width: 230,
                           	listeners:{
-                          		select : function(combo, value){
+                          		change : function(field, newValue, oldValue){
+                          		  console.log('a country has been selected');
                                   var store=Ext.getCmp('comboUkStatisticalForm').getStore();
-                              	  store.proxy.extraParams = { countryName: value[0].data.name};
+                              	  store.proxy.extraParams = { countryName: newValue};
                               	  store.load();
                           		},
 //                          		load : {
@@ -137,19 +138,20 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                           },
                           {fieldLabel: 'St.Area', xtype: 'comboUkStatistical', itemId: 'comboUkStatistical',  name: 'statistical', id: 'comboUkStatisticalForm', width: 330,
                           	listeners:{
-                          		select : function(combo, value){
+                          		change : function(field, newValue, oldValue){
+                          		  console.log('algo seleccionado en las statistical');
                                   var store=Ext.getCmp('comboUkRegionsForm').getStore();
-                              	  store.proxy.extraParams = { statistical: value[0].data.name};
+                              	  store.proxy.extraParams = { statistical: newValue};
                               	  store.load();
                           		}
                           	}
                           },                          
                           {fieldLabel: 'County (manual)', xtype: 'comboUkRegions', itemId: 'comboUkRegionsForm', id: 'comboUkRegionsForm', width: 350,
                           	listeners:{
-                        		select : function(combo, value){
+                        		change : function(field, newValue, oldValue){
                         			var aa2=combo.up('fieldset').down('#adminArea2');
                         			if (Ext.isEmpty(aa2.getValue())){
-                        				Ext.getCmp('adminArea2').setValue(value[0].data.name);	
+                        				Ext.getCmp('adminArea2').setValue(newValue);	
                         			}
                         		}
                         	}
@@ -166,12 +168,14 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                                       	  listeners:{
                                     		click : function(  The, eOpts ){
                                     			var coordenadas=Ext.getCmp('coordenadasFormBreedersUk');
+                                    			var postalCodeField=coordenadas.getComponent('zip');
+                                    			postalCodeField.setValue(postalCodeField.getValue().toUpperCase());
                                     			var colIzq=Ext.getCmp('colIzqFormBreedersUk');
                                     			var address=null;
                                     			if (Ext.isEmpty(colIzq.getComponent('poBox').getValue())){
                                       			  address= colIzq.getComponent('streetAddress').getValue() + ', ' + coordenadas.getComponent('zip').getValue() + ', United Kingdom';	
                                       			}else{
-                                      			  address= coordenadas.getComponent('zip').getValue() + ', United Kingdom';
+                                      			  address= postalCodeField.getValue() + ', United Kingdom';
                                       			}
                                       			
                                       		    var geocoder = new google.maps.Geocoder();
@@ -231,8 +235,12 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                                       			    },
                                       			    success: function(response){
                                       			    	var res= Ext.JSON.decode(response.responseText)
-                                      			    	coordenadas.getComponent('comboUkStatistical').setValue(res.statistical);
                                       			    	coordenadas.getComponent('adminArea1').setValue(res.country);
+                                      			    	setTimeout(
+                                      			    		  function(){	
+                                      			    			  coordenadas.getComponent('comboUkStatistical').setValue(res.statistical);
+                                      			    		  }, 3000
+                                      			        );
                                       			    },                                    
                                       			    failure: function(){
                                       			    	alert("Error finding this region's containing areas");
