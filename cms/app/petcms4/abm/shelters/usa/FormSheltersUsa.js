@@ -191,6 +191,8 @@ Ext.define('app.petcms4.abm.shelters.usa.FormSheltersUsa', {
                         			    		  var areas2=Utilities.procesaGeoComponentes(results[0].address_components); 	
                         			    		  if (areas2['administrative_area_level_2']!=null){
                         			    			  coordenadas.getComponent('adminArea2').setValue(areas2['administrative_area_level_2'])
+                        			    		  }else{
+                        			    			  alert("I am sorry, I cannot determine what county this is");
                         			    		  }
                         			    		});
                     			    		}
