@@ -1,13 +1,16 @@
 <?php 
 
 require_once $GLOBALS['pathCms'] . '/oad/impl/BreedersUsaOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/CatBreedsByBreederOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/svc/BreedersUsaSvc.php';
 
    class BreedersUsaSvcImpl implements BreedersUsaSvc { 
       private $oad=null; 
+      private $catBreedersByBreedOad=null; 
 
       function __construct(){ 
-         $this->oad=new BreedersUsaOadImpl();   
+         $this->oad=new BreedersUsaOadImpl();  
+          $this->catBreedersByBreedOad=new CatBreedsByBreederOadImpl();
       } 
 
       public function obtiene($id){ 
@@ -65,6 +68,18 @@ require_once $GLOBALS['pathCms'] . '/svc/BreedersUsaSvc.php';
       	$arr=$this->oad->desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
       	return $arr;
       }
+      
+      public function vinculaCatBreedABreeder($breederId, $catBreedId){
+      	$arr=$this->catBreedersByBreedOad->vinculaCatBreedABreeder($breederId, $catBreedId);
+      	return $arr;
+      }      
+      
+      public function desvinculaCatBreedDeBreeder($breederId, $catBreedId){
+      	$arr=$this->catBreedersByBreedOad->desvinculaCatBreedDeBreeder($breederId, $catBreedId);
+      	return $arr;
+      }      
+      
+      
       
       public function selTodosWeb($shelterName, $stateName, $countyName,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
       	$arr=$this->oad->selTodos($shelterName, $stateName, $countyName,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);

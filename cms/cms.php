@@ -47,6 +47,7 @@
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingAmounts.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingFrequencies.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogBreeds.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboCatBreeds.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboVideos.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboNews.js"></script>
 

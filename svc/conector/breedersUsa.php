@@ -5,7 +5,8 @@
   require_once $GLOBALS['pathCms'] . '/beans/ZipGenerico.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/ZipsGenericoSvcImpl.php';
   
-  //require_once('FirePHPCore/fb.php4');
+  
+//    require_once('FirePHPCore/fb.php4');
   
   
   header("Content-Type: text/plain; charset=utf-8");
@@ -196,6 +197,39 @@ if ($ultimo=='selecciona'){
   	foreach ($data as $item){
       $breedId=$item['id'];
       $svc->desvinculaDogBreedDeBreeder($breederId, $breedId);
+  	}
+  	
+   
+  } else if ($ultimo=='vinculaCatBreed'){
+  	header("Content-Type: application/json; charset=utf-8");
+  	   
+  	//la parte http común
+  	$breederId=$_REQUEST['breederId'];
+    
+    // este código mágico extrae solamente la parte JSON de la respuesta
+  	$request_body = file_get_contents('php://input');
+  	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
+  	
+  	$svc = new BreedersUsaSvcImpl();
+  	foreach ($data as $item){
+      $breedId=$item['id'];
+      $svc->vinculaCatBreedABreeder($breederId, $breedId);
+  	}
+  	
+ } else if ($ultimo=='desvinculaCatBreed'){
+   	header("Content-Type: application/json; charset=utf-8");
+  	   
+  	//la parte http común
+  	$breederId=$_REQUEST['breederId'];
+    
+    // este código mágico extrae solamente la parte JSON de la respuesta
+  	$request_body = file_get_contents('php://input');
+  	$data = json_decode($request_body, true); // el "true"  es para indicar que quiero un array y no un objeto stdClass
+  	
+  	$svc = new BreedersUsaSvcImpl();
+  	foreach ($data as $item){
+      $breedId=$item['id'];
+      $svc->desvinculaCatBreedDeBreeder($breederId, $breedId);
   	}
   	
   }

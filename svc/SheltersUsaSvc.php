@@ -1,7 +1,9 @@
 <?php 
 
    require_once $GLOBALS['pathCms'] . '/svc/SheltersWebSelection.php';
-   interface SheltersUsaSvc extends SheltersWebSelection{ 
+   require_once $GLOBALS['pathCms'] . '/svc/DogBreedsByBreederSvc.php';    
+   
+   interface SheltersUsaSvc extends SheltersWebSelection, DogBreedsByBreederSvc{ 
 
       public function obtiene($id); 
       public function obtienePorNumero($numero);
@@ -14,10 +16,6 @@
       public function zipContainers($zipCode); 
       
      
-      
-      public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
-      public function vinculaDogBreedAShelter($shelterId, $dogBreedId);
-      
    } 
 
 ?>

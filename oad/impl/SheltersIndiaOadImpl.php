@@ -392,36 +392,6 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterIndia.php';
       	return $filas;
       }      
       
-      public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
-      	$conexion=$this->conectarse();
-      	$sql="INSERT INTO DOG_BREEDS_BY_SHELTER (   \n";
-      	$sql.="  DOG_BREED_ID,     \n";
-      	$sql.="  SHELTER_ID     \n";
-      	$sql.=")VALUES (?, ?)    \n";
-      	$stm=$this->preparar($conexion, $sql);
-      	$stm->bind_param("ss", $dogBreedId, $shelterId);
-      	$stm->execute();
-      	$stm->close();
-      	$conexion->close();
-      	$res=array();
-      	$res['success']=true;
-      	return $res;
-      }
-      
-      public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId){
-      	$conexion=$this->conectarse();
-      	$sql="DELETE FROM DOG_BREEDS_BY_SHELTER    \n";
-      	$sql.="WHERE      \n";
-      	$sql.="  SHELTER_ID ='" . $shelterId  . "'     \n";
-      	$sql.="  AND DOG_BREED_ID ='" . $dogBreedId  . "'     \n";
-      	$stm=$this->preparar($conexion, $sql);
-      	$stm->execute();
-      	$stm->close();
-      	$conexion->close();
-      	$res=array();
-      	$res['success']=true;
-      	return $res;
-      }      
 
    } 
 ?>

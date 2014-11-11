@@ -3,15 +3,19 @@
 require_once $GLOBALS['pathCms'] . '/oad/impl/SheltersUsaOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/svc/SheltersUsaSvc.php';
 require_once $GLOBALS['pathCms'] . '/oad/impl/UsaStatesOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByBreederOadImpl.php';
 
 
    class SheltersUsaSvcImpl implements SheltersUsaSvc { 
       private $oad=null; 
       private $usaStatesOad = null;
+      private $dogBreedersByBreedOad=null; 
+      
 
       function __construct(){ 
          $this->oad=new SheltersUsaOadImpl();   
          $this->usaStatesOad = new UsaStatesOadImpl();
+         $this->dogBreedersByBreedOad=new DogBreedsByBreederOadImpl();         
       } 
 
       public function obtiene($id){ 
