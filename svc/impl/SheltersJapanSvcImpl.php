@@ -2,16 +2,16 @@
 
 require_once $GLOBALS['pathCms'] . '/oad/impl/SheltersJapanOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/svc/SheltersJapanSvc.php';
-require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByBreederOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByShelterOadImpl.php';
 
    class SheltersJapanSvcImpl implements SheltersJapanSvc { 
       private $oad=null; 
-      private $dogBreedersByBreedOad=null; 
+      private $dogBreedsByShelter=null; 
       
 
       function __construct(){ 
          $this->oad=new SheltersJapanOadImpl();   
-         $this->dogBreedersByBreedOad=new DogBreedsByBreederOadImpl();         
+         $this->dogBreedsByShelter=new DogBreedsByShelterOadImpl();
       } 
 
       public function obtiene($id){ 
@@ -61,12 +61,12 @@ require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByBreederOadImpl.php';
       } 
       
       public function vinculaDogBreedAShelter($shelterId, $dogBreedId){
-      	$arr=$this->oad->vinculaDogBreedAShelter($shelterId, $dogBreedId);
+      	$arr= $this->dogBreedsByShelter->vinculaDogBreedAShelter($shelterId, $dogBreedId);
       	return $arr;
       }      
       
       public function desvinculaDogBreedDeShelter($shelterId, $dogBreedId){
-      	$arr=$this->oad->desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
+      	$arr= $this->dogBreedsByShelter->desvinculaDogBreedDeShelter($shelterId, $dogBreedId);
       	return $arr;
       }
       

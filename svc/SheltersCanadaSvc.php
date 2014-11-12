@@ -1,10 +1,10 @@
 <?php 
 
    require_once $GLOBALS['pathCms'] . '/svc/SheltersWebSelection.php';
-   require_once $GLOBALS['pathCms'] . '/svc/DogBreedsByBreederSvc.php';
+   require_once $GLOBALS['pathCms'] . '/svc/DogBreedsByShelterSvc.php';
    
    
-   interface SheltersCanadaSvc extends SheltersWebSelection, DogBreedsByBreederSvc{ 
+   interface SheltersCanadaSvc extends SheltersWebSelection, DogBreedsByShelterSvc{ 
 
       public function obtiene($id); 
       public function obtienePorNumero($numero);
