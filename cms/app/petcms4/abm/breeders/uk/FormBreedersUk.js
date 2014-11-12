@@ -8,6 +8,16 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
     urlModificacion: Global.dirAplicacion + '/svc/conector/breedersUk.php/actualiza',
     urlBorrado: Global.dirAplicacion + '/svc/conector/breedersUk.php/borra',
     layout: 'column',
+    listeners:{
+    	exitoAgregado: function (nuevoId){
+    		this.sincronizacionStores(this, nuevoId);
+    		
+    	},
+    	exitoModificacion: function (me){
+    		var nuevoId = me.down('#' + me.nombreElementoId).getValue();
+    		me.sincronizacionStores(me, nuevoId);
+    	}
+    },    
     items: [
       {xtype: 'hidden', name: 'breederUkId', id: 'breederUkId', itemId: 'breederUkId'},            
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormBreedersUk', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
@@ -41,7 +51,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
       },//colizq
       {xtype: 'fieldset', itemId: 'colDer', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
     	  items:[
-                    { title: 'Related breeds', xtype: 'fieldset', itemId: 'specializations', border: true, collapsible: true, collapsed: true,
+                    { title: 'Related Dog breeds', xtype: 'fieldset', itemId: 'specializations', border: true, collapsible: true, collapsed: true,
                       items: [
                               {xtype: 'comboDogBreeds', name: 'specialBreedId', itemId: 'specialBreedId', id: 'specialBreedId', width: 320},
                               {xtype: 'button', text: 'Add', itemId: 'botAddSpecial',
@@ -117,6 +127,82 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
                               }                          
                       ]                 
                     },
+                    { title: 'Related cat breeds', xtype: 'fieldset', itemId: 'specializationsCats', border: true, collapsible: true, collapsed: true,
+                        items: [
+                                {xtype: 'comboCatBreeds', name: 'specialBreedIdCats', itemId: 'specialBreedIdCats', width: 320},
+                                {xtype: 'button', text: 'Add', itemId: 'botAddSpecialCats',
+                              	  listeners:{
+                              		  click : function(  The, eOpts ){
+                              			  var cmbBreeds = The.up('fieldset').getComponent('specialBreedIdCats');
+                            			  var id=cmbBreeds.getValue();
+                            			  var name=cmbBreeds.getRawValue();                              			  
+                              			  var grid=The.up('fieldset').getComponent('breedsAddedCats');
+                              			  var store=grid.getStore();
+                              			  var registro = Ext.create(store.model.modelName);
+                              			  registro.data['id']=id;
+                              			  registro.data['name']=name;
+                              			  store.insert(0, registro);
+                              		  }
+                              	  }
+                                },
+                                {fieldLabel: 'Added so far', xtype: 'grid', name: 'breedsAddedCats', itemId: 'breedsAddedCats', width: 320, height: 250,
+                              	  columns : [ 
+                              	     	    {header : 'id', dataIndex : 'id', hidden : true}, 
+                              	     	    {header : 'Breed name', dataIndex : 'name', width : 310, sortable : true}
+                              	   ],
+                                     model: Ext.define('relatedCatBreedsModel',{   
+                                       extend: 'Ext.data.Model',
+                                         fields : [ 
+                                           {name : 'id', type : 'string'}, 
+                                        	 {name : 'name', type : 'string'}
+                                         ],
+                                         idProperty: 'id'
+                                     }),
+                                     store: Ext.create('Ext.data.JsonStore', {
+                                  	    // store configs
+                                  	    autoDestroy: true,
+                                  	    model: relatedCatBreedsModel,
+                                  	    proxy: {
+                                  	        type: 'ajax',
+                                  	        url: Global.dirAplicacion + '/svc/conector/catBreeds.php/selNombresPorBreeder',
+                                  	        reader: {
+                                  	            type: 'json',
+                                  	            root: 'data',
+                                  	            idProperty: 'id',
+                                  	            totalProperty: 'total'
+                                  	        },
+                                  	        writer: {
+                                  	            type: 'json',
+                                  	            writeAllFields : false,  //just send changed fields
+                                  	            allowSingle :false,      //always wrap in an array
+                                  	            idProperty: 'id'
+                                  	           // nameProperty: 'mapping'
+                                  	        },                                	        
+                                  	        api: {
+                                  	          read: Global.dirAplicacion + '/svc/conector/catBreeds.php/selNombresPorBreeder',
+                                  	          create: Global.dirAplicacion + '/svc/conector/breedersUk.php/vinculaCatBreed',
+                                  	          //update: Global.dirAplicacion + '/svc/conector/dogBreeds.php/actualizaEnLotePorShelter',
+                                  	          destroy: Global.dirAplicacion + '/svc/conector/breedersUk.php/desvinculaCatBreed',
+                                  	        }
+                                  	    },
+                                  	    remoteSort: false,
+                                  	    pageSize: 15
+                                  	}),
+                                },
+                                {xtype: 'button', text: 'Delete', itemId: 'botDeleteSpecialCats',
+                              	  listeners: {
+                              		  click: function(The, Opts){
+                              			var grid=The.up('fieldset').getComponent('breedsAddedCats');
+                              		    var selection = grid.getSelectionModel().getSelection()[0];
+                              		    if (selection) {
+                              		      var store=grid.getStore();
+                              		      store.remove(selection);
+                              		    }
+                              		  }
+                              	  }
+                                }                          
+                        ]                 
+                    },                    
                     {title: 'GeoLocation', xtype: 'fieldset', itemId: 'coordenadas', id: 'coordenadasFormBreedersUk',  border: true, collapsible: true, collapsed: true,
                     	items: [
                           {fieldLabel: 'Zip Code', xtype: 'textfield', vtype: 'ukZipCode',  name: 'zip', itemId: 'zip',  allowBlank: false, width: 180}, 
@@ -270,13 +356,21 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
     ],
     
     /**
-     * carga las razas de perro en las que este refugio se especialice
+     * carga las razas en las que este refugio se especialice
      */
     cargaRazasAsociadas : function(me, breederId){
+      //de perro
       var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
 	  var store=grid.getStore();
 	  store.getProxy().extraParams['breederId']=breederId;
 	  store.load();
+	  
+      //de gato
+	  grid=me.getComponent('colDer').getComponent('specializationsCats').getComponent('breedsAddedCats');
+	  store=grid.getStore();
+	  store.getProxy().extraParams['breederId']=breederId;
+	  store.load();
+	  
     },
       
       
@@ -391,10 +485,17 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
    * Se lo llama luego de un ingreso o una actualización del registro principal exitosas
    */
   sincronizacionStores : function(me, breederId){
+	  //perros
 	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
       var store=grid.getStore();
 	  store.getProxy().extraParams['breederId']=breederId;
       store.sync(); 
+      
+      //gatos
+	  grid=me.getComponent('colDer').getComponent('specializationsCats').getComponent('breedsAddedCats');
+      store=grid.getStore();
+	  store.getProxy().extraParams['breederId']=breederId;
+      store.sync();       
   }, 
   
   /**
@@ -402,10 +503,17 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
    * cada vez que se oprime "agregar"
    */
   pulsoAgregar: function(me){
+	  //perros
 	  var grid=me.getComponent('colDer').getComponent('specializations').getComponent('breedsAdded');
       var store=grid.getStore();
       store.loadData([], false); //esto borra el caché local y no manda nada al server
       me.callParent(arguments);
+      
+	  //gatos
+      grid=me.getComponent('colDer').getComponent('specializationsCats').getComponent('breedsAddedCats');
+      store=grid.getStore();
+      store.loadData([], false); //esto borra el caché local y no manda nada al server
+      me.callParent(arguments);      
   }, 
   	   
   

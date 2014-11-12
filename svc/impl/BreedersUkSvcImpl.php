@@ -2,12 +2,20 @@
 
 require_once $GLOBALS['pathCms'] . '/oad/impl/BreedersUkOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/svc/BreedersUkSvc.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByBreederOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/CatBreedsByBreederOadImpl.php';
+
 
    class BreedersUkSvcImpl implements BreedersUkSvc { 
       private $oad=null; 
+      private $catBreedsByBreederOad=null; 
+      private $dogBreedsByBreederOad=null;
+      
 
       function __construct(){ 
-         $this->oad=new BreedersUkOadImpl();   
+         $this->oad=new BreedersUkOadImpl();  
+         $this->catBreedsByBreederOad=new CatBreedsByBreederOadImpl();
+         $this->dogBreedsByBreederOad= new DogBreedsByBreederOadImpl();
       } 
 
       public function obtiene($id){ 
@@ -57,14 +65,24 @@ require_once $GLOBALS['pathCms'] . '/svc/BreedersUkSvc.php';
       } 
       
       public function vinculaDogBreedABreeder($breederId, $dogBreedId){
-      	$arr=$this->oad->vinculaDogBreedABreeder($breederId, $dogBreedId);
+      	$arr=$this->dogBreedsByBreederOad->vinculaDogBreedABreeder($breederId, $dogBreedId);
       	return $arr;
       }      
       
       public function desvinculaDogBreedDeBreeder($breederId, $dogBreedId){
-      	$arr=$this->oad->desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
+      	$arr=$this->dogBreedsByBreederOad->desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
       	return $arr;
       }
+      
+      public function vinculaCatBreedABreeder($breederId, $catBreedId){
+      	$arr=$this->catBreedsByBreederOad->vinculaCatBreedABreeder($breederId, $catBreedId);
+      	return $arr;
+      }      
+      
+      public function desvinculaCatBreedDeBreeder($breederId, $catBreedId){
+      	$arr=$this->catBreedsByBreederOad->desvinculaCatBreedDeBreeder($breederId, $catBreedId);
+      	return $arr;
+      } 
       
       public function selTodosWeb($breederName, $countryName, $countyName,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){
       	$arr=$this->oad->selTodos($breederName, $countryName, $countyName,  $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);

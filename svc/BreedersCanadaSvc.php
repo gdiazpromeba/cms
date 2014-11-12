@@ -1,7 +1,12 @@
 <?php 
 
    require_once $GLOBALS['pathCms'] . '/svc/SheltersWebSelection.php';
-   interface BreedersCanadaSvc extends SheltersWebSelection{ 
+   require_once $GLOBALS['pathCms'] . '/svc/CatBreedsByBreederSvc.php';
+   require_once $GLOBALS['pathCms'] . '/svc/DogBreedsByBreederSvc.php';
+   
+   
+   
+   interface BreedersCanadaSvc extends SheltersWebSelection, CatBreedsByBreederSvc, DogBreedsByBreederSvc{ 
 
       public function obtiene($id); 
       public function obtienePorNumero($numero);
@@ -12,10 +17,6 @@
       public function selTodos($nombre, $stateName, $countyName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos);
       public function selTodosCuenta($nombre, $stateName, $countyName, $latitude, $longitude, $distance, $specialBreedId);
       public function zipContainers($zipCode); 
-      
-     
-      public function desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
-      public function vinculaDogBreedABreeder($breederId, $dogBreedId);
       
       
    } 

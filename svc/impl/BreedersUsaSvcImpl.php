@@ -2,15 +2,22 @@
 
 require_once $GLOBALS['pathCms'] . '/oad/impl/BreedersUsaOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/oad/impl/CatBreedsByBreederOadImpl.php';
+require_once $GLOBALS['pathCms'] . '/oad/impl/DogBreedsByBreederOadImpl.php';
 require_once $GLOBALS['pathCms'] . '/svc/BreedersUsaSvc.php';
+require_once $GLOBALS['pathCms'] . '/svc/DogBreedsByBreederSvc.php';
+require_once $GLOBALS['pathCms'] . '/svc/CatBreedsByBreederSvc.php';
 
-   class BreedersUsaSvcImpl implements BreedersUsaSvc { 
+   class BreedersUsaSvcImpl implements BreedersUsaSvc{ 
       private $oad=null; 
-      private $catBreedersByBreedOad=null; 
+      private $catBreedsByBreederOad=null; 
+      private $dogBreedsByBreederOad=null;
+      
+      
 
       function __construct(){ 
          $this->oad=new BreedersUsaOadImpl();  
-          $this->catBreedersByBreedOad=new CatBreedsByBreederOadImpl();
+          $this->catBreedsByBreederOad=new CatBreedsByBreederOadImpl();
+          $this->dogBreedsByBreederOad= new DogBreedsByBreederOadImpl();
       } 
 
       public function obtiene($id){ 
@@ -60,22 +67,22 @@ require_once $GLOBALS['pathCms'] . '/svc/BreedersUsaSvc.php';
       } 
       
       public function vinculaDogBreedABreeder($breederId, $dogBreedId){
-      	$arr=$this->oad->vinculaDogBreedABreeder($breederId, $dogBreedId);
+      	$arr=$this->dogBreedsByBreederOad->vinculaDogBreedABreeder($breederId, $dogBreedId);
       	return $arr;
       }      
       
       public function desvinculaDogBreedDeBreeder($breederId, $dogBreedId){
-      	$arr=$this->oad->desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
+      	$arr=$this->dogBreedsByBreederOad->desvinculaDogBreedDeBreeder($breederId, $dogBreedId);
       	return $arr;
       }
       
       public function vinculaCatBreedABreeder($breederId, $catBreedId){
-      	$arr=$this->catBreedersByBreedOad->vinculaCatBreedABreeder($breederId, $catBreedId);
+      	$arr=$this->catBreedsByBreederOad->vinculaCatBreedABreeder($breederId, $catBreedId);
       	return $arr;
       }      
       
       public function desvinculaCatBreedDeBreeder($breederId, $catBreedId){
-      	$arr=$this->catBreedersByBreedOad->desvinculaCatBreedDeBreeder($breederId, $catBreedId);
+      	$arr=$this->catBreedsByBreederOad->desvinculaCatBreedDeBreeder($breederId, $catBreedId);
       	return $arr;
       }      
       
