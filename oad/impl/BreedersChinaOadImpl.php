@@ -1,11 +1,11 @@
 <?php 
 
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
-require_once $GLOBALS['pathCms'] . '/oad/BreedersUsaOad.php';
-require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
+require_once $GLOBALS['pathCms'] . '/oad/BreedersChinaOad.php';
+require_once $GLOBALS['pathCms'] . '/beans/BreederChina.php';
 //require_once('FirePHPCore/fb.php4'); 
 
-   class BreedersUsaOadImpl extends AOD implements BreedersUsaOad { 
+   class BreedersChinaOadImpl extends AOD implements BreedersChinaOad { 
 
       public function obtiene($id){ 
          $conexion=$this->conectarse(); 
@@ -31,13 +31,13 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          $sql.="  SHJ.LATITUDE,     \n";
          $sql.="  SHJ.LONGITUDE     \n";
          $sql.="FROM  \n"; 
-         $sql.="  BREEDERS_USA  SHJ \n"; 
-         $sql.="  INNER JOIN USA_ZIPS ZIU ON SHJ.ZIP_CODE=ZIU.ZIP_CODE  \n";
+         $sql.="  BREEDERS_CHINA  SHJ \n"; 
+         $sql.="  INNER JOIN CHINA_ZIPS ZIU ON SHJ.ZIP_CODE=ZIU.ZIP_CODE  \n";
          $sql.="WHERE  \n"; 
          $sql.="  SHJ.ID='" . $id . "' \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $bean=new BreederUsa();  
+         $bean=new BreederChina();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
          		$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
          		$distance, $latitud, $longitud); 
@@ -91,12 +91,12 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
       	$sql.="  SHJ.LATITUDE,    \n";
       	$sql.="  SHJ.LONGITUDE    \n";
         $sql.="FROM  \n"; 
-        $sql.="  BREEDERS_USA  SHJ \n"; 
+        $sql.="  BREEDERS_CHINA  SHJ \n"; 
       	$sql.="WHERE  \n";
       	$sql.="  SHJ.NUMBER='" . $number . "' \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$bean=new BreederUsa();
+      	$bean=new BreederChina();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
       			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
       			$distance, $latitud, $longitud); 
@@ -150,12 +150,12 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
       	$sql.="  SHJ.LATITUDE,    \n";
       	$sql.="  SHJ.LONGITUDE    \n";
       	$sql.="FROM  \n";
-      	$sql.="  BREEDERS_USA  SHJ \n";
+      	$sql.="  BREEDERS_CHINA  SHJ \n";
       	$sql.="WHERE  \n";
       	$sql.="  SHJ.URL_ENCODED='" . $urlEncoded . "' \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$bean=new BreederUsa();
+      	$bean=new BreederChina();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
       			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
       			$distance, $latitud, $longitud);
@@ -188,7 +188,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
 
       public function inserta($bean){ 
          $conexion=$this->conectarse(); 
-         $sql="INSERT INTO BREEDERS_USA (   \n"; 
+         $sql="INSERT INTO BREEDERS_CHINA (   \n"; 
          $sql.="  ID,     \n"; 
          $sql.="  NAME,     \n"; 
          $sql.="  ZIP_CODE,     \n"; 
@@ -221,7 +221,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
 
       public function borra($id){ 
          $conexion=$this->conectarse(); 
-         $sql="DELETE FROM BREEDERS_USA   \n"; 
+         $sql="DELETE FROM BREEDERS_CHINA   \n"; 
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->bind_param("s", $id);  
@@ -231,7 +231,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
 
       public function actualiza($bean){ 
          $conexion=$this->conectarse(); 
-         $sql="UPDATE BREEDERS_USA SET   \n"; 
+         $sql="UPDATE BREEDERS_CHINA SET   \n"; 
          $sql.="  NAME=?,     \n"; 
          $sql.="  ZIP_CODE=?,     \n"; 
          $sql.="  URL=?,     \n"; 
@@ -284,7 +284,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          $sql.="  SHJ.LATITUDE,    \n";
          $sql.="  SHJ.LONGITUDE    \n";
          $sql.="FROM  \n"; 
-         $sql.="  BREEDERS_USA  SHJ \n"; 
+         $sql.="  BREEDERS_CHINA  SHJ \n"; 
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
@@ -316,7 +316,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          		  $distance, $latitud, $longitud); 
          $filas = array(); 
          while ($stm->fetch()) { 
-            $bean=new BreederUsa();  
+            $bean=new BreederChina();  
             $bean->setId($id);
             $bean->setNumber($number);
             $bean->setName($name);
@@ -343,13 +343,13 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          return $filas; 
       } 
       
-      public function selEstadosDeBreeders(){
+      public function selProvinciasDeBreeders(){
             	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  ADMINISTRATIVE_AREA_LEVEL_1,  \n";
       	$sql.="  COUNT(*)  \n";
       	$sql.="FROM  \n";
-      	$sql.="  BREEDERS_USA   \n";
+      	$sql.="  BREEDERS_CHINA   \n";
       	$sql.="GROUP BY  1 \n";
       	$sql.="ORDER BY  1 \n";
       	$stm=$this->preparar($conexion, $sql);
@@ -366,7 +366,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
 
       public function selTodosCuenta($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
-         $sql="SELECT COUNT(*) FROM BREEDERS_USA SHJ "; 
+         $sql="SELECT COUNT(*) FROM BREEDERS_CHINA SHJ "; 
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
@@ -392,6 +392,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          return $cuenta; 
       } 
       
+    
 
    } 
 ?>

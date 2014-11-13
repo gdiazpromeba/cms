@@ -59,6 +59,7 @@ var storeBreeders = Ext.create('Ext.data.ArrayStore', {
         { image : 'usa_map_menu_outline.jpeg',  caption : 'Breeders USA',  panelClass: 'app.petcms4.abm.breeders.usa.PanelBreedersUsa',   panelId: 'panelBreedersUsaId' },
         { image : 'canada_map_menu_outline.png',  caption : 'Breeders Canada',  panelClass: 'app.petcms4.abm.breeders.canada.PanelBreedersCanada',   panelId: 'panelBreedersCanadaId' },
         { image : 'uk_map_menu_outline.jpg',  caption : 'Breeders UK',  panelClass: 'app.petcms4.abm.breeders.uk.PanelBreedersUk',   panelId: 'panelBreedersUkId' },        
+        { image : 'china_map_menu_outline.gif',  caption : 'Breeders China',  panelClass: 'app.petcms4.abm.breeders.china.PanelBreedersChina',   panelId: 'panelBreedersChinaId' },
     ],
 });
 

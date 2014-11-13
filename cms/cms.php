@@ -112,6 +112,12 @@
     <script type="text/javascript" src="app/petcms4/abm/breeders/canada/GrillaBreedersCanada.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/breeders/canada/PanelBreedersCanada.js"></script>       
     
+    <!-- Breeders China -->
+    <script type="text/javascript" src="app/petcms4/abm/breeders/china/FormBreedersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/china/BusquedaBreedersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/china/GrillaBreedersChina.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/breeders/china/PanelBreedersChina.js"></script>      
+    
     <!-- Breeders UK -->
     <script type="text/javascript" src="app/petcms4/abm/breeders/uk/FormBreedersUk.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/breeders/uk/BusquedaBreedersUk.js"></script>
