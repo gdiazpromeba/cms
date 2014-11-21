@@ -35,6 +35,8 @@ Ext.define('DogBreedModel',{
 				{name : 'pictureUrl', type : 'string'},
 				{name : 'appartments', type : 'bool'},
 				{name : 'kids', type : 'bool'},
+				{name : 'metaDescripcion', type : 'string'},
+				{name : 'metaKeywords', type : 'string'},
 				{name : 'videoUrl', type : 'string'}
 			]
 });

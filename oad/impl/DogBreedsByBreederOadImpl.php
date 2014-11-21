@@ -1,7 +1,7 @@
 <?php 
 
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
-require_once $GLOBALS['pathCms'] . '/oad/DOgBreedsByBreederOad.php';
+require_once $GLOBALS['pathCms'] . '/oad/DogBreedsByBreederOad.php';
 
    class DogBreedsByBreederOadImpl extends AOD implements DogBreedsByBreederOad { 
 

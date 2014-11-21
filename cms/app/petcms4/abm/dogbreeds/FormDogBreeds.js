@@ -11,9 +11,14 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
         columns: 3,
     },
   	items: [
-        {xtype: 'fieldset', title: 'Header Text', itemId: 'colDesc', border: false, layout: 'form', width: 200,
+        {xtype: 'fieldset', itemId: 'colDesc', border: false,  layout:'vbox',  layoutConfig: { padding: 10}, width: 200,
         	items: [
-              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true, width: 50, height: 200}
+              {xtype: 'label', text: 'Header Text'},
+              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true},
+              {xtype: 'label', text: 'Meta Description'},
+              {xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true},
+              {xtype: 'label', text: 'Meta Keywords'},
+              {xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true},
         	]
         },
         {xtype: 'fieldset', itemId: 'colIzq', border: false, layout: 'form', style: 'padding:0px', bodyStyle: 'padding:0px', width: 300,
@@ -114,6 +119,8 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   	  pueblaDatosEnForm : function(record){
    		 var colDesc=this.getComponent('colDesc');
   		 colDesc.getComponent('headerText').setValue(record.get('headerText'));
+  		 colDesc.getComponent('metaDescripcion').setValue(record.get('metaDescripcion'));
+  		 colDesc.getComponent('metaKeywords').setValue(record.get('metaKeywords'));
   		 var colIzq=this.getComponent('colIzq');
   		 colIzq.getComponent('dogBreedId').setValue(record.id);
   		 colIzq.getComponent('dogBreedName').setValue(record.get('dogBreedName'));
@@ -157,6 +164,8 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   	   pueblaFormEnRegistro : function(record){
          var colDesc=this.getComponent('colDesc');
          record.data['headerText']=colDesc.getComponent('headerText');
+         record.data['metaDescripcion']=colDesc.getComponent('metaDescripcion');
+         record.data['metaKeywords']=colDesc.getComponent('metaKeywords');
   		 var colIzq=this.getComponent('colIzq');
   		 record.data['dogBreedId']=  colIzq.getComponent('dogBreedId').getValue();
   		 record.data['dogBreedName']= colIzq.getComponent('dogBreedName').getRawValue();

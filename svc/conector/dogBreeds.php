@@ -68,6 +68,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['videoUrl']=$bean->getVideoUrl();
 		  $arrBean['appartments']=$bean->getAppartments();
 		  $arrBean['kids']=$bean->getKids();
+		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
+		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
 		  $arrBean['habilitada']=$bean->getHabilitada();
 		  $datos[]=$arrBean;
 		}  
@@ -109,6 +111,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setVideoUrl($_REQUEST['videoUrl']);
 	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
 	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
+	    $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	    $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 		$exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -145,6 +149,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setVideoUrl($_REQUEST['videoUrl']);
 	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
 	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
+	    $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	    $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 	    $bean->setHabilitada(1);
 		$svc = new DogBreedsSvcImpl();
 		$exito=$svc->actualiza($bean);

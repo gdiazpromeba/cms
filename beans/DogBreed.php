@@ -36,6 +36,8 @@
       private $videoUrl; 
       private $appartments;
       private $kids;
+      private $metaDescripcion;
+      private $metaKeywords;
       private $habilitada; 
 
       public function getId(){ 
@@ -181,7 +183,14 @@
       	return $this->kids;
       }
       
-
+      public function getMetaDescripcion(){
+      	return $this->metaDescripcion;
+      }
+      
+      public function getMetaKeywords(){
+      	return $this->metaKeywords;
+      }
+      
       public function getHabilitada(){ 
          return $this->habilitada;  
       }
@@ -326,7 +335,15 @@
       
       public function setKids($valor){
       	$this->kids=$valor;
-      }      
+      }
+
+      public function setMetaDescripcion($valor){
+      	$this->metaDescripcion=$valor;
+      }
+      
+      public function setMetaKeywords($valor){
+      	$this->metaKeywords=$valor;
+      }
 
       public function setHabilitada($valor){ 
          $this->habilitada=$valor; 

@@ -7,6 +7,7 @@
   
   
 //    require_once('FirePHPCore/fb.php4');
+
   
   
   header("Content-Type: text/plain; charset=utf-8");
@@ -16,6 +17,7 @@
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
 
+ 
 if ($ultimo=='selecciona'){
 		//parametros de paginación
 		$desde=$_REQUEST['start'];
@@ -27,6 +29,7 @@ if ($ultimo=='selecciona'){
 		$longitude=isset($_REQUEST['longitude'])?$_REQUEST['longitude']:0;
 		$distance=isset($_REQUEST['distance'])?$_REQUEST['distance']:null;
 		$specialBreedId=isset($_REQUEST['specialBreedId'])?$_REQUEST['specialBreedId']:null;
+
 		
 		//si el zipCode existe, transformarlo en latitud y longitud
 		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){

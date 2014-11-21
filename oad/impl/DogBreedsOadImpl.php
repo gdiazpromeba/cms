@@ -45,6 +45,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DBR.VIDEO_URL,     \n";
          $sql.="  DBR.APPARTMENTS,     \n";
          $sql.="  DBR.KIDS,     \n";
+         $sql.="  DBR.META_DESCRIPCION,     \n";
+         $sql.="  DBR.META_KEYWORDS,     \n";
          $sql.="  DBR.HABILITADA    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  DOG_BREEDS DBR \n";
@@ -61,7 +63,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
          		  $servingMin, $servingMax,
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
-         		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
+         		  $pictureUrl, $videoUrl, $appartments, $kids, $metaDescripcion, $metaKeywords, $habilitada); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNombre($nombre);
@@ -98,6 +100,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
             $bean->setVideoUrl($videoUrl);
             $bean->setAppartments($appartments);
             $bean->setKids($kids);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
             $bean->setHabilitada($habilitada);
          } 
          $this->cierra($conexion, $stm); 
@@ -142,6 +146,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$sql.="  DBR.VIDEO_URL,     \n";
       	$sql.="  DBR.APPARTMENTS,     \n";
       	$sql.="  DBR.KIDS,     \n";
+        $sql.="  DBR.META_DESCRIPCION,     \n";
+        $sql.="  DBR.META_KEYWORDS,     \n";
       	$sql.="  DBR.HABILITADA    \n";
       	$sql.="FROM  \n";
       	$sql.="  DOG_BREEDS DBR \n";
@@ -158,7 +164,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       			$mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
       			$servingMin, $servingMax,
       			$friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText,
-      			$pictureUrl, $videoUrl, $appartments, $kids, $habilitada);
+      			$pictureUrl, $videoUrl, $appartments, $kids, $metaDescripcion, $metaKeywords, $habilitada);
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNombre($nombre);
@@ -195,6 +201,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       		$bean->setVideoUrl($videoUrl);
       		$bean->setAppartments($appartments);
       		$bean->setKids($kids);
+      		$bean->setMetaDescripcion($metaDescripcion);
+      		$bean->setMetaKeywords($metaKeywords);
       		$bean->setHabilitada($habilitada);
       	}
       	$this->cierra($conexion, $stm);
@@ -236,16 +244,18 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  VIDEO_URL,     \n"; 
          $sql.="  APPARTMENTS,     \n";
          $sql.="  KIDS,     \n";
+         $sql.="  META_DESCRIPCION,     \n";
+         $sql.="  META_KEYWORDS,     \n";
          $sql.="  HABILITADA)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("sssssssssddddddisisisisisisssiiss",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
          		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
-         		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids()); 
+         		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), $bean->getMetaDescripcion(), $bean->getMetaKeywords()); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
       
@@ -306,14 +316,17 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  VIDEO_URL=?,     \n"; 
          $sql.="  APPARTMENTS=?,     \n";
          $sql.="  KIDS=?,     \n";
+         $sql.="  META_DESCRIPCION=?,     \n";
+         $sql.="  META_KEYWORDS=?,     \n";
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE DOG_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("ssssssssddddddisisisisisisssiiisss", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
          		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
-         		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), $bean->getHabilitada(), $bean->getId() ); 
+         		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), 
+         		  $bean->getMetaDescripcion(), $bean->getMetaKeywords(), $bean->getHabilitada(), $bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 
@@ -356,6 +369,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DBR.VIDEO_URL,     \n";
          $sql.="  DBR.APPARTMENTS,     \n";
          $sql.="  DBR.KIDS,     \n";
+         $sql.="  DBR.META_DESCRIPCION,     \n";
+         $sql.="  DBR.META_KEYWORDS,     \n";
          $sql.="  DBR.HABILITADA    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  DOG_BREEDS DBR \n";
@@ -415,7 +430,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
          		  $servingMin, $servingMax, 
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
-         		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
+         		  $pictureUrl, $videoUrl, $appartments, $kids, $metaDescripcion,  $metaKeywords, $habilitada); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new DogBreed();  
@@ -454,6 +469,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
             $bean->setVideoUrl($videoUrl);
             $bean->setAppartments($appartments);
             $bean->setKids($kids);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
             $bean->setHabilitada($habilitada);
             $filas[$id]=$bean; 
          } 
