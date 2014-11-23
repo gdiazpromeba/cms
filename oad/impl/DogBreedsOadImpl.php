@@ -291,6 +291,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  DOG_PURPOSE_ID=?,     \n"; 
          $sql.="  DOG_SHEDDING_AMOUNT_ID=?,     \n"; 
          $sql.="  DOG_SHEDDING_FREQUENCY_ID=?,     \n"; 
+         
          $sql.="  MAIN_FEATURES=?,     \n"; 
          $sql.="  HEADER_TEXT=?,     \n"; 
          $sql.="  COLORS=?,     \n"; 
@@ -298,35 +299,42 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  SIZE_MAX=?,     \n"; 
          $sql.="  WEIGHT_MIN=?,     \n"; 
          $sql.="  WEIGHT_MAX=?,     \n"; 
+         
          $sql.="  SERVING_MIN=?,     \n";
          $sql.="  SERVING_MAX=?,     \n";
+         
          $sql.="  FRIENDLY_RANK=?,     \n"; 
          $sql.="  FRIENDLY_TEXT=?,     \n"; 
          $sql.="  ACTIVE_RANK=?,     \n"; 
-         $sql.="  ACTIVE_TEXT=?,     \n"; 
+         $sql.="  ACTIVE_TEXT=?,     \n";
          $sql.="  HEALTHY_RANK=?,     \n"; 
          $sql.="  HEALTHY_TEXT=?,     \n"; 
+         
          $sql.="  TRAINING_RANK=?,     \n"; 
          $sql.="  TRAINING_TEXT=?,     \n";
          $sql.="  GUARDIAN_RANK=?,     \n";
          $sql.="  GUARDIAN_TEXT=?,     \n";
          $sql.="  GROOMING_RANK=?,     \n";
          $sql.="  GROOMING_TEXT=?,     \n";
+         
          $sql.="  PICTURE_URL=?,     \n"; 
          $sql.="  VIDEO_URL=?,     \n"; 
          $sql.="  APPARTMENTS=?,     \n";
          $sql.="  KIDS=?,     \n";
-         $sql.="  META_DESCRIPCION=?,     \n";
+         
+         $sql.="  META_DESCRIPCION='" . $bean->getMetaDescripcion() . "' ,     \n";
          $sql.="  META_KEYWORDS=?,     \n";
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE DOG_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssddddddisisisisisisssiiisss", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("ssssssssddddddisisisisisisssiisis", 
+         		  $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
          		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
-         		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
+         		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), 
+         		  $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), 
-         		  $bean->getMetaDescripcion(), $bean->getMetaKeywords(), $bean->getHabilitada(), $bean->getId() ); 
+         		  $bean->getMetaKeywords(), $bean->getHabilitada(), $bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
 

@@ -14,11 +14,11 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
         {xtype: 'fieldset', itemId: 'colDesc', border: false,  layout:'vbox',  layoutConfig: { padding: 10}, width: 200,
         	items: [
               {xtype: 'label', text: 'Header Text'},
-              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true},
+              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true, height: 50},
               {xtype: 'label', text: 'Meta Description'},
-              {xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true},
+              {xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 50},
               {xtype: 'label', text: 'Meta Keywords'},
-              {xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true},
+              {xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 50},
         	]
         },
         {xtype: 'fieldset', itemId: 'colIzq', border: false, layout: 'form', style: 'padding:0px', bodyStyle: 'padding:0px', width: 300,
