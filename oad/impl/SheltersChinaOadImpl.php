@@ -29,7 +29,11 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
          $sql.="  0 AS DISTANCE_KM, \n";
          $sql.="  SHJ.LATITUDE,     \n";
-         $sql.="  SHJ.LONGITUDE     \n";
+         $sql.="  SHJ.LONGITUDE,     \n";
+         $sql.="  SHJ.META_DESCRIPCION,     \n";
+         $sql.="  SHJ.META_KEYWORDS     \n";
+         $sql.="  SHJ.META_DESCRIPCION,     \n";
+         $sql.="  SHJ.META_KEYWORDS     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_CHINA  SHJ \n"; 
          $sql.="WHERE  \n"; 
@@ -39,7 +43,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $bean=new ShelterChina();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
          		$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
-         		$distance, $latitud, $longitud); 
+         		$distance, $latitud, $longitud, $metaDescripcion, $metaKeywords); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -61,6 +65,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
             $bean->setDistancia(0);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
+            
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -88,8 +95,10 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
         $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHJ.LATITUDE,    \n";
-      	$sql.="  SHJ.LONGITUDE    \n";
-        $sql.="FROM  \n"; 
+      	$sql.="  SHJ.LONGITUDE,    \n";
+        $sql.="  SHJ.META_DESCRIPCION,     \n";
+        $sql.="  SHJ.META_KEYWORDS     \n";
+      	        $sql.="FROM  \n"; 
         $sql.="  SHELTERS_CHINA  SHJ \n"; 
       	$sql.="WHERE  \n";
       	$sql.="  SHJ.NUMBER='" . $number . "' \n";
@@ -98,7 +107,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
       	$bean=new ShelterChina();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
       			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
-      			$distance, $latitud, $longitud); 
+      			$distance, $latitud, $longitud, $metaDescripcion, $metaKeywords); 
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -120,6 +129,8 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -147,7 +158,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
         $sql.="  SHJ.SUBLOCALITY_LEVEL_1,    \n";
       	$sql.="  0 AS DISTANCE_KM, \n";
       	$sql.="  SHJ.LATITUDE,    \n";
-      	$sql.="  SHJ.LONGITUDE    \n";
+      	$sql.="  SHJ.LONGITUDE,    \n";
+        $sql.="  SHJ.META_DESCRIPCION,     \n";
+        $sql.="  SHJ.META_KEYWORDS     \n";
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_CHINA  SHJ \n";
       	$sql.="WHERE  \n";
@@ -157,7 +170,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
       	$bean=new ShelterChina();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
       			$adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
-      			$distance, $latitud, $longitud);
+      			$distance, $latitud, $longitud, $metaDescripcion, $metaKeywords);
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNumber($number);
@@ -179,6 +192,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
       		$bean->setDistancia(0);
       		$bean->setLatitude($latitud);
       		$bean->setLongitude($longitud);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
+      		
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -205,14 +221,17 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  COLLOQUIAL_AREA,     \n";
          $sql.="  LOCALITY,     \n";
-         $sql.="  SUBLOCALITY_LEVEL_1     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  SUBLOCALITY_LEVEL_1,     \n";
+         $sql.="  META_DESCRIPCION,     \n";
+         $sql.="  META_KEYWORDS     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("ssssssssssdddsssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
+         $stm->bind_param("ssssssssssdddsssssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
          		$bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(),
-         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getSubLocality1()
+         		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getSubLocality1(),
+         		$bean->getMetaDescripcion(), $bean->getMetaKeywords()
          ); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
@@ -247,13 +266,16 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2=?,     \n";
          $sql.="  COLLOQUIAL_AREA=?,     \n";
          $sql.="  LOCALITY=?,     \n";
-         $sql.="  SUBLOCALITY_LEVEL_1=?     \n";         
+         $sql.="  SUBLOCALITY_LEVEL_1=?,     \n";         
+         $sql.="  META_DESCRIPCION=?,     \n";
+         $sql.="  META_KEYWORDS=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssssdddssssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
+         $stm->bind_param("sssssssssdddssssssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
          		$bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), 
          		$bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), 
          		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getCollArea(), $bean->getLocality(), $bean->getSubLocality1(),
+         		$bean->getMetaDescripcion(), $bean->getMetaKeywords(),
          		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
@@ -281,7 +303,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $sql.="  SUBLOCALITY_LEVEL_1,     \n";
          $sql.="  DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) AS DISTANCE_KM, \n";
          $sql.="  SHJ.LATITUDE,    \n";
-         $sql.="  SHJ.LONGITUDE    \n";
+         $sql.="  SHJ.LONGITUDE,    \n";
+         $sql.="  META_DESCRIPCION,     \n";
+         $sql.="  META_KEYWORDS     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_CHINA  SHJ \n"; 
          $sql.="WHERE  1=1  \n";
@@ -312,7 +336,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
          		  $adminArea1, $adminArea2, $collArea,  $locality, $subLocality1, 
-         		  $distance, $latitud, $longitud); 
+         		  $distance, $latitud, $longitud, $metaDescripcion, $metaKeywords); 
          $filas = array(); 
          while ($stm->fetch()) { 
             $bean=new ShelterChina();  
@@ -336,6 +360,8 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterChina.php';
             $bean->setDistancia($distance);
             $bean->setLatitude($latitud);
             $bean->setLongitude($longitud);  
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 

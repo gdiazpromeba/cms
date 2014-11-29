@@ -23,7 +23,9 @@ Ext.define('SheltersUsaModel',{
 				{name : 'adminArea1', type : 'string'},
 				{name : 'adminArea2', type : 'string'},
 				{name : 'locality', type : 'string'},
-				{name : 'statisticalArea', type : 'string'}
+				{name : 'statisticalArea', type : 'string'},
+				{name : 'metaDescripcion', type : 'string'},
+				{name : 'metaKeywords', type : 'string'}
 			]
 });
 

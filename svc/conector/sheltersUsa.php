@@ -66,6 +66,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['adminArea2']=$bean->getAdminArea2();
 		  $arrBean['locality']=$bean->getLocality();
 		  $arrBean['statisticalArea']=$bean->getStatisticalArea();
+		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
+		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -95,6 +97,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setAdminArea1($_REQUEST['adminArea1']);
 	    $bean->setAdminArea2($_REQUEST['adminArea2']);
 	    $bean->setLocality($_REQUEST['locality']);
+	    $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	    $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 	    $bean->setStatisticalArea(null);
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
@@ -122,6 +126,8 @@ if ($ultimo=='selecciona'){
 	  $bean->setAdminArea1($_REQUEST['adminArea1']);
 	  $bean->setAdminArea2($_REQUEST['adminArea2']);
 	  $bean->setLocality($_REQUEST['locality']);
+	  $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	  $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 	  $bean->setStatisticalArea(null);
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	

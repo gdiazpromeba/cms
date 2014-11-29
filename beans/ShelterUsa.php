@@ -26,6 +26,26 @@
       private $adminArea2;
       private $locality;
       private $statisticalArea;
+      private $metaDescripcion;
+      private $metaKeywords;
+      
+      public function getMetaDescripcion(){
+      	return $this->metaDescripcion;
+      }
+      
+      public function getMetaKeywords(){
+      	return $this->metaKeywords;
+      }
+      
+      
+      public function setMetaDescripcion($valor){
+      	$this->metaDescripcion=$valor;
+      }
+      
+      public function setMetaKeywords($valor){
+      	$this->metaKeywords=$valor;
+      }      
+      
       
       public function getAdminArea1(){
       	return $this->adminArea1;

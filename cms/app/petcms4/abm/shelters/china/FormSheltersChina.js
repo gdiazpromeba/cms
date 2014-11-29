@@ -10,10 +10,12 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
     layout: 'column',
     items: [
       {xtype: 'hidden', name: 'shelterChinaId', id: 'shelterChinaId', itemId: 'shelterChinaId'},            
-      {xtype: 'fieldset', itemId: 'colIzq', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
+      {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormSheltersChina', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
           
             {fieldLabel: 'Shelter Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
+            {fieldLabel: 'Meta descripcion', xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 30},
+            {fieldLabel: 'Meta keywords', xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 30},
             {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
             	items: [
                   {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
@@ -239,6 +241,8 @@ Ext.define('app.petcms4.abm.shelters.china.FormSheltersChina', {
       this.cargaRazasAsociadas(this, record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
+  	  colIzq.getComponent('metaDescripcion').setValue(record.get('metaDescripcion'));
+  	  colIzq.getComponent('metaKeywords').setValue(record.get('metaKeywords'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
   	  colIzq.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
   	  colIzq.getComponent('email').setValue(record.get('email'));

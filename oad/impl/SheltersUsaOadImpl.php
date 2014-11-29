@@ -32,7 +32,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
          $sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  SHU.LOCALITY,     \n";
-         $sql.="  SHU.STATISTICAL_AREA     \n";
+         $sql.="  SHU.STATISTICAL_AREA,     \n";
+         $sql.="  SHU.META_DESCRIPCION,     \n";
+         $sql.="  SHU.META_KEYWORDS     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -47,7 +49,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, 
          		$city, $county, $state, $stateCode, $distance, 
          		$latitud, $longitud,
-                $adminArea1, $adminArea2, $locality, $statisticalArea); 
+                $adminArea1, $adminArea2, $locality, $statisticalArea, $metaDescripcion, $metaKeywords); 
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNumber($number);
@@ -71,6 +73,8 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
             $bean->setAdminArea2($adminArea2);
             $bean->setLocality($locality);
             $bean->setStatisticalArea($statisticalArea);
+            $bean->setMetaDescripcion($metaDescripcion);
+            $bean->setMetaKeywords($metaKeywords);
          } 
          $this->cierra($conexion, $stm); 
          return $bean; 
@@ -101,7 +105,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
       	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
       	$sql.="  SHU.LOCALITY,     \n";
-      	$sql.="  SHU.STATISTICAL_AREA     \n";
+      	$sql.="  SHU.STATISTICAL_AREA,     \n";
+        $sql.="  SHU.META_DESCRIPCION,     \n";
+        $sql.="  SHU.META_KEYWORDS     \n";
         $sql.="FROM  \n"; 
         $sql.="  SHELTERS_USA  SHU \n"; 
         $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -115,7 +121,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       	$bean=new ShelterUsa();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode, 
       			$distance, $latitud, $longitud,
-                $adminArea1, $adminArea2, $locality, $statisticalArea); 
+                $adminArea1, $adminArea2, $locality, $statisticalArea, $metaDescripcion, $metaKeywords); 
       	
       	if ($stm->fetch()) {
       		$bean->setId($id);
@@ -140,6 +146,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       		$bean->setAdminArea2($adminArea2);
       		$bean->setLocality($locality);
       		$bean->setStatisticalArea($statisticalArea);
+      		$bean->setMetaDescripcion($metaDescripcion);
+      		$bean->setMetaKeywords($metaKeywords);
+      		
       	}
       	$this->cierra($conexion, $stm);
       	return $bean;
@@ -170,7 +179,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_1,     \n";
       	$sql.="  SHU.ADMINISTRATIVE_AREA_LEVEL_2,     \n";
       	$sql.="  SHU.LOCALITY,     \n";
-      	$sql.="  SHU.STATISTICAL_AREA     \n";
+      	$sql.="  SHU.STATISTICAL_AREA,     \n";
+        $sql.="  SHU.META_DESCRIPCION,     \n";
+        $sql.="  SHU.META_KEYWORDS     \n";
       	$sql.="FROM  \n";
       	$sql.="  SHELTERS_USA  SHU \n";
       	$sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -184,7 +195,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       	$bean=new ShelterUsa();
       	$stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox, $city, $county, $state, $stateCode,
       			$distance, $latitud, $longitud,
-                $adminArea1, $adminArea2, $locality, $statisticalArea); 
+                $adminArea1, $adminArea2, $locality, $statisticalArea, $metaDescripcion, $metaKeywords); 
       	
       	if ($stm->fetch()) {
       		$bean->setId($id);
@@ -209,6 +220,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
       		$bean->setAdminArea2($adminArea2);
       		$bean->setLocality($locality);
       		$bean->setStatisticalArea($statisticalArea);
+      		$bean->setMetaDescripcion($metaDescripcion);
+      		$bean->setMetaKeywords($metaKeywords);
+      		
       		
       	}
       	$this->cierra($conexion, $stm);
@@ -235,14 +249,18 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_1,     \n";
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  LOCALITY,     \n";
-         $sql.="  STATISTICAL_AREA     \n";
-         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
+         $sql.="  STATISTICAL_AREA,     \n";
+         $sql.="  META_DESCRIPCION,     \n";
+         $sql.="  META_KEYWORDS     \n";
+         $sql.=") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("ssssssssssdddssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
+         $stm->bind_param("ssssssssssdddssssss",$bean->getId(), $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), $bean->getLogoUrl(), 
          		$bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), $bean->getPoBox(), $bean->getLatitude(), 
-         		$bean->getLongitude(), $bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getLocality(), $bean->getStatisticalArea()); 
+         		$bean->getLongitude(), $bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getLocality(), $bean->getStatisticalArea(),
+         		$bean->getMetaDescripcion(), $bean->getMetaKeywords()  
+         ); 
          return $this->ejecutaYCierra($conexion, $stm, $nuevoId); 
       } 
 
@@ -275,13 +293,16 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_1=?,     \n";
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2=?,     \n";
          $sql.="  LOCALITY=?,     \n";
-         $sql.="  STATISTICAL_AREA=?     \n";
+         $sql.="  STATISTICAL_AREA=?,     \n";
+         $sql.="  META_DESCRIPCION=?,     \n";
+         $sql.="  META_KEYWORDS=?     \n";
          $sql.="WHERE ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssssdddsssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
+         $stm->bind_param("sssssssssdddsssssss", $bean->getName(), $bean->getZip(), $bean->getUrl(), $bean->getUrlEncoded(), 
          		$bean->getLogoUrl(), $bean->getEmail(), $bean->getPhone(), $bean->getDescription(), $bean->getStreetAddress(), 
          		$bean->getPoBox(), $bean->getLatitude(), $bean->getLongitude(), 
          		$bean->getAdminArea1(), $bean->getAdminArea2(), $bean->getLocality(), $bean->getStatisticalArea(),
+         		$bean->getMetaDescripcion(), $bean->getMetaKeywords(),
          		$bean->getId() ); 
          return $this->ejecutaYCierra($conexion, $stm); 
       } 
@@ -312,7 +333,9 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_1,     \n";
          $sql.="  ADMINISTRATIVE_AREA_LEVEL_2,     \n";
          $sql.="  LOCALITY,     \n";
-         $sql.="  STATISTICAL_AREA     \n";
+         $sql.="  STATISTICAL_AREA,     \n";
+         $sql.="  META_DESCRIPCION,     \n";
+         $sql.="  META_KEYWORDS     \n";
          $sql.="FROM  \n"; 
          $sql.="  SHELTERS_USA  SHU \n"; 
          $sql.="  INNER JOIN USA_ZIPS ZIU ON SHU.ZIP_CODE=ZIU.ZIP_CODE  \n";
@@ -346,7 +369,8 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
-         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud, $adminArea1, $adminArea2, $locality, $statisticalArea
+         		  $city, $county, $state, $stateCode, $distance, $latitud, $longitud, $adminArea1, $adminArea2, $locality, $statisticalArea,
+         		  $metaDescripcion, $metaKeywords
          ); 
          $filas = array(); 
          while ($stm->fetch()) { 
@@ -374,6 +398,8 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
             $bean->setAdminArea2($adminArea2);
             $bean->setLocality($locality);
             $bean->setStatisticalArea($statisticalArea);
+      		$bean->setMetaDescripcion($metaDescripcion);
+      		$bean->setMetaKeywords($metaKeywords);
             $filas[$id]=$bean; 
          } 
          $this->cierra($conexion, $stm); 
