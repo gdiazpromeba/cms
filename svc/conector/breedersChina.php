@@ -64,6 +64,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['distanceKm']=$bean->getDistancia();  
 		  $arrBean['specialBreedId']=$bean->getSpecialBreedId();
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
+		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
+		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -100,6 +102,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setSubLocality1($subLocality1);
 	    $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	    $bean->setSpecialBreedId($specialBreedId);
+	    $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	    $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 	    $exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -133,6 +137,8 @@ if ($ultimo=='selecciona'){
 	  $bean->setSubLocality1($subLocality1);
 	  $specialBreedId=$_REQUEST['specialBreedId']; if (empty($specialBreedId)) $specialBreedId=null;
 	  $bean->setSpecialBreedId($specialBreedId);
+	  $bean->setMetaDescripcion($_REQUEST['metaDescripcion']);
+	  $bean->setMetaKeywords($_REQUEST['metaKeywords']);
 	  $exito=$svc->actualiza($bean);
 	  echo json_encode($exito) ;	
   

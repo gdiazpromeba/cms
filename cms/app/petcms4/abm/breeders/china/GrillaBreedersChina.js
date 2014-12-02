@@ -22,6 +22,9 @@ Ext.define('BreedersChinaModel',{
 				{name : 'distanceKm', type : 'float'},
 				{name : 'specialBreedId', type : 'string', useNull: true},
 				{name : 'specialBreedName', type : 'string', useNull: true},
+				{name : 'metaDescripcion', type : 'string'},
+				{name : 'metaKeywords', type : 'string'}
+				
 			]
 });
 

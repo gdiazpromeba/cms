@@ -24,6 +24,8 @@ Ext.define('app.petcms4.abm.breeders.china.FormBreedersChina', {
         items:[            
           
             {fieldLabel: 'Breeder Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
+            {fieldLabel: 'Meta descripcion', xtype: 'textarea',name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 30, width: 350},
+            {fieldLabel: 'Meta keywords', xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 30, width: 350},
             {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
             	items: [
                   {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
@@ -331,6 +333,8 @@ Ext.define('app.petcms4.abm.breeders.china.FormBreedersChina', {
       this.cargaRazasAsociadas(this, record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
+  	  colIzq.getComponent('metaDescripcion').setValue(record.get('metaDescripcion'));
+  	  colIzq.getComponent('metaKeywords').setValue(record.get('metaKeywords'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
   	  colIzq.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
   	  colIzq.getComponent('email').setValue(record.get('email'));
@@ -368,6 +372,8 @@ Ext.define('app.petcms4.abm.breeders.china.FormBreedersChina', {
 	record.data['id']=  this.getComponent('breederChinaId').getValue();	  
 	var colIzq=this.getComponent('colIzq');
     record.data['name']=  colIzq.getComponent('name').getValue();
+    record.data['metaDescripcion']=  colIzq.getComponent('metaDescripcion').getValue();
+    record.data['metaKeywords']=  colIzq.getComponent('metaKeywords').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();
     record.data['urlEncoded']=  colIzq.getComponent('encoding').getComponent('urlEncoded').getValue();
     record.data['email']=  colIzq.getComponent('email').getValue();

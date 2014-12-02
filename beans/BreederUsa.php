@@ -43,6 +43,7 @@
       
       public function setMetaKeywords($valor){
       	$this->metaKeywords=$valor;
+      }
             
       
 
