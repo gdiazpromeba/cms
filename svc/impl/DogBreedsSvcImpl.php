@@ -63,6 +63,11 @@ require_once $GLOBALS['pathCms'] . '/svc/DogBreedsSvc.php';
       	return $arr;
       }
       
+      public function selNombresPorForum($petForumId){
+      	$arr=$this->oad->selNombresPorForum($petForumId);
+      	return $arr;
+      }      
+      
       public function selNombresPorBreeder($breederId){
       	$arr=$this->oad->selNombresPorBreeder($breederId);
       	return $arr;
@@ -73,6 +78,12 @@ require_once $GLOBALS['pathCms'] . '/svc/DogBreedsSvc.php';
       	$arr=$this->oad->selSheltersPorRaza($dogBreedId);
       	return $arr;
       }
+      
+      public function selForumsPorRaza($dogBreedId){
+      	$arr=$this->oad->selForumsPorRaza($dogBreedId);
+      	return $arr;
+      }
+      
       
    }
 ?>

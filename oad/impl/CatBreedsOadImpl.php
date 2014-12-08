@@ -604,7 +604,34 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	}
       	$this->cierra($conexion, $stm);
       	return $filas;
-      }        
+      }  
+
+      public function selNombresPorForum($forumId){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  CBR.CAT_BREED_ID,     \n";
+      	$sql.="  CBR.CAT_BREED_NAME     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  CAT_BREEDS CBR \n";
+      	$sql.="  LEFT JOIN CAT_BREEDS_BY_FORUM DBS ON CBR.CAT_BREED_ID=DBS.CAT_BREED_ID \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  CBR.HABILITADA=1 \n";
+        $sql.="  AND DBS.FORUM_ID = '" . $forumId . "' \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  CBR.CAT_BREED_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre);
+      	$filas=array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$nombre;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }       
 
       public function selSheltersPorRaza($catBreedId){
       	$conexion=$this->conectarse();

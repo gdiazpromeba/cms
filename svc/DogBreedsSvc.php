@@ -19,6 +19,8 @@
       
       public function selNombresPorShelter($shelterId);
       
+      public function selNombresPorForum($petForumId);
+      
       public function selNombresPorBreeder($breederId);
       
       public function selSheltersPorRaza($dogBreedId);

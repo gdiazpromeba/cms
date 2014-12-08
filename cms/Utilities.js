@@ -4,27 +4,27 @@ Ext.define('Utilities', {
          * transforma un nombre para que pueda funcionar como parte de una url
          */
     	codificaUrl: function(url){
-			//url=url.replace(" ", "_");
+			//url=url.replace(" ", "-");
 			url=url.replace("&", "and");
 			url=url.replace("\'", "");
 			url=url.replace("'", "");
 			url=url.replace("%", "");
-			url=url.replace(", ", "_");
-			url=url.replace(",", "_");
+			url=url.replace(", ", "-");
+			url=url.replace(",", "-");
 			url = url.replace(/([()[{*+.$^\\|?])/g, '\\$1');
-			url=url.replace(new RegExp(' ', 'g'), "_");
-			url=url.replace(new RegExp('/', 'g'), "_");
-			url=url.replace(new RegExp('_+', 'g'), "_");
+			url=url.replace(new RegExp(' ', 'g'), "-");
+			url=url.replace(new RegExp('/', 'g'), "-");
+			url=url.replace(new RegExp('_+', 'g'), "-");
             //paréntesis y backslashes (todo junto, porque deja backslashes después de la primera conversión)			
 			url=url.replace(/["'\(\)]/g, "");
-			url=url.replace(new RegExp('\\\\', 'g'), "_");
+			url=url.replace(new RegExp('\\\\', 'g'), "-");
 			//guión
-			url=url.replace(new RegExp('\-', 'g'), "_");
+			url=url.replace(new RegExp('\-', 'g'), "-");
 			//puntos
-			url=url.replace(new RegExp('\\.', 'g'), "_");
+			url=url.replace(new RegExp('\\.', 'g'), "-");
 			//doble guión bajo
-			url=url.replace(new RegExp('__', 'g'), "_");
-			//doble guión bajo
+			url=url.replace(new RegExp('__', 'g'), "-");
+			//diéresis
 			url=url.replace(new RegExp('ü', 'g'), "u");
 			return url;
 		},

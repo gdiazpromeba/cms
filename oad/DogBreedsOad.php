@@ -23,6 +23,13 @@
       public function selNombresPorShelter($shelterId);
       
       /**
+       * consulta rápida que devuelve array php, sólo el nombre e Id, de razas en las que un foro se especialice
+       * @param unknown $shelterId
+       */
+      public function selNombresPorForum($petForumId);
+      
+      
+      /**
        * consulta ráipda que devuelve array php, sólo el nombre e Id, de razas en las que un criador se especialice
        * @param unknown $breederId
        */

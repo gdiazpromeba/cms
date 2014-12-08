@@ -143,7 +143,14 @@
     <script type="text/javascript" src="app/petcms4/abm/resources/FormResources.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/resources/BusquedaResources.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/resources/GrillaResources.js"></script>
-    <script type="text/javascript" src="app/petcms4/abm/resources/PanelResources.js"></script>    
+    <script type="text/javascript" src="app/petcms4/abm/resources/PanelResources.js"></script>   
+    
+    <!-- Forums -->
+    <script type="text/javascript" src="app/petcms4/abm/petforums/FormPetForums.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/petforums/BusquedaPetForums.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/petforums/GrillaPetForums.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/petforums/PanelPetForums.js"></script>   
+    
     
     
     

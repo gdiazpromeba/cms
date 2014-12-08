@@ -63,6 +63,11 @@ require_once $GLOBALS['pathCms'] . '/svc/CatBreedsSvc.php';
       	return $arr;
       }
       
+      public function selNombresPorForum($petForumId){
+      	$arr=$this->oad->selNombresPorForum($petForumId);
+      	return $arr;
+      }        
+      
       public function selNombresPorBreeder($breederId){
       	$arr=$this->oad->selNombresPorBreeder($breederId);
       	return $arr;

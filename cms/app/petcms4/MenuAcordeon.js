@@ -10,13 +10,15 @@ var storeBreeds = Ext.create('Ext.data.ArrayStore', {
              {name: 'panelId'}
     ],
     data:[
-        { image : 'dachs.jpg',        caption : 'Dog Breeds',     panelClass: 'app.petcms4.abm.dogbreeds.PanelDogBreeds',   panelId: 'panelDogBreedsId' }
+        { image : 'dachs.jpg',        caption : 'Dog Breeds',     panelClass: 'app.petcms4.abm.dogbreeds.PanelDogBreeds',   panelId: 'panelDogBreedsId' },
+        { image : 'petForums.jpg',       caption : 'Pet forums',     panelClass: 'app.petcms4.abm.petforums.PanelPetForums',   panelId: 'panelPetForumsId' },
+        
     ],
 });
 
 var panelBreeds=Ext.create('app.petcms4.PanelGrillaIconos', {
     id: 'panelBreedsId',
-    title: 'Front Page',
+    title: 'CMS',
     store: storeBreeds
 });
 
