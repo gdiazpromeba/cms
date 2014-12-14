@@ -3,7 +3,7 @@
    interface DogBreedsSvc { 
 
       public function obtiene($id); 
-      public function obtienePorNombre($nombre);
+      public function obtienePorNombreCodificado($nombre);
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 

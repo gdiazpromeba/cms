@@ -9,22 +9,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	items: [
       {xtype: 'hidden', name: 'newsId', id: 'newsId', itemId: 'newsId'},
       {fieldLabel: 'Title', xtype: 'textfield',  name: 'newsTitle', itemId: 'newsTitle', allowBlank: false, width: 550},
-      {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true,
-      	items: [
-            {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
-              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
-            	listeners:{
-          		click : function(  The, eOpts ){
-          			var form= The.up('form');
-          			var encoding = form.getComponent('encoding');
-          			var url = form.getComponent('newsTitle').getValue();
-          			var ueTxt = Utilities.codificaUrl(url);
-          			encoding.getComponent('urlEncoded').setValue(ueTxt);
-          		}	
-          	}
-	          }
-      	]
-      },
+      {fieldLabel: 'Encoded name', xtype: 'encodable',  linkedText: 'newsTitle', name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, width: 350},
       {fieldLabel: 'Date', xtype: 'fecha', name: 'newsDate', itemId: 'newsDate', width: 200},
       {fieldLabel: 'Text', xtype: 'textarea',  name: 'newsText', itemId: 'newsText',  id: 'newsText', grow: false, width: 750, height: 230}, 
       {fieldLabel: 'Cut position', xtype: 'numberfield',  name: 'cutPosition', itemId: 'cutPosition', allowBlank: false, width: 200, allowDecimals: false},
@@ -42,7 +27,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	pueblaDatosEnForm : function(record){
       this.getComponent('newsId').setValue(record.id);
       this.getComponent('newsTitle').setValue(record.get('newsTitle'));
-      this.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
+      this.getComponent('urlEncoded').setValue(record.get('urlEncoded'));
       this.getComponent('newsDate').setValue(record.get('newsDate'));
       this.getComponent('newsSource').setValue(record.get('newsSource'));
       this.getComponent('newsText').setValue(record.get('newsText'));
@@ -52,7 +37,7 @@ Ext.define('app.petcms4.abm.news.FormNews', {
   	pueblaFormEnRegistro : function(record){
   	  record.data['newsId']=  this.getComponent('newsId').getValue();
   	  record.data['newsTitle']=  this.getComponent('newsTitle').getValue();
-  	  record.data['urlEncoded']=  this.getComponent('encoding').getComponent('urlEncoded').getValue();
+  	  record.data['urlEncoded']=  this.getComponent('urlEncoded').getValue();
   	  record.data['newsSource']=  this.getComponent('newsSource').getValue();
   	  record.data['newsDate']=  this.getComponent('newsDate').getValue();
   	  record.data['newsText']=  this.getComponent('newsText').getValue();

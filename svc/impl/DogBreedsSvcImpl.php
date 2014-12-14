@@ -16,8 +16,8 @@ require_once $GLOBALS['pathCms'] . '/svc/DogBreedsSvc.php';
       } 
       
 
-      public function obtienePorNombre($nombre){
-      	$bean=$this->oad->obtienePorNombre($nombre);
+      public function obtienePorNombreCodificado($nombre){
+      	$bean=$this->oad->obtienePorNombreCodificado($nombre);
       	return $bean;
       }      
 

@@ -12,6 +12,20 @@
   
   $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
   $db_connection->set_charset("utf8");  
+  
+  $v8 = new V8Js();
+
+  /* basic.js */
+  $JS = <<< EOT
+  len = print('Hello' + ' ' + 'World!' + "\\n");
+  len;
+  EOT;
+
+  try {
+    var_dump($v8->executeString($JS, 'basic.js'));
+  } catch (V8JsException $e) {
+    var_dump($e);
+  }
 
   if ($ultimo=='selSegundasAreas'){
   	$pais=$_REQUEST['country'];

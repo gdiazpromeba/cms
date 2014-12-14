@@ -25,6 +25,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
           items:[
             {xtype: 'hidden', name: 'dogBreedId', id: 'dogBreedId', itemId: 'dogBreedId'},
             {fieldLabel: 'Breed Name', xtype: 'textfield',  name: 'dogBreedName', itemId: 'dogBreedName',  id: 'dogBreedName', allowBlank: false, width: 50},
+            {fieldLabel: 'Name encoded', xtype: 'encodable',  linkedText: 'dogBreedName', name: 'nameEncoded', itemId: 'nameEncoded',  allowBlank: false},
             {fieldLabel: 'Size', xtype: 'comboDogSizes', name: 'dogSize', itemId: 'dogSize', width: 50},
             {fieldLabel: 'Hist.Purpose', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'dogPurpose', width: 50},
             {fieldLabel: 'Shed.Amount', xtype: 'comboDogSheddingAmounts', name: 'dogSheddingAmount', itemId: 'dogSheddingAmount',  width: 50},
@@ -124,6 +125,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   		 var colIzq=this.getComponent('colIzq');
   		 colIzq.getComponent('dogBreedId').setValue(record.id);
   		 colIzq.getComponent('dogBreedName').setValue(record.get('dogBreedName'));
+  		 colIzq.getComponent('nameEncoded').setValue(record.get('nameEncoded'));
   		 colIzq.getComponent('dogSize').setValue(record.get('dogSizeId'));
          colIzq.getComponent('dogPurpose').setValue(record.get('dogPurposeId'));
          colIzq.getComponent('dogSheddingAmount').setValue(record.get('dogSheddingAmountId'));
@@ -169,6 +171,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
   		 var colIzq=this.getComponent('colIzq');
   		 record.data['dogBreedId']=  colIzq.getComponent('dogBreedId').getValue();
   		 record.data['dogBreedName']= colIzq.getComponent('dogBreedName').getRawValue();
+  		 record.data['nameEncoded']= colIzq.getComponent('nameEncoded').getValue();
   		 record.data['dogSizeName']= colIzq.getComponent('dogSize').getRawValue();
   		 record.data['dogSizeId']= colIzq.getComponent('dogSize').getValue();
   		 record.data['dogPurposeName']= colIzq.getComponent('dogPurpose').getRawValue();

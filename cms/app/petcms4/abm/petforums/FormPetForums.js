@@ -23,24 +23,9 @@ Ext.define('app.petcms4.abm.petforums.FormPetForums', {
       {xtype: 'fieldset', itemId: 'colIzq', id: 'colIzqFormForums', border: false, style: 'padding:0px', bodyStyle: 'padding:0px', columnWidth: 0.5,
         items:[            
             {fieldLabel: 'Name', xtype: 'textfield',  name: 'forumName', itemId: 'name',  allowBlank: false, width: 350},
+            {fieldLabel: 'Encoded name', xtype: 'encodable',  linkedText: 'name', name: 'encodedName', itemId: 'encodedName',  allowBlank: false, width: 350},
             {fieldLabel: 'Meta descripcion', xtype: 'textarea',name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 65, width: 350},
             {fieldLabel: 'Meta keywords', xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 65, width: 350},
-            {title: 'Encoded Name', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
-            	items: [
-                  {xtype: 'textfield',  name: 'encodedName', itemId: 'encodedName',  allowBlank: false, columnWidth: 0.8},
-  	              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
-                  	listeners:{
-                		click : function(  The, eOpts ){
-                			var encoding= The.up('fieldset');
-                			var colIzq= encoding.up('fieldset');
-                			var url=colIzq.getComponent('name').getValue();
-                			var ueTxt = Utilities.codificaUrl(url);
-                			encoding.getComponent('encodedName').setValue(ueTxt);
-                		}	
-                	}
-  		          }
-            	]
-            },
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'forumUrl', itemId: 'url',  allowBlank: false, width: 350},
             {fieldLabel: 'Description', xtype: 'textarea', name: 'forumDescription', itemId: 'description', allowBlank: true, height: 100, width: 350},
           ]
@@ -245,7 +230,7 @@ Ext.define('app.petcms4.abm.petforums.FormPetForums', {
       this.cargaRazasAsociadas(this, record.data['id']);
       var colIzq=this.getComponent('colIzq');
   	  colIzq.getComponent('name').setValue(record.get('name'));
-  	  colIzq.getComponent('encoding').getComponent('encodedName').setValue(record.get('encodedName'));
+  	  colIzq.getComponent('encodedName').setValue(record.get('encodedName'));
   	  colIzq.getComponent('metaDescripcion').setValue(record.get('metaDescripcion'));
   	  colIzq.getComponent('metaKeywords').setValue(record.get('metaKeywords'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
@@ -269,7 +254,7 @@ Ext.define('app.petcms4.abm.petforums.FormPetForums', {
 	record.data['id']=  this.getComponent('forumId').getValue();	  
 	var colIzq=this.getComponent('colIzq');
     record.data['name']=  colIzq.getComponent('name').getValue();
-    record.data['encodedName']=  colIzq.getComponent('encoding').getComponent('encodedName').getValue();
+    record.data['encodedName']=  colIzq.getComponent('encodedName').getValue();
     record.data['metaDescripcion']=  colIzq.getComponent('metaDescripcion').getValue();
     record.data['metaKeywords']=  colIzq.getComponent('metaKeywords').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();
@@ -291,7 +276,7 @@ Ext.define('app.petcms4.abm.petforums.FormPetForums', {
   			   mensaje='Name not valid';
   		   }
   		   
-  		   if (!colIzq.getComponent('encoding').getComponent('encodedName').isValid()){
+  		   if (!colIzq.getComponent('encodedName').isValid()){
   			   valido=false;
   			   mensaje='Encoded name not valid';
   		   }  		 

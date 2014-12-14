@@ -35,6 +35,7 @@ if ($ultimo=='selecciona'){
 		  $arrBean=array();
 		  $arrBean['dogBreedId']=$bean->getId();
 		  $arrBean['dogBreedName']=$bean->getNombre();
+		  $arrBean['nameEncoded']=$bean->getNameEncoded();
 		  $arrBean['dogSizeId']=$bean->getSizeId();
 		  $arrBean['dogSizeName']=$bean->getSizeName();
 		  $arrBean['dogPurposeId']=$bean->getPurposeId();
@@ -82,6 +83,7 @@ if ($ultimo=='selecciona'){
 	   	$bean=new DogBreed(); 
 		$svc = new DogBreedsSvcImpl();
 		$bean->setNombre($_REQUEST['dogBreedName']);
+		$bean->setNameEncoded($_REQUEST['nameEncoded']);
 		$bean->setSizeId($_REQUEST['dogSize']);
 		$bean->setPurposeId($_REQUEST['dogPurpose']);
 		$bean->setSheddingAmountId($_REQUEST['dogSheddingAmount']);
@@ -120,6 +122,7 @@ if ($ultimo=='selecciona'){
 		$bean=new DogBreed();
 		$bean->setId($_REQUEST['dogBreedId']);
 		$bean->setNombre($_REQUEST['dogBreedName']);
+		$bean->setNameEncoded($_REQUEST['nameEncoded']);
 		$bean->setSizeId($_REQUEST['dogSize']);
 		$bean->setPurposeId($_REQUEST['dogPurpose']);
 		$bean->setSheddingAmountId($_REQUEST['dogSheddingAmount']);

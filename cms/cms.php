@@ -31,6 +31,7 @@
     <!--  utilities  -->
     <script type="text/javascript" src="app/petcms4/util/Fecha.js"></script>
     <script type="text/javascript" src="app/petcms4/util/MarcoVideo.js"></script>
+    <script type="text/javascript" src="app/petcms4/controls/Encodable.js"></script>
     
     <script type="text/javascript" src="app/petcms4/combos/ComboRango1a5.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboAbecedario.js"></script>

@@ -3,6 +3,7 @@ Ext.define('DogBreedModel',{
 	fields : [ 
 			    {name : 'dogBreedId', type : 'string'}, 
 				{name : 'dogBreedName', type : 'string'},
+				{name : 'nameEncoded', type : 'string'},
 				{name : 'dogSizeId', type : 'string'},
 				{name : 'dogSizeName', type : 'string'},
 				{name : 'dogPurposeId', type : 'string'},

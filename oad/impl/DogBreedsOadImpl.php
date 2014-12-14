@@ -12,6 +12,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql="SELECT  \n"; 
          $sql.="  DBR.DOG_BREED_ID,     \n"; 
          $sql.="  DBR.DOG_BREED_NAME,     \n"; 
+         $sql.="  DBR.NAME_ENCODED,     \n"; 
          $sql.="  DBR.DOG_SIZE_ID,     \n"; 
          $sql.="  DSI.DOG_SIZE_NAME,     \n"; 
          $sql.="  DBR.DOG_PURPOSE_ID,     \n"; 
@@ -59,7 +60,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new DogBreed();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         $stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
          		  $servingMin, $servingMax,
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
@@ -67,6 +68,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNombre($nombre);
+            $bean->setNameEncoded($nameEncoded);
             $bean->setSizeId($sizeId);
             $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);
@@ -108,11 +110,12 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          return $bean; 
       } 
       
-      public function obtienePorNombre($nombre){
+      public function obtienePorNombreCodificado($nombre){
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  DBR.DOG_BREED_ID,     \n";
       	$sql.="  DBR.DOG_BREED_NAME,     \n";
+      	$sql.="  DBR.NAME_ENCODED,     \n";
       	$sql.="  DBR.DOG_SIZE_ID,     \n";
       	$sql.="  DSI.DOG_SIZE_NAME,     \n";
       	$sql.="  DBR.DOG_PURPOSE_ID,     \n";
@@ -156,11 +159,11 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$sql.="  INNER JOIN DOG_SHEDDING_AMOUNTS DSA ON DBR.DOG_SHEDDING_AMOUNT_ID=DSA.DOG_SHEDDING_AMOUNT_ID \n";
       	$sql.="  INNER JOIN DOG_SHEDDING_FREQUENCIES DSF ON DBR.DOG_SHEDDING_FREQUENCY_ID=DSF.DOG_SHEDDING_FREQUENCY_ID \n";
       	$sql.="WHERE  \n";
-      	$sql.="  DBR.DOG_BREED_NAME='" . $nombre . "' \n";
+      	$sql.="  DBR.NAME_ENCODED='" . $nombre . "' \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new DogBreed();
-      	$stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+      	$stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
       			$mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
       			$servingMin, $servingMax,
       			$friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText,
@@ -168,6 +171,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNombre($nombre);
+      		$bean->setNameEncoded($nameEncoded);
       		$bean->setSizeId($sizeId);
       		$bean->setSizeName($sizeName);
       		$bean->setPurposeId($purposeId);
@@ -214,7 +218,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $conexion=$this->conectarse(); 
          $sql="INSERT INTO DOG_BREEDS (   \n"; 
          $sql.="  DOG_BREED_ID,     \n"; 
-         $sql.="  DOG_BREED_NAME,     \n"; 
+         $sql.="  DOG_BREED_NAME,     \n";
+         $sql.="  DOG_NAME_ENCODED,     \n";
          $sql.="  DOG_SIZE_ID,     \n"; 
          $sql.="  DOG_PURPOSE_ID,     \n"; 
          $sql.="  DOG_SHEDDING_AMOUNT_ID,     \n"; 
@@ -247,11 +252,11 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  META_DESCRIPCION,     \n";
          $sql.="  META_KEYWORDS,     \n";
          $sql.="  HABILITADA)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssddddddisisisisisisssiiss",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("ssssssssssddddddisisisisisisssiiss",$bean->getId(), $bean->getNombre(), $bean->getNaneEncoded(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
          		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
@@ -287,6 +292,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $conexion=$this->conectarse(); 
          $sql="UPDATE DOG_BREEDS SET   \n"; 
          $sql.="  DOG_BREED_NAME=?,     \n"; 
+         $sql.="  NAME_ENCODED=?,     \n"; 
          $sql.="  DOG_SIZE_ID=?,     \n"; 
          $sql.="  DOG_PURPOSE_ID=?,     \n"; 
          $sql.="  DOG_SHEDDING_AMOUNT_ID=?,     \n"; 
@@ -327,8 +333,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE DOG_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssddddddisisisisisisssiisis", 
-         		  $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("sssssssssddddddisisisisisisssiisis", 
+         		  $bean->getNombre(), $bean->getNameEncoded(),  $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
          		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), 
@@ -344,6 +350,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql="SELECT  \n"; 
          $sql.="  DBR.DOG_BREED_ID,     \n"; 
          $sql.="  DBR.DOG_BREED_NAME,     \n"; 
+         $sql.="  DBR.NAME_ENCODED,     \n"; 
          $sql.="  DBR.DOG_SIZE_ID,     \n"; 
          $sql.="  DSI.DOG_SIZE_NAME,     \n"; 
          $sql.="  DBR.DOG_PURPOSE_ID,     \n"; 
@@ -434,7 +441,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         $stm->bind_result($id, $nombre, $nameEncoded,  $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
          		  $servingMin, $servingMax, 
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
@@ -444,6 +451,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
             $bean=new DogBreed();  
             $bean->setId($id);
             $bean->setNombre($nombre);
+            $bean->setNameEncoded($nameEncoded);
             $bean->setSizeId($sizeId);
             $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);

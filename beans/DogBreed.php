@@ -2,7 +2,8 @@
 
    class DogBreed { 
       private $dogBreedId; 
-      private $dogBreedName; 
+      private $dogBreedName;
+      private $nameEncoded;
       private $dogSizeId; 
       private $dogSizeName; 
       private $dogPurposeId; 
@@ -47,6 +48,10 @@
       public function getNombre(){ 
          return $this->dogBreedName;  
       }
+      
+      public function getNameEncoded(){ 
+         return $this->nameEncoded;  
+      }      
 
       public function getSizeId(){ 
          return $this->dogSizeId;  
@@ -202,6 +207,11 @@
       public function setNombre($valor){ 
          $this->dogBreedName=$valor; 
       }
+      
+      public function setNameEncoded($valor){ 
+         $this->nameEncoded=$valor; 
+      }
+      
 
       public function setSizeId($valor){ 
          $this->dogSizeId=$valor; 

@@ -26,22 +26,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
             {fieldLabel: 'Breeder Name', xtype: 'textfield',  name: 'name', itemId: 'name',  allowBlank: false, width: 350},
             {fieldLabel: 'Meta descripcion', xtype: 'textarea',name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 30, width: 350},
             {fieldLabel: 'Meta keywords', xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 30, width: 350},
-            {title: 'Encoded URL', xtype: 'fieldset', itemId: 'encoding', border: false, layout: 'column', border: true, bodyStyle: 'padding:0px; margin:0px',
-            	items: [
-                  {xtype: 'textfield',  name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, columnWidth: 0.8},
-  	              {xtype: 'button', text: 'Encode', itemId: 'botEncodeUrl', columnWidth: 0.2,
-                  	listeners:{
-                		click : function(  The, eOpts ){
-                			var encoding= The.up('fieldset');
-                			var colIzq= encoding.up('fieldset');
-                			var url=colIzq.getComponent('name').getValue();
-                			var ueTxt = Utilities.codificaUrl(url);
-                			encoding.getComponent('urlEncoded').setValue(ueTxt);
-                		}	
-                	}
-  		          }
-            	]
-            },
+            {fieldLabel: 'Encoded name', xtype: 'encodable',  linkedText: 'name', name: 'urlEncoded', itemId: 'urlEncoded',  allowBlank: false, width: 350},
             {fieldLabel: 'URL', xtype: 'textfield',  name: 'url', itemId: 'url',  allowBlank: false, width: 350},
             {fieldLabel: 'Email', xtype: 'textfield',  name: 'email', itemId: 'email',  allowBlank: true, width: 320},
             {fieldLabel: 'Phone', xtype: 'textfield',  name: 'phone', itemId: 'phone',  allowBlank: true, width: 210},
@@ -387,7 +372,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
   	  colIzq.getComponent('metaDescripcion').setValue(record.get('metaDescripcion'));
   	  colIzq.getComponent('metaKeywords').setValue(record.get('metaKeywords'));
   	  colIzq.getComponent('url').setValue(record.get('url'));
-  	  colIzq.getComponent('encoding').getComponent('urlEncoded').setValue(record.get('urlEncoded'));
+  	  colIzq.getComponent('urlEncoded').setValue(record.get('urlEncoded'));
   	  colIzq.getComponent('email').setValue(record.get('email'));
   	  colIzq.getComponent('phone').setValue(record.get('phone'));
   	  colIzq.getComponent('description').setValue(record.get('description'));
@@ -425,7 +410,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
     record.data['metaDescripcion']=  colIzq.getComponent('metaDescripcion').getValue();
     record.data['metaKeywords']=  colIzq.getComponent('metaKeywords').getValue();
     record.data['url']=  colIzq.getComponent('url').getValue();
-    record.data['urlEncoded']=  colIzq.getComponent('encoding').getComponent('urlEncoded').getValue();
+    record.data['urlEncoded']=  colIzq.getComponent('urlEncoded').getValue();
     record.data['email']=  colIzq.getComponent('email').getValue();
     record.data['phone']=  colIzq.getComponent('phone').getValue();
     record.data['description']=  colIzq.getComponent('description').getValue();
@@ -456,7 +441,7 @@ Ext.define('app.petcms4.abm.breeders.uk.FormBreedersUk', {
   			   mensaje='Name not valid';
   		   }
   		   
-  		   if (!colIzq.getComponent('encoding').getComponent('urlEncoded').isValid()){
+  		   if (!colIzq.getComponent('urlEncoded').isValid()){
   			   valido=false;
   			   mensaje='URL encoded not valid';
   		   }  		 
