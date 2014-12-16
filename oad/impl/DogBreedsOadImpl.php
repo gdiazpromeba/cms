@@ -561,7 +561,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  DBR.DOG_BREED_ID,     \n";
-      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="  DBR.DOG_BREED_NAME,     \n";
+      	$sql.="  DBR.NAME_ENCODED     \n";
       	$sql.="FROM  \n";
       	$sql.="  DOG_BREEDS DBR \n";
       	$sql.="WHERE  \n";
@@ -573,12 +574,13 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$sql.="  DBR.DOG_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded);
       	$filas=array();
       	while ($stm->fetch()) {      	
             $fila=array();
             $fila['id']=$id;
             $fila['value']=$nombre;
+            $fila['nameEncoded']=$nameEncoded;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);
