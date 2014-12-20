@@ -3,7 +3,7 @@
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
 require_once $GLOBALS['pathCms'] . '/oad/SheltersUsaOad.php';
 require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
-//require_once('FirePHPCore/fb.php4'); 
+// require_once('FirePHPCore/fb.php4'); 
 
    class SheltersUsaOadImpl extends AOD implements SheltersUsaOad { 
 

@@ -48,6 +48,9 @@ require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
          $sql.="  D1.DOG_BREED_NAME AS DOG_BREED_1_NAME,     \n"; 
          $sql.="  D2.DOG_BREED_NAME AS DOG_BREED_2_NAME,     \n"; 
          $sql.="  D3.DOG_BREED_NAME AS DOG_BREED_3_NAME,    \n"; 
+         $sql.="  D1.NAME_ENCODED AS DOG_BREED_1_NAME_ENCODED,     \n";
+         $sql.="  D2.NAME_ENCODED AS DOG_BREED_2_NAME_ENCODED,     \n";
+         $sql.="  D3.NAME_ENCODED AS DOG_BREED_3_NAME_ENCODED,    \n";
          $sql.="  D1.PICTURE_URL AS DOG_BREED_1_PICTURE,    \n";
          $sql.="  D2.PICTURE_URL AS DOG_BREED_2_PICTURE,    \n";
          $sql.="  D3.PICTURE_URL AS DOG_BREED_3_PICTURE     \n";
@@ -82,6 +85,7 @@ require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
          $video1Title=null; $video2Title=null; $video3Title=null;   
          $dogBreed1Id=null;  $dogBreed2Id=null;  $dogBreed3Id=null;  
          $dogBreed1Name=null;  $dogBreed2Name=null;  $dogBreed3Name=null;
+         $dogBreed1NameEncoded=null;  $dogBreed2NameEncoded=null;  $dogBreed3NameEncoded=null;
          $dogBreed1Picture=null;  $dogBreed2Picture=null;  $dogBreed3Picture=null;
          $stm->bind_result($news1Id, $news2Id, $news3Id, $news4Id, $news1Cut, $news2Cut, $news3Cut, $news4Cut, 
          		$news1Title, $news2Title, $news3Title, $news4Title,
@@ -93,6 +97,7 @@ require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
          		$video1Title, $video2Title, $video3Title, 
          		$dogBreed1Id, $dogBreed2Id, $dogBreed3Id, 
          		$dogBreed1Name, $dogBreed2Name, $dogBreed3Name,
+         		$dogBreed1NameEncoded, $dogBreed2NameEncoded, $dogBreed3NameEncoded,
          		$dogBreed1Picture, $dogBreed2Picture, $dogBreed3Picture
          ); 
          if ($stm->fetch()) { 
@@ -142,6 +147,11 @@ require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
             $bean->setDogBreed1Name($dogBreed1Name);
             $bean->setDogBreed2Name($dogBreed2Name);
             $bean->setDogBreed3Name($dogBreed3Name);
+            $bean->setDogBreed1NameEncoded($dogBreed1NameEncoded);
+            $bean->setDogBreed2NameEncoded($dogBreed2NameEncoded);
+            $bean->setDogBreed3NameEncoded($dogBreed3NameEncoded);
+            
+            
             $bean->setDogBreed1Picture($dogBreed1Picture);
             $bean->setDogBreed2Picture($dogBreed2Picture);
             $bean->setDogBreed3Picture($dogBreed3Picture);

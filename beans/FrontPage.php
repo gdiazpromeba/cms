@@ -39,7 +39,10 @@
       private $dogBreed3Id; 
       private $dogBreed1Name; 
       private $dogBreed2Name; 
-      private $dogBreed3Name; 
+      private $dogBreed3Name;
+      private $dogBreed1NameEncoded;
+      private $dogBreed2NameEncoded;
+      private $dogBreed3NameEncoded;
       private $dogBreed1Picture;
       private $dogBreed2Picture;
       private $dogBreed3Picture;
@@ -202,6 +205,18 @@
       public function getDogBreed3Name(){ 
          return $this->dogBreed3Name;  
       }
+      
+      public function getDogBreed1NameEncoded(){
+      	return $this->dogBreed1NameEncoded;
+      }
+      
+      public function getDogBreed2NameEncoded(){
+      	return $this->dogBreed2NameEncoded;
+      }
+      
+      public function getDogBreed3NameEncoded(){
+      	return $this->dogBreed3NameEncoded;
+      }      
       
       public function getDogBreed1Picture(){
       	return $this->dogBreed1Picture;
@@ -372,6 +387,18 @@
       public function setDogBreed3Name($valor){ 
          $this->dogBreed3Name=$valor; 
       }
+      
+      public function setDogBreed1NameEncoded($valor){
+      	$this->dogBreed1NameEncoded=$valor;
+      }
+      
+      public function setDogBreed2NameEncoded($valor){
+      	$this->dogBreed2NameEncoded=$valor;
+      }
+      
+      public function setDogBreed3NameEncoded($valor){
+      	$this->dogBreed3NameEncoded=$valor;
+      }      
       
       public function setDogBreed1Picture($valor){
       	$this->dogBreed1Picture=$valor;
