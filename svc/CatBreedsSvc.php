@@ -3,7 +3,7 @@
    interface CatBreedsSvc { 
 
       public function obtiene($id); 
-      public function obtienePorNombre($nombre);
+      public function obtienePorNombreEncoded($nombreEncoded);
       public function inserta($bean); 
       public function actualiza($bean); 
       public function borra($id); 

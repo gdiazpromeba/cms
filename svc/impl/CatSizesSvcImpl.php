@@ -1,7 +1,7 @@
 <?php 
 require_once '../../config.php';
-require_once $GLOBALS['pathCms'] . '/oad/impl/DogSizesOadImpl.php'; 
-require_once $GLOBALS['pathCms'] . '/svc/DogSizesSvc.php';  
+require_once $GLOBALS['pathCms'] . '/oad/impl/CatSizesOadImpl.php'; 
+require_once $GLOBALS['pathCms'] . '/svc/CatSizesSvc.php';  
 
    class DogSizesSvcImpl implements CatSizesSvc { 
       private $oad=null; 

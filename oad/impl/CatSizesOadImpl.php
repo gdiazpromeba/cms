@@ -15,8 +15,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatSize.php';
       public function selTodos($desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
-         $sql.="  CAT_SIZE_ID,     \n"; 
-         $sql.="  CAT_SIZE_NAME    \n"; 
+         $sql.="  SIZE_ID,     \n"; 
+         $sql.="  SIZE_NAME    \n"; 
          $sql.="FROM  \n"; 
          $sql.="  CAT_SIZES  \n"; 
          $sql.="ORDER BY  \n"; 

@@ -65,7 +65,14 @@
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/BusquedaDogBreeds.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/GrillaDogBreeds.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/dogbreeds/PanelDogBreeds.js"></script>
+
+    <!-- CatBreeds -->
+    <script type="text/javascript" src="app/petcms4/abm/catbreeds/FormCatBreeds.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/catbreeds/BusquedaCatBreeds.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/catbreeds/GrillaCatBreeds.js"></script>
+    <script type="text/javascript" src="app/petcms4/abm/catbreeds/PanelCatBreeds.js"></script>
     
+
     <!-- Shelters USA -->
     <script type="text/javascript" src="app/petcms4/abm/shelters/usa/FormSheltersUsa.js"></script>
     <script type="text/javascript" src="app/petcms4/abm/shelters/usa/BusquedaSheltersUsa.js"></script>

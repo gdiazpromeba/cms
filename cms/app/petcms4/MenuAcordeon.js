@@ -11,6 +11,7 @@ var storeBreeds = Ext.create('Ext.data.ArrayStore', {
     ],
     data:[
         { image : 'dachs.jpg',        caption : 'Dog Breeds',     panelClass: 'app.petcms4.abm.dogbreeds.PanelDogBreeds',   panelId: 'panelDogBreedsId' },
+        { image : 'cat-breeds.jpg',        caption : 'Cat Breeds',     panelClass: 'app.petcms4.abm.catbreeds.PanelCatBreeds',   panelId: 'panelCatBreedsId' },
         { image : 'petForums.jpg',       caption : 'Pet forums',     panelClass: 'app.petcms4.abm.petforums.PanelPetForums',   panelId: 'panelPetForumsId' },
         
     ],

@@ -1,13 +1,13 @@
 <?php 
 require_once '../../config.php';
-require_once $GLOBALS['pathCms'] . '/oad/impl/CatCoatLengthOadImpl.php'; 
-require_once $GLOBALS['pathCms'] . '/svc/CatCoatLengthSvc.php';  
+require_once $GLOBALS['pathCms'] . '/oad/impl/CatCoatLengthsOadImpl.php'; 
+require_once $GLOBALS['pathCms'] . '/svc/CatCoatLengthsSvc.php';  
 
-   class CatCoatLengthSvcImpl implements CatCoatLengthSvc { 
+   class CatCoatLengthsSvcImpl implements CatCoatLengthsSvc { 
       private $oad=null; 
 
       function __construct(){ 
-         $this->oad=new CatCoatLengthOadImpl();   
+         $this->oad=new CatCoatLengthsOadImpl();   
       } 
 
       public function obtiene($id){ 

@@ -1,16 +1,12 @@
 <?php 
 require_once '../../config.php';
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';  
-require_once $GLOBALS['pathCms'] . '/oad/CatCoatLengthOadOad.php';  
-require_once $GLOBALS['pathCms'] . '/beans/CatCoatLengthOad.php';
+require_once $GLOBALS['pathCms'] . '/oad/CatCoatLengthsOad.php';  
+require_once $GLOBALS['pathCms'] . '/beans/CatCoatLength.php';
 //require_once('FirePHPCore/fb.php4');
   
 
-  class CatCoatLengthOadImpl extends AOD implements CatCoatLengthOadOad { 
-
-
-
-
+  class CatCoatLengthsOadImpl extends AOD implements CatCoatLengthsOad { 
 
 
       public function selecciona($desde, $cuantos){ 
@@ -19,7 +15,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatCoatLengthOad.php';
          $sql.="  COAT_LENGTH_ID,     \n"; 
          $sql.="  COAT_LENGTH_NAME    \n"; 
          $sql.="FROM  \n"; 
-         $sql.="  CAT_COAT_LENGTH  \n"; 
+         $sql.="  CAT_COAT_LENGTHS  \n"; 
          $sql.="ORDER BY  \n"; 
          $sql.="  COAT_ORDER  \n"; 
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
@@ -42,7 +38,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatCoatLengthOad.php';
 
       public function seleccionaCuenta(){ 
          $conexion=$this->conectarse(); 
-         $sql="SELECT COUNT(*) FROM CAT_COAT_LENGTH "; 
+         $sql="SELECT COUNT(*) FROM CAT_COAT_LENGTHS "; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $cuenta=null; 

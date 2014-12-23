@@ -35,14 +35,13 @@ if ($ultimo=='selecciona'){
 		  $arrBean=array();
 		  $arrBean['catBreedId']=$bean->getId();
 		  $arrBean['catBreedName']=$bean->getNombre();
+		  $arrBean['nameEncoded']=$bean->getNameEncoded();
 		  $arrBean['catSizeId']=$bean->getSizeId();
 		  $arrBean['catSizeName']=$bean->getSizeName();
-		  $arrBean['catPurposeId']=$bean->getPurposeId();
-		  $arrBean['catPurposeName']=$bean->getPurposeName();
-		  $arrBean['catSheddingAmountId']=$bean->getSheddingAmountId();
-		  $arrBean['catSheddingAmountName']=$bean->getSheddingAmountName();
-		  $arrBean['catSheddingFrequencyId']=$bean->getSheddingFrequencyId();
-		  $arrBean['catSheddingFrequencyName']=$bean->getSheddingFrequencyName();
+		  $arrBean['coatLengthId']=$bean->getCoatLengthId();
+		  $arrBean['coatLengthName']=$bean->getCoatLengthName();
+		  $arrBean['sizeId']=$bean->getSizeId();
+		  $arrBean['sizeName']=$bean->getSizeName();
 		  $arrBean['mainFeatures']=$bean->getMainFeatures();
 		  $arrBean['headerText']=$bean->getHeaderText();
 		  $arrBean['colors']=$bean->getColors();
@@ -80,10 +79,10 @@ if ($ultimo=='selecciona'){
 	   	$bean=new CatBreed(); 
 		$svc = new CatBreedsSvcImpl();
 		$bean->setNombre($_REQUEST['catBreedName']);
+		$bean->setNameEncoded($_REQUEST['nameEncoded']);
 		$bean->setSizeId($_REQUEST['catSize']);
-		$bean->setPurposeId($_REQUEST['catPurpose']);
-		$bean->setSheddingAmountId($_REQUEST['catSheddingAmount']);
-		$bean->setSheddingFrequencyId($_REQUEST['catSheddingFrequency']);
+		$bean->setCoatLengthId($_REQUEST['coatLength']);
+		$bean->setSizeId($_REQUEST['size']);
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
 		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
@@ -116,10 +115,10 @@ if ($ultimo=='selecciona'){
 		$bean=new CatBreed();
 		$bean->setId($_REQUEST['catBreedId']);
 		$bean->setNombre($_REQUEST['catBreedName']);
+		$bean->setNameEncoded($_REQUEST['nameEncoded']);
 		$bean->setSizeId($_REQUEST['catSize']);
-		$bean->setPurposeId($_REQUEST['catPurpose']);
-		$bean->setSheddingAmountId($_REQUEST['catSheddingAmount']);
-		$bean->setSheddingFrequencyId($_REQUEST['catSheddingFrequency']);
+		$bean->setCoatLengthId($_REQUEST['coatLength']);
+		$bean->setSizeId($_REQUEST['size']);
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
 		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
@@ -162,7 +161,7 @@ if ($ultimo=='selecciona'){
 	
   }else if ($ultimo=='subeFoto'){
    	    header("Content-Type: text/html; charset=utf-8");
-        $uploads_dir = '../../resources/images/breeds';
+        $uploads_dir = '../../resources/images/catBreeds';
         if (!is_uploaded_file($_FILES['fichaFotoFU']['tmp_name'])) {
           $exito=array();
           $exito['success']=false;

@@ -12,14 +12,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql="SELECT  \n"; 
          $sql.="  CBR.CAT_BREED_ID,     \n"; 
          $sql.="  CBR.CAT_BREED_NAME,     \n"; 
-         $sql.="  CBR.CAT_SIZE_ID,     \n"; 
-         $sql.="  DSI.DOG_SIZE_NAME,     \n"; 
+         $sql.="  CBR.NAME_ENCODED,     \n";
+         $sql.="  CBR.SIZE_ID,     \n"; 
+         $sql.="  DSI.SIZE_NAME,     \n"; 
          $sql.="  CBR.CAT_PURPOSE_ID,     \n"; 
          $sql.="  DPU.DOG_PURPOSE_NAME,     \n"; 
-         $sql.="  CBR.CAT_SHEDDING_AMOUNT_ID,     \n"; 
-         $sql.="  DSA.DOG_SHEDDING_AMOUNT_NAME,     \n"; 
-         $sql.="  CBR.CAT_SHEDDING_FREQUENCY_ID,     \n"; 
-         $sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n"; 
+         $sql.="  CBR.COAT_LENGTH_ID,     \n"; 
+         $sql.="  DSA.COAT_LENGTH_NAME,     \n"; 
+         $sql.="  CBR.SIZE_ID,     \n"; 
+         $sql.="  DSF.SIZE_NAME,     \n"; 
          $sql.="  CBR.MAIN_FEATURES,     \n"; 
          $sql.="  CBR.HEADER_TEXT,     \n"; 
          $sql.="  CBR.COLORS,     \n"; 
@@ -49,15 +50,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n"; 
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN DOG_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.DOG_SIZE_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_AMOUNTS DSA ON CBR.CAT_SHEDDING_AMOUNT_ID=DSA.DOG_SHEDDING_AMOUNT_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_FREQUENCIES DSF ON CBR.CAT_SHEDDING_FREQUENCY_ID=DSF.DOG_SHEDDING_FREQUENCY_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n"; 
          $sql.="  CBR.CAT_BREED_ID='" . $id . "' \n"; 
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new CatBreed();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         $stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
          		  $servingMin, $servingMax,
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
@@ -65,14 +66,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          if ($stm->fetch()) { 
             $bean->setId($id);
             $bean->setNombre($nombre);
+            $bean->setNameEncoded($nameEncoded);
             $bean->setSizeId($sizeId);
             $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);
             $bean->setPurposeName($purposeName);
-            $bean->setSheddingAmountId($sheddingAmountId);
-            $bean->setSheddingAmountName($sheddingAmountName);
-            $bean->setSheddingFrequencyId($sheddingFrequencyId);
-            $bean->setSheddingFrequencyName($sheddingFrequencyName);
+            $bean->setCoatLengthId($sheddingAmountId);
+            $bean->setCoatLengthName($sheddingAmountName);
+            $bean->setSizeId($sheddingFrequencyId);
+            $bean->setSizeName($sheddingFrequencyName);
             $bean->setMainFeatures($mainFeatures);
             $bean->setHeaderText($headerText);
             $bean->setColors($colors);
@@ -104,19 +106,20 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          return $bean; 
       } 
       
-      public function obtienePorNombre($nombre){
+      public function obtienePorNombreEncoded($nombreEncoded){
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  CBR.CAT_BREED_ID,     \n";
       	$sql.="  CBR.CAT_BREED_NAME,     \n";
+      	$sql.="  CBR.NAME_ENCODED,     \n";
       	$sql.="  CBR.CAT_SIZE_ID,     \n";
-      	$sql.="  DSI.DOG_SIZE_NAME,     \n";
+      	$sql.="  DSI.SIZE_NAME,     \n";
       	$sql.="  CBR.CAT_PURPOSE_ID,     \n";
       	$sql.="  DPU.DOG_PURPOSE_NAME,     \n";
-      	$sql.="  CBR.CAT_SHEDDING_AMOUNT_ID,     \n";
-      	$sql.="  DSA.DOG_SHEDDING_AMOUNT_NAME,     \n";
-      	$sql.="  CBR.CAT_SHEDDING_FREQUENCY_ID,     \n";
-      	$sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n";
+      	$sql.="  CBR.COAT_LENGTH_ID,     \n";
+      	$sql.="  DSA.COAT_LENGTH_NAME,     \n";
+      	$sql.="  CBR.SIZE_ID,     \n";
+      	$sql.="  DSF.SIZE_NAME,     \n";
       	$sql.="  CBR.MAIN_FEATURES,     \n";
       	$sql.="  CBR.HEADER_TEXT,     \n";
       	$sql.="  CBR.COLORS,     \n";
@@ -146,15 +149,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-      	$sql.="  LEFT JOIN DOG_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.DOG_SIZE_ID \n";
-      	$sql.="  LEFT JOIN DOG_SHEDDING_AMOUNTS DSA ON CBR.CAT_SHEDDING_AMOUNT_ID=DSA.DOG_SHEDDING_AMOUNT_ID \n";
-      	$sql.="  LEFT JOIN DOG_SHEDDING_FREQUENCIES DSF ON CBR.CAT_SHEDDING_FREQUENCY_ID=DSF.DOG_SHEDDING_FREQUENCY_ID \n";
+      	$sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+      	$sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
+      	$sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
       	$sql.="WHERE  \n";
       	$sql.="  CBR.CAT_BREED_NAME='" . $nombre . "' \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new CatBreed();
-      	$stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+      	$stm->bind_result($id, $nombre, $nameEncoded,  $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
       			$mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
       			$servingMin, $servingMax,
       			$friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText,
@@ -162,14 +165,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	if ($stm->fetch()) {
       		$bean->setId($id);
       		$bean->setNombre($nombre);
+      		$bean->setNameEncoded($nameEncoded);
       		$bean->setSizeId($sizeId);
       		$bean->setSizeName($sizeName);
       		$bean->setPurposeId($purposeId);
       		$bean->setPurposeName($purposeName);
-      		$bean->setSheddingAmountId($sheddingAmountId);
-      		$bean->setSheddingAmountName($sheddingAmountName);
-      		$bean->setSheddingFrequencyId($sheddingFrequencyId);
-      		$bean->setSheddingFrequencyName($sheddingFrequencyName);
+      		$bean->setCoatLengthId($sheddingAmountId);
+      		$bean->setCoatLengthName($sheddingAmountName);
+      		$bean->setSizeId($sheddingFrequencyId);
+      		$bean->setSizeName($sheddingFrequencyName);
       		$bean->setMainFeatures($mainFeatures);
       		$bean->setHeadertext($headerText);
       		$bean->setColors($colors);
@@ -207,10 +211,11 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql="INSERT INTO CAT_BREEDS (   \n"; 
          $sql.="  CAT_BREED_ID,     \n"; 
          $sql.="  CAT_BREED_NAME,     \n"; 
+         $sql.="  NAME_ENCODED,     \n";
          $sql.="  CAT_SIZE_ID,     \n"; 
          $sql.="  CAT_PURPOSE_ID,     \n"; 
-         $sql.="  CAT_SHEDDING_AMOUNT_ID,     \n"; 
-         $sql.="  CAT_SHEDDING_FREQUENCY_ID,     \n"; 
+         $sql.="  COAT_LENGTH_ID,     \n"; 
+         $sql.="  SIZE_ID,     \n"; 
          $sql.="  MAIN_FEATURES,     \n"; 
          $sql.="  HEADER_TEXT,     \n"; 
          $sql.="  COLORS,     \n"; 
@@ -237,11 +242,11 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  APPARTMENTS,     \n";
          $sql.="  KIDS,     \n";
          $sql.="  HABILITADA)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("sssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("ssssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getNameEncoded(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
          		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
@@ -277,10 +282,11 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $conexion=$this->conectarse(); 
          $sql="UPDATE CAT_BREEDS SET   \n"; 
          $sql.="  CAT_BREED_NAME=?,     \n"; 
+         $sql.="  NAME_ENCODED=?,     \n";
          $sql.="  CAT_SIZE_ID=?,     \n"; 
          $sql.="  CAT_PURPOSE_ID=?,     \n"; 
-         $sql.="  CAT_SHEDDING_AMOUNT_ID=?,     \n"; 
-         $sql.="  CAT_SHEDDING_FREQUENCY_ID=?,     \n"; 
+         $sql.="  COAT_LENGTH_ID=?,     \n"; 
+         $sql.="  SIZE_ID=?,     \n"; 
          $sql.="  MAIN_FEATURES=?,     \n"; 
          $sql.="  HEADER_TEXT=?,     \n"; 
          $sql.="  COLORS=?,     \n"; 
@@ -309,7 +315,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE CAT_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("ssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getSheddingAmountId(), $bean->getSheddingFrequencyId(), 
+         $stm->bind_param("sssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getNameEncoded(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
          		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
@@ -323,14 +329,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql="SELECT  \n"; 
          $sql.="  CBR.CAT_BREED_ID,     \n"; 
          $sql.="  CBR.CAT_BREED_NAME,     \n"; 
+         $sql.="  CBR.NAME_ENCODED,     \n";
          $sql.="  CBR.CAT_SIZE_ID,     \n"; 
-         $sql.="  DSI.DOG_SIZE_NAME,     \n"; 
+         $sql.="  DSI.SIZE_NAME,     \n"; 
          $sql.="  CBR.CAT_PURPOSE_ID,     \n"; 
          $sql.="  DPU.DOG_PURPOSE_NAME,     \n"; 
-         $sql.="  CBR.CAT_SHEDDING_AMOUNT_ID,     \n"; 
-         $sql.="  DSA.DOG_SHEDDING_AMOUNT_NAME,     \n"; 
-         $sql.="  CBR.CAT_SHEDDING_FREQUENCY_ID,     \n"; 
-         $sql.="  DSF.DOG_SHEDDING_FREQUENCY_NAME,     \n"; 
+         $sql.="  CBR.COAT_LENGTH_ID,     \n"; 
+         $sql.="  DSA.COAT_LENGTH_NAME,     \n"; 
+         $sql.="  CBR.SIZE_ID,     \n"; 
+         $sql.="  DSF.SIZE_NAME,     \n"; 
          $sql.="  CBR.MAIN_FEATURES,     \n"; 
          $sql.="  CBR.HEADER_TEXT,     \n"; 
          $sql.="  CBR.COLORS,     \n"; 
@@ -360,9 +367,9 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n"; 
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN DOG_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.DOG_SIZE_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_AMOUNTS DSA ON CBR.CAT_SHEDDING_AMOUNT_ID=DSA.DOG_SHEDDING_AMOUNT_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_FREQUENCIES DSF ON CBR.CAT_SHEDDING_FREQUENCY_ID=DSF.DOG_SHEDDING_FREQUENCY_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n";
          $sql.="  CBR.HABILITADA=1 \n";
          if (!empty($nombreOParte)){
@@ -411,7 +418,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $nombre, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
+         $stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
          		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
          		  $servingMin, $servingMax, 
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
@@ -421,14 +428,15 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
             $bean=new CatBreed();  
             $bean->setId($id);
             $bean->setNombre($nombre);
+            $bean->setNameEncoded($nameEncoded);
             $bean->setSizeId($sizeId);
             $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);
             $bean->setPurposeName($purposeName);
-            $bean->setSheddingAmountId($sheddingAmountId);
-            $bean->setSheddingAmountName($sheddingAmountName);
-            $bean->setSheddingFrequencyId($sheddingFrequencyId);
-            $bean->setSheddingFrequencyName($sheddingFrequencyName);
+            $bean->setCoatLengthId($sheddingAmountId);
+            $bean->setCoatLengthName($sheddingAmountName);
+            $bean->setSizeId($sheddingFrequencyId);
+            $bean->setSizeName($sheddingFrequencyName);
             $bean->setMainFeatures($mainFeatures);
             $bean->setHeaderText($headerText);
             $bean->setColors($colors);
@@ -468,9 +476,9 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n";
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN DOG_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.DOG_SIZE_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_AMOUNTS DSA ON CBR.CAT_SHEDDING_AMOUNT_ID=DSA.DOG_SHEDDING_AMOUNT_ID \n";
-         $sql.="  LEFT JOIN DOG_SHEDDING_FREQUENCIES DSF ON CBR.CAT_SHEDDING_FREQUENCY_ID=DSF.DOG_SHEDDING_FREQUENCY_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n";
          $sql.="  CBR.HABILITADA=1 \n";
          if (!empty($nombreOParte)){
@@ -528,7 +536,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  CBR.CAT_BREED_ID,     \n";
-      	$sql.="  CBR.CAT_BREED_NAME     \n";
+      	$sql.="  CBR.CAT_BREED_NAME,     \n";
+      	$sql.="  CBR.NAME_ENCODED     \n";
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="WHERE  \n";
@@ -540,12 +549,13 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.CAT_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded);
       	$filas=array();
       	while ($stm->fetch()) {      	
             $fila=array();
             $fila['id']=$id;
             $fila['value']=$nombre;
+            $fila['nameEncoded']=$nameEncoded;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);
@@ -556,7 +566,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  CBR.CAT_BREED_ID,     \n";
-      	$sql.="  CBR.CAT_BREED_NAME     \n";
+      	$sql.="  CBR.CAT_BREED_NAME,     \n";
+      	$sql.="  CBR.NAME_ENCODED     \n";
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="  LEFT JOIN CAT_BREEDS_BY_SHELTER DBS ON CBR.CAT_BREED_ID=DBS.CAT_BREED_ID \n";
@@ -567,12 +578,13 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.CAT_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded);
       	$filas=array();
       	while ($stm->fetch()) {
       		$fila=array();
       		$fila['id']=$id;
       		$fila['name']=$nombre;
+      		$fila['nameEncoded']=$nameEncoded;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);
@@ -583,7 +595,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  CBR.CAT_BREED_ID,     \n";
-      	$sql.="  CBR.CAT_BREED_NAME     \n";
+      	$sql.="  CBR.CAT_BREED_NAME,     \n";
+      	$sql.="  CBR.NAME_ENCODED     \n";
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="  LEFT JOIN CAT_BREEDS_BY_BREEDER DBS ON CBR.CAT_BREED_ID=DBS.CAT_BREED_ID \n";
@@ -594,12 +607,13 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.CAT_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded);
       	$filas=array();
       	while ($stm->fetch()) {
       		$fila=array();
       		$fila['id']=$id;
       		$fila['name']=$nombre;
+      		$fila['nameEncoded']=$nameEncoded;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);
@@ -610,7 +624,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  CBR.CAT_BREED_ID,     \n";
-      	$sql.="  CBR.CAT_BREED_NAME     \n";
+      	$sql.="  CBR.CAT_BREED_NAME,     \n";
+      	$sql.="  CBR.NAME_ENCODED     \n";
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="  LEFT JOIN CAT_BREEDS_BY_FORUM DBS ON CBR.CAT_BREED_ID=DBS.CAT_BREED_ID \n";
@@ -621,12 +636,13 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.CAT_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded);
       	$filas=array();
       	while ($stm->fetch()) {
       		$fila=array();
       		$fila['id']=$id;
       		$fila['name']=$nombre;
+      		$fila['nameEncoded']=$nameEncoded;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);

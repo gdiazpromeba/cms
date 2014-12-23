@@ -3,14 +3,15 @@
    class CatBreed { 
       private $catBreedId; 
       private $catBreedName; 
+      private $nameEncoded;
       private $catSizeId; 
       private $catSizeName; 
       private $catPurposeId; 
       private $catPurposeName; 
-      private $catSheddingAmountId; 
-      private $catSheddingAmountName; 
-      private $catSheddingFrequencyId; 
-      private $catSheddingFrequencyName; 
+      private $coatLengthId; 
+      private $coatLengthName; 
+      private $sizeId; 
+      private $sizeName; 
       private $mainFeatures; 
       private $headerText; 
       private $colors; 
@@ -45,14 +46,11 @@
       public function getNombre(){ 
          return $this->catBreedName;  
       }
-
-      public function getSizeId(){ 
-         return $this->catSizeId;  
+      
+      public function getNameEncoded(){
+      	return $this->nameEncoded;
       }
-
-      public function getSizeName(){ 
-         return $this->catSizeName;  
-      }
+      
 
       public function getPurposeId(){ 
          return $this->catPurposeId;  
@@ -62,20 +60,20 @@
          return $this->catPurposeName;  
       }
 
-      public function getSheddingAmountId(){ 
-         return $this->catSheddingAmountId;  
+      public function getCoatLengthId(){ 
+         return $this->coatLengthId;  
       }
 
-      public function getSheddingAmountName(){ 
-         return $this->catSheddingAmountName;  
+      public function getCoatLengthName(){ 
+         return $this->coatLengthName;  
       }
 
-      public function getSheddingFrequencyId(){ 
-         return $this->catSheddingFrequencyId;  
+      public function getSizeId(){ 
+         return $this->sizeId;  
       }
 
-      public function getSheddingFrequencyName(){ 
-         return $this->catSheddingFrequencyName;  
+      public function getSizeName(){ 
+         return $this->sizeName;  
       }
 
       public function getMainFeatures(){ 
@@ -193,13 +191,18 @@
       public function setNombre($valor){ 
          $this->catBreedName=$valor; 
       }
+      
+      public function setNameEncoded($valor){
+      	$this->nameEncoded=$valor;
+      }
+      
 
       public function setSizeId($valor){ 
-         $this->catSizeId=$valor; 
+         $this->sizeId=$valor; 
       }
 
       public function setSizeName($valor){ 
-         $this->catSizeName=$valor; 
+         $this->sizeName=$valor; 
       }
 
       public function setPurposeId($valor){ 
@@ -210,20 +213,12 @@
          $this->catPurposeName=$valor; 
       }
 
-      public function setSheddingAmountId($valor){ 
-         $this->catSheddingAmountId=$valor; 
+      public function setCoatLengthId($valor){ 
+         $this->coatLengthId=$valor; 
       }
 
-      public function setSheddingAmountName($valor){ 
-         $this->catSheddingAmountName=$valor; 
-      }
-
-      public function setSheddingFrequencyId($valor){ 
-         $this->catSheddingFrequencyId=$valor; 
-      }
-
-      public function setSheddingFrequencyName($valor){ 
-         $this->catSheddingFrequencyName=$valor; 
+      public function setCoatLengthName($valor){ 
+         $this->coatLengthName=$valor; 
       }
 
       public function setMainFeatures($valor){ 
