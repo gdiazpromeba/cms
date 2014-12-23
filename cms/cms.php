@@ -44,6 +44,8 @@
     <script type="text/javascript" src="app/petcms4/combos/ComboChinaProvinces.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboCountriesUk.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSizes.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboCatSizes.js"></script>
+    <script type="text/javascript" src="app/petcms4/combos/ComboCatCoatLengths.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogPurposes.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingAmounts.js"></script>
     <script type="text/javascript" src="app/petcms4/combos/ComboDogSheddingFrequencies.js"></script>
