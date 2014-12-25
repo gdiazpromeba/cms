@@ -15,8 +15,8 @@
       private $mainFeatures; 
       private $headerText; 
       private $colors; 
-      private $sizeMin; 
-      private $sizeMax; 
+      private $lifeMin; 
+      private $lifeMax; 
       private $weightMin; 
       private $weightMax; 
       private $servingMin;
@@ -89,12 +89,12 @@
          return $this->colors;  
       }
 
-      public function getSizeMin(){ 
-         return $this->sizeMin;  
+      public function getLifeMin(){ 
+         return $this->lifeMin;  
       }
 
-      public function getSizeMax(){ 
-         return $this->sizeMax;  
+      public function getLifeMax(){ 
+         return $this->lifeMax;  
       }
 
       public function getWeightMin(){ 
@@ -234,12 +234,12 @@
          $this->colors=$valor; 
       }
 
-      public function setSizeMin($valor){ 
-         $this->sizeMin=$valor; 
+      public function setLifeMin($valor){ 
+         $this->lifeMin=$valor; 
       }
 
-      public function setSizeMax($valor){ 
-         $this->sizeMax=$valor; 
+      public function setLifeMax($valor){ 
+         $this->lifeMax=$valor; 
       }
 
       public function setWeightMin($valor){ 

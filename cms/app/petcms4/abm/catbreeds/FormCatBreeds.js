@@ -30,17 +30,17 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
             {fieldLabel: 'Coat Length', xtype: 'comboCatCoatLengths', name: 'coatLength', itemId: 'coatLength',  width: 50},
             {fieldLabel: 'Size', xtype: 'comboCatSizes', name: 'size', itemId: 'size', width: 50},
             {fieldLabel: 'Main Features', xtype: 'textfield',  name: 'mainFeatures', itemId: 'mainFeatures',  allowBlank: true, width: 50},
-            {fieldLabel: 'Colors', xtype: 'textfield',  name: 'colors', itemId: 'colors',  allowBlank: true, width: 150},
-            {fieldLabel: 'For appartments', xtype: 'checkbox', name: 'appartments', itemId: 'appartments'},
-            {fieldLabel: 'Safe for kids', xtype: 'checkbox', name: 'kids', itemId: 'kids'},
+            {fieldLabel: 'Colors', xtype: 'textfield',  name: 'colors', itemId: 'colors',  allowBlank: true, width: 150, height: 70},
+//            {fieldLabel: 'For appartments', xtype: 'checkbox', name: 'appartments', itemId: 'appartments'},
+//            {fieldLabel: 'Safe for kids', xtype: 'checkbox', name: 'kids', itemId: 'kids'},
            ]
         },//del colIzq    
         {xtype: 'fieldset', itemId: 'colDer', border: false, layout: 'form',  width: 250, //style: 'padding:0px;', bodyStyle: 'padding:0px;', width: 300,
             items:[
-              {title: 'Size', xtype: 'fieldset', itemId: 'size', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'},
+              {title: 'Lifespan', xtype: 'fieldset', itemId: 'size', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'},
                 items: [
-                  {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMin', itemId: 'sizeMin', allowBlank: false, width: 90},
-                  {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'sizeMax', itemId: 'sizeMax', allowBlank: false, width: 90}
+                  {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: false, decimalPrecision: 2, name: 'lifeMin', itemId: 'lifeMin', allowBlank: false, width: 90},
+                  {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: false, decimalPrecision: 2, name: 'lifeMax', itemId: 'lifeMax', allowBlank: false, width: 90}
                 ]
               },
               {title: 'Weight', xtype: 'fieldset', itemId: 'weight', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'}, 
@@ -49,12 +49,12 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
                    {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'weightMax', itemId: 'weightMax',   allowBlank: false,  width: 90},
                  ]
                },                   
-               {title: 'Serving sizes', xtype: 'fieldset', itemId: 'serving', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'}, 
-           	     items: [
-                     {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMin', itemId: 'servingMin',  allowBlank: false, width: 90},
-                     {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMax', itemId: 'servingMax',  allowBlank: false, width: 90},
-                   ]
-                 },                
+//               {title: 'Serving sizes', xtype: 'fieldset', itemId: 'serving', border: true, layout: {type: 'hbox',pack: 'start',align: 'stretch'}, 
+//           	     items: [
+//                     {fieldLabel: 'Min', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMin', itemId: 'servingMin',  allowBlank: false, width: 90},
+//                     {fieldLabel: 'Max', labelAlign:'right', labelWidth: 40, xtype: 'numberfield',  allowDecimals: true, decimalPrecision: 2, name: 'servingMax', itemId: 'servingMax',  allowBlank: false, width: 90},
+//                   ]
+//                 },                
                {fieldLabel: 'Video', xtype: 'textfield',  name: 'videoUrl', itemId: 'videoUrl',  allowBlank: true, width: 250},
                {fieldLabel: 'Picture', xtype: 'textfield',  name: 'pictureUrl', itemId: 'pictureUrl', id: 'catBreedPictureUrl', allowBlank: true, width: 250},
                {fieldLabel: 'Foto', xtype: 'button', text: 'Subir foto', itemId: 'botAceptar', ref: '../botAceptar', 
@@ -64,7 +64,7 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
                        win.show();
                        win.on("beforedestroy", function(){
                            Ext.getCmp('catBreedPictureUrl').setValue(win.getNombreArchivoFoto());
-                           Ext.getCmp('imagePhotoBreed').el.dom.src= Global.dirAplicacion + '/resources/images/catBreeds/' + win.getNombreArchivoFoto(); 
+                           Ext.getCmp('imagePhotoCatBreed').el.dom.src= Global.dirAplicacion + '/resources/images/catBreeds/' + win.getNombreArchivoFoto(); 
                            //formulario.doLayout();     
                        });
                      }//evento click
@@ -130,8 +130,8 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
          colIzq.getComponent('size').setValue(record.get('sizeId'));
          colIzq.getComponent('mainFeatures').setValue(record.get('mainFeatures'));
          colIzq.getComponent('colors').setValue(record.get('colors'));
-         colIzq.getComponent('appartments').setValue(record.get('appartments'));
-         colIzq.getComponent('kids').setValue(record.get('kids'));
+//         colIzq.getComponent('appartments').setValue(record.get('appartments'));
+//         colIzq.getComponent('kids').setValue(record.get('kids'));
          var ranks=this.getComponent('ranksPanel');
          ranks.getComponent('friendly').getComponent('rangoFriendly').setValue(record.get('friendlyRank'));
          ranks.getComponent('friendly').getComponent('friendlyText').setValue(record.get('friendlyText'));
@@ -147,18 +147,18 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
          ranks.getComponent('grooming').getComponent('groomingText').setValue(record.get('groomingText'));
          var colDer=this.getComponent('colDer');
          var size=colDer.getComponent('size');
-         size.getComponent('sizeMin').setValue(record.get('sizeMin'));
-         size.getComponent('sizeMax').setValue(record.get('sizeMax'));
+         size.getComponent('lifeMin').setValue(record.get('lifeMin'));
+         size.getComponent('lifeMax').setValue(record.get('lifeMax'));
          var weight=colDer.getComponent('weight');
          weight.getComponent('weightMin').setValue(record.get('weightMin'));
          weight.getComponent('weightMax').setValue(record.get('weightMax'));
-         var serving=colDer.getComponent('serving');
-         serving.getComponent('servingMin').setValue(record.get('servingMin'));
-         serving.getComponent('servingMax').setValue(record.get('servingMax'));
+//         var serving=colDer.getComponent('serving');
+//         serving.getComponent('servingMin').setValue(record.get('servingMin'));
+//         serving.getComponent('servingMax').setValue(record.get('servingMax'));
          colDer.getComponent('videoUrl').setValue(record.get('videoUrl'));
          colDer.getComponent('pictureUrl').setValue(record.get('pictureUrl'));
          //foto
-         Ext.getCmp('imagePhotoBreed').el.dom.src= Global.dirAplicacion + '/resources/images/breeds/' +record.get('pictureUrl'); 
+         Ext.getCmp('imagePhotoCatBreed').el.dom.src= Global.dirAplicacion + '/resources/images/catBreeds/' +record.get('pictureUrl'); 
   	   },
   	   
   	   pueblaFormEnRegistro : function(record){
@@ -177,8 +177,8 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
   		 record.data['mainFeatures']=  colIzq.getComponent('mainFeatures').getValue();
   		 record.data['headerText']=  colIzq.getComponent('headerText').getValue();
   		 record.data['colors']=  colIzq.getComponent('colors').getValue();
-  		 record.data['appartments']=  colIzq.getComponent('appartments').getValue();
-  		 record.data['kids']=  colIzq.getComponent('kids').getValue();
+//  		 record.data['appartments']=  colIzq.getComponent('appartments').getValue();
+//  		 record.data['kids']=  colIzq.getComponent('kids').getValue();
   		 var ranks=this.getComponent('ranksPanel');
   		 record.data['friendlyRank']= ranks.getComponent('friendly').getComponent('rangoFriendly').getValue();
   		 record.data['friendlyText']= ranks.getComponent('friendly').getComponent('friendlyText').getValue();
@@ -194,14 +194,14 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
   		 record.data['groomingText']= ranks.getComponent('grooming').getComponent('groomingText').getValue();
   		 var colDer=this.getComponent('colDer');
   		 var size=colDer.getComponent('size');
-  		 record.data['sizeMin']=  size.getComponent('sizeMin').getValue();
-  		 record.data['sizeMax']=  size.getComponent('sizeMax').getValue();
+  		 record.data['lifeMin']=  size.getComponent('lifeMin').getValue();
+  		 record.data['lifeMax']=  size.getComponent('lifeMax').getValue();
   		 var weight=colDer.getComponent('weight');
   		 record.data['weightMin']=  weight.getComponent('weightMin').getValue();
   		 record.data['weightMax']=  weight.getComponent('weightMax').getValue();
-  		 var serving=colDer.getComponent('serving');
-  		 record.data['servingMin']= serving.getComponent('servingMin').getValue();
-  		 record.data['servingMax']= serving.getComponent('servingMax').getValue();
+//  		 var serving=colDer.getComponent('serving');
+//  		 record.data['servingMin']= serving.getComponent('servingMin').getValue();
+//  		 record.data['servingMax']= serving.getComponent('servingMax').getValue();
   		 record.data['videoUrl']= colDer.getComponent('videoUrl').getValue();
   		 record.data['pictureUrl']= colDer.getComponent('pictureUrl').getValue();
   		 record.commit();

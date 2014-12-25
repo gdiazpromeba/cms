@@ -13,8 +13,6 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  CBR.CAT_BREED_ID,     \n"; 
          $sql.="  CBR.CAT_BREED_NAME,     \n"; 
          $sql.="  CBR.NAME_ENCODED,     \n";
-         $sql.="  CBR.SIZE_ID,     \n"; 
-         $sql.="  DSI.SIZE_NAME,     \n"; 
          $sql.="  CBR.CAT_PURPOSE_ID,     \n"; 
          $sql.="  DPU.DOG_PURPOSE_NAME,     \n"; 
          $sql.="  CBR.COAT_LENGTH_ID,     \n"; 
@@ -24,8 +22,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  CBR.MAIN_FEATURES,     \n"; 
          $sql.="  CBR.HEADER_TEXT,     \n"; 
          $sql.="  CBR.COLORS,     \n"; 
-         $sql.="  CBR.SIZE_MIN,     \n"; 
-         $sql.="  CBR.SIZE_MAX,     \n"; 
+         $sql.="  CBR.LIFE_MIN,     \n"; 
+         $sql.="  CBR.LIFE_MAX,     \n"; 
          $sql.="  CBR.WEIGHT_MIN,     \n"; 
          $sql.="  CBR.WEIGHT_MAX,     \n"; 
          $sql.="  CBR.SERVING_MIN,     \n";
@@ -50,7 +48,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n"; 
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.SIZE_ID=DSI.SIZE_ID \n";
          $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
          $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n"; 
@@ -58,8 +56,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $bean=new CatBreed();  
-         $stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
-         		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax, 
+         $stm->bind_result($id, $nombre, $nameEncoded, $purposeId, $purposeName, $coatLengthId, $coatLengthName, $sizeId, $sizeName, 
+         		  $mainFeatures, $headerText, $colors, $lifeMin, $lifeMax, $weightMin, $weightMax, 
          		  $servingMin, $servingMax,
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
          		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
@@ -67,19 +65,17 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
             $bean->setId($id);
             $bean->setNombre($nombre);
             $bean->setNameEncoded($nameEncoded);
-            $bean->setSizeId($sizeId);
-            $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);
             $bean->setPurposeName($purposeName);
-            $bean->setCoatLengthId($sheddingAmountId);
-            $bean->setCoatLengthName($sheddingAmountName);
-            $bean->setSizeId($sheddingFrequencyId);
-            $bean->setSizeName($sheddingFrequencyName);
+            $bean->setCoatLengthId($coatLengthId);
+            $bean->setCoatLengthName($coatLengthName);
+            $bean->setSizeId($sizeId);
+            $bean->setSizeName($sizeName);
             $bean->setMainFeatures($mainFeatures);
             $bean->setHeaderText($headerText);
             $bean->setColors($colors);
-            $bean->setSizeMin($sizeMin);
-            $bean->setSizeMax($sizeMax);
+            $bean->setLifeMin($lifeMin);
+            $bean->setLifeMax($lifeMax);
             $bean->setWeightMin($weightMin);
             $bean->setWeightMax($weightMax);
             $bean->setServingMin($servingMin);
@@ -112,8 +108,6 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.CAT_BREED_ID,     \n";
       	$sql.="  CBR.CAT_BREED_NAME,     \n";
       	$sql.="  CBR.NAME_ENCODED,     \n";
-      	$sql.="  CBR.CAT_SIZE_ID,     \n";
-      	$sql.="  DSI.SIZE_NAME,     \n";
       	$sql.="  CBR.CAT_PURPOSE_ID,     \n";
       	$sql.="  DPU.DOG_PURPOSE_NAME,     \n";
       	$sql.="  CBR.COAT_LENGTH_ID,     \n";
@@ -123,8 +117,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="  CBR.MAIN_FEATURES,     \n";
       	$sql.="  CBR.HEADER_TEXT,     \n";
       	$sql.="  CBR.COLORS,     \n";
-      	$sql.="  CBR.SIZE_MIN,     \n";
-      	$sql.="  CBR.SIZE_MAX,     \n";
+      	$sql.="  CBR.LIFE_MIN,     \n";
+      	$sql.="  CBR.LIFE_MAX,     \n";
       	$sql.="  CBR.WEIGHT_MIN,     \n";
       	$sql.="  CBR.WEIGHT_MAX,     \n";
       	$sql.="  CBR.SERVING_MIN,     \n";
@@ -149,7 +143,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$sql.="FROM  \n";
       	$sql.="  CAT_BREEDS CBR \n";
       	$sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-      	$sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+      	$sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.SIZE_ID=DSI.SIZE_ID \n";
       	$sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
       	$sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
       	$sql.="WHERE  \n";
@@ -157,8 +151,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
       	$bean=new CatBreed();
-      	$stm->bind_result($id, $nombre, $nameEncoded,  $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
-      			$mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
+      	$stm->bind_result($id, $nombre, $nameEncoded, $purposeId, $purposeName, $coatLengthId, $coatLengthName, $sizeId, $sizeName, 
+      			$mainFeatures, $headerText, $colors, $lifeMin, $lifeMax, $weightMin, $weightMax,
       			$servingMin, $servingMax,
       			$friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText,
       			$pictureUrl, $videoUrl, $appartments, $kids, $habilitada);
@@ -166,19 +160,17 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
       		$bean->setId($id);
       		$bean->setNombre($nombre);
       		$bean->setNameEncoded($nameEncoded);
-      		$bean->setSizeId($sizeId);
-      		$bean->setSizeName($sizeName);
       		$bean->setPurposeId($purposeId);
       		$bean->setPurposeName($purposeName);
-      		$bean->setCoatLengthId($sheddingAmountId);
-      		$bean->setCoatLengthName($sheddingAmountName);
-      		$bean->setSizeId($sheddingFrequencyId);
-      		$bean->setSizeName($sheddingFrequencyName);
+      		$bean->setCoatLengthId($coatLengthId);
+      		$bean->setCoatLengthName($coatLengthName);
+      		$bean->setSizeId($sizeId);
+      		$bean->setSizeName($sizeName);
       		$bean->setMainFeatures($mainFeatures);
       		$bean->setHeadertext($headerText);
       		$bean->setColors($colors);
-      		$bean->setSizeMin($sizeMin);
-      		$bean->setSizeMax($sizeMax);
+      		$bean->setLifeMin($lifeMin);
+      		$bean->setLifeMax($lifeMax);
       		$bean->setWeightMin($weightMin);
       		$bean->setWeightMax($weightMax);
       		$bean->setServingMin($servingMin);
@@ -212,15 +204,14 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  CAT_BREED_ID,     \n"; 
          $sql.="  CAT_BREED_NAME,     \n"; 
          $sql.="  NAME_ENCODED,     \n";
-         $sql.="  CAT_SIZE_ID,     \n"; 
          $sql.="  CAT_PURPOSE_ID,     \n"; 
          $sql.="  COAT_LENGTH_ID,     \n"; 
          $sql.="  SIZE_ID,     \n"; 
          $sql.="  MAIN_FEATURES,     \n"; 
          $sql.="  HEADER_TEXT,     \n"; 
          $sql.="  COLORS,     \n"; 
-         $sql.="  SIZE_MIN,     \n"; 
-         $sql.="  SIZE_MAX,     \n"; 
+         $sql.="  LIFE_MIN,     \n"; 
+         $sql.="  LIFE_MAX,     \n"; 
          $sql.="  WEIGHT_MIN,     \n"; 
          $sql.="  WEIGHT_MAX,     \n"; 
          $sql.="  SERVING_MIN,     \n";
@@ -242,12 +233,12 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  APPARTMENTS,     \n";
          $sql.="  KIDS,     \n";
          $sql.="  HABILITADA)    \n"; 
-         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
+         $sql.="VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)    \n"; 
          $nuevoId=$this->idUnico(); 
          $bean->setId($nuevoId); 
          $stm=$this->preparar($conexion, $sql); 
-         $stm->bind_param("ssssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getNameEncoded(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
-         		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
+         $stm->bind_param("sssssssssddddddisisisisisisssii",$bean->getId(), $bean->getNombre(), $bean->getNameEncoded(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
+         		  $bean->getMainFeatures(),   $bean->getHeaderText(), $bean->getColors(), $bean->getLifeMin(), $bean->getLifeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids()); 
@@ -283,15 +274,14 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql="UPDATE CAT_BREEDS SET   \n"; 
          $sql.="  CAT_BREED_NAME=?,     \n"; 
          $sql.="  NAME_ENCODED=?,     \n";
-         $sql.="  CAT_SIZE_ID=?,     \n"; 
          $sql.="  CAT_PURPOSE_ID=?,     \n"; 
          $sql.="  COAT_LENGTH_ID=?,     \n"; 
          $sql.="  SIZE_ID=?,     \n"; 
          $sql.="  MAIN_FEATURES=?,     \n"; 
          $sql.="  HEADER_TEXT=?,     \n"; 
          $sql.="  COLORS=?,     \n"; 
-         $sql.="  SIZE_MIN=?,     \n"; 
-         $sql.="  SIZE_MAX=?,     \n"; 
+         $sql.="  LIFE_MIN=?,     \n"; 
+         $sql.="  LIFE_MAX=?,     \n"; 
          $sql.="  WEIGHT_MIN=?,     \n"; 
          $sql.="  WEIGHT_MAX=?,     \n"; 
          $sql.="  SERVING_MIN=?,     \n";
@@ -315,8 +305,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  HABILITADA=?     \n"; 
          $sql.="WHERE CAT_BREED_ID=?   \n"; 
          $stm=$this->preparar($conexion, $sql);  
-         $stm->bind_param("sssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getNameEncoded(), $bean->getSizeId(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
-         		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getSizeMin(), $bean->getSizeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
+         $stm->bind_param("ssssssssddddddisisisisisisssiiis", $bean->getNombre(), $bean->getNameEncoded(), $bean->getPurposeId(), $bean->getCoatLengthId(), $bean->getSizeId(), 
+         		  $bean->getMainFeatures(), $bean->getHeaderText(),   $bean->getColors(), $bean->getLifeMin(), $bean->getLifeMax(), $bean->getWeightMin(), $bean->getWeightMax(), 
          		  $bean->getServingMin(), $bean->getServingMax(), 
          		  $bean->getFriendlyRank(), $bean->getFriendlyText(), $bean->getActiveRank(), $bean->getActiveText(), $bean->getHealthyRank(), $bean->getHealthyText(), $bean->getTrainingRank(), $bean->getTrainingText(), $bean->getGuardianRank(), $bean->getGuardianText(), $bean->getGroomingRank(), $bean->getGroomingText(), 
          		  $bean->getPictureUrl(), $bean->getVideoUrl(), $bean->getAppartments(), $bean->getKids(), $bean->getHabilitada(), $bean->getId() ); 
@@ -330,8 +320,6 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  CBR.CAT_BREED_ID,     \n"; 
          $sql.="  CBR.CAT_BREED_NAME,     \n"; 
          $sql.="  CBR.NAME_ENCODED,     \n";
-         $sql.="  CBR.CAT_SIZE_ID,     \n"; 
-         $sql.="  DSI.SIZE_NAME,     \n"; 
          $sql.="  CBR.CAT_PURPOSE_ID,     \n"; 
          $sql.="  DPU.DOG_PURPOSE_NAME,     \n"; 
          $sql.="  CBR.COAT_LENGTH_ID,     \n"; 
@@ -341,8 +329,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="  CBR.MAIN_FEATURES,     \n"; 
          $sql.="  CBR.HEADER_TEXT,     \n"; 
          $sql.="  CBR.COLORS,     \n"; 
-         $sql.="  CBR.SIZE_MIN,     \n"; 
-         $sql.="  CBR.SIZE_MAX,     \n"; 
+         $sql.="  CBR.LIFE_MIN,     \n"; 
+         $sql.="  CBR.LIFE_MAX,     \n"; 
          $sql.="  CBR.WEIGHT_MIN,     \n"; 
          $sql.="  CBR.WEIGHT_MAX,     \n"; 
          $sql.="  CBR.SERVING_MIN,     \n";
@@ -367,7 +355,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n"; 
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.SIZE_ID=DSI.SIZE_ID \n";
          $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
          $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n";
@@ -418,8 +406,8 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
-         $stm->bind_result($id, $nombre, $nameEncoded, $sizeId, $sizeName, $purposeId, $purposeName, $sheddingAmountId, $sheddingAmountName, $sheddingFrequencyId, $sheddingFrequencyName, 
-         		  $mainFeatures, $headerText, $colors, $sizeMin, $sizeMax, $weightMin, $weightMax,
+         $stm->bind_result($id, $nombre, $nameEncoded, $purposeId, $purposeName, $coatLengthId, $coatLengthName, $sizeId, $sizeName,
+         		  $mainFeatures, $headerText, $colors, $lifeMin, $lifeMax, $weightMin, $weightMax,
          		  $servingMin, $servingMax, 
          		  $friendlyRank, $friendlyText, $activeRank, $activeText, $healthyRank, $healthyText, $trainingRank, $trainingText, $guardianRank, $guardianText, $groomingRank, $groomingText, 
          		  $pictureUrl, $videoUrl, $appartments, $kids, $habilitada); 
@@ -429,19 +417,17 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
             $bean->setId($id);
             $bean->setNombre($nombre);
             $bean->setNameEncoded($nameEncoded);
-            $bean->setSizeId($sizeId);
-            $bean->setSizeName($sizeName);
             $bean->setPurposeId($purposeId);
             $bean->setPurposeName($purposeName);
-            $bean->setCoatLengthId($sheddingAmountId);
-            $bean->setCoatLengthName($sheddingAmountName);
-            $bean->setSizeId($sheddingFrequencyId);
-            $bean->setSizeName($sheddingFrequencyName);
+            $bean->setCoatLengthId($coatLengthId);
+            $bean->setCoatLengthName($coatLengthName);
+            $bean->setSizeId($sizeId);
+            $bean->setSizeName($sizeName);
             $bean->setMainFeatures($mainFeatures);
             $bean->setHeaderText($headerText);
             $bean->setColors($colors);
-            $bean->setSizeMin($sizeMin);
-            $bean->setSizeMax($sizeMax);
+            $bean->setLifeMin($lifeMin);
+            $bean->setLifeMax($lifeMax);
             $bean->setWeightMin($weightMin);
             $bean->setWeightMax($weightMax);
             $bean->setServingMin($servingMin);
@@ -476,7 +462,7 @@ require_once $GLOBALS['pathCms'] . '/beans/CatBreed.php';
          $sql.="FROM  \n";
          $sql.="  CAT_BREEDS CBR \n";
          $sql.="  LEFT JOIN DOG_PURPOSES DPU ON CBR.CAT_PURPOSE_ID=DPU.DOG_PURPOSE_ID \n";
-         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.CAT_SIZE_ID=DSI.SIZE_ID \n";
+         $sql.="  LEFT JOIN CAT_SIZES DSI ON CBR.SIZE_ID=DSI.SIZE_ID \n";
          $sql.="  LEFT JOIN CAT_COAT_LENGTHS DSA ON CBR.COAT_LENGTH_ID=DSA.COAT_LENGTH_ID \n";
          $sql.="  LEFT JOIN CAT_SIZES DSF ON CBR.SIZE_ID=DSF.SIZE_ID \n";
          $sql.="WHERE  \n";

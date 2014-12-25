@@ -45,8 +45,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['mainFeatures']=$bean->getMainFeatures();
 		  $arrBean['headerText']=$bean->getHeaderText();
 		  $arrBean['colors']=$bean->getColors();
-		  $arrBean['sizeMin']=$bean->getSizeMin();
-		  $arrBean['sizeMax']=$bean->getSizeMax();
+		  $arrBean['lifeMin']=$bean->getLifeMin();
+		  $arrBean['lifeMax']=$bean->getLifeMax();
 		  $arrBean['weightMin']=$bean->getWeightMin();
 		  $arrBean['weightMax']=$bean->getWeightMax();
 		  $arrBean['servingMin']=$bean->getServingMin();
@@ -86,12 +86,12 @@ if ($ultimo=='selecciona'){
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
 		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
-	    $bean->setSizeMin($_REQUEST['sizeMin']);
-	    $bean->setSizeMax($_REQUEST['sizeMax']);
+	    $bean->setLifeMin($_REQUEST['lifeMin']);
+	    $bean->setLifeMax($_REQUEST['lifeMax']);
 	    $bean->setWeightMin($_REQUEST['weightMin']);
 	    $bean->setWeightMax($_REQUEST['weightMax']);
-	    $bean->setServingMin($_REQUEST['servingMin']);
-	    $bean->setServingMax($_REQUEST['servingMax']);
+// 	    $bean->setServingMin($_REQUEST['servingMin']);
+// 	    $bean->setServingMax($_REQUEST['servingMax']);
 	    $bean->setFriendlyRank($_REQUEST['friendlyRank']);
 	    $bean->setFriendlyText($_REQUEST['friendlyText']);
 	    $bean->setActiveRank($_REQUEST['activeRank']);
@@ -106,8 +106,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setGroomingText($_REQUEST['groomingText']);
 	    $bean->setPictureUrl($_REQUEST['pictureUrl']);
 	    $bean->setVideoUrl($_REQUEST['videoUrl']);
-	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
-	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
+// 	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
+// 	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
 		$exito=$svc->inserta($bean);
 		echo json_encode($exito) ;
  
@@ -122,12 +122,12 @@ if ($ultimo=='selecciona'){
 		$bean->setMainFeatures($_REQUEST['mainFeatures']);
 		$bean->setHeaderText($_REQUEST['headerText']);
 	    $bean->setColors($_REQUEST['colors']);
-	    $bean->setSizeMin($_REQUEST['sizeMin']);
-	    $bean->setSizeMax($_REQUEST['sizeMax']);
+	    $bean->setLifeMin($_REQUEST['lifeMin']);
+	    $bean->setLifeMax($_REQUEST['lifeMax']);
 	    $bean->setWeightMin($_REQUEST['weightMin']);
 	    $bean->setWeightMax($_REQUEST['weightMax']);
-	    $bean->setServingMin($_REQUEST['servingMin']);
-	    $bean->setServingMax($_REQUEST['servingMax']);
+// 	    $bean->setServingMin($_REQUEST['servingMin']);
+// 	    $bean->setServingMax($_REQUEST['servingMax']);
 	    $bean->setFriendlyRank($_REQUEST['friendlyRank']);
 	    $bean->setFriendlyText($_REQUEST['friendlyText']);
 	    $bean->setActiveRank($_REQUEST['activeRank']);
@@ -142,8 +142,8 @@ if ($ultimo=='selecciona'){
 	    $bean->setGroomingText($_REQUEST['groomingText']);
 	    $bean->setPictureUrl($_REQUEST['pictureUrl']);
 	    $bean->setVideoUrl($_REQUEST['videoUrl']);
-	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
-	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
+// 	    $bean->setAppartments(isset($_REQUEST['appartments'])?1:0);
+// 	    $bean->setKids(isset($_REQUEST['kids'])?1:0);
 	    $bean->setHabilitada(1);
 		$svc = new CatBreedsSvcImpl();
 		$exito=$svc->actualiza($bean);

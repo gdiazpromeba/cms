@@ -25,7 +25,7 @@ Ext.define('app.petcms4.abm.catbreeds.PanelCatBreeds', {
     	},
     	items: [
     	    this.panBusqueda,   
-    	    {xtype : 'image', id : 'imagePhotoBreed', width: 240, height: 180},
+    	    {xtype : 'image', id : 'imagePhotoCatBreed', width: 240, height: 180},
     	    //{html:"<iframe width='250' src='http://www.youtube.com/embed/XGSy3_Czz8k'></iframe>", flex:2}
     	    
     	]
