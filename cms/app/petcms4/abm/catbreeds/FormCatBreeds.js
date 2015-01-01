@@ -30,7 +30,7 @@ Ext.define('app.petcms4.abm.catbreeds.FormCatBreeds', {
             {fieldLabel: 'Coat Length', xtype: 'comboCatCoatLengths', name: 'coatLength', itemId: 'coatLength',  width: 50},
             {fieldLabel: 'Size', xtype: 'comboCatSizes', name: 'size', itemId: 'size', width: 50},
             {fieldLabel: 'Main Features', xtype: 'textfield',  name: 'mainFeatures', itemId: 'mainFeatures',  allowBlank: true, width: 50},
-            {fieldLabel: 'Colors', xtype: 'textfield',  name: 'colors', itemId: 'colors',  allowBlank: true, width: 150, height: 70},
+            {fieldLabel: 'Colors', xtype: 'textarea',  name: 'colors', itemId: 'colors',  allowBlank: true, width: 150, height: 70},
 //            {fieldLabel: 'For appartments', xtype: 'checkbox', name: 'appartments', itemId: 'appartments'},
 //            {fieldLabel: 'Safe for kids', xtype: 'checkbox', name: 'kids', itemId: 'kids'},
            ]
