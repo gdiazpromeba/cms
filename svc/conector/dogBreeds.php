@@ -5,13 +5,63 @@
 //   require_once('FirePHPCore/fb.php4');
   
 
+  function beanToArray($bean){
+  	$arrBean=array();
+  	$arrBean['dogBreedId']=$bean->getId();
+  	$arrBean['dogBreedName']=$bean->getNombre();
+  	$arrBean['nameEncoded']=$bean->getNameEncoded();
+  	$arrBean['dogSizeId']=$bean->getSizeId();
+  	$arrBean['dogSizeName']=$bean->getSizeName();
+  	$arrBean['dogPurposeId']=$bean->getPurposeId();
+  	$arrBean['dogPurposeName']=$bean->getPurposeName();
+  	$arrBean['dogSheddingAmountId']=$bean->getSheddingAmountId();
+  	$arrBean['dogSheddingAmountName']=$bean->getSheddingAmountName();
+  	$arrBean['dogSheddingFrequencyId']=$bean->getSheddingFrequencyId();
+  	$arrBean['dogSheddingFrequencyName']=$bean->getSheddingFrequencyName();
+  	$arrBean['mainFeatures']=$bean->getMainFeatures();
+  	$arrBean['headerText']=$bean->getHeaderText();
+  	$arrBean['colors']=$bean->getColors();
+  	$arrBean['sizeMin']=$bean->getSizeMin();
+  	$arrBean['sizeMax']=$bean->getSizeMax();
+  	$arrBean['weightMin']=$bean->getWeightMin();
+  	$arrBean['weightMax']=$bean->getWeightMax();
+  	$arrBean['servingMin']=$bean->getServingMin();
+  	$arrBean['servingMax']=$bean->getServingMax();
+  	$arrBean['friendlyRank']=$bean->getFriendlyRank();
+  	$arrBean['friendlyText']=$bean->getFriendlyText();
+  	$arrBean['activeRank']=$bean->getActiveRank();
+  	$arrBean['activeText']=$bean->getActiveText();
+  	$arrBean['healthyRank']=$bean->getHealthyRank();
+  	$arrBean['healthyText']=$bean->getHealthyText();
+  	$arrBean['trainingRank']=$bean->getTrainingRank();
+  	$arrBean['trainingText']=$bean->getTrainingText();
+  	$arrBean['guardianRank']=$bean->getGuardianRank();
+  	$arrBean['guardianText']=$bean->getGuardianText();
+  	$arrBean['groomingRank']=$bean->getGroomingRank();
+  	$arrBean['groomingText']=$bean->getGroomingText();
+  	$arrBean['pictureUrl']=$bean->getPictureUrl();
+  	$arrBean['videoUrl']=$bean->getVideoUrl();
+  	$arrBean['appartments']=$bean->getAppartments();
+  	$arrBean['kids']=$bean->getKids();
+  	$arrBean['metaDescripcion']=$bean->getMetaDescripcion();
+  	$arrBean['metaKeywords']=$bean->getMetaKeywords();
+  	$arrBean['habilitada']=$bean->getHabilitada();
+  	return $arrBean;
+  }
 
   $url=$_SERVER['PHP_SELF'];
    
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
 
-if ($ultimo=='selecciona'){
+  if ($ultimo=='obtienePorNombreCodificado'){  
+  	$nombreCodificado=$_REQUEST['nombreCodificado'];
+  	$svc = new DogBreedsSvcImpl();
+  	$bean=$svc->obtienePorNombreCodificado($nombreCodificado);
+  	$arrBean=beanToArray($bean);
+  	echo json_encode($arrBean);
+
+  }else if ($ultimo=='selecciona'){
 		//parametros de paginación
 		$desde=$_REQUEST['start'];
 		$cuantos=$_REQUEST['limit'];
@@ -32,46 +82,7 @@ if ($ultimo=='selecciona'){
 		
 		$datos=array();
 		foreach ($beans as $bean){
-		  $arrBean=array();
-		  $arrBean['dogBreedId']=$bean->getId();
-		  $arrBean['dogBreedName']=$bean->getNombre();
-		  $arrBean['nameEncoded']=$bean->getNameEncoded();
-		  $arrBean['dogSizeId']=$bean->getSizeId();
-		  $arrBean['dogSizeName']=$bean->getSizeName();
-		  $arrBean['dogPurposeId']=$bean->getPurposeId();
-		  $arrBean['dogPurposeName']=$bean->getPurposeName();
-		  $arrBean['dogSheddingAmountId']=$bean->getSheddingAmountId();
-		  $arrBean['dogSheddingAmountName']=$bean->getSheddingAmountName();
-		  $arrBean['dogSheddingFrequencyId']=$bean->getSheddingFrequencyId();
-		  $arrBean['dogSheddingFrequencyName']=$bean->getSheddingFrequencyName();
-		  $arrBean['mainFeatures']=$bean->getMainFeatures();
-		  $arrBean['headerText']=$bean->getHeaderText();
-		  $arrBean['colors']=$bean->getColors();
-		  $arrBean['sizeMin']=$bean->getSizeMin();
-		  $arrBean['sizeMax']=$bean->getSizeMax();
-		  $arrBean['weightMin']=$bean->getWeightMin();
-		  $arrBean['weightMax']=$bean->getWeightMax();
-		  $arrBean['servingMin']=$bean->getServingMin();
-		  $arrBean['servingMax']=$bean->getServingMax();
-		  $arrBean['friendlyRank']=$bean->getFriendlyRank();
-		  $arrBean['friendlyText']=$bean->getFriendlyText();
-		  $arrBean['activeRank']=$bean->getActiveRank();
-		  $arrBean['activeText']=$bean->getActiveText();
-		  $arrBean['healthyRank']=$bean->getHealthyRank();
-		  $arrBean['healthyText']=$bean->getHealthyText();
-		  $arrBean['trainingRank']=$bean->getTrainingRank();
-		  $arrBean['trainingText']=$bean->getTrainingText();
-		  $arrBean['guardianRank']=$bean->getGuardianRank();
-		  $arrBean['guardianText']=$bean->getGuardianText();
-		  $arrBean['groomingRank']=$bean->getGroomingRank();
-		  $arrBean['groomingText']=$bean->getGroomingText();
-		  $arrBean['pictureUrl']=$bean->getPictureUrl();
-		  $arrBean['videoUrl']=$bean->getVideoUrl();
-		  $arrBean['appartments']=$bean->getAppartments();
-		  $arrBean['kids']=$bean->getKids();
-		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
-		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
-		  $arrBean['habilitada']=$bean->getHabilitada();
+		  $arrBean=beanToArray($bean);
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
