@@ -313,7 +313,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
          }
          if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $localityName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
@@ -397,7 +397,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
          }
          if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $localityName . "'  \n";
          }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
