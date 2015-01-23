@@ -57,7 +57,8 @@ Ext.define('app.petcms4.abm.resources.BusquedaResources', {
       
 
       reinicializar: function(){
-            this.getForm().reset();
+            this.getComponent('key').setValue('');
+            this.getComponent('text').setValue('');
       },
       
        /**
