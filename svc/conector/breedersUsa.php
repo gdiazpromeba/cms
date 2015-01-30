@@ -17,6 +17,13 @@
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
 
+//adaptador para uniformizar los parámetros del "selecciona" para todos los países
+if ($ultimo=='seleccionaUniversal'){
+	if (isset($_REQUEST['breederName'])) $_REQUEST['nombreOParte']=$_REQUEST['breederName'];
+	if (isset($_REQUEST['firstArea'])) $_REQUEST['state']=$_REQUEST['firstArea'];
+	if (isset($_REQUEST['secondArea'])) $_REQUEST['county']=$_REQUEST['secondArea'];
+	$ultimo='selecciona';
+}
  
 if ($ultimo=='selecciona'){
 		//parametros de paginación

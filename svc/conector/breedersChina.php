@@ -14,6 +14,14 @@
    
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
+  
+  //adaptador para uniformizar los parámetros del "selecciona" para todos los países
+  if ($ultimo=='seleccionaUniversal'){
+  	if (isset($_REQUEST['breederName'])) $_REQUEST['nombreOParte']=$_REQUEST['breederName'];
+  	if (isset($_REQUEST['firstArea'])) $_REQUEST['province']=$_REQUEST['firstArea'];
+  	if (isset($_REQUEST['secondArea'])) $_REQUEST['locality']=$_REQUEST['secondArea'];
+  	$ultimo='selecciona';
+  }  
 
 if ($ultimo=='selecciona'){
 		//parametros de paginación
@@ -30,7 +38,7 @@ if ($ultimo=='selecciona'){
 		//si el zipCode existe, transformarlo en latitud y longitud
 		if (isset($_REQUEST['zipCode']) && !empty($_REQUEST['zipCode'])){
 			$svcZips = new ZipsGenericoSvcImpl();
-			$zipBean = $svcZips->obtienePorCodigo("CANADA", $_REQUEST['zipCode']);
+			$zipBean = $svcZips->obtienePorCodigo("CHINA", $_REQUEST['zipCode']);
 			$latitude = $zipBean->getLatitude();
 			$longitude = $zipBean->getLongitude();
 		}

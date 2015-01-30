@@ -222,7 +222,7 @@
 		echo json_encode($res) ;
 		
   } else if ($ultimo=='selNombresPorBreeder'){
-		$breederId=$_REQUEST['forumId'];
+		$breederId=$_REQUEST['breederId'];
 		$svc = new DogBreedsSvcImpl(); 
 		$arr = $svc->selNombresPorBreeder($breederId);
 		$res=array();
