@@ -14,6 +14,14 @@
    
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
+  
+  //adaptador para uniformizar los parámetros del "selecciona" para todos los países
+ if ($ultimo=='seleccionaUniversal'){
+  	if (isset($_REQUEST['shelterName'])) $_REQUEST['nombreOParte']=$_REQUEST['shelterName'];
+  	if (isset($_REQUEST['firstArea'])) $_REQUEST['prefecture']=$_REQUEST['firstArea'];
+  	if (isset($_REQUEST['secondArea'])) $_REQUEST['district']=$_REQUEST['secondArea'];
+  	$ultimo='selecciona';
+  }  
 
 if ($ultimo=='selecciona'){
 		//parametros de paginación
