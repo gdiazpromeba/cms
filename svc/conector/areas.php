@@ -13,6 +13,11 @@
   $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
   $db_connection->set_charset("utf8");  
 
+  //adaptador para uniformizar el nomnbre
+  if ($ultimo=='selSegundasAreasShelters'){
+  	$ultimo="selSegundasAreas";
+  }
+  
   if ($ultimo=='selSegundasAreas'){
   	$pais=$_REQUEST['country'];
   	$firstArea=$_REQUEST['firstArea'];
