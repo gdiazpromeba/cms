@@ -17,6 +17,7 @@
  global $clave; $clave ='manuela';
  global $baseDeDatos; $baseDeDatos ='petzynga';
  $GLOBALS['dirAplicacion'] ='/petzyngacms';
+ $GLOBALS['dirWeb'] ='/petzyngaweb';
  $GLOBALS['pathWeb'] = 'C:/xampp/htdocs/petzyngaweb';
  $GLOBALS['pathCms'] = 'C:/xampp/htdocs/petzyngacms';
  

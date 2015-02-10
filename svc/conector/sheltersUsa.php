@@ -82,6 +82,8 @@ if ($ultimo=='selecciona'){
 		$resultado['total']=$cuenta;
 		$resultado['data']=$datos;
 		echo json_encode($resultado) ;
+		
+ 
 
    } else if ($ultimo=='inserta'){
 	   	$bean=new ShelterUsa(); 
