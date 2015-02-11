@@ -1,11 +1,11 @@
 <?php
   require_once '../../config.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUsaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersCanadaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersChinaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersIndiaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUkSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersJapanSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersUsaSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersCanadaSvcImpl.php';
+//   require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersChinaSvcImpl.php';
+//   require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersIndiaSvcImpl.php';
+  require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersUkSvcImpl.php';
+//   require_once $GLOBALS['pathCms'] . '/svc/impl/BreedersJapanSvcImpl.php';
   //require_once('FirePHPCore/fb.php4');
   
   
@@ -16,22 +16,22 @@
       $country=$_REQUEST["country"];
       switch ($country){
       	case "usa":
-      	  $svc = new SheltersUsaSvcImpl();
+      	  $svc = new BreedersUsaSvcImpl();
       	  break;
        case "uk":
-      	  $svc = new SheltersUkSvcImpl();
+      	  $svc = new BreedersUkSvcImpl();
       	  break;
-       case "china":
-      	  $svc = new SheltersChinaSvcImpl();
-      	  break;
-       case "india":
-      	  $svc = new SheltersIndiaSvcImpl();
-      	  break;
-       case "japan":
-      	  $svc = new SheltersJapanSvcImpl();
-      	  break;
+//        case "china":
+//       	  $svc = new BreedersChinaSvcImpl();
+//       	  break;
+//        case "india":
+//       	  $svc = new BreedersIndiaSvcImpl();
+//       	  break;
+//        case "japan":
+//       	  $svc = new BreedersJapanSvcImpl();
+//       	  break;
        case "canada":
-      	  $svc = new SheltersCanadaSvcImpl();
+      	  $svc = new BreedersCanadaSvcImpl();
       	  break;
       }
    	  
@@ -58,7 +58,7 @@
    	  	
    	    $item=array();
    	    $item["name"]=$name;
-   	    $urlCompleta =$GLOBALS["dirWeb"] . "/shelters/info/" . $country . "/" .  $url;
+   	    $urlCompleta =$GLOBALS["dirWeb"] . "/breeders/info/" . $country . "/" .  $url;
    	    $item["url"]=$urlCompleta ;
    	    $datos[$area1][$area2][]=$item;
    	  }
