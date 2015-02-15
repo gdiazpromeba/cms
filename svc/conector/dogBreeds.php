@@ -2,7 +2,8 @@
   require_once '../../config.php';
   require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/DogBreedsSvcImpl.php';
-//   require_once('FirePHPCore/fb.php4');
+  require_once $GLOBALS['pathWeb'] . '/application/business/dogbreeds/DogBreedUtils.php';
+//    require_once('FirePHPCore/fb.php4');
   
 
   function beanToArray($bean){
@@ -88,6 +89,62 @@
 		$resultado=array();
 		$resultado['total']=$cuenta;
 		$resultado['data']=$datos;
+		echo json_encode($resultado) ;
+
+    }else if ($ultimo=='seleccionaNg'){
+		//parametros de paginación
+		$desde=$_REQUEST['start'];
+		$nombreOParte=isset($_REQUEST['nombreOParte'])?$_REQUEST['nombreOParte']:null;
+		$inicial=isset($_REQUEST['inicial'])?$_REQUEST['inicial']:null;
+		$tamañoDesde=null;
+		$tamañoHasta=null;
+		if (isset($_REQUEST['size'])){
+			$tamaño = $_REQUEST['size'];
+			$tamaños=calculaTamaños($tamaño);
+			$tamañoDesde=$tamaños[0];
+			$tamañoHasta=$tamaños[1];
+		}
+		$alimentacion = isset($_REQUEST['alimentacion'])?$_REQUEST['alimentacion']:null;
+		$upkeepDesde=null;
+		$upkeepHasta=null;
+		if (isset($_REQUEST['upkeep'])){
+			$upkeeps=calculaUpkeep($_REQUEST['upkeep']);
+			$upkeepDesde=$upkeeps[0];
+			$upkeepHasta=$upkeeps[1];
+		}	
+		
+		
+		$cuantos=15;
+
+		
+		
+		$svc = new DogBreedsSvcImpl();
+		$beans=$svc->selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, null, null, $upkeepDesde, $upkeepHasta, $desde, $cuantos);
+		$cuenta=$svc->seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, null, null, $upkeepDesde, $upkeepHasta);
+		
+		$resultado=array();
+		$resultado["size"]=$cuenta;
+		$resultado["data"]=array();
+		
+		$resultado["data"]["rows"]=array();
+		$numCols=3;
+		$numRows=5;
+		$index=0;
+		$keys = array_keys($beans);
+		for ($row=0; $row <$numRows && $index < count($beans) ; $row++){
+			$rowObj=array();
+			$rowObj["cells"]=array();
+			for ($col=0; $col<$numCols && $index < count($keys) ; $col++){
+				$bean=$beans[$keys[$index]];
+				$cell=array();
+				$cell["name"]=$bean->getNombre();
+				$cell["nameEncoded"]=$bean->getNameEncoded();
+				$cell["pictureUrl"]=$bean->getPictureUrl();
+			    $rowObj["cells"][]=$cell;
+			    $index++;
+			}
+			$resultado["data"]["rows"][]=$rowObj;
+		}
 		echo json_encode($resultado) ;
 
    } else if ($ultimo=='inserta'){
@@ -248,8 +305,57 @@
 		$res['total']=count($arr);
 		echo json_encode($res) ;
   }
-		
   
+
+    function calculaTamaños($selDogSize){
+     	$tamañoDesde=0;
+     	$tamañoHasta=100;
+     
+     	switch($selDogSize){
+     		case "large":
+     			$tamañoDesde=60;
+     			$tamañoHasta=60;
+     			break;
+     		case "medium":
+     			$tamañoDesde=50;
+     			$tamañoHasta=50;
+     			break;
+     		case "small":
+     			$tamañoDesde=30;
+     			$tamañoHasta=30;
+     			break;
+     		case "toy":
+     			$tamañoDesde=20;
+     			$tamañoHasta=20;
+     			break;
+     		default:
+     			$tamañoDesde=0;
+     			$tamañoHasta=100;
+     			break;
+     	}
+     	return array($tamañoDesde, $tamañoHasta);
+     
+     }    
+  
+  function calculaUpkeep($selUpkeep){
+  	$upkeepDesde=1;
+  	$upkeepHasta=5;
+  	switch($selUpkeep){
+  		case "little":
+  			$upkeepDesde=1;
+  			$upkeepHasta=2;
+  			break;
+  		case "average":
+  			$upkeepDesde=3;
+  			$upkeepHasta=3;
+  			break;
+  		case "a lot":
+  			$upkeepDesde=4;
+  			$upkeepHasta=5;
+  			break;
+  	}
+  	return array($upkeepDesde, $upkeepHasta);
+  }
 
 
 ?>
