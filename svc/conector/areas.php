@@ -17,8 +17,222 @@
   if ($ultimo=='selSegundasAreasShelters'){
   	$ultimo="selSegundasAreas";
   }
+  if ($ultimo=='selPrimerasAreasBreedersJson'){
+  	$country=$_REQUEST['country'];
   
-  if ($ultimo=='selSegundasAreas'){
+  	$sql=null;
+  	$subdivision=null;
+  	$area1TypeName=null;
+  	$area2TypeName=null;
+  	switch ($country){
+  		case "usa":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_USA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United States of America";
+  			break;
+  		case "japan":
+  			$subdivision="locality";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_JAPAN  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="Japan";
+  			break;
+  		case "canada":
+  			$subdivision="subdivision";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CANADA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="Canada";
+  			break;
+  		case "china":
+  			$subdivision="locality";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CHINA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="China";
+  			break;
+  		case "india":
+  			$subdivision="district";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_INDIA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="India";
+  			break;
+  		case "uk":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_UK  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United Kingdom";
+  			break;
+  	}
+  	if (!$stm = $db_connection->prepare($sql)){
+  		echo $db_connection->error;
+  		exit();
+  	}
+  	$stm->execute();
+  	$stm->bind_result($firstArea, $amount);
+  	$result=array();
+  	$result["countryName"]=$countryName;
+  	$results["items"]=array();
+  	while ($stm->fetch()) {
+  		$fila=array();
+  		$fila["name"]=$firstArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) ;
+  		$result["items"][]=$fila;
+  	}
+  	$stm->close();
+  	$db_connection->close();
+  	echo json_encode($result);
+  
+  }elseif ($ultimo=='selSegundasAreasBreedersJson'){
+  	$country=$_REQUEST['country'];
+  	$firstArea=$_REQUEST['firstArea'];
+  	 
+  	$sql=null;
+  	$subdivision=null;
+  	$area1TypeName=null;
+  	$area2TypeName=null;
+  	switch ($country){
+  		case "usa":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_USA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United States of America";
+  			$area1TypeName="State";
+  			$area2TypeName="County";
+  			break;
+  		case "japan":
+  			$subdivision="locality";
+  			$sql= "SELECT  \n";
+  			$sql.= "  LOCALITY, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_JAPAN  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="Japan";
+  			$area1TypeName="Prefecture";
+  			$area2TypeName="Locality";
+  			break;
+  		case "canada":
+  			$subdivision="subdivision";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CANADA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$area1TypeName="Province";
+  			$countryName="Canada";
+  			$area2TypeName="Subdivision";
+  			break;
+  		case "china":
+  			$subdivision="locality";
+  			$sql= "SELECT  \n";
+  			$sql.= "  LOCALITY, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CHINA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="China";
+  			$area1TypeName="Province";
+  			$area2TypeName="Locality";
+  			break;
+  		case "india":
+  			$subdivision="district";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_INDIA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="India";
+  			$area1TypeName="State";
+  			$area2TypeName="Locality";
+  			break;
+  		case "uk":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_UK  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United Kingdom";
+  			$area1TypeName="Country";
+  			$area2TypeName="County";
+  			break;
+  	}
+  	if (!$stm = $db_connection->prepare($sql)){
+  		echo $db_connection->error;
+  		exit();
+  	}
+  	$stm->execute();
+  	$stm->bind_result($secondArea, $amount);
+    $result=array();
+    $result["countryName"]=$countryName;
+    $result["area1TypeName"]=$area1TypeName;
+    $result["area2TypeName"]=$area2TypeName;
+    $results["items"]=array();
+  	while ($stm->fetch()) {
+  		$fila=array();
+  		$fila["name"]=$secondArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
+  		$result["items"][]=$fila;
+  	}
+  	$stm->close();
+  	$db_connection->close();
+  	echo json_encode($result);
+  
+  }else if ($ultimo=='selSegundasAreas'){
   	$pais=$_REQUEST['country'];
   	$firstArea=$_REQUEST['firstArea'];
   	

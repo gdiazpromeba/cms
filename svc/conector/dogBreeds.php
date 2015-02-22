@@ -47,6 +47,10 @@
   	$arrBean['metaDescripcion']=$bean->getMetaDescripcion();
   	$arrBean['metaKeywords']=$bean->getMetaKeywords();
   	$arrBean['habilitada']=$bean->getHabilitada();
+  	
+  	$feedingArmado = armaFeeding($bean);
+  	$arrBean['feedingArmado'] = $feedingArmado;
+  	
   	return $arrBean;
   }
 
@@ -356,6 +360,21 @@
   	}
   	return array($upkeepDesde, $upkeepHasta);
   }
+  
+  function armaFeeding($info){
+  	$min= $info->getServingMin();
+  	$max= $info->getServingMax();
+  	 
+  	if ($min!=$max){
+  		$res= DogBreedUtils::trataFracciones($min);
+  		$res .=" to " . DogBreedUtils::trataFracciones($max);
+  		$res .=" cups of quality dry food, twice a day";
+  	}else{
+  		$res= DogBreedUtils::trataFracciones($min);
+  		$res .=" cups of quality dry food, twice a day";
+  	}
+  	return $res;
+  }  
 
 
 ?>
