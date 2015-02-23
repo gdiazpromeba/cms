@@ -17,7 +17,145 @@
   if ($ultimo=='selSegundasAreasShelters'){
   	$ultimo="selSegundasAreas";
   }
+  
   if ($ultimo=='selPrimerasAreasBreedersJson'){
+  	$country=$_REQUEST['country'];
+  
+  	$sql=null;
+  	$subdivision=null;
+  	$area1TypeName=null;
+  	$area2TypeName=null;
+  	switch ($country){
+  		case "usa":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_USA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United States of America";
+  			break;
+  		case "canada":
+  			$subdivision="subdivision";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_CANADA  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="Canada";
+  			break;
+  		case "uk":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_UK  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United Kingdom";
+  			break;
+  	} 
+  	if (!$stm = $db_connection->prepare($sql)){
+  		echo $db_connection->error;
+  		exit();
+  	}
+  	$stm->execute();
+  	$stm->bind_result($firstArea, $amount);
+  	$result=array();
+  	$result["countryName"]=$countryName;
+  	$results["items"]=array();
+  	while ($stm->fetch()) {
+  		$fila=array();
+  		$fila["name"]=$firstArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) ;
+  		$result["items"][]=$fila;
+  	}
+  	$stm->close();
+  	$db_connection->close();
+  	echo json_encode($result);  	
+  	 
+ }elseif ($ultimo=='selSegundasAreasBreedersJson'){
+  	$country=$_REQUEST['country'];
+  	$firstArea=$_REQUEST['firstArea'];
+  	 
+  	$sql=null;
+  	$subdivision=null;
+  	$area1TypeName=null;
+  	$area2TypeName=null;
+  	switch ($country){
+  		case "usa":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_USA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United States of America";
+  			$area1TypeName="State";
+  			$area2TypeName="County";
+  			break;
+  		case "canada":
+  			$subdivision="subdivision";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_CANADA  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$area1TypeName="Province";
+  			$countryName="Canada";
+  			$area2TypeName="Subdivision";
+  			break;
+  		case "uk":
+  			$subdivision="county";
+  			$sql= "SELECT  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_2, \n";
+  			$sql.= "  COUNT(*) \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  BREEDERS_UK  \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  ADMINISTRATIVE_AREA_LEVEL_1='" . $firstArea . "'  \n";
+  			$sql.= "GROUP BY 1 \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United Kingdom";
+  			$area1TypeName="Country";
+  			$area2TypeName="County";
+  			break;
+  	}
+  	if (!$stm = $db_connection->prepare($sql)){
+  		echo $db_connection->error;
+  		exit();
+  	}
+  	$stm->execute();
+  	$stm->bind_result($secondArea, $amount);
+    $result=array();
+    $result["countryName"]=$countryName;
+    $result["area1TypeName"]=$area1TypeName;
+    $result["area2TypeName"]=$area2TypeName;
+    $results["items"]=array();
+  	while ($stm->fetch()) {
+  		$fila=array();
+  		$fila["name"]=$secondArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
+  		$result["items"][]=$fila;
+  	}
+  	$stm->close();
+  	$db_connection->close();
+  	echo json_encode($result);
+  
+  }elseif ($ultimo=='selPrimerasAreasSheltersJson'){
   	$country=$_REQUEST['country'];
   
   	$sql=null;
@@ -111,7 +249,7 @@
   	$db_connection->close();
   	echo json_encode($result);
   
-  }elseif ($ultimo=='selSegundasAreasBreedersJson'){
+  }elseif ($ultimo=='selSegundasAreasSheltersJson'){
   	$country=$_REQUEST['country'];
   	$firstArea=$_REQUEST['firstArea'];
   	 
