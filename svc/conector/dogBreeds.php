@@ -151,6 +151,59 @@
 		}
 		echo json_encode($resultado) ;
 
+    }else if ($ultimo=='seleccionaNgAlpha'){
+
+		
+		
+		$svc = new DogBreedsSvcImpl();
+		$beans=$svc->selecciona(null, null, null, null, null, null, null, null, null, 0, 10000);
+		
+		
+		
+		$resultado=array();
+		$resultado["bloques"]=array();
+		$beansPorLetra=array();
+		
+		//agrupa todos los beans en un array,según la letra incial, en mayúscula
+		foreach ($beans as $bean){
+			$name=$bean->getNombre();
+			$letra=strtoupper($name[0]);
+			if (!isset($beansPorLetra[$letra])){
+				$beansPorLetra[$letra]=array();
+			}
+			$beansPorLetra[$letra][]=$bean;
+		}
+		
+		
+		foreach (array_keys($beansPorLetra) as $letra){
+			$beansDeLaLetra=$beansPorLetra[$letra];
+			$bloque=array();
+			$bloque["letra"]=$letra;
+	
+			$bloque["rows"]=array();
+			$numCols=3;
+			$numRows=5;
+			$index=0;
+			$keys = array_keys($beansDeLaLetra);
+			for ($row=0; $row <$numRows && $index < count($beansDeLaLetra) ; $row++){
+				$rowObj=array();
+				$rowObj["cells"]=array();
+				for ($col=0; $col<$numCols && $index < count($keys) ; $col++){
+					$bean=$beansDeLaLetra[$keys[$index]];
+					$cell=array();
+					$cell["name"]=$bean->getNombre();
+					$cell["nameEncoded"]=$bean->getNameEncoded();
+					$cell["pictureUrl"]=$GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $bean->getPictureUrl();
+					$rowObj["cells"][]=$cell;
+					$index++;
+				}
+				$bloque["rows"][]=$rowObj;
+			}
+			$resultado["bloques"][]=$bloque;
+		}
+		
+		echo json_encode($resultado) ;
+
    } else if ($ultimo=='inserta'){
 	   	$bean=new DogBreed(); 
 		$svc = new DogBreedsSvcImpl();
