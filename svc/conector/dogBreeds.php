@@ -51,6 +51,8 @@
   	$feedingArmado = armaFeeding($bean);
   	$arrBean['feedingArmado'] = $feedingArmado;
   	
+  	armaUrlsImagenes($arrBean);
+  	
   	return $arrBean;
   }
 
@@ -428,6 +430,29 @@
   	}
   	return $res;
   }  
+  
+  
+  /**
+   * crea  URLs completas con las imágenes
+   * @param unknown $arrBean
+   */
+  function armaUrlsImagenes (& $arrBean){
+  	//estrellas
+  	$urlBase=$GLOBALS['dirAplicacion']  . "/resources/images/estrellas_"; 
+  	$arrBean["imgStarFriendly"]= $urlBase . $arrBean["friendlyRank"] . ".gif";
+  	$arrBean["imgStarActive"]= $urlBase .   $arrBean["activeRank"] . ".gif";
+  	$arrBean["imgStarHealthy"]= $urlBase . $arrBean["healthyRank"] . ".gif";
+  	$arrBean["imgStarGuardian"]= $urlBase . $arrBean["guardianRank"] . ".gif";
+  	$arrBean["imgStarGrooming"]= $urlBase . $arrBean["groomingRank"] . ".gif";
+
+  	//breed
+  	$urlBase=$GLOBALS['dirAplicacion']  . "/resources/images/breeds/";
+  	$arrBean["imgBreed"]= $urlBase . $arrBean["pictureUrl"];
+  	
+  	//botón para cerrar la ventana
+  	$arrBean["imgBotonCerrar"]= $GLOBALS['dirWeb']  . "/public/img/close_button_turquesa.gif";
+  	
+  }
 
 
 ?>
