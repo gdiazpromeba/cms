@@ -3,9 +3,13 @@
   require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/DogBreedsSvcImpl.php';
   require_once $GLOBALS['pathWeb'] . '/application/business/dogbreeds/DogBreedUtils.php';
-//    require_once('FirePHPCore/fb.php4');
+//     require_once('FirePHPCore/fb.php4');
+//     ob_start();
   
 
+  
+  
+  
   function beanToArray($bean){
   	$arrBean=array();
   	$arrBean['dogBreedId']=$bean->getId();
@@ -60,6 +64,9 @@
    
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
+  
+  $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
+  $db_connection->set_charset("utf8");
 
   if ($ultimo=='obtienePorNombreCodificado'){  
   	$nombreCodificado=$_REQUEST['nombreCodificado'];
@@ -77,15 +84,15 @@
 		$tamañoDesde = isset($_REQUEST['tamañoDesde'])?$_REQUEST['tamañoDesde']:null;
 		$tamañoHasta = isset($_REQUEST['tamañoHasta'])?$_REQUEST['tamañoHasta']:null;
 		$alimentacion = isset($_REQUEST['alimentacion'])?$_REQUEST['alimentacion']:null;
-		$appartments = isset($_REQUEST['appartments'])?$_REQUEST['appartments']:null;
+		$purpose = isset($_REQUEST['purpose'])?$_REQUEST['purpose']:null;
 		$kids = isset($_REQUEST['kids'])?$_REQUEST['kids']:null;
 		$upkeepDesde = isset($_REQUEST['upkeepDesde'])?$_REQUEST['upkeepDesde']:null;
 		$upkeepHasta = isset($_REQUEST['upkeepHasta'])?$_REQUEST['upkeepHasta']:null;
 		
 		
 		$svc = new DogBreedsSvcImpl();
-		$beans=$svc->selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos);
-		$cuenta=$svc->seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta);
+		$beans=$svc->selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $purpose, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos);
+		$cuenta=$svc->seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $purpose, $kids, $upkeepDesde, $upkeepHasta);
 		
 		$datos=array();
 		foreach ($beans as $bean){
@@ -96,6 +103,80 @@
 		$resultado['total']=$cuenta;
 		$resultado['data']=$datos;
 		echo json_encode($resultado) ;
+		
+		
+    }else if ($ultimo=='selDogBreedGroups'){
+    	
+    	$svc = new DogBreedsSvcImpl();
+    	$beans=$svc->selDogBreedGroups();
+    	$datos=array(); 
+    	foreach ($beans as &$fila){
+    		$fila["pictureUrl"]= $GLOBALS['dirAplicacion']  . "/resources/images/breeds/" . $fila["pictureUrl"];
+    		$fila["groupUrl"]= $GLOBALS['dirWeb']  . "/dogbreeds/groups/" . urlencode($fila["name"]);
+    	}    	
+    	echo json_encode($beans) ;
+    	
+    }else if ($ultimo=='getDogBreedGroup'){
+    		 
+      $group = $_REQUEST["group"];
+    	    
+      $sql= "SELECT  \n";
+      $sql.= "  DOG_PURPOSE_ID, \n";
+      $sql.= "  DOG_PURPOSE_NAME, \n";
+      $sql.= "  PICTURE_URL,      \n";
+      $sql.= "  TR.TEXT_RESOURCE       \n";
+      $sql.= "FROM  \n";
+      $sql.= "  DOG_PURPOSES   \n";
+      $sql.= "  INNER JOIN TEXT_RESOURCES TR ON DOG_PURPOSES.DESCRIPTION=TR.TEXT_RES_KEY   \n";
+      $sql.= "WHERE     \n";
+      $sql.= "  DOG_PURPOSE_NAME='" . $group ."'     \n";
+
+      
+      if (!$stm = $db_connection->prepare($sql)){
+    	    echo $db_connection->error;
+    	    exit();
+       }
+       $stm->execute();
+       $stm->bind_result($purposeId, $name, $url, $text);
+       $result=array();
+       $result["group"]=array();
+       if ($stm->fetch()) {
+         $fila=array();
+    	 $result["group"]["id"] = $purposeId;
+    	 $result["group"]["name"]=$name;
+    	 $result["group"]["description"]=$text;
+    	 $result["group"]["pictureUrl"]= $GLOBALS['dirAplicacion']  . "/resources/images/breeds/" . $url;
+    	 $result["group"]["groupUrl"]= $GLOBALS['dirWeb']  . "/dogbreeds/groups/" . $name;
+       }
+       $stm->close();
+       
+       
+       $sql= "SELECT  \n";
+       $sql.= "  DOG_BREED_NAME, \n";
+       $sql.= "  NAME_ENCODED    \n";
+       $sql.= "FROM  \n";
+       $sql.= "  DOG_BREEDS   \n";
+       $sql.= "WHERE     \n";
+       $sql.= "  DOG_PURPOSE_ID='" .  $result["group"]["id"] ."'     \n";
+       
+       if (!$stm2 = $db_connection->prepare($sql)){
+       	echo $db_connection->error;
+       	exit();
+       } 
+        
+       $result["items"]=array();
+       $stm2->execute();
+       $stm2->bind_result($name, $nameEncoded);
+       while ($stm2->fetch()) {
+       	 $item=array();
+       	 $item["dogBreedName"] = $name;
+       	 $item["nameEncoded"]=$nameEncoded;
+       	 $item["url"]=   $GLOBALS['dirWeb']  . "/dogbreeds/groups/"  .  urlencode($result["group"]["name"]) . "/" . $nameEncoded;
+       	 $result["items"][]=$item;
+       }       
+       
+       $db_connection->close();
+       echo json_encode($result);
 
     }else if ($ultimo=='seleccionaNg'){
 		//parametros de paginación

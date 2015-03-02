@@ -14,11 +14,11 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
         {xtype: 'fieldset', itemId: 'colDesc', border: false,  layout:'vbox',  layoutConfig: { padding: 10}, width: 200,
         	items: [
               {xtype: 'label', text: 'Header Text'},
-              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true, height: 50},
+              {xtype: 'textarea', name: 'headerText', itemId: 'headerText', allowBlank: true, height: 50, width: 350},
               {xtype: 'label', text: 'Meta Description'},
-              {xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 50},
+              {xtype: 'textarea', name: 'metaDescripcion', itemId: 'metaDescripcion', allowBlank: true, height: 50, width: 310},
               {xtype: 'label', text: 'Meta Keywords'},
-              {xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 50},
+              {xtype: 'textarea', name: 'metaKeywords', itemId: 'metaKeywords', allowBlank: true, height: 50, width: 310},
         	]
         },
         {xtype: 'fieldset', itemId: 'colIzq', border: false, layout: 'form', style: 'padding:0px', bodyStyle: 'padding:0px', width: 300,
@@ -27,7 +27,7 @@ Ext.define('app.petcms4.abm.dogbreeds.FormDogBreeds', {
             {fieldLabel: 'Breed Name', xtype: 'textfield',  name: 'dogBreedName', itemId: 'dogBreedName',  id: 'dogBreedName', allowBlank: false, width: 50},
             {fieldLabel: 'Name encoded', xtype: 'encodable',  linkedText: 'dogBreedName', name: 'nameEncoded', itemId: 'nameEncoded',  allowBlank: false},
             {fieldLabel: 'Size', xtype: 'comboDogSizes', name: 'dogSize', itemId: 'dogSize', width: 50},
-            {fieldLabel: 'Hist.Purpose', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'dogPurpose', width: 50},
+            {fieldLabel: 'Group', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'dogPurpose', width: 50},
             {fieldLabel: 'Shed.Amount', xtype: 'comboDogSheddingAmounts', name: 'dogSheddingAmount', itemId: 'dogSheddingAmount',  width: 50},
             {fieldLabel: 'Shed.Freq.', xtype: 'comboDogSheddingFrequencies', name: 'dogSheddingFrequency', itemId: 'dogSheddingFrequency', width: 50},
             {fieldLabel: 'Main Features', xtype: 'textfield',  name: 'mainFeatures', itemId: 'mainFeatures',  allowBlank: false, width: 50},

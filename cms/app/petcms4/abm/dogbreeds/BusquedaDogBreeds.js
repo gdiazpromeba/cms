@@ -5,6 +5,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
       items: [
         {fieldLabel: 'Name ', xtype: 'textfield', itemId: 'dogBreedName', allowBlank: true, width: 200},
         {fieldLabel: 'Initial ', xtype: 'comboAbecedario', itemId: 'initial', allowBlank: true, width: 180},
+        {fieldLabel: 'Group', xtype: 'comboDogPurposes', name: 'dogPurpose', itemId: 'purpose', width: 210} 
       ],
       buttons: [
           {text:'Buscar', itemId: 'botBuscar', ref: '../botBuscar',
@@ -16,7 +17,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
               handler:  function(){
                   this.up('form').fireEvent('reinicializar pulsado');
                 }
-          }
+          }      
       ],
       
       /**
@@ -43,6 +44,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
         var resultado=new Array();
         this.agregaClaveValor(resultado, 'nombreOParte', this.getComponent('dogBreedName').getValue());
         this.agregaClaveValor(resultado, 'inicial', this.getComponent('initial').getValue());
+        this.agregaClaveValor(resultado, 'purpose', this.getComponent('purpose').getValue());
         
         return resultado;
       },
@@ -59,6 +61,7 @@ Ext.define('app.petcms4.abm.dogbreeds.BusquedaDogBreeds', {
       reinicializar: function(){
             this.getForm().reset();
             this.getComponent('initial').setValue('');
+            this.getComponent('purpose').setValue('');
       },
       
        /**

@@ -345,7 +345,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       } 
 
 
-      public function selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos){ 
+      public function selecciona($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $purpose, $kids, $upkeepDesde, $upkeepHasta, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  DBR.DOG_BREED_ID,     \n"; 
@@ -416,13 +416,10 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          	  $sql.="  AND (DBR.SERVING_MIN + DBR.SERVING_MAX)/2 > 1  \n";
          	}
          }
-         if (!empty($appartments)){
-         	if ($appartments=="Yes"){
-         		$sql.="  AND DBR.APPARTMENTS = 1  \n";
-         	}else if ($appartments=="No"){
-         		$sql.="  AND DBR.APPARTMENTS = 0  \n";
-         	}
-         }         
+         if (!empty($purpose)){
+         	$sql.="  AND DBR.DOG_PURPOSE_ID ='" . $purpose . "'  \n";
+         }   
+               
          if (!empty($kids)){
          	if ($kids=="Yes"){
          		$sql.="  AND DBR.KIDS = 1  \n";
@@ -495,7 +492,7 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       } 
 
 
-      public function seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $appartments, $kids, $upkeepDesde, $upkeepHasta){ 
+      public function seleccionaCuenta($nombreOParte, $inicial, $tamañoDesde, $tamañoHasta, $alimentacion, $purpose, $kids, $upkeepDesde, $upkeepHasta){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) \n";
          $sql.="FROM  \n";
@@ -527,12 +524,8 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
          		$sql.="  AND (DBR.SERVING_MIN + DBR.SERVING_MAX)/2 > 1  \n";
          	}
          } 
-         if (!empty($appartments)){
-         	if ($appartments=="Yes"){
-         		$sql.="  AND DBR.APPARTMENTS = 1  \n";
-         	}else if ($appartments=="No"){
-         		$sql.="  AND DBR.APPARTMENTS = 0  \n";
-         	}
+               if (!empty($purpose)){
+         	$sql.="  AND DBR.DOG_PURPOSE_ID ='" . $purpose . "'  \n";
          }
          if (!empty($kids)){
          	if ($kids=="Yes"){
@@ -690,6 +683,36 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       		$fila['id']=$id;
       		$fila['name']=$nombre;
       		$fila['urlEncoded']=$urlEncoded;
+      		$filas[]=$fila;
+      	}
+      	$this->cierra($conexion, $stm);
+      	return $filas;
+      }  
+
+      public function selDogBreedGroups(){
+      	$conexion=$this->conectarse();
+      	$sql="SELECT  \n";
+      	$sql.="  DP.DOG_PURPOSE_ID,     \n";
+      	$sql.="  DP.DOG_PURPOSE_NAME,     \n";
+      	$sql.="  TR.TEXT_RESOURCE,     \n";
+      	$sql.="  DP.PICTURE_URL     \n";
+      	$sql.="FROM  \n";
+      	$sql.="  DOG_PURPOSES DP \n";
+      	$sql.="  INNER JOIN TEXT_RESOURCES TR ON DP.DESCRIPTION=TR.TEXT_RES_KEY  \n";
+      	$sql.="WHERE  \n";
+      	$sql.="  DP.HABILITADA=1  \n";
+      	$sql.="ORDER BY  \n";
+      	$sql.="  DP.DOG_PURPOSE_NAME  \n";
+      	$stm=$this->preparar($conexion, $sql);
+      	$stm->execute();
+      	$stm->bind_result($id, $nombre, $description, $pictureUrl);
+      	$filas=array();
+      	while ($stm->fetch()) {
+      		$fila=array();
+      		$fila['id']=$id;
+      		$fila['name']=$nombre;
+      		$fila['pictureUrl']=$pictureUrl;
+      		$fila['description']=$description;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);

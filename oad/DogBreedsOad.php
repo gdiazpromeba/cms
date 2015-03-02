@@ -43,6 +43,8 @@
       */
       public function selSheltersPorRaza($dogBreedId);
       
+      public function selDogBreedGroups();
+      
    } 
 
 ?>

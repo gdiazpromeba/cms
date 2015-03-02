@@ -84,6 +84,11 @@ require_once $GLOBALS['pathCms'] . '/svc/DogBreedsSvc.php';
       	return $arr;
       }
       
+      public function selDogBreedGroups(){
+      	$arr=$this->oad->selDogBreedGroups();
+      	return $arr;
+      }
+      
       
    }
 ?>
