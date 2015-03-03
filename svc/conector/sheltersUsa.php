@@ -76,6 +76,8 @@ if ($ultimo=='selecciona'){
 		  $arrBean['statisticalArea']=$bean->getStatisticalArea();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
+		  urlCompleta($arrBean, "usa");
+		  distanciaFormateada($arrBean, "mi");
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
@@ -204,6 +206,14 @@ if ($ultimo=='selecciona'){
       $svc->desvinculaDogBreedDeShelter($shelterId, $breedId);
   	}
   	
+  }
+  
+  function urlCompleta(& $arrBean, $country){
+  	$arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/shelters/info/" . $country . "/" .  $arrBean["urlEncoded"];
+  }
+  
+  function distanciaFormateada(& $arrBean, $distanceUnit){
+  	$arrBean["distanciaFormateada"]=  number_format($arrBean["distanceMiles"], 1) . " "  . $distanceUnit;
   }
     
 
