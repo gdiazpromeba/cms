@@ -76,8 +76,11 @@ if ($ultimo=='selecciona'){
 		  $arrBean['statisticalArea']=$bean->getStatisticalArea();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
-		  urlCompleta($arrBean, "usa");
-		  distanciaFormateada($arrBean, "mi");
+		  
+		  $arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/shelters/info/" . "usa" . "/" .  $arrBean["urlEncoded"];
+		  $arrBean["distanciaFormateada"]=  number_format($arrBean["distanceMiles"], 1) . " mi";
+		  $arrBean["locacion"] =  $arrBean['adminArea2'] . ", " . $arrBean['adminArea1'];
+		  
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();

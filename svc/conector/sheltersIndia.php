@@ -70,11 +70,16 @@ if ($ultimo=='selecciona'){
 		  $arrBean['collArea']=$bean->getCollArea();
 		  $arrBean['locality']=$bean->getLocality();
 		  $arrBean['subLocality1']=$bean->getSubLocality1();
-		  $arrBean['distanceMiles']=$bean->getDistancia() * 0.621371 ;  // pasa de km a millas
+		  $arrBean['distanceKm']=$bean->getDistancia() ;  // pasa de km a millas
 		  $arrBean['specialBreedId']=$bean->getSpecialBreedId();
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
+		  
+		  $arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/shelters/info/" . "india" . "/" .  $arrBean["urlEncoded"];
+		  $arrBean["distanciaFormateada"]=  number_format($arrBean["distanceKm"], 1) . " km";	
+		  $arrBean["locacion"] =  $arrBean['adminArea2'] . ", " . $arrBean['adminArea1'];
+		  
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();
