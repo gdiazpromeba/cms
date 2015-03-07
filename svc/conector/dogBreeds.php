@@ -425,6 +425,9 @@
 		$res=array();
 		$res['data']=$arr;
 		$res['total']=count($arr);
+		foreach ( $res["data"] as &$fila){
+			$fila["fullPictureUrl"] = $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $fila["pictureUrl"];
+		}		
 		echo json_encode($res) ;	
 
   } else if ($ultimo=='selNombresPorForum'){

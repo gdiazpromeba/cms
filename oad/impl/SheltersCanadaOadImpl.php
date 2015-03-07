@@ -3,7 +3,8 @@
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
 require_once $GLOBALS['pathCms'] . '/oad/SheltersCanadaOad.php';
 require_once $GLOBALS['pathCms'] . '/beans/ShelterCanada.php';
-//require_once('FirePHPCore/fb.php4'); 
+// require_once('FirePHPCore/fb.php4'); 
+// ob_start();
 
    class SheltersCanadaOadImpl extends AOD implements SheltersCanadaOad { 
 
@@ -331,6 +332,7 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterCanada.php';
          	$sql.="  SHJ.NAME  \n";
          }         
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,

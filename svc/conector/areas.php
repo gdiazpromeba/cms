@@ -13,11 +13,6 @@
   $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
   $db_connection->set_charset("utf8");  
 
-  //adaptador para uniformizar el nomnbre
-  if ($ultimo=='selSegundasAreasShelters'){
-  	$ultimo="selSegundasAreas";
-  }
-  
   if ($ultimo=='selPrimerasAreasBreedersJson'){
   	$country=$_REQUEST['country'];
   
@@ -68,17 +63,18 @@
   	$stm->bind_result($firstArea, $amount);
   	$result=array();
   	$result["countryName"]=$countryName;
-  	$results["items"]=array();
+  	$result["items"]=array();
   	while ($stm->fetch()) {
   		$fila=array();
-  		$fila["name"]=$firstArea;
+  		$fila["label"]=$firstArea . "($amount)";
+  		$fila["value"]=$firstArea;
   		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) ;
   		$result["items"][]=$fila;
   	}
   	$stm->close();
   	$db_connection->close();
-  	echo json_encode($result);  	
-  	 
+  	echo json_encode($result);  
+
  }elseif ($ultimo=='selSegundasAreasBreedersJson'){
   	$country=$_REQUEST['country'];
   	$firstArea=$_REQUEST['firstArea'];
@@ -147,10 +143,19 @@
     $results["items"]=array();
   	while ($stm->fetch()) {
   		$fila=array();
-  		$fila["name"]=$secondArea;
+  		$fila["label"]=$secondArea . "($amount)";
+  		$fila["value"]=$secondArea;
   		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
   		$result["items"][]=$fila;
   	}
+  	
+//   	if (isset($_REQUEST['addFirstAll']) && $_REQUEST['addFirstAll']=='true'){
+//   		$fila=array();
+//   		$fila["name"]="[Select]";
+//   		$fila["value"]="";
+//   		array_unshift (  $result["items"] ,$fila);
+//   	}  	
+  	
   	$stm->close();
   	$db_connection->close();
   	echo json_encode($result);
@@ -370,7 +375,7 @@
   	$db_connection->close();
   	echo json_encode($result);
   
-  }else if ($ultimo=='selSegundasAreas'){
+  }else if ($ultimo=='selSegundasAreasShelters'){
   	$pais=$_REQUEST['country'];
   	$firstArea=$_REQUEST['firstArea'];
   	

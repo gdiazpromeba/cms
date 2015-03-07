@@ -367,7 +367,6 @@ require_once $GLOBALS['pathCms'] . '/beans/ShelterUsa.php';
          	$sql.="  SHU.NAME  \n";
          }         
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
-//          fb($sql);
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,

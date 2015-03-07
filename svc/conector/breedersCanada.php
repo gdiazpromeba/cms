@@ -74,6 +74,11 @@ if ($ultimo=='selecciona'){
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
+		  
+		  $arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/breeders/info/" . "canada" . "/" .  $arrBean["urlEncoded"];
+		  $arrBean["distanciaFormateada"]=  number_format($arrBean["distanceKm"] , 1) . " km";
+		  $arrBean["locacion"] =  $arrBean['adminArea2'] . ", " . $arrBean['adminArea1'];		  
+		  
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();

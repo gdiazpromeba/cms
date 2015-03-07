@@ -3,7 +3,8 @@
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
 require_once $GLOBALS['pathCms'] . '/oad/BreedersUsaOad.php';
 require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
-//require_once('FirePHPCore/fb.php4'); 
+// require_once('FirePHPCore/fb.php4'); 
+// ob_start();
 
    class BreedersUsaOadImpl extends AOD implements BreedersUsaOad { 
 
@@ -329,6 +330,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederUsa.php';
          	$sql.="  SHJ.NAME  \n";
          }         
          $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,

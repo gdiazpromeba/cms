@@ -5,7 +5,8 @@
   require_once $GLOBALS['pathCms'] . '/beans/ZipGenerico.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/ZipsGenericoSvcImpl.php';
   
-  //require_once('FirePHPCore/fb.php4');
+//   require_once('FirePHPCore/fb.php4');
+//   ob_start();
   
   
   header("Content-Type: text/plain; charset=utf-8");
@@ -74,6 +75,11 @@ if ($ultimo=='selecciona'){
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
+
+		  $arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/breeders/info/" . "uk" . "/" .  $arrBean["urlEncoded"];
+		  $arrBean["distanciaFormateada"]=  number_format($arrBean["distanceKm"] , 1) . " km";
+		  $arrBean["locacion"] =  $arrBean['adminArea2'] . ", " . $arrBean['adminArea1'];		  
+		  
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();

@@ -7,6 +7,7 @@
   
   
 //    require_once('FirePHPCore/fb.php4');
+//    ob_start();
 
   
   
@@ -19,7 +20,7 @@
 
 //adaptador para uniformizar los parámetros del "selecciona" para todos los países
 if ($ultimo=='seleccionaUniversal'){
-	if (isset($_REQUEST['shelterName'])) $_REQUEST['nombreOParte']=$_REQUEST['breederName'];
+	if (isset($_REQUEST['breederName'])) $_REQUEST['nombreOParte']=$_REQUEST['breederName'];
 	if (isset($_REQUEST['firstArea'])) $_REQUEST['state']=$_REQUEST['firstArea'];
 	if (isset($_REQUEST['secondArea'])) $_REQUEST['county']=$_REQUEST['secondArea'];
 	$ultimo='selecciona';
@@ -77,6 +78,11 @@ if ($ultimo=='selecciona'){
 		  $arrBean['specialBreedName']=$bean->getSpecialBreedName();
 		  $arrBean['metaDescripcion']=$bean->getMetaDescripcion();
 		  $arrBean['metaKeywords']=$bean->getMetaKeywords();
+		  
+		  $arrBean["urlCompleta"]= $GLOBALS["dirWeb"]  .  "/breeders/info/" . "usa" . "/" .  $arrBean["urlEncoded"];
+		  $arrBean["distanciaFormateada"]=  number_format($arrBean["distanceMiles"] , 1) . " km";
+		  $arrBean["locacion"] =  $arrBean['adminArea2'] . ", " . $arrBean['adminArea1'];		  
+		  
 		  $datos[]=$arrBean;
 		}  
 		$resultado=array();

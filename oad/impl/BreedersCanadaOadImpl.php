@@ -3,7 +3,8 @@
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';
 require_once $GLOBALS['pathCms'] . '/oad/BreedersCanadaOad.php';
 require_once $GLOBALS['pathCms'] . '/beans/BreederCanada.php';
-//require_once('FirePHPCore/fb.php4'); 
+// require_once('FirePHPCore/fb.php4'); 
+// ob_start();
 
    class BreedersCanadaOadImpl extends AOD implements BreedersCanadaOad { 
 
@@ -281,7 +282,7 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederCanada.php';
       } 
 
       
-      public function selTodos($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
+      public function selTodos($nombre, $provinceName, $subdivisionName, $latitude, $longitude, $distance, $specialBreedId, $desde, $cuantos){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT  \n"; 
          $sql.="  SHJ.ID,     \n"; 
@@ -312,11 +313,11 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederCanada.php';
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($prefectureName))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
+         if (!(empty($provinceName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $provinceName . "'  \n";
          }
-         if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         if (!(empty($subdivisionName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $subdivisionName . "'  \n";
          }
          if (!(empty($distance))){
          	  $sql.="  AND GETDISTANCE(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
@@ -331,7 +332,8 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederCanada.php';
          	$sql.="ORDER BY  \n";
          	$sql.="  SHJ.NAME  \n";
          }         
-         $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n"; 
+         $sql.="LIMIT " . $desde . ", " . $cuantos . "  \n";
+
          $stm=$this->preparar($conexion, $sql);  
          $stm->execute();  
          $stm->bind_result($id, $number, $name, $zip, $url, $urlEncoded, $logoUrl, $email, $phone, $description, $streetAddress, $poBox,
@@ -389,18 +391,18 @@ require_once $GLOBALS['pathCms'] . '/beans/BreederCanada.php';
       } 
 
 
-      public function selTodosCuenta($nombre, $prefectureName, $localityName, $latitude, $longitude, $distance, $specialBreedId){ 
+      public function selTodosCuenta($nombre, $provinceName, $subdivisionName, $latitude, $longitude, $distance, $specialBreedId){ 
          $conexion=$this->conectarse(); 
          $sql="SELECT COUNT(*) FROM BREEDERS_CANADA SHJ "; 
          $sql.="WHERE  1=1  \n";
          if (!(empty($nombre))){
          	$sql.="  AND SHJ.NAME LIKE '%" . $nombre . "%'  \n";
          }
-         if (!(empty($prefectureName))){
-         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $prefectureName . "'  \n";
+         if (!(empty($provinceName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_1 ='" . $provinceName . "'  \n";
          }
-         if (!(empty($localityName))){
-         	$sql.="  AND LOCALITY ='" . $localityName . "'  \n";
+         if (!(empty($subdivisionName))){
+         	$sql.="  AND ADMINISTRATIVE_AREA_LEVEL_2 ='" . $subdivisionName . "'  \n";
          }
          if (!(empty($latitude)) && !(empty($longitude)) && !(empty($distance))){
          	  $sql.="  AND DISTANCE_PYT(" . $latitude . "," . $longitude . ", SHJ.LATITUDE, SHJ.LONGITUDE) <=" . $distance . " \n";         	
