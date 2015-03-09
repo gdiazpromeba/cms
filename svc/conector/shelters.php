@@ -1,12 +1,7 @@
 <?php
   require_once '../../config.php';
 
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUsaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersCanadaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersUkSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersJapanSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersIndiaSvcImpl.php';
-  require_once $GLOBALS['pathCms'] . '/svc/impl/SheltersChinaSvcImpl.php';
+
   
   //require_once('FirePHPCore/fb.php4');
   
@@ -18,70 +13,126 @@
   $arr=explode("/", $url);
   $ultimo=array_pop($arr);
   
+  $db_connection = new mysqli("localhost", $GLOBALS['usuario'] , $GLOBALS['clave'] , $GLOBALS['baseDeDatos']);
+  $db_connection->set_charset("utf8");
   
-  $svc=null;
-  $country=$_REQUEST["country"];
-  $countryName=null;
-  $area1TypeName=null;
-  $area2TypeName=null;
   
-  switch($country){
-  	case "usa":
-  		$svc=new SheltersUsaSvcImpl();
-  		$countryName="the United States of America";
-  		$area1TypeName="State";
-  		$area2TypeName="County";
-  		break;
-  	case "canada":
-  		$svc=new SheltersCanadaSvcImpl();
-  		$countryName="Canada";
-  		$area1TypeName="Province";
-  		$area2TypeName="Subdivision";
-  		break;
-  	case "uk":
-  		$svc=new SheltersUkSvcImpl();
-  		$countryName="United Kingdom";
-  		$area1TypeName="Country";
-  		$area2TypeName="County";
-  		break;
-  	case "japan":
-  		$svc=new SheltersJapanSvcImpl();
-  		$countryName="Japan";
-  		$area1TypeName="Prefecture";
-  		$area2TypeName="Locality";
-  		break;
-  	case "china":
-  		$svc=new SheltersChinaSvcImpl();
-  		$countryName="China";
-  		$area1TypeName="Province";
-  		$area2TypeName="Locality";
-  		break;
-  	case "india":
-  		$svc=new SheltersIndiaSvcImpl();
-  		$countryName="India";
-  		$area1TypeName="State";
-  		$area2TypeName="Locality";
-  		break;
-  }
+
+  	$country=$_REQUEST['country'];
+  	$area1=$_REQUEST['area1'];
+  	$area2=$_REQUEST['area2'];
   
-  $area1=null;
-  $area2=null;
-  $area1=$_REQUEST['area1'];
-  $area2=$_REQUEST['area2'];
-  
-  $beans=$svc->selTodosWeb(null, $area1, $area2,  0, 0, null, null, 0, 10000);
-  $cuenta= $svc->selTodosWebCuenta(null, $area1, $area2, 0, 0, null, null);
-  
-  $datos=array();
-  $datos["countryName"]=$countryName;
-  $datos["area1TypeName"]=$area1TypeName;
-  $datos["area2TypeName"]=$area2TypeName;
-  $datos["items"]=array();
-  foreach ($beans as $bean){
-  	$arrBean=array();
-  	$arrBean['name']=$bean->getName();
-  	$arrBean['urlEncoded']=$bean->getUrlEncoded();
-  	$datos["items"][]=$arrBean;
-  }
-  echo json_encode($datos) ;  
+  	$sql=null;
+  	$subdivision=null;
+  	$area1TypeName=null;
+  	$area2TypeName=null;
+  	switch ($country){
+  		case "usa":
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_USA BR   \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+  			$sql.= "  AND BR.ADMINISTRATIVE_AREA_LEVEL_2='" . $area2 . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United States of America";
+  			$area1TypeName="State";
+  			$area2TypeName="County";  			
+  			break;
+  		case "canada":
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CANADA BR   \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+  			$sql.= "  AND BR.ADMINISTRATIVE_AREA_LEVEL_2='" . $area2 . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="Canada";
+  			$area1TypeName="Province";
+  			$area2TypeName="Subdivision";  			
+  			break;
+  		case "uk":
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_UK BR   \n";
+  			$sql.= "WHERE  \n";
+  			$sql.= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+  			$sql.= "  AND BR.ADMINISTRATIVE_AREA_LEVEL_2='" . $area2 . "'  \n";
+  			$sql.= "ORDER BY 1  \n";
+  			$countryName="the United Kingdom";
+  			$area1TypeName="Province";
+  			$area2TypeName="Subdivision";  			
+  			break;
+		case "india" :
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_INDIA BR   \n";
+			$sql .= "WHERE  \n";
+			$sql .= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+			$sql .= "  AND BR.ADMINISTRATIVE_AREA_LEVEL_2='" . $area2 . "'  \n";
+			$sql .= "ORDER BY 1  \n";
+			$countryName = "India";
+			$area1TypeName = "State";
+			$area2TypeName = "District";
+			break;
+		case "china" :
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_CHINA BR   \n";
+			$sql .= "WHERE  \n";
+			$sql .= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+			$sql .= "  AND BR.LOCALITY='" . $area2 . "'  \n";
+			$sql .= "ORDER BY 1  \n";
+			$countryName = "China";
+			$area1TypeName = "Province";
+			$area2TypeName = "Locality";
+			break;
+		case "japan" :
+  			$sql= "SELECT DISTINCT \n";
+  			$sql.= "  NAME, \n";
+  			$sql.= "  URL_ENCODED \n";
+  			$sql.= "FROM  \n";
+  			$sql.= "  SHELTERS_JAPAN BR   \n";
+			$sql .= "WHERE  \n";
+			$sql .= "  BR.ADMINISTRATIVE_AREA_LEVEL_1='" . $area1 . "'  \n";
+			$sql .= "  AND BR.LOCALITY='" . $area2 . "'  \n";
+			$sql .= "ORDER BY 1  \n";
+			$countryName = "Japan";
+			$area1TypeName = "Prefecture";
+			$area2TypeName = "Locality";
+			break;							
+  	} 
+  	if (!$stm = $db_connection->prepare($sql)){
+  		echo $db_connection->error;
+  		exit();
+  	}
+  	$stm->execute();
+  	$stm->bind_result($name, $nameEncoded);
+  	$result=array();
+  	$result["countryName"]=$countryName;
+  	$result["area1TypeName"]=$area1TypeName;
+  	$result["area2TypeName"]=$area2TypeName;
+  	$results["items"]=array();
+  	while ($stm->fetch()) {
+  		$fila=array();
+  		$fila["name"]=$name;
+  		$fila["nameEncoded"]=$nameEncoded; 
+  		$fila["url"] = $GLOBALS["dirWeb"] . "/shelters/info/" . $country . "/" . $nameEncoded ;
+  		$result["items"][]=$fila;
+  	}
+  	$stm->close();
+  	$db_connection->close();
+  	echo json_encode($result);  	
+  	 
+ 
 ?>

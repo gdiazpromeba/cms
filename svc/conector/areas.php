@@ -246,7 +246,8 @@
   	$results["items"]=array();
   	while ($stm->fetch()) {
   		$fila=array();
-  		$fila["name"]=$firstArea;
+  		$fila["label"]=$firstArea . "($amount)";
+  		$fila["value"]=$firstArea;
   		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) ;
   		$result["items"][]=$fila;
   	}
@@ -367,7 +368,8 @@
     $results["items"]=array();
   	while ($stm->fetch()) {
   		$fila=array();
-  		$fila["name"]=$secondArea;
+  		$fila["label"]=$secondArea . "($amount)";
+  		$fila["value"]=$secondArea ;
   		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
   		$result["items"][]=$fila;
   	}

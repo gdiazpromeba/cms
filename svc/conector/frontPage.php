@@ -1,5 +1,6 @@
 <?php
   require_once '../../config.php';
+  require_once $GLOBALS['pathCms'] . '/util/UrlUtils.php';
   require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/FrontPageSvcImpl.php';
   
@@ -65,7 +66,37 @@ if ($ultimo=='obtiene'){
 		$arrBean['dogBreed3Picture']=$bean->getDogBreed3Picture();
 		
 		echo json_encode($arrBean) ;
-
+		
+}else if ($ultimo=='readFeaturedBreeds'){
+		
+			$svc = new FrontPageSvcImpl();
+			$bean=$svc->obtiene();
+		
+			$result=array();
+			
+			$breed=array();
+			$breed["id"]=$bean->getDogBreed1Id();
+			$breed["name"]=$bean->getDogBreed1Name();
+			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
+			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed1Picture();
+			$result[]=$breed;
+			
+			$breed=array();
+			$breed["id"]=$bean->getDogBreed2Id();
+			$breed["name"]=$bean->getDogBreed2Name();
+			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
+			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed2Picture();
+			$result[]=$breed;
+				
+			$breed=array();
+			$breed["id"]=$bean->getDogBreed3Id();
+			$breed["name"]=$bean->getDogBreed3Name();
+			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
+			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed3Picture();
+			$result[]=$breed;
+				
+		
+			echo json_encode($result) ;
  
   } else if ($ultimo=='actualiza'){
   	$bean=new FrontPage(); 

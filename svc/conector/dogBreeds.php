@@ -265,10 +265,9 @@
 	
 			$bloque["rows"]=array();
 			$numCols=3;
-			$numRows=5;
-			$index=0;
+			
 			$keys = array_keys($beansDeLaLetra);
-			for ($row=0; $row <$numRows && $index < count($beansDeLaLetra) ; $row++){
+			for ($index=0;  $index < count($beansDeLaLetra) ; ){
 				$rowObj=array();
 				$rowObj["cells"]=array();
 				for ($col=0; $col<$numCols && $index < count($keys) ; $col++){
@@ -416,6 +415,9 @@
 		$res=array();
 		$res['data']=$arr;
 		$res['total']=count($arr);
+		foreach ( $res["data"] as &$fila){
+			$fila["fullPictureUrl"] = $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $fila["pictureUrl"];
+		}		
 		echo json_encode($res) ;
 		
   } else if ($ultimo=='selNombresPorBreeder'){

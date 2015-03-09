@@ -584,7 +584,9 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$conexion=$this->conectarse();
       	$sql="SELECT  \n";
       	$sql.="  DBR.DOG_BREED_ID,     \n";
-      	$sql.="  DBR.DOG_BREED_NAME     \n";
+      	$sql.="  DBR.DOG_BREED_NAME,      \n";
+      	$sql.="  DBR.NAME_ENCODED,      \n";
+      	$sql.="  DBR.PICTURE_URL      \n";
       	$sql.="FROM  \n";
       	$sql.="  DOG_BREEDS DBR \n";
       	$sql.="  INNER JOIN DOG_BREEDS_BY_SHELTER DBS ON DBR.DOG_BREED_ID=DBS.DOG_BREED_ID \n";
@@ -595,12 +597,14 @@ require_once $GLOBALS['pathCms'] . '/beans/DogBreed.php';
       	$sql.="  DBR.DOG_BREED_NAME  \n";
       	$stm=$this->preparar($conexion, $sql);
       	$stm->execute();
-      	$stm->bind_result($id, $nombre);
+      	$stm->bind_result($id, $nombre, $nameEncoded, $pictureUrl);
       	$filas=array();
       	while ($stm->fetch()) {
       		$fila=array();
       		$fila['id']=$id;
       		$fila['name']=$nombre;
+      		$fila['nameEncoded'] = $nameEncoded;
+      		$fila['pictureUrl'] = $pictureUrl;
       		$filas[]=$fila;
       	}
       	$this->cierra($conexion, $stm);

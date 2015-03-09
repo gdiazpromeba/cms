@@ -43,9 +43,37 @@
    	  
    	  
    	  $datos=array();
+   	  $area1=null; $area2=null;
+   	  
    	  foreach ($beans as $bean){
-   	  	$area1 = $bean->getAdminArea1();
-   	  	$area2 = $bean->getAdminArea2();
+   	  	switch ($country){
+   	  		case "usa":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getAdminArea2();
+   	  			break;
+   	  		case "uk":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getAdminArea2();
+   	  			break;
+   	  		case "china":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getLocality();
+   	  			break;
+   	  		case "india":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getAdminArea2();
+   	  			break;
+   	  		case "japan":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getLocality();
+   	  			break;
+   	  		case "canada":
+   	  			 $area1 = $bean->getAdminArea1();
+   	  	         $area2 = $bean->getAdminArea2();
+   	  			break;
+   	  	}   	  	
+   	  	
+
    	  	$name = $bean->getName();
    	  	$url  = $bean->getUrlEncoded(); 
    	  	
