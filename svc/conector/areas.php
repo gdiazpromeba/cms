@@ -68,7 +68,7 @@
   		$fila=array();
   		$fila["label"]=$firstArea . "($amount)";
   		$fila["value"]=$firstArea;
-  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) ;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/listing/" . $country . "/" . urlencode($firstArea) ;
   		$result["items"][]=$fila;
   	}
   	$stm->close();
@@ -145,7 +145,7 @@
   		$fila=array();
   		$fila["label"]=$secondArea . "($amount)";
   		$fila["value"]=$secondArea;
-  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/breeders/listing/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
   		$result["items"][]=$fila;
   	}
   	
@@ -248,7 +248,7 @@
   		$fila=array();
   		$fila["label"]=$firstArea . "($amount)";
   		$fila["value"]=$firstArea;
-  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) ;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/listing/" . $country . "/" . urlencode($firstArea) ;
   		$result["items"][]=$fila;
   	}
   	$stm->close();
@@ -370,7 +370,7 @@
   		$fila=array();
   		$fila["label"]=$secondArea . "($amount)";
   		$fila["value"]=$secondArea ;
-  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/sitemap/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
+  		$fila["urlEncoded"]= $GLOBALS["dirWeb"] . "/shelters/listing/" . $country . "/" . urlencode($firstArea) . "/" .  $secondArea;
   		$result["items"][]=$fila;
   	}
   	$stm->close();

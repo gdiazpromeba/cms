@@ -89,7 +89,7 @@
   		$fila=array();
   		$fila["name"]=$name;
   		$fila["nameEncoded"]=$nameEncoded; 
-  		$fila["url"] = $GLOBALS["dirWeb"] . "/breeders/sitemap/" . $country . "/" . urlencode($area1) . "/" .   $nameEncoded ;
+  		$fila["url"] = $GLOBALS["dirWeb"] . "/breeders/listing/" . $country . "/" . urlencode($area1) . "/" .   $nameEncoded ;
   		$result["items"][]=$fila;
   	}
   	$stm->close();
