@@ -421,6 +421,7 @@
 		$res['total']=count($arr);
 		foreach ( $res["data"] as &$fila){
 			$fila["fullPictureUrl"] = $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $fila["pictureUrl"];
+			$fila["link"] = $GLOBALS['dirWeb'] . "/home/breed/" . $fila["nameEncoded"];
 		}		
 		echo json_encode($res) ;
 		
@@ -433,6 +434,7 @@
 		$res['total']=count($arr);
 		foreach ( $res["data"] as &$fila){
 			$fila["fullPictureUrl"] = $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $fila["pictureUrl"];
+			$fila["link"] = $GLOBALS['dirWeb'] . "/home/breed/" . $fila["nameEncoded"];
 		}		
 		echo json_encode($res) ;	
 
