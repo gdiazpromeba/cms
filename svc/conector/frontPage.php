@@ -83,18 +83,22 @@ if ($ultimo=='obtiene'){
 			$breed["name"]=$bean->getDogBreed1Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed1Picture();
+			$breed["link"]= $GLOBALS['dirWeb'] . "/home/breed/" .$bean->getDogBreed1NameEncoded();
 			$result["featuredBreeds"][]=$breed;
 			$breed=array();
 			$breed["id"]=$bean->getDogBreed2Id();
 			$breed["name"]=$bean->getDogBreed2Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed2Picture();
+			$breed["link"]= $GLOBALS['dirWeb'] . "/home/breed/" . $bean->getDogBreed2NameEncoded();
+				
 			$result["featuredBreeds"][]=$breed;
 			$breed=array();
 			$breed["id"]=$bean->getDogBreed3Id();
 			$breed["name"]=$bean->getDogBreed3Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed3Picture();
+			$breed["link"]= $GLOBALS['dirWeb'] . "/home/breed/" . $bean->getDogBreed3NameEncoded();
 			$result["featuredBreeds"][]=$breed;
 			
 			$result["videoUrls"]=array();
