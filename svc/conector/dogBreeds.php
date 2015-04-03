@@ -170,8 +170,9 @@
        while ($stm2->fetch()) {
        	 $item=array();
        	 $item["dogBreedName"] = $name;
-       	 $item["nameEncoded"]=$nameEncoded;
+       	 $item["nameEncoded"] = $nameEncoded;
        	 $item["url"]=   $GLOBALS['dirWeb']  . "/dogbreeds/groups/"  .  urlencode($result["group"]["name"]) . "/" . $nameEncoded;
+       	 $item["link"] = $GLOBALS['dirWeb'] . "/home/breed/" . $nameEncoded;
        	 $result["items"][]=$item;
        }       
        
@@ -227,6 +228,7 @@
 				$cell["name"]=$bean->getNombre();
 				$cell["nameEncoded"]=$bean->getNameEncoded();
 				$cell["pictureUrl"]=$bean->getPictureUrl();
+				$cell["link"]=$GLOBALS['dirWeb'] . "/home/breed/" . $bean->getNameEncoded();
 			    $rowObj["cells"][]=$cell;
 			    $index++;
 			}
@@ -276,6 +278,8 @@
 					$cell["name"]=$bean->getNombre();
 					$cell["nameEncoded"]=$bean->getNameEncoded();
 					$cell["pictureUrl"]=$GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $bean->getPictureUrl();
+					$cell["pictureUrl"]=$GLOBALS['dirAplicacion'] . "/resources/images/breeds/" . $bean->getPictureUrl();
+					$cell["link"]=$GLOBALS['dirWeb'] . "/home/breed/" . $bean->getNameEncoded();
 					$rowObj["cells"][]=$cell;
 					$index++;
 				}
