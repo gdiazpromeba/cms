@@ -3,6 +3,7 @@
   require_once $GLOBALS['pathCms'] . '/util/UrlUtils.php';
   require_once $GLOBALS['pathCms'] . '/beans/FrontPage.php';
   require_once $GLOBALS['pathCms'] . '/svc/impl/FrontPageSvcImpl.php';
+  require_once $GLOBALS['pathWeb'] . '/utils/Resources.php';
   
   //require_once('FirePHPCore/fb.php4');
   
@@ -67,33 +68,40 @@ if ($ultimo=='obtiene'){
 		
 		echo json_encode($arrBean) ;
 		
-}else if ($ultimo=='readFeaturedBreeds'){
+}else if ($ultimo=='readDatos'){
 		
 			$svc = new FrontPageSvcImpl();
 			$bean=$svc->obtiene();
 		
 			$result=array();
+			$result["homePageHeader"]= Resources::getText('home_page_content');
 			
+			
+			$result["featuredBreeds"]=array();
 			$breed=array();
 			$breed["id"]=$bean->getDogBreed1Id();
 			$breed["name"]=$bean->getDogBreed1Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed1Picture();
-			$result[]=$breed;
-			
+			$result["featuredBreeds"][]=$breed;
 			$breed=array();
 			$breed["id"]=$bean->getDogBreed2Id();
 			$breed["name"]=$bean->getDogBreed2Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed2Picture();
-			$result[]=$breed;
-				
+			$result["featuredBreeds"][]=$breed;
 			$breed=array();
 			$breed["id"]=$bean->getDogBreed3Id();
 			$breed["name"]=$bean->getDogBreed3Name();
 			$breed["nameEncoded"] = UrlUtils::codifica($breed["name"]);
 			$breed["fullPictureUrl"]= $GLOBALS['dirAplicacion'] . "/resources/images/breeds/" .$bean->getDogBreed3Picture();
-			$result[]=$breed;
+			$result["featuredBreeds"][]=$breed;
+			
+			$result["videoUrls"]=array();
+			$result["videoUrls"][]="http://www.youtube.com/embed/" .  $bean->getVideo1Url();
+			$result["videoUrls"][]="http://www.youtube.com/embed/" .  $bean->getVideo2Url();
+			$result["videoUrls"][]="http://www.youtube.com/embed/" .  $bean->getVideo3Url();
+			
 				
 		
 			echo json_encode($result) ;

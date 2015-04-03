@@ -3,3 +3,4 @@ resources/images/**
 /bin
 .project
 .classpath
+.settings/**
