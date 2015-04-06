@@ -1,5 +1,4 @@
 <?php 
-require_once '../../config.php';
 require_once $GLOBALS['pathCms'] . '/oad/AOD.php';  
 require_once $GLOBALS['pathCms'] . '/oad/DogPurposesOad.php';  
 require_once $GLOBALS['pathCms'] . '/beans/DogPurpose.php';
